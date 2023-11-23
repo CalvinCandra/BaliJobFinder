@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+    font-family: "Poppins", sans-serif;
+}
+
+.bg{
+    background-image: url("../../img/auth/login_kedua.png");
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    background-color: transparent;
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 9px 4px 41px 0px #000;
+}
+
+.container .fomulir{
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.container .judul{
+    margin-bottom: 10px;
+    font-size: 30px;
+    margin-top: 25px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.inputan {
+    width: 350px;
+    height: 35px;
+    margin: 30px 0 10px 0px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #000;
+}
+
+.inputan input{
+    width: 90%;
+    margin: 2px 2px;
+    padding: 0 15px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    font-weight: 600px;
+    display: flex;
+    background: none;
+    flex: 9;
+}
+
+.inputan i{
+    flex: 1;
+    display: flex;
+    font-size: 20px;
+}
+
+.btn_login{
+    display: flex;
+    justify-content: center;
+}
+
+.btn_login button{
+    padding: 10px;
+    width: 80%;
+    border-radius: 15px;
+    border: 2px solid #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn_login button:hover{
+    background-color: #ffffff;
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.ke_register{
+    margin-top: 20px;
+}
+
+.ke_register a{
+    font-weight: 600;
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.ke_register a:hover{
+    text-decoration: underline;
+}
+
+.fomulir .pesan{
+    font-style: italic;
+    font-weight: 400;
+    color: red;
+    background:none;
+    padding-top: -30px;
+}
+
+.fomulir .bungkusForget{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.fomulir .forget{
+    text-decoration: none;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.fomulir .forget:hover{
+    text-decoration: underline;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* * Respomsive */
+/* laptop */
+@media (max-width: 1366px){
+    html{
+        font-size: 100%;
+    }
+
+    .bg{
+        background-size: cover;
+    }
+
+    .container{
+        width: 70vh;
+    }
+
+}
+
+/* tablet */
+@media (max-width: 760px){
+    html{
+        font-size: 100%;
+    }
+
+    .container{
+        width: 80vw;
+    }
+
+}
+
+/* Handphone */
+@media (max-width: 450px){
+    html{
+        font-size: 90%;
+    }
+
+    .bg{
+        height: 100vh;
+    }
+
+    .container{
+        width: 85vw;
+    }
+
+    .inputan {
+        width: 75vw;
+        /* width: 35vh; */
+        height: 35px;
+    }
+
+    .inputan input{
+        font-size: 15px;     
+    }
+
+}
+
