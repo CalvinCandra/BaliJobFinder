@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    background-color: #ffffff;
+    width: 100vh;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 6px 6px 40px rgb(0, 0, 0);
+}
+
+.container .gambar_kotak{
+    margin: 15px;
+    width: 100vh;
+}
+
+.container .gambar_kotak img{
+    max-width: 100%;
+    height: 100%;
+}
+
+.container .fomulir{
+    margin: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .fomulir .judul{
+    text-transform: uppercase;
+    font-size: 30px;
+    /* margin-bottom: 10px */
+}
+
+.fomulir .inputan{
+    width: 45vh;
+    height: 35px;
+    background-color: #ffffff;
+    margin: 15px 0;
+    /* border-radius: 10px; */
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #000;
+}
+
+.fomulir .inputan input{
+    width: 100%;
+    padding: 0 15px;
+    font-size: 18px;
+    margin: -2px 2px 0 -5px;
+    outline: none;
+    border: none;
+    background-color: none;
+    font-weight: 600;
+    flex: 6;
+}
+
+.fomulir .inputan i{
+    flex: 1;
+    display: flex;
+    font-size: 18px;
+}
+
+.container .fomulir .btn_register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.container .fomulir .btn_register button{
+    background-color: #0d6efd;
+    padding: 10px;
+    width: 90%;
+    border-radius: 50px;
+    color: #ffffff;
+    font-weight: 600;
+    border: 2px solid #0d6efd;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.container .fomulir .btn_register button:hover{
+    background-color: #ffffff;
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+    transition: background-color 0.5s ease-in-out;
+    transition: color 0.4s ease-in-out;
+}
+
+.container .ke_login a{
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.container .ke_login a:hover{
+    text-decoration: underline;
+}
+
+.fomulir .pesan{
+    font-style: italic;
+    font-weight: 400;
+    color: red;
+    background:none;
+}
+
+/* /* Respomsive */
+
+/* laptop */
+@media (max-width: 1366px){
+    html{
+        font-size: 100%;
+    }
+
+    .container .gambar_kotak{
+        display: none;
+    }
+
+    .container{
+        width: 80vw;
+    }
+
+    .fomulir small{
+        font-size: 20px;
+    }
+
+    .fomulir .inputan{
+        width: 65vw;
+    }
+
+    .fomulir .inputan input{
+        font-size: 22px;
+        flex: 10;
+    }
+
+    .fomulir small{
+        font-size: 18px;
+    }
+
+    .container .fomulir .judul{
+        margin-bottom: 18px;
+    }
+
+    .container .fomulir .btn_register button{
+       font-size: 20px;
+    }
+
+}
+
+/* tablet */
+@media (max-width: 780px){
+    html{
+        font-size: 100%;
+    }
+
+    .container{
+        width: 75vw;
+    }
+
+    .container .gambar_kotak{
+        display: none;
+    }
+
+    .fomulir .inputan{
+        width: 60vw;
+    }
+
+    .fomulir .inputan input{
+        font-size: 22px;
+        flex: 10;
+    }
+
+    .fomulir small{
+        font-size: 18px;
+    }
+
+    .container .fomulir .judul{
+        margin-bottom: 18px;
+    }
+
+    .container .fomulir .btn_register button{
+       font-size: 20px;
+    }
+}
+
+/* Handphone */
+@media (max-width: 450px){
+    html{
+        font-size: 100%;
+    }
+
+    .container{
+        width: 85vw;
+    }
+
+    .fomulir .inputan{
+        width: 70vw;
+    }
+
+    .fomulir .inputan input{
+        font-size: 17px;
+    }
+
+    .fomulir small{
+        font-size: 13px;
+    }
+
+    .container .fomulir .judul{
+        margin-bottom: 15px;
+    }
+
+    .container .fomulir .btn_register button{
+        font-size: 13px;
+     }
+}
+
+
+
+
+
