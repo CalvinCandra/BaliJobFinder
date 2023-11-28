@@ -3,7 +3,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class balijobfinder extends CI_Controller {
+class Balijobfinder extends CI_Controller {
 
     public function index()
     {

@@ -101,7 +101,7 @@ class Auth extends CI_Controller {
         $user = $this->M_auth->getUser($email);
 
         if($user){
-            if($token === $user->token){
+            if($token == $user->token){
                 $this->M_auth->email_verified();
                 $this->session->set_flashdata('pesan','Congratulation! your account has been Activated. Please Login');  
                 redirect('Auth/login');

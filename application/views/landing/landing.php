@@ -7,7 +7,6 @@
     <title>Bali JobFInder</title>
 </head>
 <body>
-    <?php $this->session->flashdata('pesan'); ?>
     
     <a href="<?php echo base_url('Auth/register_pilihan')?>">Register</a>
     <a href="<?php echo base_url('Auth')?>">Login</a>
