@@ -151,7 +151,7 @@ class Auth extends CI_Controller {
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);
-                            redirect('Pelamar/home'); 
+                            redirect('Pelamar'); 
                         }else if($data->role == "perusahaan"){
                             $this->session->set_flashdata('pesan','Login Success');
                             // set session
@@ -162,7 +162,7 @@ class Auth extends CI_Controller {
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
-                            redirect('Perusahaan/home'); 
+                            redirect('Perusahaan'); 
                         }else{
                             $this->session->set_flashdata('pesan','Login Success');
                             // set session
@@ -173,7 +173,7 @@ class Auth extends CI_Controller {
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
-                            redirect('Admin/home'); 
+                            redirect('Admin'); 
                         }
                     }
                 }else{

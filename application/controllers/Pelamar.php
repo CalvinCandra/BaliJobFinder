@@ -14,6 +14,10 @@ class Pelamar extends CI_Controller {
         $this->load->library('form_validation');
     }
 
+    public function index(){
+        redirect('Pelamar/home');
+    }
+
     public function home()
     {
         $this->load->view('Pelamar/test');
