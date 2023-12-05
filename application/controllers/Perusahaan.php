@@ -16,7 +16,7 @@ class Perusahaan extends CI_Controller {
 
     public function home()
     {
-        $this->load->view('perusahaan/test');
+        $this->template->load('perusahaan/template','perusahaan/Dashboard');
         
     }
 
