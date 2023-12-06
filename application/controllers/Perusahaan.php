@@ -10,8 +10,13 @@ class Perusahaan extends CI_Controller {
         if(!$this->session->userdata('name')){
             redirect('Auth/Login');
         }
-        // $this->load->model('M_auth');
         $this->load->library('form_validation');
+    }
+
+    public function index(){
+        
+        redirect('Perusahaan/home');
+        
     }
 
     public function home()

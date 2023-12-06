@@ -14,7 +14,7 @@
 }
 
 .kiri{
-    background: linear-gradient(154deg, #0D6EFD 0.92%, rgba(13, 110, 253, 0.24) 23.48%, #0D6EFD 57.58%, rgba(13, 110, 253, 0.00) 98.93%);
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -22,7 +22,7 @@
     text-align: center;
     width: 100%;
     height: 100vh;
-    color: #ffffff;
+    color: #0D6EFD;
 }
 
 .kiri p, .kanan p{
@@ -33,9 +33,8 @@
     font-size: 32px;
 }
 
-
 .kanan{
-    background: linear-gradient(28deg, #0D6EFD 0%, rgba(13, 110, 253, 0.24) 25.65%, #0D6EFD 58.97%, rgba(13, 110, 253, 0.00) 100%);
+    background: #0D6EFD;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -46,24 +45,44 @@
     color: #ffffff;
 }
 
-.btn-arah{
+.btn-arah-kanan, .btn-arah-kiri{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
 }
 
-.btn-arah a{
+.btn-arah-kiri a{
     text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #0D6EFD;
+    padding: 10px 30px;
+    border:1px solid #0D6EFD;
+    border-radius: 15px;
+}
+
+.btn-arah-kiri a:hover{
     color: #0D6EFD;
     font-weight: 600;
     background-color: #ffffff;
     padding: 10px 30px;
     border:1px solid #0D6EFD;
     border-radius: 15px;
+    transition: background-color 0.2s ease-in-out;
 }
 
-.btn-arah a:hover{
+.btn-arah-kanan a{
+    text-decoration: none;
+    color: #0D6EFD;
+    font-weight: 600;
+    background-color: #ffffff;
+    padding: 10px 30px;
+    border:1px solid #ffffff;
+    border-radius: 15px;
+}
+
+.btn-arah-kanan a:hover{
     color: #ffffff;
     font-weight: 600;
     background-color: #0D6EFD;

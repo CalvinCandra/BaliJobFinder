@@ -14,6 +14,10 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
     }
 
+    public function index(){
+        redirect('Admin/home');
+    }
+
     public function home()
     {
         $this->load->view('admin/test');
