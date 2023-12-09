@@ -20,7 +20,7 @@ class Pelamar extends CI_Controller {
 
     public function home()
     {
-        $this->load->view('Pelamar/test');
+        $this->template->load('pelamar/template' , 'pelamar/pelamar');
            
     }
 
