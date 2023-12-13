@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-primary elevation-4">
     <!-- Brand Logo -->
     <a class="brand-link">
-      <img src="<?= base_url()?>assets/img/icon/icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="<?= base_url()?>assets/img/favicon/icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class=" text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
@@ -16,8 +16,8 @@
         </div>
         <div class="info">
           <div class="dropdown">
-  <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $this->session->userdata('name')?> -->
-  </button>
+  <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $session?> -->
+  <!-- </button> -->
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Action</a></li>
     <li><a class="dropdown-item" href="#">Another action</a></li>
