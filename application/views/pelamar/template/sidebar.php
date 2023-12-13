@@ -1,21 +1,29 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a class="brand-link">
       <img src="<?= base_url()?>assets/img/icon/icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-bold">BALI JOB FINDER</span>
+      <span class=" text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-1 pb-1 mb-1 d-flex">
         <div class="image">
-          <img src="<?php echo base_url()?>assets/img/dashboard/profile.png" class="img-circle elevation-2" alt="User Image">
+          <!-- <img src="<?php echo base_url()?>assets/img/dashboard/profile.png" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-        <a class="d-block"><?php echo $this->session->userdata('name')?></a>
+          <div class="dropdown">
+  <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $this->session->userdata('name')?> -->
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
         </div>
       </div>
 
@@ -38,8 +46,17 @@
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Management Lowongan
-              
+                Melamar Pekerjaan
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-header">Daftar Lamaran</li>
+          <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-suitcase"></i>
+              <p>
+                Lamaran
               </p>
             </a>
           </li>
@@ -67,7 +84,7 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-header">MY PROFIL</li>
+          <!-- <li class="nav-header">MY PROFIL</li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -85,7 +102,7 @@
               
               </p>
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </nav>
