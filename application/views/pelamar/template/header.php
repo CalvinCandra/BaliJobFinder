@@ -21,14 +21,28 @@
       </div>
     </form>
 
-    <!-- Right navbar links -->
-    <!-- <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#">
+        <div class="user-panel d-flex">
+          <div class="image">
+            <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="User Image">
+          </div>
+          <div class="info">
+            <b><?php echo $this->session->userdata('name') ?></b>
+          </div>
+        </div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">User Options</span>
+        <!-- Add other dropdown items as needed -->
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item">Profile</a>
+        <a href="#" class="dropdown-item">Settings</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" onclick="logout()">Logout</a>
+      </div>
+    </li>
+</ul>
 
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-    </ul> -->
-  </nav>
-  <!-- /.navbar -->
+</nav>
