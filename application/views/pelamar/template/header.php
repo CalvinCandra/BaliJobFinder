@@ -29,7 +29,7 @@
             <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="User Image">
           </div>
           <div class="info">
-            <b><?php echo $this->session->userdata('name') ?></b>
+            <b><?php echo $session ?></b>
           </div>
         </div>
       </a>
@@ -38,9 +38,9 @@
         <!-- Add other dropdown items as needed -->
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">Profile</a>
-        <a href="#" class="dropdown-item">Settings</a>
+        <a href="<?php echo base_url("Balijobfinder")?>" class="dropdown-item">Landing Page</a>
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item" onclick="logout()">Logout</a>
+        <a href="<?php echo base_url("Auth/Logout")?>" class="dropdown-item">Logout</a>
       </div>
     </li>
 </ul>

@@ -10,7 +10,7 @@ class Pelamar extends CI_Controller {
         if(!$this->session->userdata('email')){
             redirect('Auth/Login');
         }
-        // $this->load->model('M_auth');
+        $this->load->model('M_auth');
         $this->load->library('form_validation');
     }
 
@@ -20,7 +20,13 @@ class Pelamar extends CI_Controller {
 
     public function home()
     {
-        $this->template->load('pelamar/template' , 'pelamar/pelamar');
+        $datas = $this->M_auth->getUser($this->session->userdata('email'));
+
+        $data = array(
+            'session' => $datas->name
+        );
+
+        $this->template->load('pelamar/template' , 'pelamar/pelamar', $data);
            
     }
 
