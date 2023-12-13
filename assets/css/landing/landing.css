@@ -1,0 +1,920 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+/* universal */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+    font-family: "Poppins", sans-serif;
+}
+
+.containerr{
+    display: flex;
+    justify-content: center;
+}
+
+/* navbar */
+
+/* set navbar */
+.navbar{
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    position: fixed;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+/* set pembungkus */
+.navbar .pembungkus{
+    padding: 8px 4%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* set logo */
+.navbar .pembungkus .logo{
+    width: 13vw;
+    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+}
+
+.navbar .pembungkus .logo img{
+    width: 100%;
+}
+
+/* set list menu */
+.navbar .pembungkus .list_menu{
+    width: 25vw;
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar .pembungkus .list_menu a{
+    text-decoration: none;
+    font-weight: 500;
+    color: black;
+}
+
+.navbar .pembungkus .list_menu a:hover{
+    color: #0d6efd;
+    scale: 0.95;
+    transition: color 0.2s ease-in-out;
+}
+
+/* set list auth */
+.navbar .pembungkus .auth{
+    width: 11vw;
+    /* background-color: bisque; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .pembungkus .auth .btn{
+    margin-inline: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 8px 10px;
+}
+
+.navbar .pembungkus .auth .btn:hover{
+    scale: 0.95;
+    border: 1px solid #0d6efd;
+    background-color: #ffffff;
+    color: #0d6efd;
+    transition: background-color 0.5s ease-in;
+}
+
+.navbar .pembungkus .auth .name_session{
+    font-weight: 700;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* set dropdown-menu */
+.navbar .pembungkus .auth .menu_dropdown{
+    position: absolute;
+    right: 10rem;
+    top: 60px;
+    height: 0px;
+    width: 200px;
+    background-color: #ffffff;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* set for java */
+.navbar .pembungkus .auth .menu_dropdown.open{
+    height: auto;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+.navbar .pembungkus .auth .menu_dropdown li{
+    padding: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.navbar .pembungkus .auth .menu_dropdown li:hover{
+    background-color: rgb(238, 237, 237);
+}
+
+.navbar .pembungkus .auth .menu_dropdown li a{
+    text-decoration: none;
+    color: black;
+}
+
+.navbar .pembungkus .auth .menu_dropdown li a:hover{
+    color: #0d6efd;
+    scale: 0.95;
+}
+
+/* set logo bars */
+.navbar .pembungkus .toogle{
+    display: none;
+    color: #0d6efd;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+/* set dropdown */
+.navbar .dropdown{
+   display: none;
+   position: absolute;
+   right: 2rem;
+   top: 60px;
+   height: 0px;
+   width: 300px;
+   background-color: #ffffff;
+   backdrop-filter: blur(15px);
+   overflow: hidden;
+   border-radius: 10px;
+   font-weight: 500;
+   transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* for java */
+.navbar .dropdown.open{
+    height: auto;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+.navbar .dropdown li{
+    list-style-type: none;
+    padding: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.navbar .dropdown li a{
+    text-decoration: none;
+    color: black;
+}
+
+.navbar .dropdown .ngelist:hover{
+    background-color: rgb(238, 237, 237);
+}
+
+.navbar .dropdown li a:hover{
+    color: #0d6efd;
+    scale: 0.95;
+}
+
+.navbar .dropdown .btn{
+    margin-inline: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar .dropdown .btn:hover{
+    scale: 0.95;
+    border: 1px solid #0d6efd;
+    background-color: #ffffff;
+    color: #0d6efd;
+    transition: background-color 0.5s ease-in;
+}
+
+
+/* end navbar */
+
+/* hero section */
+.hero-section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero{
+    width: 88vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 110px;
+}
+
+.hero .konten-kanan{
+    width: 100%;
+}
+
+.hero .konten-kanan .Judul{
+    color: #0d6efd;
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+.hero .konten-kanan .pendukung{
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+}
+
+.hero .konten-kanan .button{
+    background-color: #0d6efd;
+    border: 1px solid #0d6efd;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero .konten-kanan .button:hover{
+    background-color: #ffffff;
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.hero .konten-kiri{
+    width: 100%;
+}
+/* end hero section */
+
+/* alasan */
+.judul-alasan{
+    display: flex;
+    justify-content: center;
+    margin-top: 130px;
+    color: #0d6efd;
+    font-weight: 900;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.alasan-section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.alasan{
+    width: 85vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.bungkus-alasan{
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    width: 40%;
+    margin: 50px;
+    padding: 15px;
+}
+
+.bungkus-alasan .gambar{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 200px;
+}
+
+.bungkus-alasan .gambar img{
+    width: 100%;
+}
+
+.bungkus-alasan .judul-card{
+    text-align: center;
+    margin-block: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.bungkus-alasan .text{
+    text-align: center;
+    font-weight: 500;
+}
+/* end alasan */
+
+/* rekom */
+.judul-rekom{
+    display: flex;
+    justify-content: center;
+    margin-top: 130px;
+    color: #0d6efd;
+    font-weight: 900;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.pendukung-judul-rekom{
+    text-align: center;
+    font-weight: 600;
+}
+
+.rekom-section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.rekom-kotak{
+    width: 88vw;
+    display: block;
+    margin-top: 30px;
+}
+
+.rekom-kotak .rekom, 
+.rekom-kotak .rekom1{
+    margin-block: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rekom .kotak,
+.rekom1 .kotak{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 200px;
+}
+
+.rekom .kotak img,
+.rekom1 .kotak img{
+    width: 80%;
+}
+
+/* end rekom */
+
+/* lowongan */
+.judul-lowongan{
+    display: flex;
+    justify-content: center;
+    margin-top: 130px;
+    color: #0d6efd;
+    font-weight: 900;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.lowongan-section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-block: 20px;
+}
+
+.lowongan{
+    display: flex;
+    width: 90vw;
+    overflow-x: auto;
+}
+
+.lowongan::-webkit-scrollbar{
+    height: 5px;
+}
+
+.lowongan::-webkit-scrollbar-thumb{
+    background-color: #0d6efd;
+    border-radius: 10px;
+}
+
+.kotak-lowongan{
+    margin-inline: 10px;
+    margin-block: 10px;
+    min-width: 20vw;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+}
+
+.kotak-lowongan .logo-lowongan{
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
+}
+
+.kotak-lowongan .logo-lowongan img{
+    width: 100%;
+}
+
+.kotak-lowongan .body-lowongan{
+    margin-block: 15px;
+}
+
+.kotak-lowongan .body-lowongan .namaUsaha{
+    font-weight: 400;
+    color: #0d6efd;
+}
+
+.kotak-lowongan .body-lowongan .namaPosisi{
+    font-size: 25px;
+}
+
+.kotak-lowongan .kota-lowongan{
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.kotak-lowongan .kota-lowongan .icon-location i{
+    display: flex;
+    align-items: center;
+    color: #0d6efd;
+    font-size: 20px;
+}
+
+.kotak-lowongan .kota-lowongan .kotaUsaha{
+    margin-inline: 20px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.kotak-lowongan .cek a{
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800;
+    color: #0d6efd;
+}
+
+.kotak-lowongan .cek a:hover{
+    text-decoration: underline;
+}
+
+.btn_more-lowongan{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    padding-block: 20px;
+}
+
+.btn_more-lowongan a{
+    background-color: #0d6efd;
+    text-decoration: none;
+    padding: 8px 25px;
+    border: 1px solid #0d6efd;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.btn_more-lowongan a:hover{
+    scale: 0.95;
+    border: 1px solid #0d6efd;
+    background-color: #ffffff;
+    color: #0d6efd;
+    transition: background-color 0.5s ease-in;
+}
+
+/* end lowongan */
+
+/* footer */
+footer{
+    margin-top: 8%;
+    background-color: #0d6efd;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.kotak-footer{
+    width: 90vw;
+}
+
+.kotak-footer .kotak-logo{
+    margin-bottom: 2%;
+    width: 22vw;
+    height: 13vh;
+    display: flex;
+    justify-content: center;
+}
+
+.kotak-footer .kotak-logo img{
+    width: 100%;
+}
+
+.kotak-body{
+    padding: 15px 15px 40px 15px;
+    border-bottom: 2px solid #ffffff;
+    display: flex;
+}
+
+.kotak-body .about{
+    width: 40%;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.kotak-body .about h3{
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.kotak-body .about p{
+    font-weight: 500;
+    text-align: justify;
+    font-size: 17px;
+}
+
+.kotak-body .kontak{
+    width: 30%;
+    margin-left: 8vw;
+    padding: 10px;
+}
+
+.kotak-body .kontak h3{
+    font-size: 25px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.kotak-body .kontak .icon-kontak{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.kotak-body .kontak .icon-kontak a ,i{
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;  
+}
+
+.kotak-body .kontak .icon-kontak p{
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.kotak-copy{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.kotak-copy .sosmed{
+    display: flex;
+    justify-content: center;
+}
+
+.kotak-copy .sosmed a{
+    text-decoration: none;
+    font-size: 35px;
+    padding-block: 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.kotak-copy .sosmed .sosmed-center{
+    margin-inline: 17px;
+}
+
+.kotak-copy .copy{
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+}
+/* end footer */
+
+/* Responsive */
+/* laptop */
+@media  (max-width: 1366px){
+     /* universal */
+     html{
+        font-size: 90%;
+    }
+
+    /* navbar */
+    .navbar{
+        width: 100vw;
+        position: fixed;
+    }
+
+    .navbar .pembungkus{
+        padding-inline: 5%;
+    }
+
+    .navbar .pembungkus .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 18vw;
+    }
+
+    nav .auth{
+        margin-right: 3%;
+    }
+
+    /* end navbar */
+
+    /* hero section */
+    .hero{
+        margin-block: 21%;
+    }
+
+    .hero .konten-kanan{
+        width: 100%;
+        text-align: center;
+    }
+    .hero .konten-kiri{
+        display: none;
+    }
+    /* end hero section */
+
+    /* alasan */
+    .alasan{
+        width: 90vw;
+    }
+
+    /* end alasan */
+}
+
+/* table */
+@media (max-width: 900px){
+    /* universal */
+    html{
+        font-size: 80%;
+    }
+
+    /* navbar */
+    .navbar{
+        width: 100vw;
+        position: fixed;
+    }
+
+    .navbar .pembungkus .list_menu,
+    .navbar .pembungkus .auth{
+        display: none;
+    }
+
+    .navbar .pembungkus .toogle{
+        display: block;
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+
+    .navbar .dropdown{
+        display: block;
+        font-size: 15px;
+    }
+
+
+    /* end navbar */
+
+    /* hero section */
+    .hero{
+        width: 90vw;
+        margin-block: 25%;
+    }
+
+    .hero .konten-kanan{
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero .konten-kanan .Judul{
+        font-size: 60px;
+    }
+
+    .hero .konten-kanan .pendukung{
+        font-size: 20px;
+    }
+
+    .hero .konten-kiri{
+        display: none;
+    }
+    /* end hero section */
+
+    /* alasan */
+    .judul-alasan{
+        font-size: 27px;
+    }
+    .alasan{
+        width: 90vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bungkus-alasan{
+        margin: 25px;
+        width: 38vw;
+    }
+
+    .bungkus-alasan .judul-card{
+        font-size: 30px;
+    }
+
+    .bungkus-alasan .text{
+        font-size: 20px;
+    }
+    /* end alasan */
+
+    /* lowongan */
+    .kotak-lowongan{
+        min-width: 30vw;
+    }
+
+    .kotak-lowongan .logo-lowongan{
+        width: 13vw;
+    }
+    /* end lowongan */
+
+    /* footer */
+    footer{
+        width: 100;
+        padding-bottom: 20px;
+    }
+    
+    .kotak-body .about{
+        display: none;
+    }
+
+    .kotak-footer .kotak-logo{
+        width: 40vw;
+    }
+    
+    .kotak-footer .kotak-logo img{
+        width: 100%;
+    }
+
+    .kotak-body .kontak{
+        margin-left: -0.1vw;
+    }
+
+    /* end footer */
+}
+
+/* hanphone */
+@media (max-width: 500px){
+    /* navbar */
+    .navbar{
+        width: 100vw;
+        position: fixed;
+    }
+
+    /* set logo */
+    .navbar .pembungkus .logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 37vw;
+    }
+
+    /* set listmenu and auth */
+    .navbar .pembungkus .list_menu,
+    .navbar .pembungkus .auth{
+        display: none;
+    }
+
+    /* set bars */
+    .navbar .dropdown{
+        left: 2rem;
+        width: unset;
+        font-size: 18px;
+    }
+
+    /* end navbar */
+
+    /* hero section */
+    .hero{
+        width: 90vw;
+        margin-top: 200px;
+    }
+
+    .hero .konten-kanan{
+        width: 100%;
+        text-align: start;
+    }
+    
+    .hero .konten-kiri{
+        display: none;
+    }
+    /* end hero section */
+
+    /* alasan */
+    .judul-alasan{
+        font-size: 25px;
+        margin-inline: 20px;
+    }
+
+    .bungkus-alasan{
+        margin: 20px;
+        width: 60vw;
+    }
+
+    .bungkus-alasan .judul-card{
+        font-size: 30px;
+    }
+
+    .bungkus-alasan .text{
+        font-size: 20px;
+    }
+    /* end alasan */
+
+    /* rekom */
+    .judul-rekom{
+        margin-inline: 20px;
+    }
+
+    .pendukung-judul-rekom{
+        font-size: 13px;
+        margin-bottom: -30px;
+    }
+
+    .rekom1 .kotak{
+        margin-top: -80px;
+    }
+
+    .rekom .kotak img,
+    .rekom1 .kotak img{
+        width: 100%;
+    }
+    /* end rekom */
+
+    /* lowongan */
+    .kotak-lowongan{
+        min-width: 48vw;
+    }
+
+    .kotak-lowongan .logo-lowongan{
+        width: 20vw;
+    }
+    /* end lowongan */
+
+    /* footer */
+    footer{
+        width: 100;
+        padding-bottom: 20px;
+    }
+
+    .kotak-footer .kotak-logo{
+        width: 45vw;
+    }
+    
+    .kotak-footer .kotak-logo img{
+        width: 100%;
+    }
+    
+    .kotak-body .about{
+        display: none;
+    }
+
+    .kotak-body .kontak{
+        margin-left: -2%;
+    }
+
+
+
+    
+
+    /* end footer */
+}

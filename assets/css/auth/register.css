@@ -14,7 +14,7 @@ body{
     justify-content: center;
 }
 
-.container{
+.containerr{
     background-color: #ffffff;
     width: 100vh;
     display: flex;
@@ -22,17 +22,17 @@ body{
     box-shadow: 6px 6px 40px rgb(0, 0, 0);
 }
 
-.container .gambar_kotak{
+.containerr .gambar_kotak{
     margin: 15px;
     width: 100vh;
 }
 
-.container .gambar_kotak img{
+.containerr .gambar_kotak img{
     max-width: 100%;
     height: 100%;
 }
 
-.container .fomulir{
+.containerr .fomulir{
     margin: 15px;
     width: 100%;
     display: flex;
@@ -41,7 +41,7 @@ body{
     flex-direction: column;
 }
 
-.container .fomulir .judul{
+.containerr .fomulir .judul{
     text-transform: uppercase;
     font-size: 30px;
     /* margin-bottom: 10px */
@@ -76,7 +76,7 @@ body{
     font-size: 18px;
 }
 
-.container .fomulir .btn_register{
+.containerr .fomulir .btn_register{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,7 +84,7 @@ body{
     margin-bottom: 10px;
 }
 
-.container .fomulir .btn_register button{
+.containerr .fomulir .btn_register button{
     background-color: #0d6efd;
     padding: 10px;
     width: 90%;
@@ -96,7 +96,7 @@ body{
     cursor: pointer;
 }
 
-.container .fomulir .btn_register button:hover{
+.containerr .fomulir .btn_register button:hover{
     background-color: #ffffff;
     border: 2px solid #0d6efd;
     color: #0d6efd;
@@ -105,7 +105,7 @@ body{
     transition: color 0.4s ease-in-out;
 }
 
-.container .ke_login a{
+.containerr .ke_login a{
     text-decoration: none;
     font-weight: 600;
     text-transform: uppercase;
@@ -113,7 +113,7 @@ body{
     cursor: pointer;
 }
 
-.container .ke_login a:hover{
+.containerr .ke_login a:hover{
     text-decoration: underline;
 }
 
@@ -132,11 +132,11 @@ body{
         font-size: 100%;
     }
 
-    .container .gambar_kotak{
+    .containerr .gambar_kotak{
         display: none;
     }
 
-    .container{
+    .containerr{
         width: 80vw;
     }
 
@@ -157,11 +157,11 @@ body{
         font-size: 18px;
     }
 
-    .container .fomulir .judul{
+    .containerr .fomulir .judul{
         margin-bottom: 18px;
     }
 
-    .container .fomulir .btn_register button{
+    .containerr .fomulir .btn_register button{
        font-size: 20px;
     }
 
@@ -173,11 +173,11 @@ body{
         font-size: 100%;
     }
 
-    .container{
+    .containerr{
         width: 75vw;
     }
 
-    .container .gambar_kotak{
+    .containerr .gambar_kotak{
         display: none;
     }
 
@@ -194,11 +194,11 @@ body{
         font-size: 18px;
     }
 
-    .container .fomulir .judul{
+    .containerr .fomulir .judul{
         margin-bottom: 18px;
     }
 
-    .container .fomulir .btn_register button{
+    .containerr .fomulir .btn_register button{
        font-size: 20px;
     }
 }
@@ -209,7 +209,7 @@ body{
         font-size: 100%;
     }
 
-    .container{
+    .containerr{
         width: 85vw;
     }
 
@@ -225,11 +225,11 @@ body{
         font-size: 13px;
     }
 
-    .container .fomulir .judul{
+    .containerr .fomulir .judul{
         margin-bottom: 15px;
     }
 
-    .container .fomulir .btn_register button{
+    .containerr .fomulir .btn_register button{
         font-size: 13px;
      }
 }

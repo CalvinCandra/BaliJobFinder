@@ -22,18 +22,35 @@ class Auth extends CI_Controller {
 
 // ==================================================================menampilkan halaman login
     public function login(){
+        $data = array(
+            'title' => 'Login',
+            'css' => 'assets/css/auth/login.css',
+        );
+        $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/login');
+        $this->load->view('auth/_partials/footer');
     }
 
 // ====================================================================menampilkan pilihan register
     public function register_pilihan(){
+        $data = array(
+            'title' => 'Register',
+            'css' => 'assets/css/auth/regipil.css',
+        );
+        $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/pilihan_register');
-        
+        $this->load->view('auth/_partials/footer');
     }
 
     // menampilkan halaman register pelamar
     public function nampil_registerPelamar(){
+        $data = array(
+            'title' => 'Register',
+            'css' => 'assets/css/auth/register.css',
+        );
+        $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/register_pelamar');
+        $this->load->view('auth/_partials/footer');
     }
     
 // ================================================================= Register  PELAMAR
@@ -45,7 +62,6 @@ class Auth extends CI_Controller {
             'is_unique' => 'This Email has already register',
         ]);
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('no_hp', 'No Handphone', 'trim|required|max_length[14]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]',[
             'in_lenght' => 'Your Passoword To Short',
         ]);
@@ -54,7 +70,13 @@ class Auth extends CI_Controller {
         ]);
 
         if ($this->form_validation->run() == FALSE) {
+            $data = array(
+                'title' => 'Register',
+                'css' => 'assets/css/auth/register.css',
+            );
+            $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/register_pelamar');
+            $this->load->view('auth/_partials/footer');
         } else {
             $this->M_auth->regisPelamar();     
             $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail'); 
@@ -67,7 +89,13 @@ class Auth extends CI_Controller {
 // ===================================================================== Register PERUSAHAAN
     // menampilkan halaman register perusaahaan
     public function nampil_registerPerusahaan(){
+        $data = array(
+            'title' => 'Register',
+            'css' => 'assets/css/auth/register.css',
+        );
+        $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/register_perusahaan');
+        $this->load->view('auth/_partials/footer');
     }
 
     public function register_perusahaan(){
@@ -76,7 +104,6 @@ class Auth extends CI_Controller {
             'is_unique' => 'This Email has already register',
         ]);
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('no_hp', 'No Handphone', 'trim|required|max_length[14]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]',[
             'in_lenght' => 'Your Passoword To Short',
         ]);
@@ -85,7 +112,13 @@ class Auth extends CI_Controller {
         ]);
 
         if ($this->form_validation->run() == FALSE) {
+            $data = array(
+                'title' => 'Register',
+                'css' => 'assets/css/auth/register.css',
+            );
+            $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/register_perusahaan');
+            $this->load->view('auth/_partials/footer');
         } else {
             $this->M_auth->regisPerusahaan();
             $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail');   
@@ -101,7 +134,7 @@ class Auth extends CI_Controller {
         $user = $this->M_auth->getUser($email);
 
         if($user){
-            if($token == $user->token){
+            if($token === $user->token){
                 $this->M_auth->email_verified();
                 $this->session->set_flashdata('pesan','Congratulation! your account has been Activated. Please Login');  
                 redirect('Auth/login');
@@ -124,7 +157,15 @@ class Auth extends CI_Controller {
 
        
        if ($this->form_validation->run() == FALSE) {
+            // panggil view
+            $data = array(
+                'title' => 'Login',
+                'css' => 'assets/css/auth/login.css'
+            );
+            $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/login');
+            $this->load->view('auth/_partials/footer');
+
        }else {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
@@ -146,8 +187,6 @@ class Auth extends CI_Controller {
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
-                                'name' => $data->name,
-                                'role' => $data->role,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);
@@ -157,8 +196,6 @@ class Auth extends CI_Controller {
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
-                                'name' => $data->name,
-                                'role' => $data->role,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
@@ -168,8 +205,6 @@ class Auth extends CI_Controller {
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
-                                'name' => $data->name,
-                                'role' => $data->role,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
@@ -191,7 +226,13 @@ class Auth extends CI_Controller {
 // ======================================================================== Forget Password
     // mmenampilkan input email untuk forget akun
     public function VForget(){
+        $data = array(
+            'title' => 'Forget Password',
+            'css' => 'assets/css/auth/forget.css',
+        );
+        $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/forget/forget');
+        $this->load->view('auth/_partials/footer');
     }
 
     //function mengirim pesan ke email
@@ -203,7 +244,14 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 
         if ($this->form_validation->run() == FALSE) {
+            // panggil view
+            $data = array(
+                'title' => 'Forget Password',
+                'css' => 'assets/css/auth/forget.css',
+            );
+            $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/forget/forget');
+            $this->load->view('auth/_partials/footer');
         } else {
             $data = $this->M_auth->getUser($email);
             // mengecek apakah email sudah terdaftar apa belum
@@ -260,7 +308,6 @@ class Auth extends CI_Controller {
         
         
     }
-
 
 // ======================================================================== logout
     public function logout(){
