@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-.container{
+.containerr{
     background-color: transparent;
     width: 30%;
     background-color: white;
@@ -23,7 +23,7 @@
     box-shadow: 9px 4px 41px 0px #000;
 }
 
-.container .fomulir{
+.containerr .fomulir{
     margin: 15px 0;
     width: 100%;
     display: flex;
@@ -32,7 +32,7 @@
     flex-direction: column; 
 }
 
-.container .judul{
+.containerr .judul{
     margin-bottom: 10px;
     font-size: 30px;
     margin-top: 25px;
@@ -142,7 +142,7 @@
         background-size: cover;
     }
 
-    .container{
+    .containerr{
         width: 70vh;
     }
 
@@ -154,7 +154,7 @@
         font-size: 100%;
     }
 
-    .container{
+    .containerr{
         width: 80vw;
     }
 
@@ -170,7 +170,7 @@
         height: 100vh;
     }
 
-    .container{
+    .containerr{
         width: 85vw;
     }
 

@@ -32,12 +32,195 @@ class M_auth extends CI_Model {
         if($type == 'verify'){
             $this->email->subject('Account Verification');
             
-            $this->email->message('Selamat Datang di Bali Job Finder, Silakan verifikasi email dengan klik link dibawah berikut <br> 
-            <a href="'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'">Activate Now</a>');
+            $this->email->message(
+
+                '<html lang="en">
+                <head>
+                  <style>
+                    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+                    
+                    body{
+                        font-family: "Poppins", sans-serif;
+                    }
+                    
+                    .container{
+                        margin: 5px auto;
+                        width :80vh;
+                        padding: 2% 3%;
+                    }
+                    
+                    .judul{
+                        margin-top: 30px;
+                        font-weight: 600;
+                        text-align: center;
+                        color: #0d6efd;
+                    }
+                    
+                    .sapa{
+                        font-weight: 600;
+                        margin-bottom: 25px;
+                        font-size: 30px;
+                    }
+                    
+                    .button{
+                        margin: 30px auto;
+                    }
+                    
+                    .button .link{
+                        background-color: #0d6efd;
+                        padding: 10px 20px;
+                        border: 1px solid #0d6efd;
+                        border-radius: 5px;
+                        color: #ffffff;
+                        text-decoration: none;
+                        font-weight: 600;
+                        text-align :center;
+                    }
+                    
+                    .button .link:hover{
+                        background-color: #ffffff;
+                        font-weight: 600;
+                        color: #0d6efd;
+                        border: 1px solid #0d6efd;
+                        transition: background-color 0.5s ease-in-out;
+                    }
+                    
+                    .pembatas{
+                        margin: 7px 0px;
+                    }
+                    
+                    .link-alt{
+                        color: #0d6efd;
+                    }
+                </style>
+                
+                </head>
+
+                <body>
+                  <h1 class="judul">Bali Job Finder</h1>
+                  <div class="container">
+                
+                      <p class="sapa">Hello!</p>
+                      <p>Please click the button below to verify your email</p>
+                
+                      <div class="button">
+                        <a href="'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'" class="link">Verify Now</a>
+                      </div>
+                
+                      <p>Regards, <br>
+                        Bali Job Finder
+                      </p>
+                
+                      <hr class="pembatas">
+                
+                      <p class="alt">
+                        if you having trouble clicking the <span>"Verify Now"</span>  button, copy and paste the URL below into your web browser:
+                        <a href="'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'" class="link-alt">'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'</a>
+                      </p>
+                  </div>
+                </body>
+                </html>'
+
+            //     'Selamat Datang di Bali Job Finder, Silakan verifikasi email dengan klik link dibawah berikut <br> 
+            // <a href="'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'">Activate Now</a>'
+        
+            
+            );
+
         }else if($type == 'change'){
             $this->email->subject('Change Password');
-            $this->email->message('Selamat Datang di Bali Job Finder, Silakan ganti password dengan klik link dibawah berikut <br> 
-            <a href="'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'">Change Password Now</a>');
+            $this->email->message('
+            <html lang="en">
+            <head>
+              <style>
+                @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+                
+                body{
+                    font-family: "Poppins", sans-serif;
+                }
+                
+                .container{
+                    margin: 5px auto;
+                    width :80vh;
+                    padding: 2% 3%;
+                }
+                
+                .judul{
+                    margin-top: 30px;
+                    font-weight: 600;
+                    text-align: center;
+                    color: #0d6efd;
+                }
+                
+                .sapa{
+                    font-weight: 600;
+                    margin-bottom: 25px;
+                    font-size: 30px;
+                }
+                
+                .button{
+                    margin: 30px auto;
+                }
+                
+                .button .link{
+                    background-color: #0d6efd;
+                    padding: 10px 20px;
+                    border: 1px solid #0d6efd;
+                    border-radius: 5px;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-weight: 600;
+                    text-align :center;
+                }
+                
+                .button .link:hover{
+                    background-color: #ffffff;
+                    font-weight: 600;
+                    color: #0d6efd;
+                    border: 1px solid #0d6efd;
+                    transition: background-color 0.5s ease-in-out;
+                }
+                
+                .pembatas{
+                    margin: 7px 0px;
+                }
+                
+                .link-alt{
+                    color: #0d6efd;
+                }
+            </style>
+            
+            </head>
+
+            <body>
+              <h1 class="judul">Bali Job Finder</h1>
+              <div class="container">
+            
+                  <p class="sapa">Hello!</p>
+                  <p>Please click the button below to change your password</p>
+            
+                  <div class="button">
+                    <a href="'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'" class="link">Change Now</a>
+                  </div>
+            
+                  <p>Regards, <br>
+                    Bali Job Finder
+                  </p>
+            
+                  <hr class="pembatas">
+            
+                  <p class="alt">
+                    if you having trouble clicking the <span>"Change Now"</span>  button, copy and paste the URL below into your web browser:
+                    <a href="'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'" class="link-alt">'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'</a>
+                  </p>
+              </div>
+            </body>
+            </html>
+            ');
+
+            
+            // $this->email->message('Selamat Datang di Bali Job Finder, Silakan ganti password dengan klik link dibawah berikut <br> 
+            // <a href="'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'">Change Password Now</a>');
         }
 
         $this->email->send();
@@ -56,7 +239,6 @@ class M_auth extends CI_Model {
         $email = $this->input->post('email');
         $pass = $this->input->post('password');
         $name = $this->input->post('name');
-        $no_hp = $this->input->post('no_hp');
 
         // membuat token
         $token = base64_encode(random_bytes(16));
@@ -68,7 +250,6 @@ class M_auth extends CI_Model {
             'name' => $name,
             'email_verified' => NULL,
             'token' => $token,
-            'no_hp' => $no_hp,
             'role' => "pelamar",
         );
 
@@ -110,7 +291,6 @@ class M_auth extends CI_Model {
         $email = $this->input->post('email');
         $pass = $this->input->post('password');
         $name = $this->input->post('name');
-        $no_hp = $this->input->post('no_hp');
 
         // membuat token
         $token = base64_encode(random_bytes(16));
@@ -122,7 +302,6 @@ class M_auth extends CI_Model {
             'name' => $name,
             'email_verified' => NULL,
             'token' => $token,
-            'no_hp' => $no_hp,
             'role' => "perusahaan",
         );
 
