@@ -24,7 +24,7 @@ class Auth extends CI_Controller {
     public function login(){
         $data = array(
             'title' => 'Login',
-            'css' => 'assets/css/auth/login.css',
+            'css' => 'assets/css/auth/loginn.css',
         );
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/login');
