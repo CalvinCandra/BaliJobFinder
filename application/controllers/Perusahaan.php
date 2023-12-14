@@ -161,7 +161,7 @@ class Perusahaan extends CI_Controller {
                 $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
     
                 // menyimpan logo ke database
-                $this->M_perusahaan->saveLogoPath($user_id, $logo_path);
+                $this->M_perusahaan->saveLogoPath($user_id->id_users, $logo_path);
             } else {
                 // mengatasi jika error
                 $error = $this->upload->display_errors();
@@ -169,7 +169,7 @@ class Perusahaan extends CI_Controller {
             }
         }
 
-        $this->M_perusahaan->simpanProfile($user_id);
+        $this->M_perusahaan->simpanProfile($user_id->id_users);
         redirect('perusahaan/profile');
     }
     
