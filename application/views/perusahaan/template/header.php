@@ -27,16 +27,16 @@
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <div class="user-panel d-flex">
-          <div class="info">
-            <b><?php echo $this->session->userdata('name') ?></b>
-          </div>
-          <div class="image mb-2">
+        <div class="image">
                     <?php if ($key['logo']): ?>
                         <img src="<?php echo base_url($key['logo']); ?>" class="img-circle elevation-1" alt="User Image">
                     <?php else: ?>
                         <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">
                     <?php endif; ?>
-                </div>
+          </div>
+          <div class="info">
+            <b><?php echo $session ?></b>
+          </div>
         </div>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -44,7 +44,7 @@
         <!-- Add other dropdown items as needed -->
         <div class="dropdown-divider"></div>
         <a href="<?= base_url('perusahaan/profile') ?>" class="dropdown-item">Profile User</a>
-        <a href="#" class="dropdown-item">Landing Page</a>
+        <a href="<?= base_url('Balijobfinder') ?>" class="dropdown-item">Landing Page</a>
         <div class="dropdown-divider"></div>
         <a href="<?php echo base_url("Auth/logout")?>" class="dropdown-item">Logout</a>
       </div>

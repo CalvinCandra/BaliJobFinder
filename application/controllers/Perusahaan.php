@@ -29,9 +29,12 @@ class Perusahaan extends CI_Controller {
         // $this->session->unset_userdata('keyword');
         // $this->session->unset_userdata('key_lamaran');
 
-        $data['perusahaan'] = $this->M_perusahaan->getPerusahaan($user_id);
-        $data['JumlahLowongan'] = $this->M_perusahaan->LowonganCount($user_id);
-        $data['totalLamaran'] = $this->M_perusahaan->LamaranCount($user_id);
+        $data = array(
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
+            'JumlahLowongan' => $this->M_perusahaan->LowonganCount($user_id->id_users),
+            'totalLamaran' => $this->M_perusahaan->LamaranCount($user_id->id_users),
+            'session' => $user_id->name
+        );
         $this->template->load('perusahaan/template','perusahaan/Dashboard',$data);
         
     }
