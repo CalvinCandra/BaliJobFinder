@@ -16,12 +16,12 @@
                 <h3>Kontak</h3>
 
                 <div class="icon-kontak">
-                    <a href=""><i class="bi bi-envelope-fill"></i></i></i></a>
+                    <a href="" ><i class="fa-solid fa-envelope"></i></a>
                     <p>balijobfinder@gmail.com</p>
                 </div>
 
                 <div class="icon-kontak">
-                    <a href=""><i class="bi bi-whatsapp"></i></a>
+                    <a href=""><i class="fa-brands fa-whatsapp"></i></a>
                     <p>087777777777</p>
                 </div>
 
@@ -31,9 +31,9 @@
         <div class="kotak-copy">
             
             <div class="sosmed">
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href="" class="sosmed-center"><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href="" class="sosmed-center"><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
                 <a href=""></a>
             </div>
 
@@ -46,8 +46,7 @@
 </footer>
 <!-- end footer -->
     
-    
-    
+
 <script src="<?php echo base_url('assets/js/navbar.js')?>"></script>
     
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

@@ -1,5 +1,5 @@
-const toggleBtn = document.querySelector('.toogle')
-const toggleBtnIcon = document.querySelector('.toogle i')
+const toggleBtn = document.querySelector('.icon-bars')
+const toggleBtnIcon = document.querySelector('.icon-bars i')
 const Dropdown = document.querySelector('.dropdown')
 
 toggleBtn.onclick = function (){
@@ -7,8 +7,8 @@ toggleBtn.onclick = function (){
     const isOpen = Dropdown.classList.contains('open')
 
     toggleBtnIcon.classList = isOpen
-    ? 'bi bi-x'
-    : 'bi bi-list'
+    ? 'fa-solid fa-x'
+    : 'fa-solid fa-bars'
 }
 
 const NameBtn = document.querySelector('.name_session')

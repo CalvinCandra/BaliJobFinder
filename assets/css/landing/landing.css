@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: none;
     font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
 }
 
 .containerr{
@@ -141,7 +142,7 @@
 }
 
 /* set logo bars */
-.navbar .pembungkus .toogle{
+.navbar .pembungkus .icon-bars{
     display: none;
     color: #0d6efd;
     font-weight: bolder;
@@ -455,17 +456,21 @@
     margin-bottom: 28px;
 }
 
-.kotak-lowongan .kota-lowongan .icon-location i{
+.kotak-lowongan .kota-lowongan .icon-location #location i{
     display: flex;
     align-items: center;
     color: #0d6efd;
     font-size: 20px;
+    padding: 3px;
+    margin: 2.5px 0 0 0;
 }
 
 .kotak-lowongan .kota-lowongan .kotaUsaha{
-    margin-inline: 20px;
+    margin-inline: 13px;
     font-weight: 500;
     font-size: 18px;
+    display: flex;
+    align-items: center;
 }
 
 .kotak-lowongan .cek a{
@@ -577,8 +582,11 @@ footer{
     margin-bottom: 10px;
 }
 
-.kotak-body .kontak .icon-kontak a ,i{
-    text-decoration: none;
+.kotak-body .kontak .icon-kontak a{
+    text-decoration: none;  
+}
+
+.kotak-body .kontak .icon-kontak i{
     color: #ffffff;
     font-weight: 600;
     display: flex;
@@ -603,6 +611,9 @@ footer{
 
 .kotak-copy .sosmed a{
     text-decoration: none;
+}
+
+.kotak-copy .sosmed i{
     font-size: 35px;
     padding-block: 10px;
     margin-bottom: 5px;
@@ -694,10 +705,9 @@ footer{
         display: none;
     }
 
-    .navbar .pembungkus .toogle{
+    .navbar .pembungkus .icon-bars{
         display: block;
         font-size: 20px;
-        margin-bottom: 6px;
     }
 
     .navbar .dropdown{
@@ -897,7 +907,7 @@ footer{
     }
 
     .kotak-footer .kotak-logo{
-        width: 45vw;
+        width: 52vw;
     }
     
     .kotak-footer .kotak-logo img{
