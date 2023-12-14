@@ -38,7 +38,7 @@
                     if($session_name === NULL){
                 ?>
                     <a href="<?php echo base_url("Auth/login")?>" class="btn">Login</a>
-                    <a href="<?php echo base_url("Auth/register_pilihan")?>" class="btn">Register</a>
+                    <a href="<?php echo base_url("Auth/register_pilih")?>" class="btn">Register</a>
                 <?php 
                     }else{
                 ?>
@@ -77,7 +77,7 @@
                 <li class="ngelist"><a href="#lowongan" class="link">Lowongan</a></li>
                 <li class="ngelist"><a href="#contact" class="link">Contact</a></li>
                 <li><a href="<?php echo base_url("Auth/login")?>" class="btn">Login</a></li>
-                <li><a href="<?php echo base_url("Auth/register_pilihan")?>" class="btn">Register</a></li>
+                <li><a href="<?php echo base_url("Auth/register_pilih")?>" class="btn">Register</a></li>
             <?php 
                 }else{
             ?>
