@@ -133,7 +133,7 @@
                 <!-- lowongan kota -->
                 <div class="kota-lowongan">
                     <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                     <p class="kotaUsaha">Denpasar</p>
                 </div>
@@ -155,83 +155,7 @@
     
                 <?php } ?>
             </div>
-    
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/unique.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-    
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/The_Keranjang 1.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-    
+
             <div class="kotak-lowongan">
                 <!-- img -->
                 <div class="logo-lowongan">
@@ -247,7 +171,7 @@
                 <!-- lowongan kota -->
                 <div class="kota-lowongan">
                     <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                     <p class="kotaUsaha">Denpasar</p>
                 </div>
@@ -269,7 +193,7 @@
     
                 <?php } ?>
             </div>
-    
+
             <div class="kotak-lowongan">
                 <!-- img -->
                 <div class="logo-lowongan">
@@ -285,7 +209,7 @@
                 <!-- lowongan kota -->
                 <div class="kota-lowongan">
                     <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                     <p class="kotaUsaha">Denpasar</p>
                 </div>
@@ -307,7 +231,7 @@
     
                 <?php } ?>
             </div>
-    
+
             <div class="kotak-lowongan">
                 <!-- img -->
                 <div class="logo-lowongan">
@@ -323,7 +247,7 @@
                 <!-- lowongan kota -->
                 <div class="kota-lowongan">
                     <div class="icon-location">
-                        <a><i class="bi bi-geo-alt-fill"></i></a>
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
                     <p class="kotaUsaha">Denpasar</p>
                 </div>
@@ -345,6 +269,83 @@
     
                 <?php } ?>
             </div>
+
+            <div class="kotak-lowongan">
+                <!-- img -->
+                <div class="logo-lowongan">
+                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
+                </div>
+    
+                <!-- lowongan body -->
+                <div class="body-lowongan">
+                    <p class="namaUsaha">PT. Blessing Computer</p>
+                    <h2 class="namaPosisi">Staff Administrasi</h2>
+                </div>
+    
+                <!-- lowongan kota -->
+                <div class="kota-lowongan">
+                    <div class="icon-location">
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+                    <p class="kotaUsaha">Denpasar</p>
+                </div>
+    
+                <!-- link cek details -->
+                <?php 
+                    if($session_name == NULL){
+                ?>
+                    <div class="cek">
+                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
+                    </div>
+                <?php
+                    }else{
+                ?>
+    
+                <div class="cek">
+                    <a href=""></a>
+                </div>
+    
+                <?php } ?>
+            </div>
+
+            <div class="kotak-lowongan">
+                <!-- img -->
+                <div class="logo-lowongan">
+                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
+                </div>
+    
+                <!-- lowongan body -->
+                <div class="body-lowongan">
+                    <p class="namaUsaha">PT. Blessing Computer</p>
+                    <h2 class="namaPosisi">Staff Administrasi</h2>
+                </div>
+    
+                <!-- lowongan kota -->
+                <div class="kota-lowongan">
+                    <div class="icon-location">
+                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+                    <p class="kotaUsaha">Denpasar</p>
+                </div>
+    
+                <!-- link cek details -->
+                <?php 
+                    if($session_name == NULL){
+                ?>
+                    <div class="cek">
+                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
+                    </div>
+                <?php
+                    }else{
+                ?>
+    
+                <div class="cek">
+                    <a href=""></a>
+                </div>
+    
+                <?php } ?>
+            </div>
+    
     
         </div>
     </div>

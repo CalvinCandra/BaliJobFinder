@@ -6,8 +6,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon/icon.png')?>" type="image/x-icon">
 
-     <!-- CDN Bootstrap Icon -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+     <!-- CDN Fontawsome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     
     <!-- link css -->
     <link rel="stylesheet" href="<?php echo base_url("assets/css/landing/landing.css")?>">
@@ -65,7 +65,7 @@
                 <?php } ?>
             </div>
 
-            <a class="toogle"><i class="bi bi-list"></i></a>
+            <a class="icon-bars"><i class="fa-solid fa-bars"></i></a>
         </div>
 
         <div class="dropdown">
