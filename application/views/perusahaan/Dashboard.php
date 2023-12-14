@@ -27,14 +27,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>0</h3>
+                <h3><?php echo $totalLamaran ?></h3>
 
                 <p>Pelamar</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?= base_url('perusahaan/lamaran') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -42,14 +42,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>2</h3>
+                <h3><?php echo $JumlahLowongan?></h3>
 
                 <p>Iklan Lowongan</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href= "<?= base_url('perusahaan/management') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

@@ -1,31 +1,20 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="<?php echo base_url("assets/img/icon/icon.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a class="brand-link">
+      <img src="<?php echo base_url("assets/img/icon/icon.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle"
            style="opacity: .8">
-      <span class="brand-text font-weight-bold">BALI JOB FINDER</span>
+      <span class="brand-text text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="User Image">
-        </div>
-        <div class="info">
-          <a class="d-block"><?php echo $this->session->userdata('name')?></a>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav class="mt-4">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('perusahaan/home') ?>" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -35,7 +24,7 @@
           
           <li class="nav-header">LOWONGAN KERJA</li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?= base_url('perusahaan/management') ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Management Lowongan
@@ -69,7 +58,7 @@
           </li> -->
           <li class="nav-header">PELAMAR KERJA</li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?= base_url('perusahaan/lamaran') ?>" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Daftar Pelamar
@@ -78,7 +67,7 @@
           </li>
           <li class="nav-header">MY PROFIL</li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?= base_url('perusahaan/profile') ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profil User
@@ -102,3 +91,28 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+
+  <!-- <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var navLinks = document.querySelectorAll(".nav-link");
+
+    // Add click event listener to each navigation link
+    navLinks.forEach(function(link) {
+      link.addEventListener("click", function() {
+        // Remove "active" class from all links
+        navLinks.forEach(function(navLink) {
+          navLink.classList.remove("active");
+        });
+
+        // Add "active" class to the clicked link
+        this.classList.add("active");
+      });
+
+      // Check if the link's href matches the current URL
+      if (link.href === window.location.href) {
+        link.classList.add("active");
+      }
+    });
+  });
+  </script> -->
+
