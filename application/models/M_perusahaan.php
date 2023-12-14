@@ -30,8 +30,7 @@
         public function getUser()
         {
             $email = $this->session->userdata('email');
-            $user = $this->db->get_where('users', ['email' => $email])->row();
-            $user_id = $user->id_users;
+            $user_id = $this->db->get_where('users', ['email' => $email])->row();
             return $user_id;
         }
 

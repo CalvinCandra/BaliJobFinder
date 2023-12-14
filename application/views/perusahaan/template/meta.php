@@ -26,5 +26,8 @@
   <link rel="stylesheet" href="<?= base_url()?>assets/temp/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- icon -->
+  <link rel="shortcut icon" href="<?php echo base_url("assets/img/favicon/icon.png")?>" type="image/x-icon">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
