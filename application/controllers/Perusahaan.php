@@ -42,7 +42,10 @@ class Perusahaan extends CI_Controller {
     public function management()
     {
         $user_id = $this->M_perusahaan->getUser();
-        $data['perusahaan'] = $this->M_perusahaan->getPerusahaan($user_id);
+        $data = array(
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
+            'session' => $user_id->name
+        );
 
         // ambil data dari kolom pencarian
         if($this->input->post('cari')){
@@ -54,7 +57,7 @@ class Perusahaan extends CI_Controller {
 
         // config pagination
         $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/management';
-        $config['total_rows'] = $this->M_perusahaan->LowonganCount($user_id, $data['keyword']);
+        $config['total_rows'] = $this->M_perusahaan->LowonganCount($user_id->id_users, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -62,7 +65,7 @@ class Perusahaan extends CI_Controller {
         $this->pagination->initialize($config);
 
         $data['start'] = $this->uri->segment(3);
-        $data['lowongan'] = $this->M_perusahaan->getLowongan($user_id,$config['per_page'],$data['start'],$data['keyword']);
+        $data['lowongan'] = $this->M_perusahaan->getLowongan($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
         $this->template->load('perusahaan/template','perusahaan/management',$data);
 
         // unset session untuk pencarian di lamaran
@@ -72,7 +75,7 @@ class Perusahaan extends CI_Controller {
     public function addLowongan()
     {
         $user_id = $this->M_perusahaan->getUser();
-        $this->M_perusahaan->input($user_id);
+        $this->M_perusahaan->input($user_id->id_users);
         redirect('perusahaan/management');
         
     }
@@ -93,7 +96,11 @@ class Perusahaan extends CI_Controller {
     public function lamaran()
     {
         $user_id = $this->M_perusahaan->getUser();
-        $data['perusahaan'] = $this->M_perusahaan->getPerusahaan($user_id);
+        
+        $data = array(
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
+            'session' => $user_id->name
+        );
 
         // ambil data dari kolom pencarian
         if($this->input->post('cari_lamaran')){
@@ -105,7 +112,7 @@ class Perusahaan extends CI_Controller {
 
         // config pagination
         $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/lamaran';
-        $config['total_rows'] = $this->M_perusahaan->LamaranCount($user_id, $data['key_lamaran']);
+        $config['total_rows'] = $this->M_perusahaan->LamaranCount($user_id->id_users, $data['key_lamaran']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -113,7 +120,7 @@ class Perusahaan extends CI_Controller {
         $this->pagination->initialize($config);
 
         $data['start'] = $this->uri->segment(3);
-        $data['lamaran'] = $this->M_perusahaan->getPelamar($user_id,$config['per_page'],$data['start'],$data['key_lamaran']);
+        $data['lamaran'] = $this->M_perusahaan->getPelamar($user_id->id_users,$config['per_page'],$data['start'],$data['key_lamaran']);
         $this->template->load('perusahaan/template','perusahaan/daftar_pelamar',$data);
 
         // unset session untuk pencarian di lowongan
@@ -129,7 +136,10 @@ class Perusahaan extends CI_Controller {
     public function profile()
     {
         $user_id = $this->M_perusahaan->getUser();
-        $data['perusahaan'] = $this->M_perusahaan->getPerusahaan($user_id);
+        $data = array(
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
+            'session' => $user_id->name
+        );
         $this->template->load('perusahaan/template','perusahaan/profile',$data);
     }
 
@@ -151,7 +161,7 @@ class Perusahaan extends CI_Controller {
                 $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
     
                 // menyimpan logo ke database
-                $this->M_perusahaan->saveLogoPath($user_id, $logo_path);
+                $this->M_perusahaan->saveLogoPath($user_id->id_users, $logo_path);
             } else {
                 // mengatasi jika error
                 $error = $this->upload->display_errors();
@@ -159,7 +169,7 @@ class Perusahaan extends CI_Controller {
             }
         }
 
-        $this->M_perusahaan->simpanProfile($user_id);
+        $this->M_perusahaan->simpanProfile($user_id->id_users);
         redirect('perusahaan/profile');
     }
     

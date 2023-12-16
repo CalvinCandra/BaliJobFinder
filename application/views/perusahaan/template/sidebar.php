@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a class="brand-link">
-      <img src="<?php echo base_url("assets/img/icon/icon.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle"
+      <img src="<?php echo base_url("assets/img/favicon/icon.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle"
            style="opacity: .8">
       <span class="brand-text text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
