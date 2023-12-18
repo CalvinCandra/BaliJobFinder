@@ -153,15 +153,23 @@
             return $this->db->get_where('data_perusahaan', array('fk_id_users' => $user_id));
         }
 
-        public function simpanProfile()
+        public function simpanProfile($id_users)
         {
             $edit = array(
                 'nama_perusahaan' => $this->input->post('nama_perusahaan'),
                 'tlp_perusahaan' => $this->input->post('no_tlp'),
                 'alamat_perusahaan' => $this->input->post('alamat'),
+                'kota' => $this->input->post('kota'),
             );
             $this->db->where('id_perusahaan', $this->input->post('id'));
             $result = $this->db->update('data_perusahaan', $edit);
+
+            if ($result) {
+                // Jika update data perusahaan sukses, update juga nama perusahaan di tabel users
+                $nama_perusahaan_baru = $this->input->post('nama_perusahaan');
+                $this->db->where('id_users', $id_users);
+                $this->db->update('users', ['name' => $nama_perusahaan_baru]);
+            }
             return $result;
         }
 
