@@ -54,6 +54,10 @@
                                     <input type="text" class="form-control" name="no_tlp" value="<?php echo $key['tlp_perusahaan']; ?>" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="no_tlp">Kota:</label>
+                                    <input type="text" class="form-control" name="kota" value="<?php echo $key['kota']; ?>" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="alamat">Alamat:</label>
                                     <textarea class="form-control" name="alamat" rows="3" required><?php echo $key['alamat_perusahaan']; ?></textarea>
                                 </div>
