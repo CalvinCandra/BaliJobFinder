@@ -3,11 +3,11 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
     
     class M_pelamar extends CI_Model {
-      // get data pelamar
-      public function getPelamar($user_id)
-      {
-          return $this->db->get_where('data_pelamar', array('fk_id_users' => $user_id));
-      }
+        // get data pelamar
+        public function getDataPelamar($user_id)
+        {
+            return $this->db->get_where('data_pelamar', array('fk_id_users' => $user_id));
+        }
     
         public function getLowongan($user_id, $limit, $start,$keyword=null)
         {

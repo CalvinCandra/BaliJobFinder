@@ -37,7 +37,7 @@ class Balijobfinder extends CI_Controller {
             // mengambil gambar profile berdasarkan role
             if($datas->role == 'pelamar'){
                 // mengambil data pelamar yang sedang login
-                $pelamar = $this->M_pelamar->getPelamar($datas->id_users)->row();
+                $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
                 if(empty($pelamar->gambar)){
                     $logo = 'assets/img/dashboard/profile.png';
                 }else{
@@ -96,7 +96,7 @@ class Balijobfinder extends CI_Controller {
         // mengambil gambar profile
         if($datas->role == 'pelamar'){
             // mengambil data pelamar yang sedang login
-            $pelamar = $this->M_pelamar->getPelamar($datas->id_users)->row();
+            $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
             if(empty($pelamar->gambar)){
                 $logo = 'assets/img/dashboard/profile.png';
             }else{
@@ -173,7 +173,7 @@ class Balijobfinder extends CI_Controller {
          // mengambil gambar profile berdasarkan role
          if($datas->role == 'pelamar'){
              // mengambil data pelamar yang sedang login
-             $pelamar = $this->M_pelamar->getPelamar($datas->id_users)->row();
+             $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
              if(empty($pelamar->gambar)){
                  $logo = 'assets/img/dashboard/profile.png';
              }else{
@@ -219,7 +219,7 @@ class Balijobfinder extends CI_Controller {
         $user = $this->M_auth->getUser($this->session->userdata('email'));
 
         // get data pelamar
-        $pelamar = $this->M_landing->getPelamar($user->id_users);
+        $pelamar = $this->M_landing->getDataPelamar($user->id_users);
 
         // ambil id_lowongan yang disembunyiin
         $lowongan = $this->input->post('id_lowongan');
