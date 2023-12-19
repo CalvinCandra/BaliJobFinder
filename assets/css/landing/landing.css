@@ -478,8 +478,7 @@
 
 .kotak-lowongan .kota-lowongan{
     display: flex;
-    align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 
 .kotak-lowongan .kota-lowongan .icon-location #location i{
@@ -493,6 +492,7 @@
 
 .kotak-lowongan .kota-lowongan .kotaUsaha{
     margin-inline: 13px;
+    padding-top: 1px;
     font-weight: 500;
     font-size: 18px;
     display: flex;
@@ -796,7 +796,7 @@ footer{
 
     /* lowongan */
     .kotak-lowongan{
-        min-width: 30vw;
+        min-width: 45vw;
     }
 
     .kotak-lowongan .logo-lowongan{
@@ -918,7 +918,7 @@ footer{
 
     /* lowongan */
     .kotak-lowongan{
-        min-width: 48vw;
+        min-width: 50vw;
     }
 
     .kotak-lowongan .logo-lowongan{

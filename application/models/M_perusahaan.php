@@ -168,12 +168,7 @@
             $this->db->where('id_lamaran', $id);
             $result = $this->db->delete('lamaran');
             return $result;
-        }
-      
-       public function getPerusahaan($user_id)
-        {
-            return $this->db->get_where('data_perusahaan', array('fk_id_users' => $user_id));
-        }
+        }   
 
         // simpan profile
 
