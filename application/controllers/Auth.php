@@ -22,10 +22,12 @@ class Auth extends CI_Controller {
 
 // ==================================================================menampilkan halaman login
     public function login(){
+        // data-data untuk ke view
         $data = array(
             'title' => 'Login',
             'css' => 'assets/css/auth/loginn.css',
         );
+        // memanggil komponen view
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/login');
         $this->load->view('auth/_partials/footer');
@@ -33,10 +35,12 @@ class Auth extends CI_Controller {
 
 // ====================================================================menampilkan pilihan register
     public function register_pilihan(){
+         // data-data untuk ke view
         $data = array(
             'title' => 'Register',
             'css' => 'assets/css/auth/regipil.css',
         );
+        // memanggil komponen view
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/pilihan_register');
         $this->load->view('auth/_partials/footer');
@@ -44,10 +48,12 @@ class Auth extends CI_Controller {
 
     // menampilkan halaman register pelamar
     public function nampil_registerPelamar(){
+         // data-data untuk ke view
         $data = array(
             'title' => 'Register',
             'css' => 'assets/css/auth/register.css',
         );
+        // memanggil komponen view
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/register_pelamar');
         $this->load->view('auth/_partials/footer');
@@ -69,16 +75,23 @@ class Auth extends CI_Controller {
             'matches' => 'Your Passoword Dont Matches',
         ]);
 
+        // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
         if ($this->form_validation->run() == FALSE) {
+             // data-data untuk ke view
             $data = array(
                 'title' => 'Register',
                 'css' => 'assets/css/auth/register.css',
             );
+            // memanggil komponen view
             $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/register_pelamar');
             $this->load->view('auth/_partials/footer');
-        } else {
-            $this->M_auth->regisPelamar();     
+        } else { //jika tidak ada 
+
+            // manggil function regisPelamar di M_auth
+            $this->M_auth->regisPelamar();
+
+            // kirim flashdata ke view
             $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail'); 
             redirect('Auth/login');
             
@@ -89,10 +102,12 @@ class Auth extends CI_Controller {
 // ===================================================================== Register PERUSAHAAN
     // menampilkan halaman register perusaahaan
     public function nampil_registerPerusahaan(){
+         // data-data untuk ke view
         $data = array(
             'title' => 'Register',
             'css' => 'assets/css/auth/register.css',
         );
+        // memanggil komponen view
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/register_perusahaan');
         $this->load->view('auth/_partials/footer');
@@ -111,16 +126,22 @@ class Auth extends CI_Controller {
             'matches' => 'Your Passoword Dont Matches',
         ]);
 
+        // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
         if ($this->form_validation->run() == FALSE) {
+             // data-data untuk ke view
             $data = array(
                 'title' => 'Register',
                 'css' => 'assets/css/auth/register.css',
             );
+            // memanggil komponen view
             $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/register_perusahaan');
             $this->load->view('auth/_partials/footer');
         } else {
+            // manggil function regisPerusahaan di M_auth
             $this->M_auth->regisPerusahaan();
+
+            // kirim flashdata ke view
             $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail');   
             redirect('Auth/login');  
         }
@@ -128,21 +149,33 @@ class Auth extends CI_Controller {
 
 //=============================================================================== Verify akun agar bisa login
     public function verify(){
+        // ambil data pada url
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 
+        // ambil data users berdasarkan email
         $user = $this->M_auth->getUser($email);
 
+        // jika user ada
         if($user){
+            //jika token = token yang ada di database
             if($token === $user->token){
+
+                // manggil function email_verified di M_auth
                 $this->M_auth->email_verified();
+
+                // kirim flashdata ke view
                 $this->session->set_flashdata('pesan','Congratulation! your account has been Activated. Please Login');  
                 redirect('Auth/login');
-            }else{
+            }else{ //jika tidak
+
+                // kirim flashdata ke view
                 $this->session->set_flashdata('error','Account Activation Failed. Wrong Token.');  
                 redirect('Auth/login'); 
             }
-        }else{
+        }else{ //jika tidak
+
+            // kirim flashdata ke view
             $this->session->set_flashdata('error','Account Activation Failed. Wrong Email.');  
             redirect('Auth/login'); 
         }
@@ -155,21 +188,25 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
-       
+       // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
        if ($this->form_validation->run() == FALSE) {
-            // panggil view
+             // data-data untuk ke view
             $data = array(
                 'title' => 'Login',
                 'css' => 'assets/css/auth/login.css'
             );
+            // memanggil komponen view
             $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/login');
             $this->load->view('auth/_partials/footer');
 
        }else {
+
+            //ambil data inputan user
             $email = $this->input->post('email');
             $password = $this->input->post('password');
 
+            // get data Users
             $data = $this->M_auth->getUser($email);
 
             // ngecek apakah ada usernya
@@ -211,11 +248,11 @@ class Auth extends CI_Controller {
                             redirect('Admin'); 
                         }
                     }
-                }else{
+                }else{ //jika password salah
                     $this->session->set_flashdata('error','Wrong Password');  
                     redirect('Auth/login'); 
                 }
-            }else{
+            }else{ //jika email blm terdaftar
                 $this->session->set_flashdata('error','Email is not Registered');  
                 redirect('Auth/login'); 
             }
@@ -226,10 +263,12 @@ class Auth extends CI_Controller {
 // ======================================================================== Forget Password
     // mmenampilkan input email untuk forget akun
     public function VForget(){
+         // data-data untuk ke view
         $data = array(
             'title' => 'Forget Password',
             'css' => 'assets/css/auth/forget.css',
         );
+        // memanggil komponen view
         $this->load->view('auth/_partials/header', $data);
         $this->load->view('auth/forget/forget');
         $this->load->view('auth/_partials/footer');
@@ -237,22 +276,27 @@ class Auth extends CI_Controller {
 
     //function mengirim pesan ke email
     public function KirimEmailPass(){
+
          // mengambil data inputan user
          $email = $this->input->post('email');
 
         // set rules form validation
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 
+        // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
         if ($this->form_validation->run() == FALSE) {
-            // panggil view
+             // data-data untuk ke view
             $data = array(
                 'title' => 'Forget Password',
                 'css' => 'assets/css/auth/forget.css',
             );
+            // memanggil komponen view
             $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/forget/forget');
             $this->load->view('auth/_partials/footer');
         } else {
+
+            // ambil data users
             $data = $this->M_auth->getUser($email);
             // mengecek apakah email sudah terdaftar apa belum
             if($data->email === $email){
@@ -272,17 +316,19 @@ class Auth extends CI_Controller {
          $email = $this->input->get('email');
          $token = $this->input->get('token');
 
-         // ngecek apakah sudah terdaftar
+         // ambil data users
          $user = $this->M_auth->getUser($email);
  
+         //jika ada users
          if($user){
+            // jika token sama dengan token di database
             if($token === $user->token){
                 $this->load->view('auth/forget/formForget');
-            }else{
+            }else{ //jika token berbeda
                 $this->session->set_flashdata('error','Link Failed. Wrong Token.');  
                 redirect('Auth/login'); 
             }
-         }else{
+         }else{ //jika email blm register
              $this->session->set_flashdata('error','Link Failed, Email Not Register');  
              redirect('Auth/login'); 
          }
@@ -298,9 +344,13 @@ class Auth extends CI_Controller {
             'matches' => 'Your Passoword Dont Matches',
         ]);
 
+        // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
         if ($this->form_validation->run() == FALSE) {
+
             $this->load->view('auth/forget/formForget');
+
         } else {
+            // panggil function forget di M_auth
             $this->M_auth->forget();
             $this->session->set_flashdata('pesan','Congratulation! your password has been change. Please Login');  
             redirect('Auth/login');
@@ -311,6 +361,7 @@ class Auth extends CI_Controller {
 
 // ======================================================================== logout
     public function logout(){
+        // hapus semua session
         session_destroy();
         redirect('Auth/login');
     }

@@ -13,7 +13,7 @@
 /* set navbarr */
 .navbarr{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    margin-bottom: 20px;
+    margin-bottom: 200px;
     position: fixed;
     width: 100vw;
     background-color: #ffffff;
@@ -235,205 +235,81 @@
 .navbarr .pembungkus .auth .user .foto_user img{
     width: 100%;
 }
+
 /* end navbarr */
 
-/* hero section */
-.hero-section{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.hero{
-    width: 88vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 110px;
-}
-
-.hero .konten-kanan{
-    width: 100%;
-}
-
-.hero .konten-kanan .Judul{
-    color: #0d6efd;
-    text-transform: uppercase;
-    font-size: 3.5rem;
-    font-weight: 900;
-}
-
-.hero .konten-kanan .pendukung{
-    font-weight: 800;
-    font-size: 1rem;
-    text-transform: capitalize;
-    margin-bottom: 25px;
-}
-
-.hero .konten-kanan .button{
-    background-color: #0d6efd;
-    border: 1px solid #0d6efd;
-    color: #ffffff;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-    padding: 10px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.hero .konten-kanan .button:hover{
-    background-color: #ffffff;
-    border: 2px solid #0d6efd;
-    color: #0d6efd;
-    transition: background-color 0.5s ease-in-out;
-}
-
-.hero .konten-kiri{
-    width: 100%;
-}
-/* end hero section */
-
-/* alasan */
-.judul-alasan{
-    display: flex;
-    justify-content: center;
-    margin-top: 130px;
-    color: #0d6efd;
-    font-weight: 900;
-    font-size: 30px;
-    text-transform: uppercase;
-}
-.alasan-section{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.alasan{
-    width: 85vw;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-
-.bungkus-alasan{
-    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
-    width: 40%;
-    margin: 50px;
-    padding: 15px;
-}
-
-.bungkus-alasan .gambar{
-    margin: auto;
+/* search */
+.search-section{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    height: 200px;
-}
-
-.bungkus-alasan .gambar img{
     width: 100%;
 }
 
-.bungkus-alasan .judul-card{
-    text-align: center;
-    margin-block: 10px;
+.search-section .search-data{
+    width: 90vw;
+    margin-top: 120px;
+}
+
+.search-section .search-data .form-search{
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.search-section .search-data .form-search .search-input{
     font-size: 20px;
-    font-weight: 700;
-    color: #0d6efd;
+    width: 88%;
+    height: 37px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    border-radius:5px ;
+    border: 2px solid #0d6efd;
+    outline: none;
 }
 
-.bungkus-alasan .text{
-    text-align: center;
-    font-weight: 500;
-}
-/* end alasan */
 
-/* rekom */
-.judul-rekom{
-    display: flex;
-    justify-content: center;
-    margin-top: 130px;
-    color: #0d6efd;
-    font-weight: 900;
-    font-size: 30px;
+.search-section .search-data .form-search .search-btn{
+    font-size: 17px;
     text-transform: uppercase;
-}
-
-.pendukung-judul-rekom{
-    text-align: center;
     font-weight: 600;
+    padding-block: 5px;
+    background-color: #0d6efd;
+    border:1px solid #0d6efd;
+    width: 10%;
+    color: #ffffff;
+    border: none;
+    border-radius:5px ;
+    cursor: pointer;
 }
 
-.rekom-section{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.search-section .search-data .form-search .search-btn:hover{
+    /* scale: 0.95; */
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+    background-color: #ffffff;
+    transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
 }
-
-.rekom-kotak{
-    width: 88vw;
-    display: block;
-    margin-top: 30px;
-}
-
-.rekom-kotak .rekom, 
-.rekom-kotak .rekom1{
-    margin-block: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.rekom .kotak,
-.rekom1 .kotak{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 15%;
-    height: 200px;
-}
-
-.rekom .kotak img,
-.rekom1 .kotak img{
-    width: 80%;
-}
-
-/* end rekom */
+/* END search */
 
 /* lowongan */
-.judul-lowongan{
-    display: flex;
-    justify-content: center;
-    margin-top: 130px;
-    color: #0d6efd;
-    font-weight: 900;
-    font-size: 30px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-}
-
 .lowongan-section{
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     padding-block: 20px;
 }
 
 .lowongan{
     display: flex;
-    width: 90vw;
-    overflow-x: auto;
-}
-
-.lowongan::-webkit-scrollbar{
-    height: 5px;
-}
-
-.lowongan::-webkit-scrollbar-thumb{
-    background-color: #0d6efd;
-    border-radius: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 88vw;
 }
 
 .kotak-lowongan{
@@ -510,37 +386,21 @@
     text-decoration: underline;
 }
 
-.btn_more-lowongan{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-    padding-block: 20px;
-}
-
-.btn_more-lowongan a{
-    background-color: #0d6efd;
-    text-decoration: none;
-    padding: 8px 25px;
-    border: 1px solid #0d6efd;
-    border-radius: 10px;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.btn_more-lowongan a:hover{
-    scale: 0.95;
-    border: 1px solid #0d6efd;
-    background-color: #ffffff;
-    color: #0d6efd;
-    transition: background-color 0.5s ease-in;
-}
-
 /* end lowongan */
+
+/* pagination */
+.pagination{
+    display: flex;
+    margin-top: 20px;
+    justify-content: start;
+    align-items: center;
+    /* background-color: red; */
+}
+/* end pagination */
 
 /* footer */
 footer{
-    margin-top: 8%;
+    margin-top: 2%;
     background-color: #0d6efd;
     width: 100%;
     display: flex;
@@ -577,7 +437,6 @@ footer{
 
 .kotak-body .about h3{
     text-transform: uppercase;
-    font-weight: 600;
     margin-bottom: 10px;
     font-size: 25px;
 }
@@ -691,26 +550,6 @@ footer{
 
     /* end navbarr */
 
-    /* hero section */
-    .hero{
-        margin-block: 21%;
-    }
-
-    .hero .konten-kanan{
-        width: 100%;
-        text-align: center;
-    }
-    .hero .konten-kiri{
-        display: none;
-    }
-    /* end hero section */
-
-    /* alasan */
-    .alasan{
-        width: 90vw;
-    }
-
-    /* end alasan */
 }
 
 /* table */
@@ -741,68 +580,47 @@ footer{
         font-size: 15px;
     }
 
-
     /* end navbarr */
 
-    /* hero section */
-    .hero{
-        width: 90vw;
-        margin-block: 25%;
-    }
-
-    .hero .konten-kanan{
+    /* search */
+    .search-section{
         width: 100%;
-        text-align: center;
     }
 
-    .hero .konten-kanan .Judul{
-        font-size: 60px;
+    .search-section .search-data{
+        width: 70vw;
     }
 
-    .hero .konten-kanan .pendukung{
-        font-size: 20px;
+    .search-section .search-data .form-search .search-input{
+        width: 45vw;
     }
 
-    .hero .konten-kiri{
-        display: none;
-    }
-    /* end hero section */
-
-    /* alasan */
-    .judul-alasan{
-        font-size: 27px;
-    }
-    .alasan{
-        width: 90vw;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
+    .search-section .search-data .form-search .search-btn{
+        width: 20vw;
     }
 
-    .bungkus-alasan{
-        margin: 25px;
+    /* end search */
+
+    /* lowongan */
+    .lowongan-section{
+        width: 100%;
+    }
+    .kotak-lowongan{
         width: 38vw;
     }
 
-    .bungkus-alasan .judul-card{
-        font-size: 30px;
+    .lowongan .kotak-lowongan .logo-lowongan{
+        width: 20vw;
     }
 
-    .bungkus-alasan .text{
-        font-size: 20px;
-    }
-    /* end alasan */
-
-    /* lowongan */
-    .kotak-lowongan{
-        min-width: 45vw;
-    }
-
-    .kotak-lowongan .logo-lowongan{
-        width: 13vw;
+    .lowongan .kotak-lowongan .logo-lowongan img{
+        width: 100%;
     }
     /* end lowongan */
+
+
+
+
 
     /* footer */
     footer{
@@ -860,71 +678,21 @@ footer{
 
     /* end navbarr */
 
-    /* hero section */
-    .hero{
-        width: 90vw;
-        margin-top: 200px;
-    }
-
-    .hero .konten-kanan{
-        width: 100%;
-        text-align: start;
-    }
-    
-    .hero .konten-kiri{
-        display: none;
-    }
-    /* end hero section */
-
-    /* alasan */
-    .judul-alasan{
-        font-size: 25px;
-        margin-inline: 20px;
-    }
-
-    .bungkus-alasan{
-        margin: 20px;
-        width: 60vw;
-    }
-
-    .bungkus-alasan .judul-card{
-        font-size: 30px;
-    }
-
-    .bungkus-alasan .text{
-        font-size: 20px;
-    }
-    /* end alasan */
-
-    /* rekom */
-    .judul-rekom{
-        margin-inline: 20px;
-    }
-
-    .pendukung-judul-rekom{
-        font-size: 13px;
-        margin-bottom: -30px;
-    }
-
-    .rekom1 .kotak{
-        margin-top: -80px;
-    }
-
-    .rekom .kotak img,
-    .rekom1 .kotak img{
-        width: 100%;
-    }
-    /* end rekom */
-
     /* lowongan */
     .kotak-lowongan{
-        min-width: 50vw;
+        width: 40vw;
+    }
+    .lowongan .kotak-lowongan .logo-lowongan{
+        margin: auto;
+        width: 30vw;
     }
 
-    .kotak-lowongan .logo-lowongan{
-        width: 20vw;
+    .lowongan .kotak-lowongan .logo-lowongan img{
+        width: 100%;
     }
     /* end lowongan */
+    
+
 
     /* footer */
     footer{
@@ -947,6 +715,10 @@ footer{
     .kotak-body .kontak{
         margin-left: -2%;
     }
+
+
+
+    
 
     /* end footer */
 }
