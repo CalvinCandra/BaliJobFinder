@@ -12,7 +12,7 @@
             
           </div><!-- /.col -->
         </div><!-- /.row -->
-        <div class= "alert alert-success" >Selamat Datang <b> <?php echo $this->session->userdata('name')?> </b></div>
+        <div class= "alert alert-success" >Selamat Datang <b> <?php echo $session?> </b></div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
