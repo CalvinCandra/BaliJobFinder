@@ -41,22 +41,22 @@
             </a>
           </li>
           
-          <li class="nav-header">LOWONGAN KERJA</li>
+          <li class="nav-header">DAFTAR LAMARAN</li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="<?= base_url('perusahaan/management')?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Melamar Pekerjaan
+                Lamaran
               </p>
             </a>
           </li>
 
-          <li class="nav-header">Daftar Lamaran</li>
+          <li class="nav-header">LOWONGAN PEKERJAAN</li>
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-suitcase"></i>
               <p>
-                Lamaran
+                Melamar Pekerjaan
               </p>
             </a>
           </li>
