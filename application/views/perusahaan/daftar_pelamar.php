@@ -48,7 +48,11 @@
                                     <td><?= ++$start ?></td>
                                     <td><?php echo $key['nama_lengkap'] ?></td>
                                     <td><?php echo $key['posisi_lowongan'] ?></td>
-                                    <td><?php echo $key['cv'] ?></td>
+                                    <td>
+                                        <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
+                                            <p>Cek CV</p>
+                                        </a>
+                                    </td>
                                     <td>
                                         <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editLamaranModal">Edit</button> -->
                                         <button class="btn btn-info" data-toggle="modal" data-target="#detailLamaranModal<?php echo $key['id_lamaran'] ?>">Detail</button>
@@ -103,8 +107,10 @@
                         <input type="text" class="form-control" value="<?= $key['no_hp'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="syaratLowonganEdit">CV :</label>
-                        <textarea class="form-control" id="syaratLowonganEdit" rows="3" placeholder="File"></textarea>
+                        <label for="syaratLowonganEdit">CV</label>
+                        <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
+                            <p>Cek CV</p>
+                        </a>
                     </div>
                 </form>
             </div>

@@ -65,25 +65,6 @@
               </p>
             </a>
           </li>
-          <!-- <li class="nav-header">MY PROFIL</li>
-          <li class="nav-item">
-            <a href="<?= base_url('perusahaan/profile') ?>" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Profil User
-              
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url("Auth/logout")?>" class="nav-link">
-              <i class="nav-icon fas fa-arrow-left"></i>
-              <p>
-                Log Out
-              
-              </p>
-            </a>
-          </li> -->
 
         </ul>
       </nav>

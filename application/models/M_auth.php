@@ -8,6 +8,7 @@ class M_auth extends CI_Model {
 // ==================================================== Config Email Verification
     public function config($email, $token, $type){
 
+        // config ketentuan email
         $config['useragent'] = "Codeigniter";
         $config['mailpath'] = "usr/bin/sendmail";
         $config['protocol'] = "smtp";
@@ -22,14 +23,19 @@ class M_auth extends CI_Model {
         $config['smtp_timeout'] = 30;
         $config['wordwrap'] = TRUE;
 
+        // panggil library
         $this->load->library('email');
 
+        // initialize config email
         $this->email->initialize($config);
+        // host emailnya
         $this->email->from('balijobfinder@gmail.com','Bali Job Finder');
+        // dikirim ke email users
         $this->email->to($email);
 
         // pengecekan jika type verify
         if($type == 'verify'){
+            // jika typenya adalah verify, maka akan mengirim pesan berikut pada email users
             $this->email->subject('Account Verification');
             
             $this->email->message(
@@ -120,13 +126,9 @@ class M_auth extends CI_Model {
                   </div>
                 </body>
                 </html>'
-
-            //     'Selamat Datang di Bali Job Finder, Silakan verifikasi email dengan klik link dibawah berikut <br> 
-            // <a href="'.base_url(). 'Auth/verify?email=' . $email . '&token='. $token .'">Activate Now</a>'
-        
-            
             );
 
+        //jika typenya change, akan mengirim email berikut
         }else if($type == 'change'){
             $this->email->subject('Change Password');
             $this->email->message('
@@ -217,17 +219,15 @@ class M_auth extends CI_Model {
             </body>
             </html>
             ');
-
-            
-            // $this->email->message('Selamat Datang di Bali Job Finder, Silakan ganti password dengan klik link dibawah berikut <br> 
-            // <a href="'.base_url(). 'Auth/ForgetPassword?email=' . $email . '&token='. $token .'">Change Password Now</a>');
         }
 
+        // kirim email
         $this->email->send();
         
     }
 // =========================================================== Ambil Data User Sesuai Email
     public function getUser($email){
+        // ambil data users yang emailnya sama
         $user = $this->db->get_where('users', ['email' => $email])->row();
         return $user;
     }
@@ -270,12 +270,16 @@ class M_auth extends CI_Model {
         $this->db->insert('data_pelamar', $dataPelamar);
         $this->db->trans_complete();
 
+        // ngecek jika tidak berhasil
         if ($this->db->trans_status() === FALSE)
         {
+            // maka akan dikembalikanb seperti sebelumnya
             $this->db->trans_rollback();
         }
+        // jika berhasil
         else
         {
+            // maka akan di comit
             $this->db->trans_commit();
         }
 
@@ -322,14 +326,18 @@ class M_auth extends CI_Model {
         $this->db->insert('data_perusahaan', $dataPerusahaan);
         $this->db->trans_complete();
 
-        if ($this->db->trans_status() === FALSE)
-        {
-            $this->db->trans_rollback();
-        }
-        else
-        {
-            $this->db->trans_commit();
-        }
+         // ngecek jika tidak berhasil
+         if ($this->db->trans_status() === FALSE)
+         {
+             // maka akan dikembalikanb seperti sebelumnya
+             $this->db->trans_rollback();
+         }
+         // jika berhasil
+         else
+         {
+             // maka akan di comit
+             $this->db->trans_commit();
+         }
 
         // memanggil function config
         $this->config($email, $token, 'verify');
@@ -337,10 +345,12 @@ class M_auth extends CI_Model {
 
 // ================================================================= update colom email_verified
     public function email_verified(){
+        // membuat data-data untuk di update pada table users
         $data = array(
             'email_verified' => time(),
             'token' => NULL,
         );
+        // update
         $this->db->update('users', $data);
     }
 
@@ -349,12 +359,15 @@ class M_auth extends CI_Model {
 
     //memasukan token untuk link dan mengirim link ke email
     public function kirimChange($email){
+
         // membuat token
         $token = base64_encode(random_bytes(16));
 
+        // membuat data-data untuk di update pada table users
         $data = array(
             'token' => $token,
         );
+        // update
         $this->db->update('users', $data);
 
         // memanggil function config
@@ -363,12 +376,16 @@ class M_auth extends CI_Model {
 
     // ===================================================================== update colom password
     public function forget(){
+        // ambil data input user
         $pass = $this->input->post('password');
 
+        // membuat data-data untuk di update pada table users
         $data = array(
             'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
             'token' => NULL,
         );
+
+        //update
         $this->db->update('users', $data);
     }
 }

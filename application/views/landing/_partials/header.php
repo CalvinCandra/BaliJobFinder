@@ -6,29 +6,33 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon/icon.png')?>" type="image/x-icon">
 
+    <!-- CDN Bootsrap -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
      <!-- CDN Fontawsome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     
     <!-- link css -->
-    <link rel="stylesheet" href="<?php echo base_url("assets/css/landing/landing.css")?>">
+    <link rel="stylesheet" href="<?php echo base_url($css)?>">
 
     
     <title><?= $title?></title>
 </head>
 <body>
     <!-- navbar -->
-    <nav class="navbar">
+    <div class="navbarr">
         <div class="pembungkus">
             <!-- logo -->
             <div class="logo">
-                <img src="<?php echo base_url("assets/img/logo/blue_logo 1.png")?>" alt="Logo Bali Job Finder" srcset="">
+                <img src="<?php echo base_url("assets/img/logo/blue_logo 1.png")?>" alt="Logo Bali Job Finder">
             </div>
 
             <!-- navigasion menu -->
-            <div class="list_menu">
-                <a href="#home">Home</a>
-                <a href="#lowongan">Lowongan</a>
-                <a href="#contact">Contact</a>
+            <div class="list-menu">
+                <a href="<?= base_url("#home")?>">Home</a>
+                <a href="<?= base_url("#lowongan")?>">Lowongan</a>
+                <a href="<?= base_url("#contact")?>">Contact</a>
             </div>
 
             <!-- navidasion action -->
@@ -42,7 +46,14 @@
                 <?php 
                     }else{
                 ?>
-                    <a class="name_session"><?php echo $session_name?></a>
+                    <!-- foto with name -->
+                    <div class="user">
+                        <div class="foto_user">
+                            <img src="<?php echo base_url($logo) ?>" alt="">
+                        </div>
+                        <a class="name_session"><?php echo $session_name?></a>
+                    </div>
+
                     <div class="menu_dropdown">
                         <!-- cek role -->
                         <?php 
@@ -104,9 +115,6 @@
                 </div>
             <?php } ?>
         </div>
-
-
-
-    </nav>
+    </div>
 
     <!-- end navbar -->

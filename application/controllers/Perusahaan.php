@@ -7,9 +7,12 @@ class Perusahaan extends CI_Controller {
 
     public function __construct(){
         parent:: __construct();
+
+        // jika user blm login
         if(!$this->session->userdata('email')){
             redirect('Auth/Login');
         }
+        
         $this->load->library('form_validation');
         $this->load->model('M_perusahaan');
         
@@ -23,12 +26,10 @@ class Perusahaan extends CI_Controller {
 
     public function home()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
 
-        // unset session untuk pencarian
-        // $this->session->unset_userdata('keyword');
-        // $this->session->unset_userdata('key_lamaran');
-
+        // memberikan data - data ke dalam view
         $data = array(
             'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
             'JumlahLowongan' => $this->M_perusahaan->LowonganCount($user_id->id_users),
@@ -39,9 +40,13 @@ class Perusahaan extends CI_Controller {
         
     }
 
+    
     public function management()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
+        
+        //memberikan data-data ke dalam view 
         $data = array(
             'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
             'session' => $user_id->name
@@ -64,17 +69,23 @@ class Perusahaan extends CI_Controller {
         // initialize pagination
         $this->pagination->initialize($config);
 
+        // mengambil link menjadi 3 bagian
+        //1. BaliJobFinder
+        //2. perusahaan
+        //3. management
         $data['start'] = $this->uri->segment(3);
+
+        // memanggil function getLowongan di M_perusahaan
         $data['lowongan'] = $this->M_perusahaan->getLowongan($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
         $this->template->load('perusahaan/template','perusahaan/management',$data);
-
-        // unset session untuk pencarian di lamaran
-        // $this->session->unset_userdata('key_lamaran');
     }
+
 
     public function addLowongan()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
+        // manggil function input pada M_perusahaan
         $this->M_perusahaan->input($user_id->id_users);
         redirect('perusahaan/management');
         
@@ -82,6 +93,7 @@ class Perusahaan extends CI_Controller {
 
     public function editLowongan()
     {
+        // manggil function editLowongan pada M_perusahaan
         $this->M_perusahaan->editLowongan();
         redirect('perusahaan/management');
         
@@ -89,14 +101,17 @@ class Perusahaan extends CI_Controller {
 
     public function deleteLowongan($id)
     {
+        // manggil function deleteLowongan pada M_perusahaan
         $this->M_perusahaan->deleteLowongan($id );
         redirect('perusahaan/management'); 
     }
 
     public function lamaran()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
         
+        // memberikan data-data ke view
         $data = array(
             'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
             'session' => $user_id->name
@@ -119,23 +134,30 @@ class Perusahaan extends CI_Controller {
         // initialize pagination
         $this->pagination->initialize($config);
 
+        // mengambil link menjadi 3 bagian
+        //1. BaliJobFinder
+        //2. perusahaan
+        //3. lamaran
         $data['start'] = $this->uri->segment(3);
+
+        // memanggil function getpelamar di M_perusahaan
         $data['lamaran'] = $this->M_perusahaan->getPelamar($user_id->id_users,$config['per_page'],$data['start'],$data['key_lamaran']);
         $this->template->load('perusahaan/template','perusahaan/daftar_pelamar',$data);
-
-        // unset session untuk pencarian di lowongan
-        // $this->session->unset_userdata('keyword');
     }
 
     public function deleteLamaran($id)
     {
+        // manggil function deleteLamaran pada M_perusahaan
         $this->M_perusahaan->deleteLamaran($id );
         redirect('perusahaan/lamaran'); 
     }
 
     public function profile()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
+        
+        // kirim data-data pada view
         $data = array(
             'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
             'session' => $user_id->name
@@ -145,19 +167,24 @@ class Perusahaan extends CI_Controller {
 
     public function simpanProfile()
     {
+        // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
     
         // melakukan pengecekan apakah ada file di unggah atau tidak
         if (!empty($_FILES['logo_file']['name'])) {
+
             // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/img/profile/perusahaan';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size']      = 2048; // 2MB
+            $config['upload_path']   = './assets/img/profile/perusahaan'; //tempat upload logonya nanti
+            $config['allowed_types'] = 'jpg|png'; // esktesion yang diperbolehkan
+            $config['max_size']      = 5048; // set ukuran menjadi 5mb
     
-            $this->load->library('upload', $config);
+            $this->load->library('upload', $config); 
     
+            //jika file gambar diupload
             if ($this->upload->do_upload('logo_file')) {
+                // upload
                 $upload_data = $this->upload->data();
+                // lalu simpan pada path
                 $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
     
                 // menyimpan logo ke database

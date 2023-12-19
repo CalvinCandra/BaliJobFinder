@@ -117,17 +117,21 @@
     <h2 class="judul-lowongan">Lowongan Pekerjaan</h2>
     <div class="lowongan-section">
         <div class="lowongan">
+
+            <?php
+                foreach($datalowongan->result_array() as $key):
+            ?>     
     
             <div class="kotak-lowongan">
                 <!-- img -->
                 <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
+                    <img src="<?php echo base_url($key['logo'])?>" alt="">
                 </div>
     
                 <!-- lowongan body -->
                 <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
+                    <p class="namaUsaha"><?= $key['nama_perusahaan']?></p>
+                    <h2 class="namaPosisi"><?= $key['posisi_lowongan']?></h2>
                 </div>
     
                 <!-- lowongan kota -->
@@ -135,7 +139,7 @@
                     <div class="icon-location">
                         <a id="location"><i class="fa-solid fa-location-dot"></i></a>
                     </div>
-                    <p class="kotaUsaha">Denpasar</p>
+                    <p class="kotaUsaha"><?= $key['kota']?></p>
                 </div>
     
                 <!-- link cek details -->
@@ -150,209 +154,35 @@
                 ?>
     
                 <div class="cek">
-                    <a href=""></a>
+                    <a href="<?php echo base_url("Balijobfinder/Details?lowongan=".$key['posisi_lowongan'].'&perusahaan='.$key['nama_perusahaan'])?>">Detail Lowongan</a>
                 </div>
     
                 <?php } ?>
             </div>
 
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-
-            <div class="kotak-lowongan">
-                <!-- img -->
-                <div class="logo-lowongan">
-                    <img src="<?php echo base_url("assets/img/landing/blessing computer 2.png")?>" alt="">
-                </div>
-    
-                <!-- lowongan body -->
-                <div class="body-lowongan">
-                    <p class="namaUsaha">PT. Blessing Computer</p>
-                    <h2 class="namaPosisi">Staff Administrasi</h2>
-                </div>
-    
-                <!-- lowongan kota -->
-                <div class="kota-lowongan">
-                    <div class="icon-location">
-                        <a id="location"><i class="fa-solid fa-location-dot"></i></a>
-                    </div>
-                    <p class="kotaUsaha">Denpasar</p>
-                </div>
-    
-                <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
-                <div class="cek">
-                    <a href=""></a>
-                </div>
-    
-                <?php } ?>
-            </div>
-    
+            <?php
+                endforeach
+            ?>
     
         </div>
+
     </div>
+
+     <!-- link more -->
+     <?php 
+        if($session_name == NULL){
+    ?>
+       <div class="btn_more-lowongan">
+            <a href="<?php echo base_url("Auth/login") ?>">Find More</a>
+        </div>
+    <?php
+        }else{
+    ?>
+        <div class="btn_more-lowongan">
+            <a href="<?php echo base_url("Balijobfinder/Lowongan") ?>">Find More</a>
+        </div>
     
-    <div class="btn_more-lowongan">
-        <a href="">Find More</a>
-    </div>
+    <?php } ?>
 </section>
 
 <!-- end lowongan -->
