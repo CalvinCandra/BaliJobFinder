@@ -12,7 +12,7 @@
             
           </div><!-- /.col -->
         </div><!-- /.row -->
-        <div class= "alert alert-success" >Selamat Datang di dashboard<b> Pelamar </b></div>
+        <div class= "alert alert-success" >Selamat Datang di dashboard<b> <?php echo $session ?></b></div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
