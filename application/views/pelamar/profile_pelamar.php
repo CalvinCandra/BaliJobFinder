@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="no_tlp">Tanggal Lahir:</label>
-                                    <input type="text" class="form-control" name="tgl_lahir" value="<?php echo $key['tgl_lahir']; ?>" required>
+                                    <input type="date" class="form-control" name="tgl_lahir" value="<?php echo $key['tgl_lahir']; ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="no_tlp">No.HP:</label>
@@ -61,7 +61,7 @@
                                     <label for="alamat">Alamat:</label>
                                     <textarea class="form-control" name="alamat" rows="3" required><?php echo $key['alamat']; ?></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                <button type="submit" class="btn btn-primary">Simpan Profile</button>
                             </form>
                         </div>
                     <?php endforeach ?>

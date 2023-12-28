@@ -21,10 +21,11 @@ class Pelamar extends CI_Controller {
 
     public function home()
     {
-        $datas = $this->M_auth->getUser($this->session->userdata('email'));
+        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
 
         $data = array(
-            'session' => $datas->name
+            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
+            'session' => $user_id->name
         );
 
         $this->template->load('pelamar/template' , 'pelamar/pelamar', $data);
@@ -34,6 +35,7 @@ class Pelamar extends CI_Controller {
     {
         $user_id = $this->M_pelamar->getUser();
         $data = array(
+            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
             'perusahaan' => $this->M_pelamar->getPerusahaan($user_id->id_users),
             'session' => $user_id->name
         );
@@ -62,11 +64,12 @@ class Pelamar extends CI_Controller {
 
     public function lamaran()
     {
-        $datas = $this->M_auth->getUser($this->session->userdata('email'));
+        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
 
         $data = array(
-            'session' => $datas->name,
-            'lamaran' =>$this->M_pelamar->lamaran($datas->id_users)
+            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
+            'session' => $user_id->name,
+            'lamaran' =>$this->M_pelamar->lamaran($user_id->id_users)
         );
 
         $this->template->load('pelamar/template' , 'pelamar/management_lamaran', $data);
@@ -75,11 +78,11 @@ class Pelamar extends CI_Controller {
     public function profile()
     {
         // ambil id_users
-        $user_id = $this->M_auth->getuser($this->session->userdata('email'));
+        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
         
         // kirim data-data pada view
         $data = array(
-            'profile' => $this->M_pelamar->simpanProfile($user_id->id_users),
+            'profile' => $this->M_pelamar->getDataPelamar($user_id->id_users),
             'session' => $user_id->name
         );
         $this->template->load('pelamar/template','pelamar/profile_pelamar',$data);
@@ -88,7 +91,7 @@ class Pelamar extends CI_Controller {
     public function simpanProfile()
     {
         // ambil id_users
-        $user_id = $this->M_pelamar->getDataPelamar();
+        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
     
         // melakukan pengecekan apakah ada file di unggah atau tidak
         if (!empty($_FILES['logo_file']['name'])) {
@@ -105,7 +108,7 @@ class Pelamar extends CI_Controller {
                 // upload
                 $upload_data = $this->upload->data();
                 // lalu simpan pada path
-                $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
+                $logo_path = 'assets/img/profile/pelamar/' . $upload_data['file_name'];
     
                 // menyimpan logo ke database
                 $this->M_perusahaan->saveLogoPath($user_id->id_users, $logo_path);
@@ -117,7 +120,7 @@ class Pelamar extends CI_Controller {
         }
 
         $this->M_pelamar->simpanProfile($user_id->id_users);
-        redirect('pelamar/profile_pelamar');
+        redirect('pelamar/profile');
     }
 }
 /* End of file Pelamar.php */
