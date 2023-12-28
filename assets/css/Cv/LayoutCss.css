@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.containerr{
+    background-color: #0d6efd;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerr .kiri{
+    width: 50%;
+    margin-block: 50px;
+    padding-right: 10px;
+}
+
+.containerr .kiri .kiri-center{
+    display: flex;
+    justify-content: center;
+}
+
+.containerr .kiri .kiri-center .foto{
+    display: flex;
+    align-items: center;
+    background-color: aqua;
+    width: 50%;
+    height: 5%;
+    overflow: hidden;
+}
+
+.containerr .kiri .kiri-center .foto img{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.containerr .kiri .nama_pelamar{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.containerr .kiri .nama_pelamar h2{
+    font-size: 40px;
+    color: #ffffff;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.containerr .kiri .kiri-center .deskripsi_pelamar{
+    text-align: justify;
+    width: 90%;
+    margin-top: 30px;
+}
+
+.containerr .kiri .kiri-center .deskripsi_pelamar p{
+   color: #ffffff;
+   font-weight: 500;
+   font-size: 17px;
+}
+
+.containerr .kiri .kontak{
+    margin-top: 30px;
+}
+
+.containerr .kiri .kontak .judul{
+    background-color: #ffffff;
+    width: 24%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.containerr .kiri .kontak .judul h3{
+    margin-left: 35px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #0d6efd;
+    text-transform: uppercase;
+}
+
+.containerr .kiri .kontak .data-kontak{
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.containerr .kiri .kontak .data-kontak .icon{
+    display: flex;
+    align-items: center;
+}
+
+.containerr .kiri .kontak .data-kontak .icon #icon-kontak{
+    font-size: 25px;
+    font-weight: 600;
+    color: #ffffff;
+    width: 8%;
+}
+
+.containerr .kiri .kontak .data-kontak .icon p{
+    padding-top: 13px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+
+/* kanan */
+.containerr .kanan{
+    background-color: #ffffff;
+    width: 50%;
+    margin-block: 50px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+/* kanan pendidikan */
+.containerr .kanan .pendidikan{
+   margin-top: 35px;
+   margin-bottom: 20px;
+}
+
+.containerr .kanan .pendidikan .judul{
+    background-color: #0d6efd;
+    width: 30%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.containerr .kanan .pendidikan .judul h3{
+    margin-left: 35px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.containerr .kanan .pendidikan .konten{
+    width: 90%;
+}
+
+.containerr .kanan .pendidikan .konten .kotak{
+    width: 48%;
+    margin: 1% ;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+}
+
+.containerr .kanan .pendidikan .konten .kotak .nama_sekolah{
+    font-weight: 600;
+}
+
+.containerr .kanan .pendidikan .konten .kotak .tahun{
+    font-weight: lighter;
+    color: grey;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: -9px;
+}
+
+.containerr .kanan .pendidikan .konten .kotak .bidang{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.containerr .kanan .pendidikan .konten .kotak .nilai{
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: -5px;
+    margin-bottom: -6px;
+}
+/* end kanan pendidikan */
+
+
+/* kanan pengalaman */
+.containerr .kanan .pengalaman{
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
+
+.containerr .kanan .pengalaman .judul{
+    background-color: #0d6efd;
+    width: 34%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.containerr .kanan .pengalaman .judul h3{
+    margin-left: 35px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.containerr .kanan .pengalaman .konten{
+    width: 90%;
+}
+
+.containerr .kanan .pengalaman .konten .kotak{
+    width: 48%;
+    margin: 1% ;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+}
+
+.containerr .kanan .pengalaman .konten .kotak .jabatan{
+    font-weight: 600;
+}
+
+.containerr .kanan .pengalaman .konten .kotak .status{
+    font-weight: lighter;
+    color: grey;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: -9px;
+}
+
+.containerr .kanan .pengalaman .konten .kotak .bidang{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.containerr .kanan .pengalaman .konten .kotak .nilai{
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: -5px;
+    margin-bottom: -6px;
+}
+
+
+
+
+.containerr .kanan .skill .judul{
+    background-color: #0d6efd;
+    width: 19%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.containerr .kanan .skill .judul h3{
+    margin-left: 35px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.containerr .kanan .skill .konten {
+    width: 90%;
+}
+
+
+
+

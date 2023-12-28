@@ -39,6 +39,10 @@
         <div class="dropdown-divider"></div>
         <a href="<?php echo base_url("pelamar/profile")?>" class="dropdown-item">Profile</a>
         <a href="<?php echo base_url("Balijobfinder")?>" class="dropdown-item">Landing Page</a>
+
+        <div class="dropdown-divider"></div>
+        <a href="<?php echo base_url("CV/GenerateCV")?>" class="dropdown-item" target="__blank" download>Generate CV</a>
+
         <div class="dropdown-divider"></div>
         <a href="<?php echo base_url("Auth/Logout")?>" class="dropdown-item">Logout</a>
       </div>

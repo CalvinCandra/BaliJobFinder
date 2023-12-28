@@ -590,6 +590,32 @@ footer{
 
     /* end navbarr */
 
+    .kotak-details{
+        display: flex;
+        justify-content: none;
+        flex-wrap: wrap;
+    }
+
+   .kotak-details .detail-section{
+        width: 100%;
+        margin-top: 15%;
+    }
+
+    .kotak-details .detail-section .bungkus-detail .header .logo{
+        width: 50vw;
+    }
+
+    .detail .kotak-details .cegah{
+        margin-top: 10px;
+        width: 100%;
+        height: 10%;
+    }
+
+    .detail .kotak-details .cegah .upload-section{
+        margin-top: 5px;
+        margin-bottom: 90px;
+        position: static;
+    }
 
 
 
@@ -650,9 +676,6 @@ footer{
     }
 
     /* end navbarr */
-
-   
-    
 
 
     /* footer */
