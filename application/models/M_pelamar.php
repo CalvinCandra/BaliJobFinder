@@ -29,7 +29,9 @@
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'no_hp' => $this->input->post('no_hp'),
-                'alamat' => $this->input->post('alamat'),   
+                'alamat' => $this->input->post('alamat'),
+                'deskripsi_pelamar' => $this->input->post('deskripsi'),
+                   
             );
             // ambil data id
             $this->db->where('id_pelamar', $this->input->post('id'));
