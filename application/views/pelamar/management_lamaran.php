@@ -44,9 +44,13 @@
                                     <td><?= $key['posisi_lowongan']?></td>
                                     <td><?= $key['nama_perusahaan']?></td>
                                     <td>
-                                        <!-- <button class="btn btn-info" data-toggle="modal" data-target="#detailLamaran">Detail</button> -->
-                                        <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editLowonganModal">Edit</button> -->
-                                        <!-- <button class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">Hapus</button> -->
+                                        <?php if ($key['status'] == "Diterima"): ?>
+                                            <span class="badge badge-success">Diterima</span>
+                                        <?php elseif ($key['status'] == "Ditolak"): ?>
+                                            <span class="badge badge-danger">Ditolak</span>
+                                        <?php else : ?>
+                                            <span class="badge badge-warning">Perlu Konfirmasi...</span>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <?php endforeach?>

@@ -10,7 +10,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -19,17 +19,22 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
+    <?php foreach ($profile->result_array() as $key): ?>
     <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <div class="user-panel d-flex">
-          <div class="image">
-            <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="User Image">
+        <div class="image">
+                    <?php if ($key['gambar']): ?>
+                        <img src="<?php echo base_url($key['gambar']); ?>" class="img-circle elevation-1" alt="User Image">
+                    <?php else: ?>
+                        <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">
+                    <?php endif; ?>
           </div>
           <div class="info">
-            <b><?php echo $session ?></b>
+            <b><?= $session ?></b>
           </div>
         </div>
       </a>
@@ -37,12 +42,13 @@
         <span class="dropdown-item dropdown-header">User Options</span>
         <!-- Add other dropdown items as needed -->
         <div class="dropdown-divider"></div>
-        <a href="<?php echo base_url("pelamar/profile")?>" class="dropdown-item">Profile</a>
-        <a href="<?php echo base_url("Balijobfinder")?>" class="dropdown-item">Landing Page</a>
+        <a href="<?= base_url('pelamar/profile') ?>" class="dropdown-item">Profile User</a>
+        <a href="<?= base_url('Balijobfinder') ?>" class="dropdown-item">Landing Page</a>
         <div class="dropdown-divider"></div>
-        <a href="<?php echo base_url("Auth/Logout")?>" class="dropdown-item">Logout</a>
+        <a href="<?php echo base_url("Auth/logout")?>" class="dropdown-item">Logout</a>
       </div>
     </li>
-</ul>
-
+  </ul>
 </nav>
+<?php endforeach ?>
+  <!-- /.navbar -->

@@ -21,6 +21,7 @@
             $result = $this->db->get();
             return $result;
         }
+
         public function simpanProfile($user_id)
         {
             // ambil data yang di input user
@@ -46,5 +47,7 @@
 
 
     }
+
+
 }
     /* End of file perusahaan.php */
