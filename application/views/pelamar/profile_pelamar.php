@@ -61,6 +61,10 @@
                                     <label for="alamat">Alamat:</label>
                                     <textarea class="form-control" name="alamat" rows="3" required><?php echo $key['alamat']; ?></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label for="alamat">Deskripsi Pelamar:</label>
+                                    <textarea class="form-control" name="deskripsi" rows="3" required><?php echo $key['deskripsi_pelamar']; ?></textarea>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Simpan Profile</button>
                             </form>
                         </div>
