@@ -24,29 +24,14 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>100</h3>
-
-                <p>Perusahaan Yang telah Dilamar</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-briefcase"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?php echo $totalLamaran?></h3>
 
-                <p>Lowongan Yang telah dilamar</p>
+                <p>Jumlah Lamaran</p>
               </div>
               <div class="icon">
-                <i class="ion ion-ios-paper"></i>
+                <i class="ion ion-checkmark-circled"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -62,21 +47,6 @@
               </div>
               <div class="icon">
                 <i class="ion ion-checkmark-circled"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>2</h3>
-
-                <p>Iklan Lowongan</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-close-circled"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
