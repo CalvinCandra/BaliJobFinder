@@ -21,7 +21,7 @@
       </div>
     </form> -->
 
-    <?php foreach ($profile->result_array() as $key): ?>
+    <?php foreach ($profile as $key): ?>
     <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">

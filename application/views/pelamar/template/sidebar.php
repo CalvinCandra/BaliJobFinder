@@ -11,20 +11,6 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-        <div class="image">
-          <!-- <img src="<?php echo base_url()?>assets/img/dashboard/profile.png" class="img-circle elevation-2" alt="User Image"> -->
-        </div>
-        <div class="info">
-          <div class="dropdown">
-  <!-- <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $session?> -->
-  <!-- </button> -->
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
-        </div>
       </div>
 
       <!-- Sidebar Menu -->
@@ -43,10 +29,10 @@
           
           <li class="nav-header">DAFTAR LAMARAN</li>
           <li class="nav-item">
-            <a href="<?= base_url('pelamar/lamaran')?>" class="nav-link">
+            <a href="<?= base_url('Pelamar/managementStatus')?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Lamaran
+                Status Lamaran
               </p>
             </a>
           </li>
