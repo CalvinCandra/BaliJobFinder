@@ -12,21 +12,20 @@ class Admin extends CI_Controller {
         if(!$this->session->userdata('email')){
             redirect('Auth/Login');
         }
-        $this->load->model('M_auth');
-        $this->load->model('M_admin');
+        $this->load->model(array('M_auth', 'M_admin'));
         
         $this->load->library('form_validation');
     }
 
-       // Fungsi ini akan meredirect ke fungsi home
+    // Fungsi ini akan meredirect ke fungsi home
     public function index(){
         redirect('Admin/home');
     }
 
-        // Fungsi untuk menampilkan halaman dashboard admin
+    // Fungsi untuk menampilkan halaman dashboard admin
     public function home()
     {
-          // Mendapatkan data user dari session
+        // Mendapatkan data user dari session
         $email = $this->session->userdata('email');
 
         $datas = $this->M_auth->getUser($email);
@@ -40,24 +39,24 @@ class Admin extends CI_Controller {
             );
 
         }
-               // Menampilkan halaman dashboard dengan template
+        // Menampilkan halaman dashboard dengan template
         $this->template->load('admin/template','admin/Dashboard',$data);
         
     }
 
 
     
-         // Fungsi untuk menampilkan data lowongan pekerjaan
-        // dan melakukan operasi pencarian dengan pagination
+    // Fungsi untuk menampilkan data lowongan pekerjaan
+    // dan melakukan operasi pencarian dengan pagination
     public function datalowongan()
     {
         // Mendapatkan data user dari session
         $email = $this->session->userdata('email');
         $datas = $this->M_auth->getUser($email);
-        $data = array(
-                'session' => $datas->name,
 
-            );
+        $data = array(
+            'session' => $datas->name,
+        );
         
         // ambil data dari kolom pencarian
         if($this->input->post('cari')){
@@ -81,19 +80,19 @@ class Admin extends CI_Controller {
     }
 
     
-        // Fungsi untuk menampilkan data pelamar pekerjaan
-        // dan melakukan operasi pencarian dengan pagination
+    // Fungsi untuk menampilkan data pelamar pekerjaan
+    // dan melakukan operasi pencarian dengan pagination
     public function dataPelamar()
     {
-          // Mendapatkan data user dari session
+        // Mendapatkan data user dari session
         $email = $this->session->userdata('email');
         $datas = $this->M_auth->getUser($email);
-            $data = array(
-                'session' => $datas->name,
 
-            );
+        $data = array(
+            'session' => $datas->name,
+        );
         
-             // ambil data dari kolom pencarian
+        // ambil data dari kolom pencarian
         if($this->input->post('cari')){
             $data['key_pelamar'] = $this->input->post('keyword');
             $this->session->set_userdata('key_pelamar',$data['key_pelamar']);
@@ -115,17 +114,18 @@ class Admin extends CI_Controller {
         $this->template->load('admin/template','admin/data_pelamar',$data);
     }
 
-        // Fungsi untuk menampilkan data perusahaan
-        // dan melakukan operasi pencarian dengan pagination
+
+    // Fungsi untuk menampilkan data perusahaan
+    // dan melakukan operasi pencarian dengan pagination
     public function dataPerusahaan()
     {
         // Mendapatkan data user dari session
         $email = $this->session->userdata('email');
         $datas = $this->M_auth->getUser($email);
   
-            $data = array(
-                'session' => $datas->name,
-            );
+        $data = array(
+            'session' => $datas->name,
+        );
             
         // ambil data dari kolom pencarian
         if($this->input->post('cari')){
@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
     }
 
     
-        // Fungsi untuk melakukan edit data lowongan
+    // Fungsi untuk melakukan edit data lowongan
     public function editLowongan()
     {
         $this->M_admin->editLowongan();
@@ -164,10 +164,12 @@ class Admin extends CI_Controller {
         $this->M_admin->deleteLowongan($id );
         redirect('admin/dataLowongan'); 
     }
+
+
     // Fungsi untuk melakukan edit data perusahaan
     public function editperusahaan()
     {
-        // melakukan pengecekan apakah ada file di unggah atau tidak
+        // melakukan pengecekan apakah ada logo di unggah atau tidak
         if (!empty($_FILES['logo_file']['name'])) {
             // Config untuk upload file berupa foto
             $config['upload_path']   = './assets/img/profile/perusahaan';
@@ -195,14 +197,14 @@ class Admin extends CI_Controller {
     }
 
     
-        // Fungsi untuk menghapus data perusahaan berdasarkan ID
+    // Fungsi untuk menghapus data perusahaan berdasarkan ID
     public function deleteperusahaan($id)
     {
-        $this->M_admin->deleteperusahaan($id );
+        $this->M_admin->deleteperusahaan($id);
         redirect('admin/dataPerusahaan'); 
     }
 
-        // Fungsi untuk melakukan edit data pelamar
+    // Fungsi untuk melakukan edit data pelamar
     public function editpelamar()
     {
         // melakukan pengecekan apakah ada file di unggah atau tidak
@@ -232,7 +234,7 @@ class Admin extends CI_Controller {
         
     }
 
-        // Fungsi untuk menghapus data pelamar berdasarkan ID
+    // Fungsi untuk menghapus data pelamar berdasarkan ID
     public function deletepelamar($id)
     {
         $this->M_admin->deletepelamar($id );

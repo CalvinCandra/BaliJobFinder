@@ -4,6 +4,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_auth extends CI_Model {
+// =========================================================== Ambil Data User Sesuai Email
+    public function getUser($email){
+        // ambil data users yang emailnya sama
+        $user = $this->db->get_where('users', ['email' => $email])->row();
+        return $user;
+    }
     
 // ==================================================== Config Email Verification
     public function config($email, $token, $type){
@@ -225,12 +231,6 @@ class M_auth extends CI_Model {
         $this->email->send();
         
     }
-// =========================================================== Ambil Data User Sesuai Email
-    public function getUser($email){
-        // ambil data users yang emailnya sama
-        $user = $this->db->get_where('users', ['email' => $email])->row();
-        return $user;
-    }
 
 // ==================================================================================== REGISTER
 // ============================================================================ PELAMAR
@@ -240,27 +240,35 @@ class M_auth extends CI_Model {
         $pass = $this->input->post('password');
         $name = $this->input->post('name');
 
-        // membuat token
-        $token = base64_encode(random_bytes(16));
-
         // deklarasi untuk memasukan data pada table users
         $data = array(
             'email' => $email,
             'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
             'name' => $name,
             'email_verified' => NULL,
-            'token' => $token,
             'role' => "pelamar",
         );
 
-        // db transision
+        // db transision start
         $this->db->trans_start();
+
         // insert ke table users
         $this->db->insert('users', $data);
-        // mengambil last id
+        // mengambil last id yang baru saja di insert
         $last_id = $this->db->insert_id();
 
-        // deklarasi untuk memasukan data pda table data_pelamar
+        // membuat token random
+        $token = base64_encode(random_bytes(16));
+
+        // memasukan token random ke dalam column token yang ada di table user berdasarkan id yang dikirim
+        $dataToken = [
+            'token' => $token
+        ];
+
+        $this->db->where('id_users', $last_id);
+        $this->db->update('users', $dataToken);
+
+        // deklarasi untuk memasukan data pada table data_pelamar
         $dataPelamar = array(
             'nama_lengkap' => $name,
             'fk_id_users' => $last_id,
@@ -268,6 +276,8 @@ class M_auth extends CI_Model {
 
         // deklarasi untuk memasukan data pda table data_pelamar
         $this->db->insert('data_pelamar', $dataPelamar);
+        
+        // db transision end
         $this->db->trans_complete();
 
         // ngecek jika tidak berhasil
@@ -296,25 +306,34 @@ class M_auth extends CI_Model {
         $pass = $this->input->post('password');
         $name = $this->input->post('name');
 
-        // membuat token
-        $token = base64_encode(random_bytes(16));
-
         // deklarasi untuk memasukan data pada table users
         $data = array(
             'email' => $email,
             'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
             'name' => $name,
             'email_verified' => NULL,
-            'token' => $token,
             'role' => "perusahaan",
         );
 
-        // db transision
+        // db transision start
         $this->db->trans_start();
+
         // insert ke table users
         $this->db->insert('users', $data);
         // mengambil last id
         $last_id = $this->db->insert_id();
+
+        // membuat token random
+        $token = base64_encode(random_bytes(16));
+
+        // memasukan token random ke dalam colum token yang ada di table user berdasarkan id yang dikirim
+        $dataToken = [
+            'token' => $token
+        ];
+
+        $this->db->where('id_users', $last_id);
+        $this->db->update('users', $dataToken);
+
 
         // deklarasi untuk memasukan data pda table data_perusahaan
         $dataPerusahaan = array(
@@ -324,6 +343,8 @@ class M_auth extends CI_Model {
 
         // insert ke table data_perusahaan
         $this->db->insert('data_perusahaan', $dataPerusahaan);
+
+        // db transision end
         $this->db->trans_complete();
 
          // ngecek jika tidak berhasil
@@ -344,21 +365,23 @@ class M_auth extends CI_Model {
     }
 
 // ================================================================= update colom email_verified
-    public function email_verified(){
+    public function email_verified($id_users){
         // membuat data-data untuk di update pada table users
         $data = array(
             'email_verified' => time(),
             'token' => NULL,
         );
+
+        $this->db->where('id_users', $id_users);
+
         // update
         $this->db->update('users', $data);
     }
 
 
 // ================================================================= update Password
-
     //memasukan token untuk link dan mengirim link ke email
-    public function kirimChange($email){
+    public function kirimChangeForget($email, $id_users){
 
         // membuat token
         $token = base64_encode(random_bytes(16));
@@ -367,6 +390,8 @@ class M_auth extends CI_Model {
         $data = array(
             'token' => $token,
         );
+
+        $this->db->where('id_users', $id_users);
         // update
         $this->db->update('users', $data);
 
@@ -378,6 +403,7 @@ class M_auth extends CI_Model {
     public function forget(){
         // ambil data input user
         $pass = $this->input->post('password');
+        $id_users = $this->input->post('users');
 
         // membuat data-data untuk di update pada table users
         $data = array(
@@ -386,6 +412,7 @@ class M_auth extends CI_Model {
         );
 
         //update
+        $this->db->where(['id_users '=> $id_users]);
         $this->db->update('users', $data);
     }
 }

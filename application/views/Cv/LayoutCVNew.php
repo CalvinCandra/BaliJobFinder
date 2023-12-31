@@ -27,10 +27,10 @@
 
     </style>
 
-    <body style="background-color: #0d6efd;">
+    <body style="background-color: #ffffff;">
     <div class="container-fuild">
 
-        <div class="position-relative" style="float:left; margin-top:15%; width:55%;">
+        <div class="position-relative" style="float:left; width:55%;">
             <div class="position-relative" style="left:25%; top:5%;">     
                 <div class="w-50 h-50">
                     <img src="<?= base_url("assets/img/profile/perusahaan/bintang_benggong.jpg")?>" alt="" class="w-100">
@@ -39,18 +39,18 @@
             </div>
 
             <div class="position-relative" style="top:-21%;">
-                <h1 class="text-center fs-1 fw-bold" style="color:#ffffff;"><?= $nama_pelamar?></h1>
+                <h1 class="text-center fs-1 fw-bold"><?= $nama_pelamar?></h1>
             </div>
 
             <div class="position-relative" style="top:-21%;"> 
                 <div class="mb-2 px-2 mx-auto" style="width:90%;">
-                    <p class="text-justify fs-5" style="color:#ffffff;"><?= $deskripsi_pelamar?></p>
+                    <p class="text-justify fs-5"><?= $deskripsi_pelamar?></p>
                 </div>
             </div>
 
             <div class="position-relative py-3" style="top:-21%;">
-                <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #ffffff;">
-                    <h2 class="text-center fw-bold text-uppercase" style="color: #0d6efd; margin-left:20px; font-size:30px; font-weight:600;">Kontak</h2>
+                <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
+                    <h2 class="text-center fw-bold text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Kontak</h2>
                 </div>
                 <div class="p-3 position-relative" style="width:90%;">
 
@@ -59,7 +59,7 @@
                             <img src="<?= base_url("assets/img/CV/location.png")?>" alt="" class="w-100">
                         </div>
                         <div class="position-absolute" style="right:0; top:3%; width:80%;">
-                            <p class="fw-bold text-justify position-relative" style="right:0; color:#ffffff;"><?= $alamat?></p>
+                            <p class="fw-bold text-justify position-relative" style="right:0;"><?= $alamat?></p>
                         </div>   
                     </div>
 
@@ -68,7 +68,7 @@
                             <img src="<?= base_url("assets/img/CV/wa.png")?>" alt="" class="w-100">
                         </div>
                         <div class="position-absolute" style="right:0; width:80%; top:21%;">
-                            <p class="fw-bold"  style="color:#ffffff;"><?= $no_hp?></p>                        
+                            <p class="fw-bold"><?= $no_hp?></p>                        
                         </div>
                     </div>
 
@@ -77,12 +77,39 @@
                             <img src="<?= base_url("assets/img/CV/mail.png")?>" alt="" class="w-100">
                         </div>
                         <div class="position-absolute" style="right:0; width:80%; top:35%;">
-                            <p class="fw-bold"  style="color:#ffffff;"><?= $email_pelamar?></p>  
+                            <p class="fw-bold"><?= $email_pelamar?></p>  
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <div class="" style="margin-top :-15%;">
+                    <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
+                        <h2 class="text-center text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Skill</h2>
+                    </div>
+        
+                    <div class="mx-2">
+    
+                        <div class="w-100" style="width:100%;">
+                            <?php
+                                foreach ($skill as $dataSkill) {
+                                    echo "
+                                        <div class='my-2'>
+                                            <h5 class='fs-3 fw-bold'>{$dataSkill['nama_skill']}</h5>
+                                            <div class='progress w-100'>
+                                                <div class='progress-bar fw-bold text-center' role='progressbar' style='width: {$dataSkill['value']}%;' aria-valuenow='{$dataSkill['value']}' aria-valuemin='0' aria-valuemax='100'>{$dataSkill['value']}%</div>
+                                            </div>
+                                        </div>
+                                    ";
+                                }
+                            ?>
+                                
+                        </div>
+                    </div>
+                </div>
+
+
         </div>
 
        
@@ -133,7 +160,7 @@
                                 <ul style="margin-top:-15px;">
                                     <li>
                                         <div class="ms-2 me-5 p-2">
-                                            <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['tahun_terakhir_kerja']?></p>
+                                            <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['bulan_akhir_kerja']?> <?= $Datapengalaman['tahun_akhir_kerja']?></p>
                                            
                                             <h2 class="fw-bold" style="margin-top:-10px; font-size:20px;"><?= $Datapengalaman['jabatan']?></h2>
     
@@ -153,30 +180,6 @@
                     </div>
                 </div>
         
-                <div class="">
-                    <div class="w-75" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
-                        <h2 class="text-center text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Skill</h2>
-                    </div>
-        
-                    <div class="mx-2">
-    
-                        <div class="w-100" style="width:100%;">
-                            <?php
-                                foreach ($skill as $dataSkill) {
-                                    echo "
-                                        <div class='my-2'>
-                                            <h5 class='fs-3 fw-bold'>{$dataSkill['nama_skill']}</h5>
-                                            <div class='progress w-100'>
-                                                <div class='progress-bar fw-bold text-center' role='progressbar' style='width: {$dataSkill['value']}%;' aria-valuenow='{$dataSkill['value']}' aria-valuemin='0' aria-valuemax='100'>{$dataSkill['value']}%</div>
-                                            </div>
-                                        </div>
-                                    ";
-                                }
-                            ?>
-                                
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
