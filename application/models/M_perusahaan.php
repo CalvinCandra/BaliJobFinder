@@ -17,6 +17,27 @@
         {
             return $this->db->get_where('data_perusahaan', array('fk_id_users' => $user_id));
         }
+
+        // menghitung jumlah lowongan berdasarkan perusahaan yang login
+        public function LowonganCount($user_id, $keyword=null)
+        {
+            // mengambil id perusahaan yang login
+            $query = $this->db->select('id_perusahaan')->get_where('data_perusahaan', ['fk_id_users' => $user_id]);
+            $id_perusahaan = $query->row()->id_perusahaan;
+        
+            // pencarian data di tabel berdasarkan keyword
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('salary', $keyword);
+                $this->db->group_end();
+            }
+        
+            // menghitung jumlah lowongan berdasarkan id lowongan
+            $count = $this->db->where('fk_id_perusahaan', $id_perusahaan)->count_all_results('lowongan_kerja');
+            return $count;
+                    
+        }
     
         // get data lowongan
         public function getLowongan($user_id, $limit, $start,$keyword=null)
@@ -43,12 +64,11 @@
         }
 
         // memasukkan inputan ke dalam tabel
-        public function input($user_id)
+        public function inputlowongan($user_id)
         {
             // mengambil nilai id perusahaan yang login
-            // $query = $this->db->select('id_perusahaan')->get_where('data_perusahaan', ['fk_id_users' => $user_id]);
             $query = $this->getPerusahaan($user_id)->row();
-            $id_perusahaan = $query->id_perusahaan;
+            // $id_perusahaan = $query->id_perusahaan;
 
             // ambil data insert
             $insert = array(
@@ -56,7 +76,7 @@
                 'salary' => $this->input->post('salary'),
                 'syarat_lowongan' => $this->input->post('syarat_lowongan'),
                 'status' => 1,
-                'fk_id_perusahaan'=> $id_perusahaan,
+                'fk_id_perusahaan'=> $query->id_perusahaan,
                 
             );
             // insert
@@ -75,8 +95,10 @@
                 'syarat_lowongan' => $this->input->post('syarat'),
                 'status' => $this->input->post('status'),
             );
+
             // update data sesuai id
             $this->db->where('id_lowongan', $this->input->post('id'));
+
             // update
             $result = $this->db->update('lowongan_kerja', $edit);
             return $result;
@@ -87,32 +109,12 @@
         {
             // ambil id data lowongan
             $this->db->where('id_lowongan', $id);
+
             // delete
             $result = $this->db->delete('lowongan_kerja');
             return $result;
         }
 
-        // menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function LowonganCount($user_id, $keyword=null)
-        {
-            // mengambil id perusahaan yang login
-            $query = $this->db->select('id_perusahaan')->get_where('data_perusahaan', ['fk_id_users' => $user_id]);
-            $id_perusahaan = $query->row()->id_perusahaan;
-
-            // pencarian data di tabel berdasarkan keyword
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('posisi_lowongan', $keyword);
-                $this->db->or_like('salary', $keyword);
-                $this->db->group_end();
-            }
-
-            // menghitung jumlah lowongan berdasarkan id lowongan
-            $count = $this->db->where('fk_id_perusahaan', $id_perusahaan)->count_all_results('lowongan_kerja');
-            return $count;
-            
-        }
-        
         // get data pelamar
         public function getPelamar($user_id, $limit, $start, $keyword = null)
         {
@@ -122,6 +124,7 @@
             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+
             $this->db->where('data_perusahaan.fk_id_users', $user_id);
 
             // tampilkan data berdasarkan yang dicari user
@@ -166,6 +169,7 @@
         public function deleteLamaran($id)
         {
             $this->db->where('id_lamaran', $id);
+            
             $result = $this->db->delete('lamaran');
             return $result;
         }   
