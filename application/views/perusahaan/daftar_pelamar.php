@@ -39,6 +39,7 @@
                                     <th>Nama</th>
                                     <th>Posisi</th>
                                     <th>CV</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -50,8 +51,17 @@
                                     <td><?php echo $key['posisi_lowongan'] ?></td>
                                     <td>
                                         <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
-                                            <p>Cek CV</p>
+                                            <p class="btn btn-light">Cek CV</p>
                                         </a>
+                                    </td>
+                                    <td>
+                                        <?php if ($key['status_lamaran'] == "Diterima"): ?>
+                                            <span class="badge badge-success">Diterima</span>
+                                        <?php elseif ($key['status_lamaran'] == "Ditolak"): ?>
+                                            <span class="badge badge-danger">Ditolak</span>
+                                        <?php else : ?>
+                                            <span class="badge badge-warning">Perlu Konfirmasi...</span>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editLamaranModal">Edit</button> -->
@@ -96,7 +106,7 @@
                     </div>
                     <div class="form-group">
                         <label for="salaryLowonganEdit">Alamat :</label>
-                        <input type="text" class="form-control" value="<?= $key['alamat'] ?>" disabled>
+                        <textarea class="form-control" name="alamat" rows="3" disabled><?= $key['alamat'] ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="salaryLowonganEdit">Posisi yang Dilamar :</label>
@@ -107,15 +117,20 @@
                         <input type="text" class="form-control" value="<?= $key['no_hp'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="syaratLowonganEdit">CV</label>
+                        <label for="syaratLowonganEdit">CV</label><br>
                         <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
-                            <p>Cek CV</p>
+                            <p class="btn btn-light">Cek CV</p>
                         </a>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
+            <div class="modal-footer">
+            <form method="post" action="<?php echo base_url('perusahaan/konfirmasiLamaran/'.$key['id_lamaran']) ?>">
+                <button type="submit" class="btn btn-success" name="status" value="Diterima">Terima</button>
+                <button type="submit" class="btn btn-danger" name="status" value="Ditolak">Tolak</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </form>
             </div>
         </div>
     </div>

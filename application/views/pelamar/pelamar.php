@@ -43,10 +43,10 @@
               <div class="inner">
                 <h3>0</h3>
 
-                <p>Lamaran yang diterima</p>
+                <p>Menunggu Konfirmasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-checkmark-circled"></i>
+                <i class="fas fa-spinner"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

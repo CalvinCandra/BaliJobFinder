@@ -152,6 +152,22 @@ class Perusahaan extends CI_Controller {
         redirect('perusahaan/lamaran'); 
     }
 
+    public function konfirmasiLamaran($id_lamaran) 
+    {
+        // Mengambil nilai status dari input POST
+        $status = $this->input->post('status');
+    
+        // Memeriksa apakah status valid ('Diterima' atau 'Ditolak')
+        if ($status == 'Diterima' || $status == 'Ditolak') {
+            // Menggunakan model M_perusahaan untuk mengonfirmasi status lamaran di database
+            $this->M_perusahaan->konfirmasiStatusLamaran($id_lamaran, $status);
+    
+            // Redirect ke halaman daftar pelamar setelah konfirmasi
+            redirect('perusahaan/lamaran');
+        } 
+    }
+    
+
     public function profile()
     {
         // ambil id_users

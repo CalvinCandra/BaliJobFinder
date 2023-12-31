@@ -170,6 +170,18 @@
             return $result;
         }   
 
+        // mengkonfirmasi atau mengubah status lamaran pelamar
+        public function konfirmasiStatusLamaran($id_lamaran, $status) {
+            // Membuat array $data dengan key 'status_lamaran' dan nilai $status
+            $data = array('status_lamaran' => $status);
+        
+            // Menggunakan CodeIgniter Query Builder untuk menetapkan WHERE clause berdasarkan $id_lamaran
+            $this->db->where('id_lamaran', $id_lamaran);
+        
+            // Melakukan operasi UPDATE pada tabel 'lamaran' dengan data baru dari array $data
+            $this->db->update('lamaran', $data);
+        }
+
         // simpan profile
 
         public function simpanProfile($id_users)
