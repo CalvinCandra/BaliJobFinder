@@ -96,7 +96,19 @@
     font-weight: 600;
 }
 
-.btn_login .submit:hover{
+.btn_forget .submit{
+    margin-left: 10px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn_login .submit:hover, .btn_forget .submit:hover{
     background-color: #ffffff;
     border: 2px solid #0d6efd;
     color: #0d6efd;
