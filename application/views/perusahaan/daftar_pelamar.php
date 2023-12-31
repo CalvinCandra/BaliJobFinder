@@ -125,12 +125,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-            <div class="modal-footer">
-            <form method="post" action="<?php echo base_url('perusahaan/konfirmasiLamaran/'.$key['id_lamaran']) ?>">
-                <button type="submit" class="btn btn-success" name="status" value="Diterima">Terima</button>
-                <button type="submit" class="btn btn-danger" name="status" value="Ditolak">Tolak</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </form>
+                <form method="post" action="<?php echo base_url('perusahaan/konfirmasiLamaran/'.$key['id_lamaran']) ?>">
+                    <button type="submit" class="btn btn-success" name="status" value="Diterima">Terima</button>
+                    <button type="submit" class="btn btn-danger" name="status" value="Ditolak">Tolak</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </form>
             </div>
         </div>
     </div>

@@ -19,9 +19,7 @@ class Perusahaan extends CI_Controller {
     }
 
     public function index(){
-        
         redirect('Perusahaan/home');
-        
     }
 
     public function home()
@@ -85,8 +83,9 @@ class Perusahaan extends CI_Controller {
     {
         // ambil id_users
         $user_id = $this->M_perusahaan->getUser();
+
         // manggil function input pada M_perusahaan
-        $this->M_perusahaan->input($user_id->id_users);
+        $this->M_perusahaan->inputlowongan($user_id->id_users);
         redirect('perusahaan/management');
         
     }
@@ -178,6 +177,7 @@ class Perusahaan extends CI_Controller {
             'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
             'session' => $user_id->name
         );
+        
         $this->template->load('perusahaan/template','perusahaan/profile',$data);
     }
 
