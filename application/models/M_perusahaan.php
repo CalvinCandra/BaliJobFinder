@@ -122,6 +122,7 @@
             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+            $this->db->join('status_rekrut', 'status_rekrut.fk_id_pelamar = data_pelamar.id_pelamar', 'left');
             $this->db->where('data_perusahaan.fk_id_users', $user_id);
 
             // tampilkan data berdasarkan yang dicari user
@@ -169,6 +170,12 @@
             $result = $this->db->delete('lamaran');
             return $result;
         }   
+
+        public function konfirmasiStatusLamaran($fk_id_lowongan, $status) {
+            $data = array('status' => $status);
+            $this->db->where('fk_id_lowongan', $fk_id_lowongan);
+            $this->db->update('status_rekrut', $data);
+        }
 
         // simpan profile
 

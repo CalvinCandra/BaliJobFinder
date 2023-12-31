@@ -39,6 +39,7 @@
                                     <th>Nama</th>
                                     <th>Posisi</th>
                                     <th>CV</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -52,6 +53,15 @@
                                         <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
                                             <p>Cek CV</p>
                                         </a>
+                                    </td>
+                                    <td>
+                                        <?php if ($key['status'] == "Diterima"): ?>
+                                            <span class="badge badge-success">Diterima</span>
+                                        <?php elseif ($key['status'] == "Ditolak"): ?>
+                                            <span class="badge badge-danger">Ditolak</span>
+                                        <?php else : ?>
+                                            <span class="badge badge-warning">Perlu Konfirmasi...</span>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <!-- <button class="btn btn-warning" data-toggle="modal" data-target="#editLamaranModal">Edit</button> -->
@@ -115,7 +125,12 @@
                 </form>
             </div>
             <div class="modal-footer">
+            <div class="modal-footer">
+            <form method="post" action="<?php echo base_url('perusahaan/konfirmasiLamaran/'.$key['fk_id_lowongan']) ?>">
+                <button type="submit" class="btn btn-success" name="status" value="Diterima">Terima</button>
+                <button type="submit" class="btn btn-danger" name="status" value="Ditolak">Tolak</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </form>
             </div>
         </div>
     </div>

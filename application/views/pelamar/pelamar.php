@@ -28,7 +28,7 @@
               <div class="inner">
                 <h3>100</h3>
 
-                <p>Perusahaan Yang telah Dilamar</p>
+                <p>Jumlah Lamaran</p>
               </div>
               <div class="icon">
                 <i class="ion ion-briefcase"></i>
@@ -41,12 +41,12 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>0</h3>
 
-                <p>Lowongan Yang telah dilamar</p>
+                <p>Lamaran Di Terima</p>
               </div>
               <div class="icon">
-                <i class="ion ion-ios-paper"></i>
+                <i class="ion ion-checkmark-circled"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -58,10 +58,10 @@
               <div class="inner">
                 <h3>0</h3>
 
-                <p>Lamaran yang diterima</p>
+                <p>Menunggu Konfirmasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-checkmark-circled"></i>
+                <i class="fas fa-spinner"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -73,7 +73,7 @@
               <div class="inner">
                 <h3>2</h3>
 
-                <p>Iklan Lowongan</p>
+                <p>Lamaran Ditolak</p>
               </div>
               <div class="icon">
                 <i class="ion ion-close-circled"></i>
