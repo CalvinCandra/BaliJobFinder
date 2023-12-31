@@ -101,7 +101,7 @@
                             <ul style="margin-top:-15px;">
                                 <li>
                                     <div class="ms-3 me-5 p-2">
-                                        <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['tahun_akhir']?></p>
+                                        <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapendidikan['bulan_awal']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></p>
                 
                                         <h2 class="fw-bold" style="margin-top:-10px; font-size:20px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
                 
@@ -112,9 +112,7 @@
                                     </div>
                                 </li>
                             </ul>
-        
-                                
-                                
+
                         <?php
                             endforeach;
                         ?>

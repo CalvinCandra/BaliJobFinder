@@ -10,8 +10,8 @@ class Pelamar extends CI_Controller {
         if(!$this->session->userdata('email')){
             redirect('Auth/Login');
         }
-        $this->load->model('M_auth');
-        $this->load->model('M_pelamar');
+        $this->load->model(array('M_auth', 'M_pelamar', 'M_pendidikan','M_pengalaman','M_skill'));
+
         $this->load->library('form_validation');
     }
 
@@ -21,23 +21,39 @@ class Pelamar extends CI_Controller {
 
     public function home()
     {
+
+        // get id_user sesuai email yang login
         $user_id = $this->M_auth->getUser($this->session->userdata('email'));
 
-        $data = array(
-            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
-            'session' => $user_id->name
-        );
+        // get semua data Pelamar
+        $Datapelamar = $this->M_pelamar->getDataPelamar($user_id->id_users);
+        // ubah menjadi row
+        $pelamar = $Datapelamar->row();
 
+        $data = array(
+            'profile'=> $Datapelamar->result_array(),
+            'session' => $user_id->name,
+            'totalLamaran' => $this->M_pelamar->LamaranCount($pelamar->id_pelamar),
+        );
+ 
         $this->template->load('pelamar/template' , 'pelamar/pelamar', $data);
            
     }
-    public function management()
+    
+    public function managementStatus()
     {
-        $user_id = $this->M_pelamar->getUser();
+        // get id_user sesuai email yang login
+        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+
+        // get semua data Pelamar
+        $Datapelamar = $this->M_pelamar->getDataPelamar($user_id->id_users);
+        // ubah menjadi row
+        $pelamar = $Datapelamar->row();
+
         $data = array(
-            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
-            'perusahaan' => $this->M_pelamar->getPerusahaan($user_id->id_users),
-            'session' => $user_id->name
+            'profile'=> $Datapelamar->result_array(),
+            'session' => $user_id->name,
+            'totalLamaran' => $this->M_pelamar->LamaranCount($pelamar->id_pelamar),
         );
 
         // ambil data dari kolom pencarian
@@ -49,8 +65,8 @@ class Pelamar extends CI_Controller {
         }
 
         // config pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/pelamar/management_pelamar';
-        $config['total_rows'] = $this->M_pelamar->LowonganCount($user_id->id_users, $data['keyword']);
+        $config['base_url'] = 'http://localhost/BaliJobFinder/Pelamar/StatusLamaran';
+        $config['total_rows'] = $this->M_pelamar->LamaranCount($pelamar->id_pelamar, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -58,19 +74,9 @@ class Pelamar extends CI_Controller {
         $this->pagination->initialize($config);
 
         $data['start'] = $this->uri->segment(3);
-        $data['lowongan'] = $this->M_pelamar->getLowongan($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
-        $this->template->load('pelamar/template','pelamar/management_pelamar',$data);
-    }
 
-    public function lamaran()
-    {
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
-
-        $data = array(
-            'profile'=> $this->M_pelamar->getDataPelamar($user_id->id_users),
-            'session' => $user_id->name,
-            'lamaran' =>$this->M_pelamar->lamaran($user_id->id_users)
-        );
+        // memanggil function getpelamar di M_perusahaan
+        $data['lamaran'] = $this->M_pelamar->getStatusLamaran($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
 
         $this->template->load('pelamar/template' , 'pelamar/management_lamaran', $data);
     }
@@ -79,12 +85,26 @@ class Pelamar extends CI_Controller {
     {
         // ambil id_users
         $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+
+        // ambil data pelamar berdasarkan id_users yang login
+        $Datapelamar = $this->M_pelamar->getDataPelamar($user_id->id_users);
+
+        // ubah data pelamar menjadi row, agar bisa mengambil id_pelamar untuk paramter
+        $pelamar = $Datapelamar->row();
         
         // kirim data-data pada view
         $data = array(
-            'profile' => $this->M_pelamar->getDataPelamar($user_id->id_users),
+            // mengirim data pelamar yang polosan dalam bentuk array
+            'profile' => $Datapelamar->result_array(),
+            // mengirim data pendidikan yang polosan dalam bentuk array
+            'pendidikan'=> $this->M_pendidikan->getDataPendidikan($pelamar->id_pelamar)->result_array(),
+            // mengirim data pengalaman yang polosan dalam bentuk array
+            'pengalaman'=> $this->M_pengalaman->getDataPengalaman($pelamar->id_pelamar)->result_array(),
+            // mengirim data skill yang polosan dalam bentuk array
+            'skill'=> $this->M_skill->getDataSkill($pelamar->id_pelamar)->result_array(),
             'session' => $user_id->name
         );
+        
         $this->template->load('pelamar/template','pelamar/profile_pelamar',$data);
     }
 

@@ -6,7 +6,7 @@
                     <b><h2>Daftar Lamaran</h2></b>
                 </div>
                 <div class="col-md-6">
-                    <form action="<?= base_url('perusahaan/management') ?>" method="post">
+                    <form action="<?= base_url('Pelamar/managementStatus') ?>" method="post">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchLowongan" placeholder="daftar lamaran..." name="keyword" autocomplete="off" autofocus>
                             <div class="input-group-append">
@@ -26,7 +26,7 @@
                         <h3 class="card-title">Kelola Lowongan</h3>
                     </div> -->
                     <div class="card-body">
-                        <h5>Results : 0</h5>
+                        <h5>Results : <?= $totalLamaran?></h5>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -37,19 +37,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php  $nomor=1 ?>
-                            <?php foreach ($lamaran->result_array() as $key): ?>
+                            <?php 
+                                $nomor=1;
+                                foreach ($lamaran->result_array() as $key): 
+                            ?>
                                 <tr>
                                     <td><?= $nomor++?></td>
                                     <td><?= $key['posisi_lowongan']?></td>
                                     <td><?= $key['nama_perusahaan']?></td>
                                     <td>
-                                        <?php if ($key['status'] == "Diterima"): ?>
+                                        <?php if ($key['status_lamaran'] == "Diterima"): ?>
                                             <span class="badge badge-success">Diterima</span>
-                                        <?php elseif ($key['status'] == "Ditolak"): ?>
+                                        <?php elseif ($key['status_lamaran'] == "Ditolak"): ?>
                                             <span class="badge badge-danger">Ditolak</span>
                                         <?php else : ?>
-                                            <span class="badge badge-warning">Perlu Konfirmasi...</span>
+                                            <span class="badge badge-warning">Belum Terkonfrimasi...</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
