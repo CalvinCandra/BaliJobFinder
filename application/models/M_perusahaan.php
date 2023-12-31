@@ -122,7 +122,6 @@
             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-            $this->db->join('status_rekrut', 'status_rekrut.fk_id_pelamar = data_pelamar.id_pelamar', 'left');
             $this->db->where('data_perusahaan.fk_id_users', $user_id);
 
             // tampilkan data berdasarkan yang dicari user
@@ -171,10 +170,16 @@
             return $result;
         }   
 
-        public function konfirmasiStatusLamaran($fk_id_lowongan, $status) {
-            $data = array('status' => $status);
-            $this->db->where('fk_id_lowongan', $fk_id_lowongan);
-            $this->db->update('status_rekrut', $data);
+        // mengkonfirmasi atau mengubah status lamaran pelamar
+        public function konfirmasiStatusLamaran($id_lamaran, $status) {
+            // Membuat array $data dengan key 'status_lamaran' dan nilai $status
+            $data = array('status_lamaran' => $status);
+        
+            // Menggunakan CodeIgniter Query Builder untuk menetapkan WHERE clause berdasarkan $id_lamaran
+            $this->db->where('id_lamaran', $id_lamaran);
+        
+            // Melakukan operasi UPDATE pada tabel 'lamaran' dengan data baru dari array $data
+            $this->db->update('lamaran', $data);
         }
 
         // simpan profile
