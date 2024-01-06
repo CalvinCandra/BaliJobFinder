@@ -26,7 +26,13 @@
                         <h3 class="card-title">Kelola Lowongan</h3>
                     </div> -->
                     <div class="card-body">
-                        <button class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahLowonganModal">Tambah Lowongan</button>
+                        
+                        <?php  if($cekData == 1):?>
+                            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahLowonganModalAlert">Tambah Lowongan</button>
+                        <?php else:?>
+                                <button class="btn btn-success mb-3" data-toggle="modal" data-target="#tambahLowonganModal">Tambah Lowongan</button>
+                        <?php endif;?>
+
                         <h5>Results : <?= $total_rows; ?></h5>
 
                         <?php if ($keyword && $lowongan->num_rows() == 0): ?>
@@ -183,4 +189,25 @@
         </div>
     </div>
 <?php endforeach ?>
+
+<!-- Modal Alert -->
+<div class="modal fade" id="tambahLowonganModalAlert" tabindex="-1" role="dialog" aria-labelledby="tambahLowonganModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahLowonganModalLabel">Alert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Upsss, Data Profile Masih Ada Yang Kosong, Silahkan Di isi Dulu
+            </div>
+
+            <div class="modal-footer">
+                <a href="<?php echo base_url("Perusahaan/profile")?>" class="btn btn-success">Okey</a>
+            </div>
+        </div>
+    </div>
+</div>
 

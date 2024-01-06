@@ -323,8 +323,8 @@ class M_auth extends CI_Model {
         // mengambil last id
         $last_id = $this->db->insert_id();
 
-        // membuat token random
-        $token = base64_encode(random_bytes(16));
+       // membuat token
+       $token = base64_encode(random_bytes(16));
 
         // memasukan token random ke dalam colum token yang ada di table user berdasarkan id yang dikirim
         $dataToken = [
@@ -368,7 +368,7 @@ class M_auth extends CI_Model {
     public function email_verified($id_users){
         // membuat data-data untuk di update pada table users
         $data = array(
-            'email_verified' => time(),
+            'email_verified' => date('Y-m-d'),
             'token' => NULL,
         );
 

@@ -800,7 +800,7 @@ footer{
     }
 
     .kotak-lowongan .logo-lowongan{
-        width: 13vw;
+        width: 20vw;
     }
     /* end lowongan */
 
@@ -918,11 +918,11 @@ footer{
 
     /* lowongan */
     .kotak-lowongan{
-        min-width: 50vw;
+        min-width: 55vw;
     }
 
     .kotak-lowongan .logo-lowongan{
-        width: 20vw;
+        width: 28vw;
     }
     /* end lowongan */
 

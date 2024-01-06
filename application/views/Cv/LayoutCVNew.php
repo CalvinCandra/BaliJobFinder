@@ -31,9 +31,10 @@
     <div class="container-fuild">
 
         <div class="position-relative" style="float:left; width:55%;">
+
             <div class="position-relative" style="left:25%; top:5%;">     
                 <div class="w-50 h-50">
-                    <img src="<?= base_url("assets/img/profile/perusahaan/bintang_benggong.jpg")?>" alt="" class="w-100">
+                    <img src="<?= base_url("assets/img/profile/pelamar/".$foto)?>" alt="" class="w-100">
                 </div>
 
             </div>
@@ -84,6 +85,7 @@
                 </div>
             </div>
 
+
             <div class="" style="margin-top :-15%;">
                     <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
                         <h2 class="text-center text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Skill</h2>
@@ -91,7 +93,7 @@
         
                     <div class="mx-2">
     
-                        <div class="w-100" style="width:100%;">
+                        <div class="w-100" style="width:80%;">
                             <?php
                                 foreach ($skill as $dataSkill) {
                                     echo "
@@ -107,7 +109,7 @@
                                 
                         </div>
                     </div>
-                </div>
+            </div>
 
 
         </div>
@@ -128,7 +130,7 @@
                             <ul style="margin-top:-15px;">
                                 <li>
                                     <div class="ms-3 me-5 p-2">
-                                        <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapendidikan['bulan_awal']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></p>
+                                        <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapendidikan['bulan_mulai']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></p>
                 
                                         <h2 class="fw-bold" style="margin-top:-10px; font-size:20px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
                 

@@ -29,7 +29,7 @@
         <div class="user-panel d-flex">
         <div class="image">
                     <?php if ($key['logo']): ?>
-                        <img src="<?php echo base_url($key['logo']); ?>" class="img-circle elevation-1" alt="User Image">
+                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" class="img-circle elevation-1" alt="User Image">
                     <?php else: ?>
                         <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">
                     <?php endif; ?>

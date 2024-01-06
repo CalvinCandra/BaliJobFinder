@@ -2,7 +2,6 @@
 
 <section class="detail">
     <div class="kotak-details">
-
         <div class="detail-section">
        
             <div class="bungkus-detail">
@@ -12,7 +11,7 @@
                 ?>
                 <div class="header">
                     <div class="logo">
-                        <img src="<?= base_url($key['logo'])?>" alt="">
+                        <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
                     </div>
                     <div class="nama_perusahaan">
                         <h2><?= $key['nama_perusahaan']?></h2>
@@ -109,9 +108,13 @@
         <?php
             if($role == 'pelamar'):
                 foreach($datalowongan->result_array() as $key):
+
         ?>
             <form action="<?= base_url("BalijobFinder/uploadCV")?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id_lowongan" value="<?= $key['id_lowongan']?>">
+                <input type="hidden" name="posisi" value="<?= $key['posisi_lowongan']?>" >
+                <input type="hidden" name="perusahaan" value="<?= $key['nama_perusahaan']?>">
+
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" name="cv" id="inputGroupFile02">
                 </div>

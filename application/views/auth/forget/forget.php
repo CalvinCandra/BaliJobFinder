@@ -2,8 +2,7 @@
     <div class="bg">
         <div class="containerr">
             <h2 class="judul fw-bold">Forget Password</h2> 
-            <!-- menampilkan error -->
-            <?php
+
                     $pesan = $this->session->flashdata('pesan');
                     $error = $this->session->flashdata('error');
 

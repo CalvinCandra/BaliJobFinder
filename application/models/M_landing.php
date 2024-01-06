@@ -55,24 +55,42 @@ class M_landing extends CI_Model {
         //join table
         $this->db->select('*');
         $this->db->from('lowongan_kerja');
-        $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan' );
+        $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
         $this->db->where(array(
             'lowongan_kerja.status' => 1,
             'lowongan_kerja.posisi_lowongan' => $posisi,
-            'data_perusahaan.nama_perusahaan' => $perusahaan,)
-        );
+            'data_perusahaan.nama_perusahaan' => $perusahaan,
+        ));
 
         $query = $this->db->get();
         return $query;
     }
 
-    public function getPelamar($user){
+    public function getDataPelamar($user){
         return $this->db->get_where('data_pelamar', ['fk_id_users'=> $user])->row();
     }
 
-    public function UploadPathCV($pelamar, $logo_path, $lowongan){
+    public function CekLamaran($id_pelamar, $id_lowongan){
+        $lamaran = $this->db->get_where('lamaran', 
+        [
+            'fk_id_pelamar' => $id_pelamar,
+            'fk_id_lowongan' => $id_lowongan
+        ])->row();
+
+
+        if($lamaran->status_lamaran == "Belum Terkonfrimasi"){
+            return $nilai = 1;
+        }
+            
+        if($lamaran->status_lamaran == "Diterima"){
+            return $nilai = 2;
+        }
+
+    }
+
+    public function UploadPathCV($pelamar, $file_name, $lowongan){
         $data = array(
-            'cv' => $logo_path,
+            'cv' => $file_name,
             'fk_id_lowongan' => $lowongan,
             'fk_id_pelamar' => $pelamar,
         );

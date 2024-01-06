@@ -4,18 +4,26 @@
     
     class M_perusahaan extends CI_Model {
 
-        // mengambil id_user yang login
-        public function getUser()
-        {
-            $email = $this->session->userdata('email');
-            $user_id = $this->db->get_where('users', ['email' => $email])->row();
-            return $user_id;
-        }
-
         // get data perusahaan yang login
         public function getPerusahaan($user_id)
         {
             return $this->db->get_where('data_perusahaan', array('fk_id_users' => $user_id));
+        }
+
+        // cek data profile apakah ada atau tidak
+        public function cekData($id_perusahaan){
+            // jika data tidak ada
+            if($this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->num_rows() == 0){
+                return 1;
+            }else{
+                $perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->row();
+                if(is_null($perusahaan->logo) || is_null($perusahaan->alamat_perusahaan) || is_null($perusahaan->tlp_perusahaan) || 
+                    is_null($perusahaan->kota)){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
         }
 
         // menghitung jumlah lowongan berdasarkan perusahaan yang login
@@ -187,7 +195,6 @@
         }
 
         // simpan profile
-
         public function simpanProfile($id_users)
         {
             // ambil data yang di input user
@@ -213,12 +220,12 @@
         }
 
         // menyimpan logo
-        public function saveLogoPath($id, $logoPath)
+        public function saveLogoPath($id, $file_name)
         {
             // pilih id berdasarkan user yang upload
             $this->db->where('fk_id_users', $id);
             // update
-            $this->db->update('data_perusahaan', ['logo' => $logoPath]);
+            $this->db->update('data_perusahaan', ['logo' => $file_name]);
         }
 
 

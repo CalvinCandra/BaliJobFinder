@@ -11,9 +11,16 @@ class Auth extends CI_Controller {
         $this->load->library('email'); 
     }
 
-    public function index()
-    {
+
+    public function index(){
         redirect('Auth/login');
+    }
+
+     // function buat alert
+    public function SweetAlert($icon, $title, $text){
+        $this->session->set_flashdata('swal_icon', $icon);
+        $this->session->set_flashdata('swal_title', $title);
+        $this->session->set_flashdata('swal_text', $text);
     }
 
 // ==================================================================menampilkan halaman login
@@ -42,6 +49,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
 
+// ================================================================= Register  PELAMAR
     // menampilkan halaman register pelamar
     public function nampil_registerPelamar(){
          // data-data untuk ke view
@@ -55,7 +63,6 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
     
-// ================================================================= Register  PELAMAR
     // register sebagai pelamar
     public function register_pelamar(){
 
@@ -87,8 +94,7 @@ class Auth extends CI_Controller {
             // manggil function regisPelamar di M_auth
             $this->M_auth->regisPelamar();
 
-            // kirim flashdata ke view
-            $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail'); 
+            $this->SweetAlert('success', 'Berhasil!', 'Selamat, Anda Berhasil Membuat Akun. Silahkan Verifikasi Akun Anda Di Gmail');
             redirect('Auth/login');
             
         }
@@ -109,6 +115,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
 
+    // register sebagai perusahaan
     public function register_perusahaan(){
         // set rules form validation
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]',[
@@ -137,43 +144,42 @@ class Auth extends CI_Controller {
             // manggil function regisPerusahaan di M_auth
             $this->M_auth->regisPerusahaan();
 
-            // kirim flashdata ke view
-            $this->session->set_flashdata('pesan','Congratulation! your account has been created. Please Activated Your Account On Gmail');   
-            redirect('Auth/login');  
+            $this->SweetAlert('success', 'Berhasil!', 'Selamat, Anda Berhasil Membuat Akun. Silahkan Verifikasi Akun Anda Di Gmail');
+            redirect('Auth/login'); 
         }
     }
 
 //=============================================================================== Verify akun agar bisa login
     public function verify(){
-        // ambil data pada url
+        // ngambil dari url (get)
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 
-        // ambil data users berdasarkan email
+        // ambil data users
         $user = $this->M_auth->getUser($email);
 
-        // jika user ada
+        //jika ada users
         if($user){
-            //jika token = token yang ada di database
-            if($token === $user->token){
+           // jika token sama dengan token di database
+           if($token === $user->token){
 
                 // manggil function email_verified di M_auth
                 $this->M_auth->email_verified($user->id_users);
 
                 // kirim flashdata ke view
-                $this->session->set_flashdata('pesan','Congratulation! your account has been Activated. Please Login');  
+                $this->SweetAlert('success', 'Berhasil!', 'Selamat! Akun Anda Berhasil Di Verifikasi. Silahkan Login Kembali');
                 redirect('Auth/login');
             }else{ //jika tidak
 
                 // kirim flashdata ke view
-                $this->session->set_flashdata('error','Account Activation Failed. Wrong Token.');  
-                redirect('Auth/login'); 
+                $this->SweetAlert('error', 'Gagal!', 'Aktivasi Akun Gagal, Token Tidak Cocok');
+                redirect('Auth/login');
             }
         }else{ //jika tidak
 
             // kirim flashdata ke view
-            $this->session->set_flashdata('error','Account Activation Failed. Wrong Email.');  
-            redirect('Auth/login'); 
+            $this->SweetAlert('error', 'Gagal!', 'Aktivasi Akun Gagal, Email Tidak Cocok');
+            redirect('Auth/login');
         }
     }
 
@@ -218,11 +224,11 @@ class Auth extends CI_Controller {
            // mengecek apakah email sudah terdaftar apa belum
            if($data->email === $email){
                $this->M_auth->kirimChangeForget($email, $data->id_users);
-               $this->session->set_flashdata('pesan','Congratulation! Password Change link has been send. Please Check On Gmail');   
+               $this->SweetAlert('success', 'Berhasil!', 'Link Ganti Password Berhasil Terkirim Ke Email Anda, Silakan Klik Link Yang Dikirim');
                redirect('Auth/VForget');
-           }else{ 
-               $this->session->set_flashdata('error','Email is not Registered');  
-               redirect('Auth/login');  
+           }else{
+                $this->SweetAlert('error', 'Gagal!', 'Email Tidak Cocok');
+                redirect('Auth/login');
            }
        }
     }
@@ -245,12 +251,12 @@ class Auth extends CI_Controller {
                ];
                $this->load->view('auth/forget/formForget', $data);
            }else{ //jika token berbeda
-               $this->session->set_flashdata('error','Link Failed. Wrong Token.');  
-               redirect('Auth/login'); 
+                $this->SweetAlert('error', 'Gagal!', 'Token Tidak Cocok');
+                redirect('Auth/login');
            }
         }else{ //jika email blm register
-            $this->session->set_flashdata('error','Link Failed, Email Not Register');  
-            redirect('Auth/login'); 
+            $this->SweetAlert('error', 'Gagal!', 'Tidak Cocok');
+            redirect('Auth/login');
         }
     }
 
@@ -271,10 +277,10 @@ class Auth extends CI_Controller {
         } else {
             // panggil function forget di M_auth
             $this->M_auth->forget();
-            $this->session->set_flashdata('pesan','Congratulation! your password has been change. Please Login');  
+            
+            $this->SweetAlert('success', 'Berhasil!', 'Selamat! Berhasil Mengganti Password Akun Anda. Silahkan Login Dengan Password Baru');
             redirect('Auth/login');
         }
-        
         
     }
 
@@ -312,12 +318,11 @@ class Auth extends CI_Controller {
                 if(password_verify($password, $data->password) || $data->password == $password){
                     // jika password sudah sama, cek apakah sudah di verifikasi email
                     if($data->email_verified == NULL){
-                        $this->session->set_flashdata('error','Account not Verify, Please Verify on Gmail');  
-                        redirect('Auth/login'); 
+                        $this->SweetAlert('error', 'Gagal!', 'Akun Belum Terverifikasi, Silahkan Verifikasi');
+                        redirect('Auth/login');
                     }else{
                         // jika sudah, pindahkan sesuai role mereka
                         if($data->role == "pelamar"){
-                            $this->session->set_flashdata('pesan','Login Success');
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
@@ -327,7 +332,7 @@ class Auth extends CI_Controller {
                             redirect('Pelamar');
 
                         }else if($data->role == "perusahaan"){
-                            $this->session->set_flashdata('pesan','Login Success');
+
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
@@ -337,7 +342,7 @@ class Auth extends CI_Controller {
                             redirect('Perusahaan'); 
 
                         }else{
-                            $this->session->set_flashdata('pesan','Login Success');
+
                             // set session
                             $data_session = array(
                                 'email' => $data->email,
@@ -349,12 +354,12 @@ class Auth extends CI_Controller {
                         }
                     }
                 }else{ //jika password salah
-                    $this->session->set_flashdata('error','Wrong Password');  
-                    redirect('Auth/login'); 
+                    $this->SweetAlert('error', 'Gagal!', 'Password Tidak Sama');
+                    redirect('Auth/login');
                 }
             }else{ //jika email blm terdaftar
-                $this->session->set_flashdata('error','Email is not Registered');  
-                redirect('Auth/login'); 
+                $this->SweetAlert('error', 'Gagal!', 'Email Belum Terdaftar');
+                redirect('Auth/login');
             }
        }
            
