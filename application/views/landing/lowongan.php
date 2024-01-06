@@ -29,13 +29,13 @@
                 <div class="kotak-lowongan">
                     <!-- img -->
                     <div class="logo-lowongan">
-                        <img src="<?php echo base_url($key['logo'])?>" alt="">
+                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
                     </div>
         
                     <!-- lowongan body -->
                     <div class="body-lowongan">
-                        <p class="namaUsaha"><?= $key['nama_perusahaan']?></p>
-                        <h2 class="namaPosisi"><?= $key['posisi_lowongan']?></h2>
+                        <p class="namaUsaha" id="perusahaan" value="<?= $key['nama_perusahaan']?>"><?= $key['nama_perusahaan']?></p>
+                        <h2 class="namaPosisi" id="posisi" value="<?= $key['posisi_lowongan']?>"><?= $key['posisi_lowongan']?></h2>
                     </div>
         
                     <!-- lowongan kota -->
@@ -48,7 +48,7 @@
         
                     <!-- link cek details -->
                     <div class="cek">
-                        <a href="<?php echo base_url("Balijobfinder/Details?lowongan=".$key['posisi_lowongan'].'&perusahaan='.$key['nama_perusahaan'])?>">Detail Lowongan</a>
+                        <a href="<?php echo base_url('Balijobfinder/Details/'.$key['posisi_lowongan'].'/'.$key['nama_perusahaan'])?>">Detail Lowongan</a>
                     </div>
         
                 </div>

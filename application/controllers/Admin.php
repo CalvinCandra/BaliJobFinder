@@ -17,6 +17,13 @@ class Admin extends CI_Controller {
         $this->load->library('form_validation');
     }
 
+    // function buat alert
+    public function SweetAlert($icon, $title, $text){
+        $this->session->set_flashdata('swal_icon', $icon);
+        $this->session->set_flashdata('swal_title', $title);
+        $this->session->set_flashdata('swal_text', $text);
+    }
+
     // Fungsi ini akan meredirect ke fungsi home
     public function index(){
         redirect('Admin/home');
@@ -45,7 +52,6 @@ class Admin extends CI_Controller {
     }
 
 
-    
     // Fungsi untuk menampilkan data lowongan pekerjaan
     // dan melakukan operasi pencarian dengan pagination
     public function datalowongan()
@@ -153,16 +159,29 @@ class Admin extends CI_Controller {
     // Fungsi untuk melakukan edit data lowongan
     public function editLowongan()
     {
-        $this->M_admin->editLowongan();
-        redirect('admin/dataLowongan');
+        $editlowongan = $this->M_admin->editLowongan();
+
+        if($editlowongan){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Lowongan');
+            redirect('admin/dataLowongan');
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Update Data Lowongan');
+            redirect('admin/dataLowongan');
+        }
         
     }
 
     // Fungsi untuk menghapus data lowongan berdasarkan ID
     public function deleteLowongan($id)
     {
-        $this->M_admin->deleteLowongan($id );
-        redirect('admin/dataLowongan'); 
+        $hapuslowongan = $this->M_admin->deleteLowongan($id);
+        if($hapuslowongan){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Hapus Data Lowongan');
+            redirect('admin/dataLowongan');
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Hapus Data Lowongan');
+            redirect('admin/dataLowongan');
+        }
     }
 
 
@@ -191,8 +210,15 @@ class Admin extends CI_Controller {
             }
         }
 
-        $this->M_admin->editPerusahaan();
-        redirect('admin/dataPerusahaan');
+        $editperusahaan = $this->M_admin->editPerusahaan();
+
+        if($editlperusahaan){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Perusahaan');
+            redirect('admin/dataPerusahaan');
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Update Data Perusahaan');
+            redirect('admin/dataPerusahaan');
+        }
         
     }
 
@@ -200,8 +226,15 @@ class Admin extends CI_Controller {
     // Fungsi untuk menghapus data perusahaan berdasarkan ID
     public function deleteperusahaan($id)
     {
-        $this->M_admin->deleteperusahaan($id);
-        redirect('admin/dataPerusahaan'); 
+        $hapusperusahaan = $this->M_admin->deleteperusahaan($id);
+
+        if($hapusperusahaan){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Hapus Data Perusahaan');
+            redirect('admin/dataPerusahaan'); 
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Hapus Data Perusahaan');
+            redirect('admin/dataPerusahaan'); 
+        }
     }
 
     // Fungsi untuk melakukan edit data pelamar
@@ -229,16 +262,28 @@ class Admin extends CI_Controller {
             }
         }
 
-        $this->M_admin->editpelamar();
-        redirect('admin/dataPelamar');
-        
+        $editpelamar = $this->M_admin->editpelamar();
+
+        if($editpelamar){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Pelamar');
+            redirect('admin/dataPelamar');
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Update Data Pelamar');
+            redirect('admin/dataPelamar');
+        }
     }
 
     // Fungsi untuk menghapus data pelamar berdasarkan ID
     public function deletepelamar($id)
     {
-        $this->M_admin->deletepelamar($id );
-        redirect('admin/dataPelamar'); 
+        $hapuspelamar = $this->M_admin->deletepelamar($id);
+        if($hapuspelamar){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Hapus Data Pelamar');
+            redirect('admin/dataPelamar');
+        }else{
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Hapus Data Pelamar');
+            redirect('admin/dataPelamar');
+        }
     }
     
 

@@ -32,5 +32,22 @@
 <script src="<?= base_url()?>assets/temp/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url()?>assets/temp/dist/js/demo.js"></script>
+
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+    <?php if($this->session->flashdata('swal_icon')):?>
+
+        Swal.fire({
+            title: "<?= $this->session->flashdata('swal_title')?>",
+            text: "<?= $this->session->flashdata('swal_text')?>",
+            icon: "<?= $this->session->flashdata('swal_icon')?>",
+        });
+
+    <?php endif;?> 
+
+</script>
 </body>
 </html>

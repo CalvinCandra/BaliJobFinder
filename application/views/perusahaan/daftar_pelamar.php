@@ -50,8 +50,8 @@
                                     <td><?php echo $key['nama_lengkap'] ?></td>
                                     <td><?php echo $key['posisi_lowongan'] ?></td>
                                     <td>
-                                        <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
-                                            <p class="btn btn-light">Cek CV</p>
+                                        <a href="<?php echo base_url("assets/CV/".$key['cv']) ?>" target="__blank">
+                                            <p class="btn btn-light text-primary">Cek CV</p>
                                         </a>
                                     </td>
                                     <td>
@@ -118,8 +118,8 @@
                     </div>
                     <div class="form-group">
                         <label for="syaratLowonganEdit">CV</label><br>
-                        <a href="<?php echo base_url($key['cv']) ?>" target="__blank">
-                            <p class="btn btn-light">Cek CV</p>
+                        <a href="<?php echo base_url("assets/CV/".$key['cv']) ?>" target="__blank">
+                            <p class="btn btn-light text-primary">Cek CV</p>
                         </a>
                     </div>
                 </form>

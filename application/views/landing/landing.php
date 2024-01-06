@@ -125,7 +125,7 @@
             <div class="kotak-lowongan">
                 <!-- img -->
                 <div class="logo-lowongan">
-                    <img src="<?php echo base_url($key['logo'])?>" alt="">
+                    <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
                 </div>
     
                 <!-- lowongan body -->
@@ -154,7 +154,7 @@
                 ?>
     
                 <div class="cek">
-                    <a href="<?php echo base_url("Balijobfinder/Details?lowongan=".$key['posisi_lowongan'].'&perusahaan='.$key['nama_perusahaan'])?>">Detail Lowongan</a>
+                    <a href="<?php echo base_url('Balijobfinder/Details/'.$key['posisi_lowongan'].'/'.$key['nama_perusahaan'])?>">Detail Lowongan</a>
                 </div>
     
                 <?php } ?>

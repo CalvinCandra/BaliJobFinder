@@ -2,7 +2,7 @@
     <div class="bg">
         <div class="containerr">
             <h2 class="judul fw-bold">Login Form</h2>
-             <!-- menampilkan pesan -->
+
                 <?php
                     $pesan = $this->session->flashdata('pesan');
                     $error = $this->session->flashdata('error');

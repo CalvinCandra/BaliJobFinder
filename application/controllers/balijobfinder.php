@@ -12,21 +12,14 @@ class Balijobfinder extends CI_Controller {
         $this->load->library('form_validation'); 
     }
 
+    public function SweetAlert($icon, $title, $text){
+        $this->session->set_flashdata('swal_icon', $icon);
+        $this->session->set_flashdata('swal_title', $title);
+        $this->session->set_flashdata('swal_text', $text);
+    }
+
     public function index(){
-        redirect('Balijobfinder/home', 'refresh');
-    }
-
-    // function ngecek digunakan untuk ngecek sudah login apa blm
-    public function cek(){
-        if(!$this->session->userdata('email')){
-            
-            redirect('Auth/Login');
-            
-        }
-    }
-
-    public function home()
-    {
+        // redirect('Balijobfinder/home', 'refresh');
         // get data email
         $email = $this->session->userdata('email');
 
@@ -41,7 +34,7 @@ class Balijobfinder extends CI_Controller {
                 if(empty($pelamar->gambar)){
                     $logo = 'assets/img/dashboard/profile.png';
                 }else{
-                    $logo = $pelamar->gambar;
+                    $logo = 'assets/img/profile/pelamar/'.$pelamar->gambar;
                 }
                 
             }elseif($datas->role == 'perusahaan'){
@@ -50,7 +43,7 @@ class Balijobfinder extends CI_Controller {
                 if(empty($perusahaan->logo)){
                     $logo = 'assets/img/dashboard/profile.png';
                 }else{
-                    $logo = $perusahaan->logo;
+                    $logo = 'assets/img/profile/perusahaan/'.$perusahaan->logo;
                 }
 
             }else{
@@ -83,6 +76,13 @@ class Balijobfinder extends CI_Controller {
         $this->load->view('landing/_partials/footer');
     }
 
+    // function ngecek digunakan untuk ngecek sudah login apa blm
+    public function cek(){
+        if(!$this->session->userdata('email')){ 
+            redirect('Auth/Login');
+        }
+    }
+
     public function Lowongan(){
         // pengecekan jika blm login 
         $this->cek();
@@ -100,7 +100,7 @@ class Balijobfinder extends CI_Controller {
             if(empty($pelamar->gambar)){
                 $logo = 'assets/img/dashboard/profile.png';
             }else{
-                $logo = $pelamar->gambar;
+                $logo = 'assets/img/profile/pelamar/'.$pelamar->gambar;
             }
             
         }elseif($datas->role == 'perusahaan'){
@@ -109,7 +109,7 @@ class Balijobfinder extends CI_Controller {
             if(empty($perusahaan->logo)){
                 $logo = 'assets/img/dashboard/profile.png';
             }else{
-                $logo = $perusahaan->logo;
+                $logo = 'assets/img/profile/perusahaan/'.$perusahaan->logo;
             }
 
         }else{
@@ -160,7 +160,7 @@ class Balijobfinder extends CI_Controller {
     }
 
     // menampilkan halaman details
-    public function Details(){
+    public function Details($posisi, $perusahaan){
          // pengecekan jika blm login 
          $this->cek();
 
@@ -177,7 +177,7 @@ class Balijobfinder extends CI_Controller {
              if(empty($pelamar->gambar)){
                  $logo = 'assets/img/dashboard/profile.png';
              }else{
-                 $logo = $pelamar->gambar;
+                 $logo ='assets/img/profile/pelamar/'.$pelamar->gambar;
              }
              
          }elseif($datas->role == 'perusahaan'){
@@ -186,16 +186,12 @@ class Balijobfinder extends CI_Controller {
              if(empty($perusahaan->logo)){
                  $logo = 'assets/img/dashboard/profile.png';
              }else{
-                 $logo = $perusahaan->logo;
+                $logo = 'assets/img/profile/perusahaan/'.$perusahaan->logo;
              }
  
          }else{
              $logo = 'assets/img/dashboard/profile.png';
          };
-
-         //  get posisi lowongan dan nama perusahaan dari url
-         $posisi = $this->input->get('lowongan');
-         $perusahaan = $this->input->get('perusahaan');
  
          //kirim data ke view
          $data = array(
@@ -206,7 +202,12 @@ class Balijobfinder extends CI_Controller {
              'css' => 'assets/css/landing/details.css'
          );
 
-         $data['datalowongan'] = $this->M_landing->getDataLowongan($posisi, $perusahaan);
+        // mengubah $perusahaan dalam array
+        $string = (array)$perusahaan;
+        // lalu menganti %20(spasi di url) menjadi spasi biasa
+        $nama_perusahaan = str_replace("%20", " ", $string['nama_perusahaan']);
+
+        $data['datalowongan'] = $this->M_landing->getDataLowongan($posisi, $nama_perusahaan);
 
         $this->load->view('landing/_partials/header', $data);
         $this->load->view('landing/detailLowongan');
@@ -221,43 +222,59 @@ class Balijobfinder extends CI_Controller {
         // get data pelamar
         $pelamar = $this->M_landing->getDataPelamar($user->id_users);
 
-        // ambil id_lowongan yang disembunyiin
+        // ambil id_lowongan, posisi yang sedang dilamar, dan nama perusahaan yang disembunyiin
         $lowongan = $this->input->post('id_lowongan');
+        $posisi = $this->input->post('posisi');
+        $perusahaan = $this->input->post('perusahaan');
 
-        if (!empty($_FILES['cv']['name'])) {
+        // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
+        $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
 
-            // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
-            $config['allowed_types'] = 'pdf'; // esktesion yang diperbolehkan
-            $config['max_size']      = 10000; // set ukuran menjadi 10mb
+        if($cek == 1){
+            $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Konfrimasi Perusahaan');          
+            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+            
+        }else if($cek == 2){
+            $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Diterima Di Pekerjaan Ini, Silahkan Menunggu Email Dari Perusahaan');  
+            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+        }else{
+            if (!empty($_FILES['cv']['name'])) {
     
-            $this->load->library('upload', $config); 
-    
-            //jika file gambar diupload
-            if ($this->upload->do_upload('cv')) {
-                // upload
-                $upload_data = $this->upload->data();
-                // lalu simpan pada path
-                $logo_path = 'assets/CV/' . $upload_data['file_name'];
-    
-                // menyimpan lcvgo ke database
-                $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $logo_path, $lowongan);
+                // Config untuk upload file berupa foto
+                $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
+                $config['allowed_types'] = '|pdf'; // esktesion yang diperbolehkan
+                $config['max_size']      = 10000; // set ukuran menjadi 10mb
+        
+                $this->load->library('upload', $config); 
+        
+                //jika file gambar diupload
+                if ($this->upload->do_upload('cv')) {
+                    // upload
+                    $upload_data = $this->upload->data();
+                    // lalu simpan pada path
+                    $logo_path = 'assets/CV/' . $upload_data['file_name'];
 
-                if($cv){
-                    $this->session->set_flashdata('pesan', "Berhasil Mengirim Lamaran Kerja");
-                    redirect('Balijobfinder/home','refresh');
+                    $file_name = $upload_data['file_name'];
+        
+                    // menyimpan lcvgo ke database
+                    $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $file_name, $lowongan);
+    
+                    if($cv){
+                        $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
+                        redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                    }
                     
+                } else {
+                    // mengatasi jika error
+                    // $error = $this->upload->display_errors();
+                    $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 10MB'); 
+                    redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                 }
-                
-            } else {
-                // mengatasi jika error
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('error', $error);
-                redirect('Balijobfinder/home','refresh');
             }
         }
 
-    }
+
+    } 
 
 
 

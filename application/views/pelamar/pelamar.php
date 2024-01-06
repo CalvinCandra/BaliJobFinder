@@ -33,7 +33,7 @@
               <div class="icon">
                 <i class="ion ion-checkmark-circled"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?= base_url('Pelamar/managementStatus')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -41,14 +41,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>0</h3>
+                <h3><?php echo $totalLamaranKonfrimasi?></h3>
 
                 <p>Menunggu Konfirmasi</p>
               </div>
               <div class="icon">
                 <i class="fas fa-spinner"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?= base_url('Pelamar/managementStatus')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
