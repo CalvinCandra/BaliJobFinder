@@ -1,8 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// panggil autoload dompdf nya
+require_once 'dompdf-master/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
 class Pdfgenerator {
     public function generate($html, $filename='', $paper = '', $orientation = '', $stream=TRUE)
     {   
