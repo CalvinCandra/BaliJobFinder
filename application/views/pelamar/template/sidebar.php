@@ -1,17 +1,14 @@
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-primary elevation-4">
+  <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a class="brand-link">
       <img src="<?= base_url()?>assets/img/favicon/icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class=" text-primary font-weight-bold">BALI JOB FINDER</span>
+      <span class="brand-text text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-1 pb-1 mb-1 d-flex">
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

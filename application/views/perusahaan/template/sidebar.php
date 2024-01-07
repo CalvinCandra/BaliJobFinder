@@ -7,7 +7,7 @@
       <span class="brand-text text-primary font-weight-bold">BALI JOB FINDER</span>
     </a>
 
-
+    <div class="sidebar">
       <!-- Sidebar Menu -->
       <nav class="mt-4">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
