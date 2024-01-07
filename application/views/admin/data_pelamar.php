@@ -51,7 +51,7 @@
                                         <?php if (empty($key['gambar'])): ?>
                                             <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
                                         <?php else: ?>
-                                            <img src="<?= base_url($key['gambar']); ?>" alt="Logo Preview" width="100">
+                                            <img src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>" alt="Logo Preview" width="100">
                                         <?php endif; ?>
                                     </td>
                                     <td><?= $key['nama_lengkap']?></td>
