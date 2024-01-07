@@ -203,7 +203,7 @@ class Balijobfinder extends CI_Controller {
          );
 
         // mengubah $perusahaan dalam array
-        $string = (array)$perusahaan;
+        $string = get_object_vars($perusahaan);
         // lalu menganti %20(spasi di url) menjadi spasi biasa
         $nama_perusahaan = str_replace("%20", " ", $string['nama_perusahaan']);
 
