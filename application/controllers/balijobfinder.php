@@ -12,6 +12,13 @@ class Balijobfinder extends CI_Controller {
         $this->load->library('form_validation'); 
     }
 
+    // function ngecek digunakan untuk ngecek sudah login apa blm
+    public function cek(){
+        if(!$this->session->userdata('email')){ 
+            redirect('Auth/Login');
+        }
+    }
+
     public function SweetAlert($icon, $title, $text){
         $this->session->set_flashdata('swal_icon', $icon);
         $this->session->set_flashdata('swal_title', $title);
@@ -74,13 +81,6 @@ class Balijobfinder extends CI_Controller {
         $this->load->view('landing/_partials/header', $data);
         $this->load->view('landing/landing');
         $this->load->view('landing/_partials/footer');
-    }
-
-    // function ngecek digunakan untuk ngecek sudah login apa blm
-    public function cek(){
-        if(!$this->session->userdata('email')){ 
-            redirect('Auth/Login');
-        }
     }
 
     public function Lowongan(){
@@ -160,7 +160,7 @@ class Balijobfinder extends CI_Controller {
     }
 
     // menampilkan halaman details
-    public function Details($posisi, $perusahaan){
+    public function Details($posisi, $nama_perusahaan){
          // pengecekan jika blm login 
          $this->cek();
 
@@ -202,12 +202,10 @@ class Balijobfinder extends CI_Controller {
              'css' => 'assets/css/landing/details.css'
          );
 
-        // mengubah $perusahaan dalam array
-        $string = get_object_vars($perusahaan);
-        // lalu menganti %20(spasi di url) menjadi spasi biasa
-        $nama_perusahaan = str_replace("%20", " ", $string['nama_perusahaan']);
+        // // lalu menganti %20(spasi di url) menjadi spasi biasa
+        $perusahaan = str_replace("%20", " ", $nama_perusahaan);
 
-        $data['datalowongan'] = $this->M_landing->getDataLowongan($posisi, $nama_perusahaan);
+        $data['datalowongan'] = $this->M_landing->getDataLowongan($posisi, $perusahaan);
 
         $this->load->view('landing/_partials/header', $data);
         $this->load->view('landing/detailLowongan');
@@ -219,56 +217,68 @@ class Balijobfinder extends CI_Controller {
         // get user
         $user = $this->M_auth->getUser($this->session->userdata('email'));
 
-        // get data pelamar
-        $pelamar = $this->M_landing->getDataPelamar($user->id_users);
-
         // ambil id_lowongan, posisi yang sedang dilamar, dan nama perusahaan yang disembunyiin
         $lowongan = $this->input->post('id_lowongan');
         $posisi = $this->input->post('posisi');
         $perusahaan = $this->input->post('perusahaan');
 
-        // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
-        $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
-
-        if($cek == 1){
-            $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Konfrimasi Perusahaan');          
+        // jika role
+        if($user->role == "admin"){ // Jika Admin
+            $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Adalah Seorang Admin');          
             redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+
+        }else if($user->role == "perusahaan"){ //Jika Perusahaan
+            $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Yang Membuka Lowongan Ini');          
+            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+
+        }else{ // Jika Pelamar
+
+            // get data pelamar
+            $pelamar = $this->M_landing->getDataPelamar($user->id_users);
+
+            // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
+            $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
+
+            if($cek == 1){
+                $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Konfrimasi Perusahaan');          
+                redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                
+            }else if($cek == 2){
+                $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Diterima Di Pekerjaan Ini, Silahkan Menunggu Email Dari Perusahaan');  
+                redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+            }else{
+                if (!empty($_FILES['cv']['name'])) {
+        
+                    // Config untuk upload file berupa foto
+                    $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
+                    $config['allowed_types'] = '|pdf'; // esktesion yang diperbolehkan
+                    $config['max_size']      = 10000; // set ukuran menjadi 10mb
             
-        }else if($cek == 2){
-            $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Diterima Di Pekerjaan Ini, Silahkan Menunggu Email Dari Perusahaan');  
-            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
-        }else{
-            if (!empty($_FILES['cv']['name'])) {
-    
-                // Config untuk upload file berupa foto
-                $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
-                $config['allowed_types'] = '|pdf'; // esktesion yang diperbolehkan
-                $config['max_size']      = 10000; // set ukuran menjadi 10mb
-        
-                $this->load->library('upload', $config); 
-        
-                //jika file gambar diupload
-                if ($this->upload->do_upload('cv')) {
-                    // upload
-                    $upload_data = $this->upload->data();
-                    // lalu simpan pada path
-                    $logo_path = 'assets/CV/' . $upload_data['file_name'];
+                    $this->load->library('upload', $config); 
+            
+                    //jika file gambar diupload
+                    if ($this->upload->do_upload('cv')) {
+                        // upload
+                        $upload_data = $this->upload->data();
+                        // lalu simpan pada path
+                        $logo_path = 'assets/CV/' . $upload_data['file_name'];
 
-                    $file_name = $upload_data['file_name'];
+                        $file_name = $upload_data['file_name'];
+            
+                        // menyimpan lcvgo ke database
+                        $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $file_name, $lowongan);
         
-                    // menyimpan lcvgo ke database
-                    $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $file_name, $lowongan);
-    
-                    if($cv){
-                        $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
+                        if($cv){
+                            $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
+                            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                        }
+                        
+                    } else {
+                        // mengatasi jika error
+                        // $error = $this->upload->display_errors();
+                        $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 10MB'); 
                         redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                     }
-                    
-                } else {
-                    // mengatasi jika error
-                    // $error = $this->upload->display_errors();
-                    $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 10MB'); 
-                    redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                 }
             }
         }

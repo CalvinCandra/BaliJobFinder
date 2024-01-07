@@ -105,11 +105,6 @@
 
       </div>
       <div class="modal-body">
-        <?php
-            if($role == 'pelamar'):
-                foreach($datalowongan->result_array() as $key):
-
-        ?>
             <form action="<?= base_url("BalijobFinder/uploadCV")?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id_lowongan" value="<?= $key['id_lowongan']?>">
                 <input type="hidden" name="posisi" value="<?= $key['posisi_lowongan']?>" >
@@ -120,12 +115,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Lamar</button>
             </form>
-        <?php
-                endforeach;
-            else:
-        ?>
-            <h5 class="text-center">Opppsss Cannot Upload CV</h5>
-        <?php endif;?>
       </div>
     </div>
   </div>
