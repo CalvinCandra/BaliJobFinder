@@ -101,7 +101,7 @@ class Pelamar extends CI_Controller {
         $data['start'] = $this->uri->segment(3);
 
         // memanggil function getpelamar di M_perusahaan
-        $data['lamaran'] = $this->M_pelamar->getStatusLamaran($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
+        $data['lamaran'] = $this->M_pelamar->getStatusLamaran($pelamar->id_pelamar, $config['per_page'],$data['start'],$data['keyword']);
 
         $this->template->load('pelamar/template' , 'pelamar/management_lamaran', $data);
     }

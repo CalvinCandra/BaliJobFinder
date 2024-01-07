@@ -143,21 +143,9 @@
                 </div>
     
                 <!-- link cek details -->
-                <?php 
-                    if($session_name == NULL){
-                ?>
-                    <div class="cek">
-                        <a href="<?php echo base_url("Auth/login")?>">Detail Lowongan</a>
-                    </div>
-                <?php
-                    }else{
-                ?>
-    
                 <div class="cek">
                     <a href="<?php echo base_url('Balijobfinder/Details/'.$key['posisi_lowongan'].'/'.$key['nama_perusahaan'])?>">Detail Lowongan</a>
                 </div>
-    
-                <?php } ?>
             </div>
 
             <?php
@@ -169,20 +157,9 @@
     </div>
 
      <!-- link more -->
-     <?php 
-        if($session_name == NULL){
-    ?>
-       <div class="btn_more-lowongan">
-            <a href="<?php echo base_url("Auth/login") ?>">Find More</a>
-        </div>
-    <?php
-        }else{
-    ?>
-        <div class="btn_more-lowongan">
-            <a href="<?php echo base_url("Balijobfinder/Lowongan") ?>">Find More</a>
-        </div>
-    
-    <?php } ?>
+     <div class="btn_more-lowongan">
+        <a href="<?php echo base_url("Balijobfinder/Lowongan") ?>">Find More</a>
+    </div>
 </section>
 
 <!-- end lowongan -->
