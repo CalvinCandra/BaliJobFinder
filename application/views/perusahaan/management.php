@@ -57,8 +57,8 @@
                                 <?php foreach ($lowongan->result_array() as $key): ?>
                                 <tr>
                                     <td><?php echo ++$start ?></td>
-                                    <td><?php echo $key['posisi_lowongan'] ?></td>
-                                    <td>Rp. <?php echo number_format($key['salary'], 0, ',', '.'); ?></td>
+                                    <td ><?php echo $key['posisi_lowongan'] ?></td>
+                                    <td >Rp. <?php echo number_format($key['salary'], 0, ',', '.'); ?></td>
                                     <td><?php echo $key['syarat_lowongan'] ?></td>
                                     <td>
                                         <?php if ($key['status'] == 1): ?>
@@ -107,11 +107,11 @@
                     </div>
                     <div class="form-group">
                         <label for="syaratLowongan">Syarat:</label>
-                        <textarea class="form-control" name="syarat_lowongan" rows="3" placeholder="Masukkan syarat lowongan" required></textarea>
+                        <textarea class="form-control" name="syarat_lowongan" rows="10" placeholder="Masukkan syarat lowongan" required></textarea>
                     </div>
                     <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>
@@ -133,9 +133,10 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="<?php echo base_url('perusahaan/editLowongan') ?>">
+                    <input type="hidden" class="form-control" name="lowongan" value="<?php echo $key['id_lowongan'] ?>">
+
                     <div class="form-group">
                         <label for="posisiLowonganEdit">Posisi:</label>
-                        <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_lowongan'] ?>">
                         <input type="text" class="form-control" name="posisi" value="<?php echo $key['posisi_lowongan'] ?>" required>
                     </div>
                     <div class="form-group">
@@ -154,7 +155,7 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
@@ -177,12 +178,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus lowongan ini?
+                    Apakah Anda yakin ingin menghapus lowongan <b><?= $key['posisi_lowongan']?></b>?
                 </div>
                 <div class="modal-footer">
                     <form method="post" action="<?php echo base_url('perusahaan/deleteLowongan/'.$key['id_lowongan']) ?>">
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                     </form>
                 </div>
             </div>

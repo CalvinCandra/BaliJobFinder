@@ -23,7 +23,7 @@ class Auth extends CI_Controller {
         $this->session->set_flashdata('swal_text', $text);
     }
 
-// ==================================================================menampilkan halaman login
+    // function menampikan form login
     public function login(){
         // data-data untuk ke view
         $data = array(
@@ -36,7 +36,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
 
-// ====================================================================menampilkan pilihan register
+    // function menampilkan pilihan register
     public function register_pilihan(){
          // data-data untuk ke view
         $data = array(
@@ -49,8 +49,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
 
-// ================================================================= Register  PELAMAR
-    // menampilkan halaman register pelamar
+    // function menampilkan halaman register pelamar
     public function nampil_registerPelamar(){
          // data-data untuk ke view
         $data = array(
@@ -63,7 +62,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
     
-    // register sebagai pelamar
+    // function register sebagai pelamar
     public function register_pelamar(){
 
         // set rules form validation
@@ -91,8 +90,13 @@ class Auth extends CI_Controller {
             $this->load->view('auth/_partials/footer');
         } else { //jika tidak ada 
 
+            // get inputan data yang ada di form
+            $email = $this->input->post('email');
+            $pass = $this->input->post('password');
+            $name = $this->input->post('name');
+
             // manggil function regisPelamar di M_auth
-            $this->M_auth->regisPelamar();
+            $this->M_auth->regisPelamar($email, htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)), $name);
 
             $this->SweetAlert('success', 'Berhasil!', 'Selamat, Anda Berhasil Membuat Akun. Silahkan Verifikasi Akun Anda Di Gmail');
             redirect('Auth/login');
@@ -100,9 +104,7 @@ class Auth extends CI_Controller {
         }
     }
 
-
-// ===================================================================== Register PERUSAHAAN
-    // menampilkan halaman register perusaahaan
+    // function menampilkan halaman register perusaahaan
     public function nampil_registerPerusahaan(){
          // data-data untuk ke view
         $data = array(
@@ -115,7 +117,7 @@ class Auth extends CI_Controller {
         $this->load->view('auth/_partials/footer');
     }
 
-    // register sebagai perusahaan
+    // function register sebagai perusahaan
     public function register_perusahaan(){
         // set rules form validation
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]',[
@@ -141,27 +143,33 @@ class Auth extends CI_Controller {
             $this->load->view('auth/register_perusahaan');
             $this->load->view('auth/_partials/footer');
         } else {
+
+            // get inputan data yang ada di form
+            $email = $this->input->post('email');
+            $pass = $this->input->post('password');
+            $name = $this->input->post('name');
+
             // manggil function regisPerusahaan di M_auth
-            $this->M_auth->regisPerusahaan();
+            $this->M_auth->regisPerusahaan($email, htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)), $name);
 
             $this->SweetAlert('success', 'Berhasil!', 'Selamat, Anda Berhasil Membuat Akun. Silahkan Verifikasi Akun Anda Di Gmail');
             redirect('Auth/login'); 
         }
     }
 
-//=============================================================================== Verify akun agar bisa login
+    // function untuk melakukan verifikasi
     public function verify(){
         // ngambil dari url (get)
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 
         // ambil data users
-        $user = $this->M_auth->getUser($email);
+        $user = $this->M_auth->getUser($email)->row();
 
         //jika ada users
         if($user){
-           // jika token sama dengan token di database
-           if($token === $user->token){
+           // jika token sama dengan token di database menggunakan fungsi hash_equals
+           if(hash_equals($token, $user->token)){
 
                 // manggil function email_verified di M_auth
                 $this->M_auth->email_verified($user->id_users);
@@ -183,8 +191,7 @@ class Auth extends CI_Controller {
         }
     }
 
-// ======================================================================== Forget Password
-    // mmenampilkan input email untuk forget akun
+    // function untuk menampilkan halaman halaman form email untuk change password
     public function VForget(){
         // data-data untuk ke view
        $data = array(
@@ -197,7 +204,7 @@ class Auth extends CI_Controller {
        $this->load->view('auth/_partials/footer');
    }
 
-    //function mengirim pesan ke email saat forget
+    //function mengirim pesan ke email untuk change password
     public function KirimEmailPassForget(){
 
         // mengambil data inputan user
@@ -220,10 +227,11 @@ class Auth extends CI_Controller {
        } else {
 
            // ambil data users
-           $data = $this->M_auth->getUser($email);
+           $user = $this->M_auth->getUser($email)->row();
+
            // mengecek apakah email sudah terdaftar apa belum
-           if($data->email === $email){
-               $this->M_auth->kirimChangeForget($email, $data->id_users);
+           if($user->email === $email){
+               $this->M_auth->kirimChangeForget($email, $user->id_users);
                $this->SweetAlert('success', 'Berhasil!', 'Link Ganti Password Berhasil Terkirim Ke Email Anda, Silakan Klik Link Yang Dikirim');
                redirect('Auth/VForget');
            }else{
@@ -233,22 +241,21 @@ class Auth extends CI_Controller {
        }
     }
 
-    // menampilkan halaman form update
+    // function untuk menmapilkan halaman change password
     public function ForgetPassword(){
         // ngambil dari url (get)
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 
         // ambil data users
-        $user = $this->M_auth->getUser($email);
+        $user = $this->M_auth->getUser($email)->row();
 
         //jika ada users
         if($user){
            // jika token sama dengan token di database
-           if($token === $user->token){
-               $data=[
-                   'users' =>$user->id_users
-               ];
+           if(hash_equals($token, $user->token)){
+               $data=['users' => $user->id_users];
+
                $this->load->view('auth/forget/formForget', $data);
            }else{ //jika token berbeda
                 $this->SweetAlert('error', 'Gagal!', 'Token Tidak Cocok');
@@ -260,7 +267,7 @@ class Auth extends CI_Controller {
         }
     }
 
-    // proses ubah password
+    // function untuk proses change password
     public function prosesForget(){
         //set rules
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]',[
@@ -275,8 +282,12 @@ class Auth extends CI_Controller {
 
             $this->load->view('auth/forget/formForget');
         } else {
+            // ambil data input user
+            $pass = $this->input->post('password');
+            $id_users = $this->input->post('users');
+
             // panggil function forget di M_auth
-            $this->M_auth->forget();
+            $this->M_auth->forget(htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)), $id_users);
             
             $this->SweetAlert('success', 'Berhasil!', 'Selamat! Berhasil Mengganti Password Akun Anda. Silahkan Login Dengan Password Baru');
             redirect('Auth/login');
@@ -284,8 +295,7 @@ class Auth extends CI_Controller {
         
     }
 
-
-// =============================================================================== LOGIN ALL USER
+    // function untuk proses multiuser
     public function proses_login(){
          // set rules form validation
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
@@ -310,32 +320,32 @@ class Auth extends CI_Controller {
             $password = $this->input->post('password');
 
             // get data Users
-            $data = $this->M_auth->getUser($email);
+            $users = $this->M_auth->getUser($email)->row();
 
             // ngecek apakah ada usernya
-            if($data){
+            if($users){
                 // jika ada, cek passwordnya apakah sama dengan database
-                if(password_verify($password, $data->password) || $data->password == $password){
+                if(password_verify($password, $users->password) || $users->password == $password){
                     // jika password sudah sama, cek apakah sudah di verifikasi email
-                    if($data->email_verified == NULL){
+                    if($users->email_verified == NULL){
                         $this->SweetAlert('error', 'Gagal!', 'Akun Belum Terverifikasi, Silahkan Verifikasi');
                         redirect('Auth/login');
                     }else{
                         // jika sudah, pindahkan sesuai role mereka
-                        if($data->role == "pelamar"){
+                        if($users->role == "pelamar"){
                             // set session
                             $data_session = array(
-                                'email' => $data->email,
+                                'email' => $users->email,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);
                             redirect('Pelamar');
 
-                        }else if($data->role == "perusahaan"){
+                        }else if($users->role == "perusahaan"){
 
                             // set session
                             $data_session = array(
-                                'email' => $data->email,
+                                'email' => $users->email,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
@@ -345,7 +355,7 @@ class Auth extends CI_Controller {
 
                             // set session
                             $data_session = array(
-                                'email' => $data->email,
+                                'email' => $users->email,
                             );  
                             // kirim session
                             $this->session->set_userdata($data_session);  
@@ -365,7 +375,7 @@ class Auth extends CI_Controller {
            
     }
 
-// ======================================================================== logout
+    // function untuk logout
     public function logout(){
         // hapus semua session
         session_destroy();

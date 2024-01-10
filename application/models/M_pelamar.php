@@ -3,28 +3,13 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
     
     class M_pelamar extends CI_Model {
-        // get data pelamar
+        // function get data pelamar
         public function getDataPelamar($user_id)
         {
             return $this->db->get_where('data_pelamar', array('fk_id_users' => $user_id));
         }
 
-        // get data pendidikan sesuai id yang dikirim
-        public function getDataPendidikan($id_pelamar) {
-            return $this->db->get_where('pendidikan', array('fk_id_pelamar' => $id_pelamar));
-        }
-        
-        // get data pendidikan sesuai id yang dikirim
-        public function getDataPengalaman($id_pelamar) {
-            return $this->db->get_where('pengalaman', array('fk_id_pelamar' => $id_pelamar));
-        }
-
-        // get data pendidikan sesuai id yang dikirim
-        public function getDataSkill($id_pelamar) {
-            return $this->db->get_where('skil', array('fk_id_pelamar' => $id_pelamar));
-        }
-
-        // cek data profile apakah ada atau tidak
+        // function cek data profile apakah ada atau tidak
         public function cekData($id_pelamar){
             // jika data tidak ada
             if($this->db->get_where('data_pelamar', ['id_pelamar' => $id_pelamar])->num_rows() == 0){
@@ -38,8 +23,9 @@
                 }
             }
         }
-   
-        // cek data pendidikan berdasarkan user yang login apakah ada atau tidak
+
+           
+        // function cek data pendidikan berdasarkan user yang login apakah ada atau tidak
         public function cekDataPendidikan($id_pelamar){
             // jika data pendidikan tidak ada
             if($this->db->get_where('pendidikan', ['fk_id_pelamar' => $id_pelamar])->num_rows() == 0){
@@ -49,7 +35,7 @@
             }
         }
    
-         // cek data pengalaman berdasarkan user yang login apakah ada atau tidak
+         // function cek data pengalaman berdasarkan user yang login apakah ada atau tidak
         public function cekDataPengalaman($id_pelamar){
             // jika data pengalaman tidak ada
             if($this->db->get_where('pengalaman', ['fk_id_pelamar' => $id_pelamar])->num_rows() == 0){
@@ -59,7 +45,7 @@
             }
         }
 
-        // cek data skill berdasarkan user yang login apakah ada atau tidak
+        // function cek data skill berdasarkan user yang login apakah ada atau tidak
         public function cekDataSkill($id_pelamar){
             // jika data skill tidak ada
             if($this->db->get_where('skil', ['fk_id_pelamar' => $id_pelamar])->num_rows() == 0){
@@ -69,71 +55,33 @@
             }
         }
 
-        // get jumlah lamaran
-        public function LamaranCount($id_pelamar)
-        {
-            $this->db->select('COUNT(*) as total_lamaran');
-            $this->db->from('lamaran');
-            // join table data_pelamar
-            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            $this->db->where('lamaran.fk_id_pelamar', $id_pelamar);
+         // function get jumlah lamaran
+         public function LamaranCount($id_pelamar)
+         {
+             $this->db->select('COUNT(*) as total_lamaran');
+             $this->db->from('lamaran');
+             // join table data_pelamar
+             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
+             $this->db->where('lamaran.fk_id_pelamar', $id_pelamar);
+ 
+             return $this->db->get()->row()->total_lamaran;
+         }
+ 
+         // function get jumlah lamaran berdasarkan statusnya belum terkonfirmasi
+         public function LamaranCountStatus($id_pelamar)
+         {
+             $this->db->select('COUNT(*) as total');
+             $this->db->from('lamaran');
+             // join table data_pelamar
+             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
+             $this->db->where([
+                 'lamaran.fk_id_pelamar'=> $id_pelamar, 
+                 'lamaran.status_lamaran' => 'Belum Terkonfrimasi' 
+             ]);
+             return $this->db->get()->row()->total;
+         }
 
-            return $this->db->get()->row()->total_lamaran;
-        }
-
-        // get jumlah lamaran yang statusnya belum terkonfirmasi
-        public function LamaranCountStatus($id_pelamar)
-        {
-            $this->db->select('COUNT(*) as total');
-            $this->db->from('lamaran');
-            // join table data_pelamar
-            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            $this->db->where([
-                'lamaran.fk_id_pelamar'=> $id_pelamar, 
-                'lamaran.status_lamaran' => 'Belum Terkonfrimasi' 
-            ]);
-            return $this->db->get()->row()->total;
-        }
-
-        public function simpanProfile($user_id)
-        {
-            // ambil data yang di input user
-            $edit = array(
-                'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'no_hp' => $this->input->post('no_hp'),
-                'alamat' => $this->input->post('alamat'),
-                'deskripsi_pelamar' => $this->input->post('deskripsi'),
-                   
-            );
-            // ambil data id
-            $this->db->where('id_pelamar', $this->input->post('id'));
-
-            // update
-            $result = $this->db->update('data_pelamar', $edit);
-
-            if ($result) {
-                // Jika update data perusahaan sukses, update juga nama perusahaan di tabel users
-                $nama_pelamar_baru = $this->input->post('nama_lengkap');
-                $this->db->where('id_users', $user_id);
-                $this->db->update('users', ['name' => $nama_pelamar_baru]);
-            }
-            return $result;
-        }
-
-        // menyimpan logo
-        public function saveLogoPath($id, $file_name)
-        {
-            // pilih id berdasarkan user yang upload
-            $this->db->where('fk_id_users', $id);
-            // update
-            $this->db->update('data_pelamar', ['gambar' => $file_name]);
-        }
-
-        // get data berdasarkan fk_id_pelamar
-        public function getLamaran($id_pelamar){
-            return $this->db->get_where('lamaran', array('fk_id_pelamar' => $id_pelamar));
-        }
-
+        //  function untuk get status lamaran
         public function getStatusLamaran($id_pelamar,  $limit, $start, $keyword = null){
             $this->db->select('*');
             $this->db->from('lamaran');
@@ -154,129 +102,150 @@
             // batasan pagination
             $this->db->limit($limit, $start);
 
-            $result = $this->db->get();
-
-            return $result;
+            return $this->db->get();
         }
 
-        // simpan data pendidikan
-        public function SimpanPendidikan($id_pelamar){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'nama_sekolah' => $this->input->post('nama_sekolah'),
-                'jenjang_pendidikan' => $this->input->post('jenjang_pendidikan'),
-                'bidang_studi' => $this->input->post('bidang_studi'),
-                'bulan_mulai' => $this->input->post('bulan_mulai'),
-                'tahun_mulai' => $this->input->post('tahun_mulai'),
-                'bulan_akhir' => $this->input->post('bulan_akhir'),
-                'tahun_akhir' => $this->input->post('tahun_akhir'),
-                'nilai_akhir' => $this->input->post('nilai_akhir'),
-                'fk_id_pelamar' => $id_pelamar
-            );
-
-            return $this->db->insert('pendidikan', $data);
+        // functio get data pendidikan sesuai id yang dikirim
+        public function getDataPendidikan($id_pelamar) {
+            return $this->db->get_where('pendidikan', array('fk_id_pelamar' => $id_pelamar));
+        }
+        
+        // function get data pendidikan sesuai id yang dikirim
+        public function getDataPengalaman($id_pelamar) {
+            return $this->db->get_where('pengalaman', array('fk_id_pelamar' => $id_pelamar));
         }
 
-        // Update data pendidikan
-        public function UpdatePendidikan(){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'nama_sekolah' => $this->input->post('nama_sekolah'),
-                'jenjang_pendidikan' => $this->input->post('jenjang_pendidikan'),
-                'bidang_studi' => $this->input->post('bidang_studi'),
-                'bulan_mulai' => $this->input->post('bulan_mulai'),
-                'tahun_mulai' => $this->input->post('tahun_mulai'),
-                'bulan_akhir' => $this->input->post('bulan_akhir'),
-                'tahun_akhir' => $this->input->post('tahun_akhir'),
-                'nilai_akhir' => $this->input->post('nilai_akhir'),
-            );
-
-            $this->db->where('id_pendidikan', $this->input->post('pendidikan'));
-            return $this->db->update('pendidikan', $data);
+        // function get data pendidikan sesuai id yang dikirim
+        public function getDataSkill($id_pelamar) {
+            return $this->db->get_where('skil', array('fk_id_pelamar' => $id_pelamar));
         }
 
-        // hapus data pendidikan
+        // function update profile
+        public function simpanProfile($nama_lengkap, $no_telp, $alamat, $deskripsi_pelamar, $id_users)
+        {
+            
+            // db transition start
+            $this->db->trans_start();
+
+            // update data dengan sp
+            $query = $this->db->query("call sp_update_data_pelamar('".$nama_lengkap."', '".$no_telp."', '".$alamat."', '".$deskripsi_pelamar."', '".$id_users."')");
+
+            // update nama_perusahaan di table users
+            $this->db->where('id_users', $id_users);
+            $query = $this->db->update('users', ['name' => $nama_lengkap]);
+
+            // db transision end
+            $this->db->trans_complete();
+
+            return $query;
+        }
+
+        //function menyimpan logo
+        public function saveLogoPath($id, $file_name)
+        {
+            // pilih id berdasarkan user yang upload
+            $this->db->where('id_pelamar', $id);
+            // update
+            $this->db->update('data_pelamar', ['gambar' => $file_name]);
+        }   
+
+        // function simpan data pendidikan
+        public function SimpanPendidikan($nama_sekolah, $jenjang_pendidikan, $bidang_studi, $bulan_mulai, $tahun_mulai, $bulan_akhir, $tahun_akhir, $nilai_akhir, $id_pelamar){
+            // memanggil sp_insert_pendidikan
+            return $this->db->query("
+                call sp_insert_pendidikan(
+                    '".$nama_sekolah."',
+                    '".$jenjang_pendidikan."',
+                    '".$bidang_studi."',
+                    '".$bulan_mulai."',
+                    '".$tahun_mulai."',
+                    '".$bulan_akhir."',
+                    '".$tahun_akhir."',
+                    '".$nilai_akhir."',
+                    '".$id_pelamar."'
+                )
+            ");
+        }
+
+        // fucntion Update data pendidikan
+        public function UpdatePendidikan($nama_sekolah, $jenjang_pendidikan, $bidang_studi, $bulan_mulai, $tahun_mulai, $bulan_akhir, $tahun_akhir, $nilai_akhir, $id_pendidikan){
+            // memanggil sp_insert_pendidikan
+            return $this->db->query("
+                call sp_update_pendidikan(
+                    '".$nama_sekolah."',
+                    '".$jenjang_pendidikan."',
+                    '".$bidang_studi."',
+                    '".$bulan_mulai."',
+                    '".$tahun_mulai."',
+                    '".$bulan_akhir."',
+                    '".$tahun_akhir."',
+                    '".$nilai_akhir."',
+                    '".$id_pendidikan."'
+                )
+            ");
+        }
+
+        // function hapus data pendidikan
         public function HapusPendidikan($id_pendidikan){
-            $this->db->where('id_pendidikan', $id_pendidikan);
-            return $this->db->delete('pendidikan');
+            return $this->db->query("call sp_hapus_pendidikan('".$id_pendidikan."')");
         }
 
-        // simpan data Pengalaman
-        public function SimpanPengalaman($id_pelamar){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'jabatan' => $this->input->post('jabatan'),
-                'status_pekerja' => $this->input->post('status_pekerja'),
-                'nama_perusahaan' => $this->input->post('nama_perusahaan'),
-                'lokasi_perusahaan' => $this->input->post('lokasi_perusahaan'),
-                'sistem_kerja' => $this->input->post('sistem_kerja'),
-                'status_kerja' => $this->input->post('status_kerja'),
-                'bulan_mulai_kerja' => $this->input->post('bulan_mulai_kerja'),
-                'tahun_mulai_kerja' => $this->input->post('tahun_mulai_kerja'),
-                'bulan_akhir_kerja' => $this->input->post('bulan_akhir_kerja'),
-                'tahun_akhir_kerja' => $this->input->post('tahun_akhir_kerja'),
-                'fk_id_pelamar' => $id_pelamar
-            );
+        //function simpan data Pengalaman
+        public function SimpanPengalaman($jabatan, $statusPekerja, $perusahaan, $lokasi, $sistemKerja, $statusKerja, $bulanMulai, $tahunMulai, $bulanAkhir, $tahunAkhir, $id_pelamar){
         
-            return $this->db->insert('pengalaman', $data);
+            return $this->db->query("call sp_insert_pengalaman(
+                '".$jabatan."',
+                '".$statusPekerja."',
+                '".$perusahaan."',
+                '".$lokasi."',
+                '".$sistemKerja."',
+                '".$statusKerja."',
+                '".$bulanMulai."',
+                '".$tahunMulai."',
+                '".$bulanAkhir."',
+                '".$tahunAkhir."',
+                '".$id_pelamar."'
+            )");
         }
 
-        // Update data Pengalaman
-        public function UpdatePengalaman(){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'jabatan' => $this->input->post('jabatan'),
-                'status_pekerja' => $this->input->post('status_pekerja'),
-                'nama_perusahaan' => $this->input->post('nama_perusahaan'),
-                'lokasi_perusahaan' => $this->input->post('lokasi_perusahaan'),
-                'sistem_kerja' => $this->input->post('sistem_kerja'),
-                'status_kerja' => $this->input->post('status_kerja'),
-                'bulan_mulai_kerja' => $this->input->post('bulan_mulai_kerja'),
-                'tahun_mulai_kerja' => $this->input->post('tahun_mulai_kerja'),
-                'bulan_akhir_kerja' => $this->input->post('bulan_akhir_kerja'),
-                'tahun_akhir_kerja' => $this->input->post('tahun_akhir_kerja'),
-            );
-            $this->db->where('id_pengalaman', $this->input->post('pengalaman'));
-        
-            return $this->db->update('pengalaman', $data);
+        //function Update data Pengalaman
+        public function UpdatePengalaman($jabatan, $statusPekerja, $perusahaan, $lokasi, $sistemKerja, $statusKerja, $bulanMulai, $tahunMulai, $bulanAkhir, $tahunAkhir, $pengalaman){
+            return $this->db->query("call sp_update_pengalaman(
+                '".$jabatan."',
+                '".$statusPekerja."',
+                '".$perusahaan."',
+                '".$lokasi."',
+                '".$sistemKerja."',
+                '".$statusKerja."',
+                '".$bulanMulai."',
+                '".$tahunMulai."',
+                '".$bulanAkhir."',
+                '".$tahunAkhir."',
+                '".$pengalaman."'
+            )");
         }
 
-        // hapus data pendidikan
+        //function hapus data pendidikan
         public function HapusPengalaman($id_pengalaman){
-
-            $this->db->where('id_pengalaman', $id_pengalaman);
-
-            return $this->db->delete('pengalaman');
+            return $this->db->query("call sp_delete_pengalaman('".$id_pengalaman."')");
         }
 
-        // simpan data pendidikan
-        public function SimpanSkill($id_pelamar){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'fk_id_pelamar' => $id_pelamar,
-                'nama_skill' => $this->input->post('nama_skill'),
-                'value' => $this->input->post('value'),
-            );
-
-            return $this->db->insert('skil', $data);
+        //function  simpan data pendidikan
+        public function SimpanSkill($id_pelamar, $nama_skill, $value){
+            // memanggil sp
+            return $this->db->query("call sp_insert_skill('".$id_pelamar."', '".$nama_skill."', '".$value."')");
         }
 
         // Update data pendidikan
-        public function UpdateSkill(){
-            // membuat array untuk dimasukan kedalam database
-            $data = array(
-                'nama_skill' => $this->input->post('nama_skill'),
-                'value' => $this->input->post('value'),
-            );
-
-            $this->db->where('id_skill', $this->input->post('skill'));
-            return $this->db->update('skil', $data);
+        public function UpdateSkill($nama_skill, $value, $skill){
+            // memanggil sp
+            return $this->db->query("call sp_update_skill('".$nama_skill."', '".$value."', '".$skill."')");
         }
 
         // hapus data pendidikan
         public function HapusSkill($id_skill){
-            $this->db->where('id_skill', $id_skill);
-            return $this->db->delete('skil');
+           // memanggil sp
+           return $this->db->query("call sp_delete_skill('".$id_skill."')");
         }
     
 

@@ -32,6 +32,9 @@
                                 </div>
                             <?php endif; ?>
                             <form method="post" action="<?php echo base_url('perusahaan/simpanProfile'); ?>" enctype="multipart/form-data">
+
+                            <input type="hidden" class="form-control" name="perusahaan" value="<?php echo $key['id_perusahaan'] ?>">
+
                              <div class="form-group">
                                     <label for="logo">Logo Perusahaan:</label>
                                     <br>
@@ -46,7 +49,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Perusahaan:</label>
-                                    <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_perusahaan'] ?>">
                                     <input type="text" class="form-control" name="nama_perusahaan" value="<?php echo $key['nama_perusahaan']; ?>" required>
                                 </div>
                                 <div class="form-group">

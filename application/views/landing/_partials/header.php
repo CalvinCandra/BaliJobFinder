@@ -16,12 +16,18 @@
     <!-- link css -->
     <link rel="stylesheet" href="<?php echo base_url($css)?>">
 
+    <!-- slide js library -->
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+
     
     <title><?= $title?></title>
 </head>
 <body>
     <!-- navbar -->
-    <div class="navbarr">
+    <div class="navbarr" data-aos="fade-down" data-aos-delay="500">
         <div class="pembungkus">
             <!-- logo -->
             <div class="logo">

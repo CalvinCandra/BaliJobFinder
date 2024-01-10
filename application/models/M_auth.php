@@ -4,14 +4,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_auth extends CI_Model {
-// =========================================================== Ambil Data User Sesuai Email
+
+    // function mencari Data User berdasarkan email
     public function getUser($email){
         // ambil data users yang emailnya sama
-        $user = $this->db->get_where('users', ['email' => $email])->row();
-        return $user;
+        return $this->db->get_where('users', ['email' => $email]);
     }
     
-// ==================================================== Config Email Verification
+    // function untuk config dan mengirim email verifikasi atau change password
     public function config($email, $token, $type){
 
         // config ketentuan email
@@ -28,6 +28,18 @@ class M_auth extends CI_Model {
         $config['newline'] = "\r\n";
         $config['smtp_timeout'] = 30;
         $config['wordwrap'] = TRUE;
+
+        // mail traps
+        // $config = Array(
+        //     'protocol' => 'smtp',
+        //     'smtp_host' => 'sandbox.smtp.mailtrap.io',
+        //     'smtp_port' => 2525,
+        //     'smtp_user' => '5c005f9c357c7e',
+        //     'smtp_pass' => '11cf2bc8fcae1f',
+        //     'mailtype' => 'html',
+        //     'crlf' => "\r\n",
+        //     'newline' => "\r\n"
+        // );
 
         // panggil library
         $this->load->library('email');
@@ -232,18 +244,12 @@ class M_auth extends CI_Model {
         
     }
 
-// ==================================================================================== REGISTER
-// ============================================================================ PELAMAR
-    public function regisPelamar(){
-        // mengambil data inputan user
-        $email = $this->input->post('email');
-        $pass = $this->input->post('password');
-        $name = $this->input->post('name');
-
+    // function untuk register pelamar dan mengirim email verifikasi
+    public function regisPelamar($email, $pass, $name){
         // deklarasi untuk memasukan data pada table users
-        $data = array(
+        $datausers = array(
             'email' => $email,
-            'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
+            'password' => $pass,
             'name' => $name,
             'email_verified' => NULL,
             'role' => "pelamar",
@@ -253,25 +259,23 @@ class M_auth extends CI_Model {
         $this->db->trans_start();
 
         // insert ke table users
-        $this->db->insert('users', $data);
+        $this->db->insert('users', $datausers);
+
         // mengambil last id yang baru saja di insert
-        $last_id = $this->db->insert_id();
+        $last_id_users = $this->db->insert_id();
 
         // membuat token random
-        $token = base64_encode(random_bytes(16));
+        $token = base64_encode(random_bytes(10));
 
         // memasukan token random ke dalam column token yang ada di table user berdasarkan id yang dikirim
-        $dataToken = [
-            'token' => $token
-        ];
-
-        $this->db->where('id_users', $last_id);
-        $this->db->update('users', $dataToken);
+        $this->db->set('token', $token);
+        $this->db->where('id_users', $last_id_users);
+        $this->db->update('users');
 
         // deklarasi untuk memasukan data pada table data_pelamar
         $dataPelamar = array(
             'nama_lengkap' => $name,
-            'fk_id_users' => $last_id,
+            'fk_id_users' => $last_id_users,
         );
 
         // deklarasi untuk memasukan data pda table data_pelamar
@@ -298,18 +302,13 @@ class M_auth extends CI_Model {
 
     }
 
-
-// ============================================================================ PERUSAHAAN
-    public function regisPerusahaan(){
-        // mengambil data inputan user
-        $email = $this->input->post('email');
-        $pass = $this->input->post('password');
-        $name = $this->input->post('name');
+    // function untuk register perusahaan dan mengirim email verifikasi
+    public function regisPerusahaan($email, $pass, $name){
 
         // deklarasi untuk memasukan data pada table users
-        $data = array(
+        $datausers = array(
             'email' => $email,
-            'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
+            'password' => $pass,
             'name' => $name,
             'email_verified' => NULL,
             'role' => "perusahaan",
@@ -319,26 +318,23 @@ class M_auth extends CI_Model {
         $this->db->trans_start();
 
         // insert ke table users
-        $this->db->insert('users', $data);
+        $this->db->insert('users', $datausers);
         // mengambil last id
-        $last_id = $this->db->insert_id();
+        $last_id_users = $this->db->insert_id();
 
-       // membuat token
-       $token = base64_encode(random_bytes(16));
+        // membuat token
+        $token = base64_encode(random_bytes(10));
 
         // memasukan token random ke dalam colum token yang ada di table user berdasarkan id yang dikirim
-        $dataToken = [
-            'token' => $token
-        ];
-
-        $this->db->where('id_users', $last_id);
-        $this->db->update('users', $dataToken);
+        $this->db->set('token', $token);
+        $this->db->where('id_users', $last_id_users);
+        $this->db->update('users');
 
 
         // deklarasi untuk memasukan data pda table data_perusahaan
         $dataPerusahaan = array(
             'nama_perusahaan' => $name,
-            'fk_id_users' => $last_id,
+            'fk_id_users' => $last_id_users,
         );
 
         // insert ke table data_perusahaan
@@ -364,7 +360,7 @@ class M_auth extends CI_Model {
         $this->config($email, $token, 'verify');
     }
 
-// ================================================================= update colom email_verified
+    // function untuk verifikasi email
     public function email_verified($id_users){
         // membuat data-data untuk di update pada table users
         $data = array(
@@ -379,8 +375,7 @@ class M_auth extends CI_Model {
     }
 
 
-// ================================================================= update Password
-    //memasukan token untuk link dan mengirim link ke email
+    //function untuk mengirimkan link ganti password ke email
     public function kirimChangeForget($email, $id_users){
 
         // membuat token
@@ -399,15 +394,11 @@ class M_auth extends CI_Model {
         $this->config($email, $token, 'change');
     }
 
-    // ===================================================================== update colom password
-    public function forget(){
-        // ambil data input user
-        $pass = $this->input->post('password');
-        $id_users = $this->input->post('users');
-
+    // function untuk menganti password yang sudah di input
+    public function forget($pass, $id_users){
         // membuat data-data untuk di update pada table users
         $data = array(
-            'password' => htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)),
+            'password' => $pass,
             'token' => NULL,
         );
 

@@ -1,6 +1,6 @@
 <!-- search section -->
 <div class="search-section">
-    <div class="search-data">
+    <div class="search-data" data-aos="zoom-in-up" data-aos-duration="900">
         <form class="form-search" action="<?= base_url("Balijobfinder/lowongan")?>" method="post">
             <input class="search-input" type="text" placeholder="Nama Pekerjaan..." name="search">
             <input class="search-btn" name="cari" type="submit" value="cari">
@@ -26,7 +26,7 @@
                     foreach($datalowongan->result_array() as $key):
                 ?>     
     
-                <div class="kotak-lowongan">
+                <div class="kotak-lowongan"  data-aos="zoom-in-up" data-aos-duration="900">
                     <!-- img -->
                     <div class="logo-lowongan">
                         <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
