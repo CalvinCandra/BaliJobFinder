@@ -4,153 +4,21 @@
     
     class M_perusahaan extends CI_Model {
 
-        // get data perusahaan yang login
-        public function getPerusahaan($user_id)
+        // function untuk mengambil data perusahaan yang login
+        public function getPerusahaan($id_users)
         {
-            return $this->db->get_where('data_perusahaan', array('fk_id_users' => $user_id));
+            return $this->db->get_where('data_perusahaan', array('fk_id_users' => $id_users));
         }
 
-        // cek data profile apakah ada atau tidak
-        public function cekData($id_perusahaan){
-            // jika data tidak ada
-            if($this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->num_rows() == 0){
-                return 1;
-            }else{
-                $perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->row();
-                if(is_null($perusahaan->logo) || is_null($perusahaan->alamat_perusahaan) || is_null($perusahaan->tlp_perusahaan) || 
-                    is_null($perusahaan->kota)){
-                    return 1;
-                }else{
-                    return 0;
-                }
-            }
-        }
-
-        // menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function LowonganCount($user_id, $keyword=null)
+        // function untuk menghitung jumlah lowongan berdasarkan perusahaan yang login
+        public function LowonganCount($id_perusahaan)
         {
-            // mengambil id perusahaan yang login
-            $query = $this->db->select('id_perusahaan')->get_where('data_perusahaan', ['fk_id_users' => $user_id]);
-            $id_perusahaan = $query->row()->id_perusahaan;
-        
-            // pencarian data di tabel berdasarkan keyword
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('posisi_lowongan', $keyword);
-                $this->db->or_like('salary', $keyword);
-                $this->db->group_end();
-            }
-        
             // menghitung jumlah lowongan berdasarkan id lowongan
-            $count = $this->db->where('fk_id_perusahaan', $id_perusahaan)->count_all_results('lowongan_kerja');
-            return $count;
+            return $this->db->where('fk_id_perusahaan', $id_perusahaan)->count_all_results('lowongan_kerja');
                     
         }
-    
-        // get data lowongan
-        public function getLowongan($user_id, $limit, $start,$keyword=null)
-        {
-            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
-            $this->db->select('*');
-            $this->db->from('data_perusahaan');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
 
-            $this->db->where('data_perusahaan.fk_id_users', $user_id);
-            // menentukan batasan dari pagination
-            $this->db->limit($limit,$start);
-            
-            // jika data yang dicari ada
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('posisi_lowongan', $keyword);
-                $this->db->or_like('salary', $keyword);
-                $this->db->group_end();
-            }
-
-            $result = $this->db->get();
-            return $result;
-        }
-
-        // memasukkan inputan ke dalam tabel
-        public function inputlowongan($user_id)
-        {
-            // mengambil nilai id perusahaan yang login
-            $query = $this->getPerusahaan($user_id)->row();
-            // $id_perusahaan = $query->id_perusahaan;
-
-            // ambil data insert
-            $insert = array(
-                'posisi_lowongan' => $this->input->post('posisi_lowongan'),
-                'salary' => $this->input->post('salary'),
-                'syarat_lowongan' => $this->input->post('syarat_lowongan'),
-                'status' => 1,
-                'fk_id_perusahaan'=> $query->id_perusahaan,
-                
-            );
-            // insert
-            $result= $this->db->insert('lowongan_kerja', $insert);
-            return $result;
-            
-        }
-
-        // mengedit atau update data lowongan
-        public function editLowongan()
-        {
-            // ambil data update
-            $edit = array(
-                'posisi_lowongan' => $this->input->post('posisi'),
-                'salary' => $this->input->post('salary'),
-                'syarat_lowongan' => $this->input->post('syarat'),
-                'status' => $this->input->post('status'),
-            );
-
-            // update data sesuai id
-            $this->db->where('id_lowongan', $this->input->post('id'));
-
-            // update
-            $result = $this->db->update('lowongan_kerja', $edit);
-            return $result;
-        }
-
-        // menghapus data lowongan dari tabel
-        public function deleteLowongan($id)
-        {
-            // ambil id data lowongan
-            $this->db->where('id_lowongan', $id);
-
-            // delete
-            $result = $this->db->delete('lowongan_kerja');
-            return $result;
-        }
-
-        // get data pelamar
-        public function getPelamar($user_id, $limit, $start, $keyword = null)
-        {
-            // join 3 table yaitu lowonngan_kerja, data_pelamar, data_perusahaan
-            $this->db->select('*');
-            $this->db->from('lamaran');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
-            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-
-            $this->db->where('data_perusahaan.fk_id_users', $user_id);
-
-            // tampilkan data berdasarkan yang dicari user
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('posisi_lowongan', $keyword);
-                $this->db->or_like('nama_lengkap', $keyword);
-                $this->db->group_end();
-            }
-
-            // batasan pagination
-            $this->db->limit($limit, $start);
-
-            $result = $this->db->get();
-            return $result;
-        }
-
-        // get jumlah lamaran
+        // function untuk menghitung jumlah lamaran berdasarkan lowongan kerja perusahaan
         public function LamaranCount($user_id,$keyword=null)
         {
             // join 3 table yaitu lowongan_kerja, data_pelamar, data_perusahaan
@@ -173,59 +41,133 @@
             return $query->row()->total_lamaran;
         }
 
+
+        // function untuk cek data profile apakah ada atau tidak
+        public function cekData($id_perusahaan){
+            // jika data tidak ada
+            if($this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->num_rows() == 0){
+                return 1;
+            }else{
+                $perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id_perusahaan])->row();
+                if(is_null($perusahaan->logo) || is_null($perusahaan->alamat_perusahaan) || is_null($perusahaan->tlp_perusahaan) || 
+                    is_null($perusahaan->kota)){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
+        }
+
+        // function untuk simpan profile
+        public function simpanProfile($nama_perusahaan, $telp, $alamat, $kota, $id_users)
+        {
+
+            // db transition start
+            $this->db->trans_start();
+
+            // update data
+            $query = $this->db->query("call sp_update_data_perusahaan('".$nama_perusahaan."', '".$telp."', '".$alamat."', '".$kota."', '".$id_users."')");
+
+            // update nama_perusahaan di table users
+            $this->db->where('id_users', $id_users);
+            $query = $this->db->update('users', ['name' => $nama_perusahaan]);
+
+            // db transision end
+            $this->db->trans_complete();
+
+            return $query;
+        }
+
+        // function untuk menyimpan logo
+        public function saveLogoPath($id, $file_name)
+        {
+            // pilih id berdasarkan user yang upload
+            $this->db->where('id_perusahaan', $id);
+            // update
+            $this->db->update('data_perusahaan', ['logo' => $file_name]);
+        }
+    
+        // function get data lowongan
+        public function getLowongan($id_perusahaan, $limit, $start,$keyword=null)
+        {
+            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            $this->db->select('*');
+            $this->db->from('data_perusahaan');
+            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+
+            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+            // menentukan batasan dari pagination
+            $this->db->limit($limit,$start);
+            
+            // jika data yang dicari ada
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('salary', $keyword);
+                $this->db->group_end();
+            }
+
+            return $this->db->get();
+        }
+
+        // function memasukkan inputan ke dalam tabel
+        public function inputlowongan($posisi, $salary, $syarat, $id_perusahaan)
+        {
+            // memanggil sp_insert_lowongan
+            return $this->db->query("call sp_insert_lowongan('".$posisi."', '".$salary."', '".$syarat."', '1', '".$id_perusahaan."' )");
+        }
+
+        // function mengedit atau update data lowongan
+        public function editLowongan($posisi, $salary, $syarat, $status, $id_lowongan)
+        {
+            // memanggil sp_update_lowongan
+            return $this->db->query("call sp_update_lowongan('".$posisi."', '".$salary."','".$syarat."','".$status."','".$id_lowongan."')");
+        }
+
+        // menghapus data lowongan dari tabel
+        public function deleteLowongan($id_lowongan)
+        {
+            // memanggil sp_delete_lowongan
+            return $this->db->query("call sp_delete_lowongan('".$id_lowongan."')");
+        }
+
+        // function get data pelamar
+        public function getPelamar($id_perusahaan, $limit, $start, $keyword = null)
+        {
+            // join 3 table yaitu lowonngan_kerja, data_pelamar, data_perusahaan
+            $this->db->select('*');
+            $this->db->from('lamaran');
+            $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
+            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
+            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+
+            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+
+            // tampilkan data berdasarkan yang dicari user
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('nama_lengkap', $keyword);
+                $this->db->group_end();
+            }
+
+            // batasan pagination
+            $this->db->limit($limit, $start);
+
+            return $this->db->get();
+        }
+
         // hapus lamaran dari table lamaran
         public function deleteLamaran($id)
         {
-            $this->db->where('id_lamaran', $id);
-            
-            $result = $this->db->delete('lamaran');
-            return $result;
+            //memanggil sp_delete_lamaran 
+            return $this->db->query("call sp_delete_lamaran('".$id."')");
         }   
 
         // mengkonfirmasi atau mengubah status lamaran pelamar
         public function konfirmasiStatusLamaran($id_lamaran, $status) {
-            // Membuat array $data dengan key 'status_lamaran' dan nilai $status
-            $data = array('status_lamaran' => $status);
-        
-            // Menggunakan CodeIgniter Query Builder untuk menetapkan WHERE clause berdasarkan $id_lamaran
-            $this->db->where('id_lamaran', $id_lamaran);
-        
-            // Melakukan operasi UPDATE pada tabel 'lamaran' dengan data baru dari array $data
-            $this->db->update('lamaran', $data);
-        }
-
-        // simpan profile
-        public function simpanProfile($id_users)
-        {
-            // ambil data yang di input user
-            $edit = array(
-                'nama_perusahaan' => $this->input->post('nama_perusahaan'),
-                'tlp_perusahaan' => $this->input->post('no_tlp'),
-                'alamat_perusahaan' => $this->input->post('alamat'),
-                'kota' => $this->input->post('kota'),
-            );
-            // ambil data id
-            $this->db->where('id_perusahaan', $this->input->post('id'));
-
-            // update
-            $result = $this->db->update('data_perusahaan', $edit);
-
-            if ($result) {
-                // Jika update data perusahaan sukses, update juga nama perusahaan di tabel users
-                $nama_perusahaan_baru = $this->input->post('nama_perusahaan');
-                $this->db->where('id_users', $id_users);
-                $this->db->update('users', ['name' => $nama_perusahaan_baru]);
-            }
-            return $result;
-        }
-
-        // menyimpan logo
-        public function saveLogoPath($id, $file_name)
-        {
-            // pilih id berdasarkan user yang upload
-            $this->db->where('fk_id_users', $id);
-            // update
-            $this->db->update('data_perusahaan', ['logo' => $file_name]);
+            // memanggil sp_update_lamaran
+            return $this->db->query("call sp_update_lamaran('".$status."','".$id_lamaran."')");
         }
 
 

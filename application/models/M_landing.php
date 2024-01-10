@@ -5,12 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_landing extends CI_Model {
 
+    // function untuk jumlah lowongan
     public function jumlahLowongan(){
         // mengambil data dan dijadikan num_row
         return $this->db->get('lowongan_kerja')->num_rows();
     }
 
-    // ambil data lowongan
+    // ambil data lowongan berdasarkan yang aktif dan tampilkan secara acak
     public function getLowonganLanding(){
          //join table
          $this->db->select('*');
@@ -27,6 +28,7 @@ class M_landing extends CI_Model {
         return $query;
     }
 
+    // function untuk melihat lowongan yang lebih banyak, dan tampilkan secara acak
     public function getLowonganMore($limit, $start, $search=null){
 
          //join table
@@ -51,6 +53,7 @@ class M_landing extends CI_Model {
         return $query;
     }
 
+    // function untuk melihat data lowongan secara details
     public function getDataLowongan($posisi, $perusahaan){
         //join table
         $this->db->select('*');
@@ -66,10 +69,7 @@ class M_landing extends CI_Model {
         return $query;
     }
 
-    public function getDataPelamar($user){
-        return $this->db->get_where('data_pelamar', ['fk_id_users'=> $user])->row();
-    }
-
+    // function untuk mengecek lamaran
     public function CekLamaran($id_pelamar, $id_lowongan){
         $lamaran = $this->db->get_where('lamaran', 
         [
@@ -88,16 +88,10 @@ class M_landing extends CI_Model {
 
     }
 
+    // function untuk insert ke lamaran
     public function UploadPathCV($pelamar, $file_name, $lowongan){
-        $data = array(
-            'cv' => $file_name,
-            'fk_id_lowongan' => $lowongan,
-            'fk_id_pelamar' => $pelamar,
-        );
-
-        $query = $this->db->insert('lamaran', $data);
-        return $query;
-        
+        // memanggil sp_insert_lamaran
+        return $this->db->query("call sp_insert_lamaran('".$file_name."', '".$lowongan."', '".$pelamar."')");
     }
     
     

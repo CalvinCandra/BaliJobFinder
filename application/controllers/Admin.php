@@ -32,14 +32,11 @@ class Admin extends CI_Controller {
     // Fungsi untuk menampilkan halaman dashboard admin
     public function home()
     {
-        // Mendapatkan data user dari session
-        $email = $this->session->userdata('email');
-
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
         
-        if($datas){
+        if($users){
             $data = array(
-                'session' => $datas->name,
+                'session' => $users->name,
                 'totalLowongan' =>  $this->M_admin->LowonganCount(),
                 'totalPerusahaan' =>  $this->M_admin->PerusahaanCount(),
                 'totalPelamar' =>  $this->M_admin->PelamarCount(),
@@ -52,16 +49,15 @@ class Admin extends CI_Controller {
     }
 
 
-    // Fungsi untuk menampilkan data lowongan pekerjaan
+    // function untuk menampilkan data lowongan pekerjaan
     // dan melakukan operasi pencarian dengan pagination
     public function datalowongan()
     {
         // Mendapatkan data user dari session
-        $email = $this->session->userdata('email');
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         $data = array(
-            'session' => $datas->name,
+            'session' => $users->name,
         );
         
         // ambil data dari kolom pencarian
@@ -81,21 +77,21 @@ class Admin extends CI_Controller {
         // initialize pagination
         $this->pagination->initialize($config);
         $data['start'] = $this->uri->segment(3);
+
         $data['lowongan_kerja'] = $this->M_admin->getLowongan($config['per_page'],$data['start'],$data['keyword']);
         $this->template->load('admin/template','admin/management',$data);
     }
 
     
-    // Fungsi untuk menampilkan data pelamar pekerjaan
+    // function untuk menampilkan data pelamar pekerjaan
     // dan melakukan operasi pencarian dengan pagination
     public function dataPelamar()
     {
         // Mendapatkan data user dari session
-        $email = $this->session->userdata('email');
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         $data = array(
-            'session' => $datas->name,
+            'session' => $users->name,
         );
         
         // ambil data dari kolom pencarian
@@ -115,22 +111,21 @@ class Admin extends CI_Controller {
         // initialize pagination
         $this->pagination->initialize($config);
         $data['start'] = $this->uri->segment(3);
-        $data['pelamar'] = $this->M_admin->getDataPelamar($config['per_page'],$data['start'],$data['key_pelamar']);
 
+        $data['pelamar'] = $this->M_admin->getDataPelamar($config['per_page'],$data['start'],$data['key_pelamar']);
         $this->template->load('admin/template','admin/data_pelamar',$data);
     }
 
 
-    // Fungsi untuk menampilkan data perusahaan
+    // function untuk menampilkan data perusahaan
     // dan melakukan operasi pencarian dengan pagination
     public function dataPerusahaan()
     {
         // Mendapatkan data user dari session
-        $email = $this->session->userdata('email');
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'));
   
         $data = array(
-            'session' => $datas->name,
+            'session' => $users->name,
         );
             
         // ambil data dari kolom pencarian
@@ -150,16 +145,22 @@ class Admin extends CI_Controller {
         // initialize pagination
         $this->pagination->initialize($config);
         $data['start'] = $this->uri->segment(3);
-        $data['perusahaan'] = $this->M_admin->getDataPerusahaan($config['per_page'],$data['start'],$data['key_perusahaan']);
 
+        $data['perusahaan'] = $this->M_admin->getDataPerusahaan($config['per_page'],$data['start'],$data['key_perusahaan']);
         $this->template->load('admin/template','admin/data_perusahaan',$data);
     }
 
-    
-    // Fungsi untuk melakukan edit data lowongan
+    // function untuk melakukan edit data lowongan
     public function editLowongan()
     {
-        $editlowongan = $this->M_admin->editLowongan();
+        // mengambil data inputan user
+        $lowongan = $this->input->post('lowongan');
+        $posisi = $this->input->post('posisi_lowongan');
+        $salary = $this->input->post('salary');
+        $syarat = $this->input->post('syarat');
+        $status = $this->input->post('status');
+
+        $editlowongan = $this->M_admin->editLowongan($posisi, $salary, $syarat, $status, $lowongan);
 
         if($editlowongan){
             $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Lowongan');

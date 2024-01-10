@@ -8,8 +8,24 @@
 }
 
 .bg{
-    background-image: url("../../img/auth/login_kedua.png");
     height: 100vh;
+    position: relative;
+}
+
+.bg .gambar_atas{
+    position: absolute;
+    top: -1px;
+}
+
+.bg .gambar_bawah{
+    position: absolute;
+    bottom: 0;
+}
+
+.login{
+    position: relative;
+    z-index: 1;
+    top: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +171,7 @@
     }
 
     .containerr{
-        width: 80vw;
+        width: 80%;
     }
 
 }
@@ -171,7 +187,7 @@
     }
 
     .containerr{
-        width: 85vw;
+        width: 85%;
     }
 
     .inputan {

@@ -94,7 +94,7 @@
                                     <?php if (empty($key['logo'])): ?>
                                         <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
                                     <?php else: ?>
-                                        <img src="<?= base_url($key['logo']); ?>" alt="Logo Preview" width="100">
+                                        <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="100">
                                     <?php endif; ?>
                                 </div>
                     
@@ -147,7 +147,7 @@
                                     <?php if (empty($key['logo'])): ?>
                                         <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
                                     <?php else: ?>
-                                        <img src="<?= base_url($key['logo']); ?>" alt="Logo Preview" width="100">
+                                        <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="100">
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group">

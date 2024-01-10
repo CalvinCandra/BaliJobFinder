@@ -95,7 +95,7 @@
                                     <?php if (empty($key['logo'])): ?>
                                         <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
                                     <?php else: ?>
-                                        <img src="<?= base_url($key['logo']); ?>" alt="Logo Preview" width="100">
+                                        <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="100">
                                     <?php endif; ?>
                                 </div>
                     
@@ -120,11 +120,9 @@
                         <input type="text" class="form-control" value="<?= $key['syarat_lowongan'] ?>" disabled>
                     </div>
                     <div class="form-group">
-    <label for="statusLowongandDetail">Status:</label>
-    <div class="custom-select">
-        <div class="selected-option"><?php echo ($key['status'] == 1) ? 'Aktif' : 'Tidak Aktif'; ?></div>
-    </div>
-</div>
+                        <label for="statusLowongandDetail">Status:</label>
+                        <input type="text" class="form-control" name="" value="<?php echo ($key['status'] == 1) ? 'Aktif' : 'Tidak Aktif'; ?>" disabled>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -149,10 +147,11 @@
             <div class="modal-body">
                 <form method="post" action="<?php echo base_url('admin/editLowongan') ?>">
                 
+                    <input type="hidden" class="form-control" name="lowongan" value="<?php echo $key['id_lowongan'] ?>">
+                    
                     <div class="form-group">
                         <label for="namaperusahaanEdit">Nama Perusahaan:</label>
-                        <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_lowongan'] ?>">
-                        <input type="text" class="form-control" name="namaperusahaan" value="<?php echo $key['nama_perusahaan'] ?>" disabled>
+                        <input type="text" class="form-control" value="<?php echo $key['nama_perusahaan'] ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="salaryLowonganEdit">Posisi Lowongan:</label>
@@ -174,7 +173,7 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>

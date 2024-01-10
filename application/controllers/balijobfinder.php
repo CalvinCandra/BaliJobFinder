@@ -26,27 +26,23 @@ class Balijobfinder extends CI_Controller {
     }
 
     public function index(){
-        // redirect('Balijobfinder/home', 'refresh');
-        // get data email
-        $email = $this->session->userdata('email');
-
         // ambil id_users
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
-        if($datas){
+        if($users){
             // mengambil gambar profile berdasarkan role
-            if($datas->role == 'pelamar'){
+            if($users->role == 'pelamar'){
                 // mengambil data pelamar yang sedang login
-                $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
+                $pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
                 if(empty($pelamar->gambar)){
                     $logo = 'assets/img/dashboard/profile.png';
                 }else{
                     $logo = 'assets/img/profile/pelamar/'.$pelamar->gambar;
                 }
                 
-            }elseif($datas->role == 'perusahaan'){
+            }elseif($users->role == 'perusahaan'){
                 // mengambil data perusaahan yang sedang login
-                $perusahaan = $this->M_perusahaan->getPerusahaan($datas->id_users)->row();
+                $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
                 if(empty($perusahaan->logo)){
                     $logo = 'assets/img/dashboard/profile.png';
                 }else{
@@ -61,8 +57,8 @@ class Balijobfinder extends CI_Controller {
             $data = array(
                 'title' => 'Bali Job Finder',
                 'css' => 'assets/css/landing/landing.css',
-                'session_name' => $datas->name,
-                'role' => $datas->role,
+                'session_name' => $users->name,
+                'role' => $users->role,
                 'logo' => $logo,
                 'datalowongan' => $this->M_landing->getLowonganLanding()
             );
@@ -87,25 +83,22 @@ class Balijobfinder extends CI_Controller {
         // pengecekan jika blm login 
         $this->cek();
 
-        // get data email
-        $email = $this->session->userdata('email');
-
         // ambil id_users berdasarkan email
-        $datas = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         // mengambil gambar profile
-        if($datas->role == 'pelamar'){
+        if($users->role == 'pelamar'){
             // mengambil data pelamar yang sedang login
-            $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
+            $pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
             if(empty($pelamar->gambar)){
                 $logo = 'assets/img/dashboard/profile.png';
             }else{
                 $logo = 'assets/img/profile/pelamar/'.$pelamar->gambar;
             }
             
-        }elseif($datas->role == 'perusahaan'){
+        }elseif($users->role == 'perusahaan'){
             // mengambil data perusaahan yang sedang login
-            $perusahaan = $this->M_perusahaan->getPerusahaan($datas->id_users)->row();
+            $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
             if(empty($perusahaan->logo)){
                 $logo = 'assets/img/dashboard/profile.png';
             }else{
@@ -119,8 +112,8 @@ class Balijobfinder extends CI_Controller {
         //kirim data ke view
         $data = array(
             'title' => 'Lowongan Kerja',
-            'session_name' => $datas->name,
-            'role' => $datas->role,
+            'session_name' => $users->name,
+            'role' => $users->role,
             'logo' => $logo,
             'css' => 'assets/css/landing/lowongan.css',
         );
@@ -163,26 +156,23 @@ class Balijobfinder extends CI_Controller {
     public function Details($posisi, $nama_perusahaan){
          // pengecekan jika blm login 
          $this->cek();
-
-         // get data email
-         $email = $this->session->userdata('email');
  
          // ambil id_users berdasarkan email
-         $datas = $this->M_auth->getUser($email);
+         $users = $this->M_auth->getUser($this->session->userdata('email'));
  
          // mengambil gambar profile berdasarkan role
-         if($datas->role == 'pelamar'){
+         if($users->role == 'pelamar'){
              // mengambil data pelamar yang sedang login
-             $pelamar = $this->M_pelamar->getDataPelamar($datas->id_users)->row();
+             $pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
              if(empty($pelamar->gambar)){
                  $logo = 'assets/img/dashboard/profile.png';
              }else{
                  $logo ='assets/img/profile/pelamar/'.$pelamar->gambar;
              }
              
-         }elseif($datas->role == 'perusahaan'){
+         }elseif($users->role == 'perusahaan'){
              // mengambil data perusaahan yang sedang login
-             $perusahaan = $this->M_perusahaan->getPerusahaan($datas->id_users)->row();
+             $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
              if(empty($perusahaan->logo)){
                  $logo = 'assets/img/dashboard/profile.png';
              }else{
@@ -213,9 +203,10 @@ class Balijobfinder extends CI_Controller {
 
     }
 
+    // function untuk upload CV
     public function uploadCV(){
         // get user
-        $user = $this->M_auth->getUser($this->session->userdata('email'));
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         // ambil id_lowongan, posisi yang sedang dilamar, dan nama perusahaan yang disembunyiin
         $lowongan = $this->input->post('id_lowongan');
@@ -223,18 +214,18 @@ class Balijobfinder extends CI_Controller {
         $perusahaan = $this->input->post('perusahaan');
 
         // jika role
-        if($user->role == "admin"){ // Jika Admin
+        if($users->role == "admin"){ // Jika Admin
             $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Adalah Seorang Admin');          
             redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
 
-        }else if($user->role == "perusahaan"){ //Jika Perusahaan
+        }else if($users->role == "perusahaan"){ //Jika Perusahaan
             $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Yang Membuka Lowongan Ini');          
             redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
 
         }else{ // Jika Pelamar
 
             // get data pelamar
-            $pelamar = $this->M_landing->getDataPelamar($user->id_users);
+            $pelamar = $this->M_pelamar->getDataPelamar($users->id_users);
 
             // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
             $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
@@ -275,7 +266,6 @@ class Balijobfinder extends CI_Controller {
                         
                     } else {
                         // mengatasi jika error
-                        // $error = $this->upload->display_errors();
                         $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 10MB'); 
                         redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                     }

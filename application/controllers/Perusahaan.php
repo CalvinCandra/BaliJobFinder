@@ -29,30 +29,103 @@ class Perusahaan extends CI_Controller {
         $this->session->set_flashdata('swal_text', $text);
     }
 
+    // function menampikan dashboard
     public function home()
     {
         // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         // memberikan data - data ke dalam view
         $data = array(
-            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
-            'JumlahLowongan' => $this->M_perusahaan->LowonganCount($user_id->id_users),
-            'totalLamaran' => $this->M_perusahaan->LamaranCount($user_id->id_users),
-            'session' => $user_id->name
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($users->id_users),
+            'JumlahLowongan' => $this->M_perusahaan->LowonganCount($users->id_users),
+            'totalLamaran' => $this->M_perusahaan->LamaranCount($users->id_users),
+            'session' => $users->name
         );
         $this->template->load('perusahaan/template','perusahaan/Dashboard',$data);
         
     }
 
+    // function menampilkan profile
+    public function profile()
+    {
+        // ambil id_users
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
+        
+        // kirim data-data pada view
+        $data = array(
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($users->id_users),
+            'session' => $users->name
+        );
+        
+        $this->template->load('perusahaan/template','perusahaan/profile',$data);
+    }
+
+    // function simpan profile
+    public function simpanProfile()
+    {
+        // ambil id_users
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+        // get data perusahaan
+        $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
     
+        // melakukan pengecekan apakah ada file di unggah atau tidak
+        if (!empty($_FILES['logo_file']['name'])) {
+
+            // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
+            if(!empty($perusahaan->logo)){
+                unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
+            }
+
+            // Config untuk upload file berupa foto
+            $config['upload_path']   = './assets/img/profile/perusahaan'; //tempat upload logonya nanti
+            $config['allowed_types'] = 'jpg|png'; // esktesion yang diperbolehkan
+            $config['max_size']      = 5048; // set ukuran menjadi 5mb
+    
+            $this->load->library('upload', $config); 
+    
+            //jika file gambar diupload
+            if ($this->upload->do_upload('logo_file')) {
+                // upload
+                $upload_data = $this->upload->data();
+
+                // lalu simpan pada path
+                $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
+
+                $file_name = $upload_data['file_name'];
+    
+                // // menyimpan logo ke database
+                $this->M_perusahaan->saveLogoPath($perusahaan->id_perusahaan, $file_name);
+            } else {
+                // mengatasi jika error
+                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .png Dengan Ukuran Max 5MB');
+                redirect('perusahaan/profile');
+            }
+        }
+
+        // ambil data inputan user
+        $nama_perusahaan = $this->input->post('nama_perusahaan');
+        $no_tlp = $this->input->post('no_tlp');
+        $kota = $this->input->post('kota');
+        $alamat = $this->input->post('alamat');
+
+        $updateProfile = $this->M_perusahaan->simpanProfile($nama_perusahaan, $no_tlp, $kota, $alamat, $users->id_users);
+        
+        if($updateProfile){
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Profile');
+            redirect('perusahaan/profile');
+        }
+    }
+
+    // function menampilkan data lowongan
     public function management()
     {
         // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         // mengambil data perusahaan
-        $perusahaan = $this->M_perusahaan->getPerusahaan($user_id->id_users);
+        $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users);
 
         $DataPerusahaan = $perusahaan->row();
         
@@ -61,7 +134,7 @@ class Perusahaan extends CI_Controller {
             'perusahaan' => $perusahaan,
             // ngecek data profile
             'cekData' => $this->M_perusahaan->cekData($DataPerusahaan->id_perusahaan),
-            'session' => $user_id->name
+            'session' => $users->name
         );
 
         // ambil data dari kolom pencarian
@@ -74,7 +147,7 @@ class Perusahaan extends CI_Controller {
 
         // config pagination
         $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/management';
-        $config['total_rows'] = $this->M_perusahaan->LowonganCount($user_id->id_users, $data['keyword']);
+        $config['total_rows'] = $this->M_perusahaan->LowonganCount($DataPerusahaan->id_perusahaan, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -88,18 +161,25 @@ class Perusahaan extends CI_Controller {
         $data['start'] = $this->uri->segment(3);
 
         // memanggil function getLowongan di M_perusahaan
-        $data['lowongan'] = $this->M_perusahaan->getLowongan($user_id->id_users,$config['per_page'],$data['start'],$data['keyword']);
+        $data['lowongan'] = $this->M_perusahaan->getLowongan($DataPerusahaan->id_perusahaan, $config['per_page'], $data['start'], $data['keyword']);
         $this->template->load('perusahaan/template','perusahaan/management',$data);
     }
 
-
+    // function untuk tambah lowongan
     public function addLowongan()
     {
-        // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+        // ambil id_users yang sedang lofin
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
-        // manggil function input pada M_perusahaan
-        $addLowongan = $this->M_perusahaan->inputlowongan($user_id->id_users);
+        // ambil data perusahaan berdasarkan id_users yang login
+        $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
+
+        // ambil data data inputan user
+        $posisi = $this->input->post('posisi_lowongan');
+        $salary = $this->input->post('salary');
+        $syarat = $this->input->post('syarat_lowongan');
+        
+        $addLowongan = $this->M_perusahaan->inputlowongan($posisi, $salary, $syarat, $perusahaan->id_perusahaan);
 
         if($addLowongan){
             $this->SweetAlert('success', 'Berhasil!', 'Berhasil Tambah Lowongan Kerja');
@@ -111,10 +191,18 @@ class Perusahaan extends CI_Controller {
         
     }
 
+    // function edit lowongan
     public function editLowongan()
     {
+        // ambil data data inputan user
+        $posisi = $this->input->post('posisi');
+        $salary = $this->input->post('salary');
+        $syarat = $this->input->post('syarat');
+        $status = $this->input->post('status');
+        $lowongan = $this->input->post('lowongan');
+
         // manggil function editLowongan pada M_perusahaan
-        $updateLowongan = $this->M_perusahaan->editLowongan();
+        $updateLowongan = $this->M_perusahaan->editLowongan($posisi, $salary, $syarat, $status, $lowongan);
 
         if($updateLowongan){
             $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Lowongan Kerja');
@@ -125,6 +213,7 @@ class Perusahaan extends CI_Controller {
         }
     }
 
+    // function delete lowongan
     public function deleteLowongan($id)
     {
         // manggil function deleteLowongan pada M_perusahaan
@@ -139,15 +228,19 @@ class Perusahaan extends CI_Controller {
         }
     }
 
+    // function cek lamaran
     public function lamaran()
     {
         // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+        // mengambil data perusahaan
+        $perusahaan = $this->M_perusahaan->getPerusahaan($users->id_users)->row();
         
         // memberikan data-data ke view
         $data = array(
-            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
-            'session' => $user_id->name
+            'perusahaan' => $this->M_perusahaan->getPerusahaan($users->id_users),
+            'session' => $users->name
         );
 
         // ambil data dari kolom pencarian
@@ -160,7 +253,7 @@ class Perusahaan extends CI_Controller {
 
         // config pagination
         $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/lamaran';
-        $config['total_rows'] = $this->M_perusahaan->LamaranCount($user_id->id_users, $data['key_lamaran']);
+        $config['total_rows'] = $this->M_perusahaan->LamaranCount($perusahaan->id_perusahaan, $data['key_lamaran']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -174,7 +267,7 @@ class Perusahaan extends CI_Controller {
         $data['start'] = $this->uri->segment(3);
 
         // memanggil function getpelamar di M_perusahaan
-        $data['lamaran'] = $this->M_perusahaan->getPelamar($user_id->id_users,$config['per_page'],$data['start'],$data['key_lamaran']);
+        $data['lamaran'] = $this->M_perusahaan->getPelamar($perusahaan->id_perusahaan,$config['per_page'],$data['start'],$data['key_lamaran']);
         $this->template->load('perusahaan/template','perusahaan/daftar_pelamar',$data);
     }
 
@@ -208,6 +301,8 @@ class Perusahaan extends CI_Controller {
             redirect('perusahaan/lamaran');
 
         }elseif($status == 'Ditolak'){
+            // Menggunakan model M_perusahaan untuk mengonfirmasi status lamaran di database
+            $this->M_perusahaan->konfirmasiStatusLamaran($id_lamaran, $status);
 
             $this->SweetAlert('info', 'Semangat!', 'Semangat Ya Untuk Mencari Pekerja Yang Sesuai');
 
@@ -217,68 +312,7 @@ class Perusahaan extends CI_Controller {
     }
     
 
-    public function profile()
-    {
-        // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
-        
-        // kirim data-data pada view
-        $data = array(
-            'perusahaan' => $this->M_perusahaan->getPerusahaan($user_id->id_users),
-            'session' => $user_id->name
-        );
-        
-        $this->template->load('perusahaan/template','perusahaan/profile',$data);
-    }
-
-    public function simpanProfile()
-    {
-        // ambil id_users
-        $user_id = $this->M_auth->getUser($this->session->userdata('email'));
-        // get data perusahaan
-        $perusahaan = $this->M_perusahaan->getPerusahaan($user_id->id_users)->row();
     
-        // melakukan pengecekan apakah ada file di unggah atau tidak
-        if (!empty($_FILES['logo_file']['name'])) {
-
-            // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-            if(!empty($perusahaan->logo)){
-                unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
-            }
-
-            // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/img/profile/perusahaan'; //tempat upload logonya nanti
-            $config['allowed_types'] = 'jpg|png'; // esktesion yang diperbolehkan
-            $config['max_size']      = 5048; // set ukuran menjadi 5mb
-    
-            $this->load->library('upload', $config); 
-    
-            //jika file gambar diupload
-            if ($this->upload->do_upload('logo_file')) {
-                // upload
-                $upload_data = $this->upload->data();
-
-                // lalu simpan pada path
-                $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
-
-                $file_name = $upload_data['file_name'];
-    
-                // // menyimpan logo ke database
-                $this->M_perusahaan->saveLogoPath($user_id->id_users, $file_name);
-            } else {
-                // mengatasi jika error
-                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .png Dengan Ukuran Max 5MB');
-                redirect('perusahaan/profile');
-            }
-        }
-
-        $updateProfile = $this->M_perusahaan->simpanProfile($user_id->id_users, $file_name);
-        
-        if($updateProfile){
-            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Profile');
-            redirect('perusahaan/profile');
-        }
-    }
     
 
 }

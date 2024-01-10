@@ -3,60 +3,22 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
     
     class M_admin extends CI_Model {
-
-        // menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function LowonganCount($keyword=null)
-        {
-
-            // pencarian data di tabel berdasarkan keyword
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('posisi_lowongan', $keyword);
-                $this->db->or_like('salary', $keyword);
-                $this->db->group_end();
-            }
-
-            // menghitung jumlah lowongan berdasarkan id lowongan
-            $count = $this->db->count_all_results('lowongan_kerja');
-            return $count;
-            
+        // function untuk menghitung jumlah keselurahan lowongan
+        public function LowonganCount(){
+            return $this->db->count_all_results('lowongan_kerja');
         }
 
-        // menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function PerusahaanCount($keyword=null)
-        {
-
-            // pencarian data di tabel berdasarkan keyword
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('nama_perusahaan', $keyword);
-                $this->db->group_end();
-            }
-
-            // menghitung jumlah lowongan berdasarkan id lowongan
-            $count = $this->db->count_all_results('data_perusahaan');
-            return $count;
-            
+        // function untuk menghitung jumlah keselurahan akun perusahaan
+        public function PerusahaanCount(){
+            return $this->db->count_all_results('data_perusahaan');
         }
 
-        // menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function PelamarCount($keyword=null)
-        {
-
-            // pencarian data di tabel berdasarkan keyword
-            if ($keyword) {
-                $this->db->group_start();
-                $this->db->like('nama_lengkap', $keyword);
-                $this->db->group_end();
-            }
-
-            // menghitung jumlah lowongan berdasarkan id lowongan
-            $count = $this->db->count_all_results('data_pelamar');
-            return $count;
-            
+        // function untuk menghitung jumlah keselurahan akun pelamar
+        public function PelamarCount(){
+            return $this->db->count_all_results('data_pelamar');
         }
 
-        // meng join 2 tabel lowongan_kerja Dengan data_perusahaan
+        // function untuk mengambil data perusahaan dan meng join 2 tabel lowongan_kerja Dengan data_perusahaan
         public function getlowongan($limit, $start,$keyword=null) {
             $this->db->select('*');
             $this->db->from('lowongan_kerja');
@@ -72,15 +34,13 @@
                 $this->db->group_end();
             }
 
-            $query = $this->db->get();
-            return $query;
+            return $this->db->get();
         } 
     
-        // meng join 2 tabel data_pelamar Dengan users
+        // function untuk mengambil data pelamar meng join 2 tabel data_pelamar Dengan users
         public function getDataPelamar($limit, $start,$keyword=null) {
             $this->db->select('*');
             $this->db->from('data_pelamar');
-            $this->db->join('users', 'users.id_users = data_pelamar.fk_id_users');
 
             $this->db->limit($limit,$start);
 
@@ -99,7 +59,6 @@
         public function getDataPerusahaan($limit, $start,$keyword=null) {
             $this->db->select('*');
             $this->db->from('data_perusahaan');
-            $this->db->join('users', 'users.id_users = data_perusahaan.fk_id_users');
 
             $this->db->limit($limit,$start);
 
@@ -110,25 +69,14 @@
                 $this->db->group_end();
             }
             
-            $query = $this->db->get();
-            return $query;
+            return $this->db->get();
         } 
 
-        // mengedit atau update data lowongan
-        public function editLowongan()
+        // function untuk mengedit atau update data lowongan
+        public function editLowongan($posisi, $salary, $syarat, $status, $id_lowongan)
         {
-            $edit = array(
-                
-                'posisi_lowongan' => $this->input->post('posisi'),
-                'salary' => $this->input->post('salary'),
-                'syarat_lowongan' => $this->input->post('syarat'),
-                'status' => $this->input->post('status'),
-                
-            );
-
-            $this->db->where('id_lowongan', $this->input->post('id'));
-            $result = $this->db->update('lowongan_kerja', $edit);
-            return $result;
+            // memanggil sp_update_lowongan
+            return $this->db->query("call sp_update_lowongan('".$posisi."', '".$salary."', '".$syarat."', '".$status.", '".$id_lowongan."'')");
         }
 
         
