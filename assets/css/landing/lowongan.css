@@ -327,7 +327,7 @@
 .kotak-lowongan{
     margin-inline: 10px;
     margin-block: 10px;
-    min-width: 20vw;
+    min-width: 25vw;
     padding: 15px;
     background-color: #ffffff;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
@@ -352,16 +352,19 @@
 .kotak-lowongan .body-lowongan{
     margin-top: 30px;
     margin-bottom: 20px;
+    margin-left: 3px;
+    width: 90%;
 }
 
 .kotak-lowongan .body-lowongan .namaUsaha{
     font-weight: 400;
     margin-bottom: 5px;
+    font-size: 15px;
     color: #0d6efd;
 }
 
 .kotak-lowongan .body-lowongan .namaPosisi{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .kotak-lowongan .kota-lowongan{
