@@ -379,7 +379,7 @@ class Auth extends CI_Controller {
     public function logout(){
         // hapus semua session
         session_destroy();
-        redirect('Auth/login');
+        redirect('Balijobfinder');
     }
        
 

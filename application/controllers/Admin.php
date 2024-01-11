@@ -8,13 +8,20 @@ class Admin extends CI_Controller {
     public function __construct(){
         parent:: __construct();
 
-        // jika user blm login redirect ke halaman login
-        if(!$this->session->userdata('email')){
-            redirect('Auth/Login');
-        }
         $this->load->model(array('M_auth', 'M_admin'));
         
         $this->load->library('form_validation');
+
+        // cek
+       $cek = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+       if(!$cek){
+           redirect('Auth/login');
+       }
+
+       if($cek->role == 'perusahaan' || $cek->role == 'pelamar'){
+           redirect('Balijobfinder');
+       }
     }
 
     // function buat alert
@@ -26,7 +33,23 @@ class Admin extends CI_Controller {
 
     // Fungsi ini akan meredirect ke fungsi home
     public function index(){
-        redirect('Admin/home');
+         // cek
+       $cek = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+       if(!$cek){
+           redirect('Auth/login');
+       }
+
+       if($cek->role == 'admin'){
+           $this->SweetAlert('error', 'Dilarang!', 'Halaman Tidak Bisa Di akses, Karena Bukan Untuk Anda');
+           redirect('Admin');
+       }elseif($cek->role == 'pelamar'){
+           $this->SweetAlert('error', 'Dilarang!', 'Halaman Tidak Bisa Di akses, Karena Bukan Untuk Anda');
+           redirect('Pelamar');
+       }else{
+           redirect('Admin/home');
+       }
+       
     }
 
     // Fungsi untuk menampilkan halaman dashboard admin

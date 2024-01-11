@@ -7,10 +7,20 @@ class Pelamar extends CI_Controller {
 
     public function __construct(){
         parent:: __construct();
-        if(!$this->session->userdata('email')){
-            redirect('Auth/Login');
-        }
+
         $this->load->model(array('M_auth', 'M_pelamar'));
+
+        // cek
+       $cek = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+       if(!$cek){
+           redirect('Auth/login');
+       }
+
+        if($cek->role == 'perusahaan' || $cek->role == 'admin'){
+            redirect('Balijobfinder');
+        }
+
     }
 
     // function buat alert
@@ -27,6 +37,7 @@ class Pelamar extends CI_Controller {
     // function menampilkan dashboard
     public function home()
     {
+        
         // get id_user sesuai email yang login
         $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 

@@ -29,7 +29,7 @@
 
 /* set logo */
 .navbarr .pembungkus .logo{
-    width: 15vw;
+    width: 15%;
     /* background-color: aqua; */
     display: flex;
     align-items: center;
@@ -41,7 +41,8 @@
 
 /* set list menu */
 .navbarr .pembungkus .list-menu{
-    width: 25vw;
+    width: 25%;
+    margin-left: 5%;
     /* background-color: aquamarine; */
     display: flex;
     justify-content: space-evenly;
@@ -62,7 +63,7 @@
 
 /* set list auth */
 .navbarr .pembungkus .auth{
-    width: 15vw;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,13 +218,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 15%;
+    margin-right: 10px;
+    margin-left: -10px;
 }
 
 .navbarr .pembungkus .auth .user .foto_user{
-    margin-right: 20px;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     z-index: 9999;
     display: flex;
@@ -710,6 +712,11 @@ footer{
         position: fixed;
     }
 
+    /* set logo */
+    .navbarr .pembungkus .logo{
+        width: 25%;
+    }
+
     .navbarr .pembungkus .list-menu,
     .navbarr .pembungkus .auth{
         display: none;
@@ -822,7 +829,7 @@ footer{
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 37vw;
+        width: 37%;
     }
 
     /* set listmenu and auth */

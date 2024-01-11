@@ -7,19 +7,21 @@ class Perusahaan extends CI_Controller {
 
     public function __construct(){
         parent:: __construct();
-
-        // jika user blm login
-        if(!$this->session->userdata('email')){
-            redirect('Auth/Login');
-        }
         
         $this->load->library('form_validation');
         $this->load->model(array('M_perusahaan', 'M_auth'));
-        
-    }
 
-    public function index(){
-        redirect('Perusahaan/home');
+        // cek
+       $cek = $this->M_auth->getUser($this->session->userdata('email'))->row();
+
+       if(!$cek){
+           redirect('Auth/login');
+       }
+
+       if($cek->role == 'pelamar' || $cek->role == 'admin'){
+            redirect('Balijobfinder');
+        }
+        
     }
 
     // function buat alert
@@ -27,6 +29,10 @@ class Perusahaan extends CI_Controller {
         $this->session->set_flashdata('swal_icon', $icon);
         $this->session->set_flashdata('swal_title', $title);
         $this->session->set_flashdata('swal_text', $text);
+    }
+
+    public function index(){
+       redirect('Perusahaan/home');
     }
 
     // function menampikan dashboard

@@ -57,8 +57,8 @@
                         <div class="foto_user">
                             <img src="<?php echo base_url($logo) ?>" alt="">
                         </div>
-                        <a class="name_session"><?php echo $session_name?></a>
                     </div>
+                    <a class="name_session"><?php echo $session_name?></a>
 
                     <div class="menu_dropdown">
                         <!-- cek role -->
