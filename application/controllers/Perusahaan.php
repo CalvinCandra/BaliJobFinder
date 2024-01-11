@@ -18,13 +18,9 @@ class Perusahaan extends CI_Controller {
            redirect('Auth/login');
        }
 
-       if($cek->role == 'admin'){
-           redirect('Admin');
-       }elseif($cek->role == 'pelamar'){
-           redirect('Pelamar');
-       }else{
-           redirect('Perusahaan');
-       }
+       if($cek->role == 'pelamar' || $cek->role == 'admin'){
+            redirect('Balijobfinder');
+        }
         
     }
 

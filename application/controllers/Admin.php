@@ -19,12 +19,8 @@ class Admin extends CI_Controller {
            redirect('Auth/login');
        }
 
-       if($cek->role == 'perusahaan'){
-           redirect('Perusahaan');
-       }elseif($cek->role == 'pelamar'){
-           redirect('Pelamar');
-       }else{
-           redirect('Admin');
+       if($cek->role == 'perusahaan' || $cek->role == 'pelamar'){
+           redirect('Balijobfinder');
        }
     }
 

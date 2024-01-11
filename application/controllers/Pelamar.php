@@ -17,13 +17,9 @@ class Pelamar extends CI_Controller {
            redirect('Auth/login');
        }
 
-       if($cek->role == 'admin'){
-           redirect('Admin');
-       }elseif($cek->role == 'perusahaan'){
-           redirect('Perusahaan');
-       }else{
-           redirect('Pelamar');
-       }
+        if($cek->role == 'perusahaan' || $cek->role == 'admin'){
+            redirect('Balijobfinder');
+        }
 
     }
 
