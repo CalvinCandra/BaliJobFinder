@@ -74,23 +74,48 @@
                         <ul class="splide__list">
                             <li class="splide__slide d-flex justify-content-center align-items-center">
                                 <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/landing/blessing computer 2.png')?>" alt="" style="width:100%;">
+                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_collection.jpg')?>" alt="" style="width:100%;">
                                 </div>
                             </li>
                             <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
                                 <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/landing/khrisna oleh-oleh 1.png')?>" alt="" style="width:100%;">
+                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Bank_Mandiri.jpg')?>" alt="" style="width:100%;">
                                 </div>
                             </li>
     
                             <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
                                 <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/landing/The_keranjang 1.png')?>" alt="" style="width:100%;">
+                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Telkom_Indonesia_(Persero)_Tbk.jpg')?>" alt="" style="width:100%;">
                                 </div>
                             </li>
                             <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
                                 <div class=" w-50 p-2 ">
-                                <img src="<?php echo base_url('assets/img/landing/unique.png')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
+                                </div>
+                            </li>
+                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
+                                <div class=" w-50 p-2 ">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bullseye.jpg')?>" alt="" style="width:100%;">
+                                </div>
+                            </li>
+                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
+                                <div class=" w-50 p-2 ">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Kreasi_Bali_Prima_(Atlas_Beach_Fest).jpg')?>" alt="" style="width:100%;">
+                                </div>
+                            </li>
+                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
+                                <div class=" w-50 p-2 ">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Techbros_Indonesia.jpg')?>" alt="" style="width:100%;">
+                                </div>
+                            </li>
+                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
+                                <div class=" w-50 p-2 ">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Solusi_Sinergi_Digital_(SSD).jpg')?>" alt="" style="width:100%;">
+                                </div>
+                            </li>
+                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
+                                <div class=" w-50 p-2 ">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
                                 </div>
                             </li>
     

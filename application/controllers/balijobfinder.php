@@ -133,7 +133,7 @@ class Balijobfinder extends CI_Controller {
 
         $config['base_url'] = base_url(). 'Balijobfinder/Lowongan';
         $config['total_rows'] = $jumlah_data;
-        $config['per_page'] = 16;
+        $config['per_page'] = 15;
 
         // initialize pagination
         $this->pagination->initialize($config);
@@ -195,7 +195,10 @@ class Balijobfinder extends CI_Controller {
         // // lalu menganti %20(spasi di url) menjadi spasi biasa
         $perusahaan = str_replace("%20", " ", $nama_perusahaan);
 
-        $data['datalowongan'] = $this->M_landing->getDataLowongan($posisi, $perusahaan);
+        // // lalu menganti %20(spasi di url) menjadi spasi biasa
+        $posisiLowongan = str_replace("%20", " ", $posisi);
+
+        $data['datalowongan'] = $this->M_landing->getDataLowongan($posisiLowongan, $perusahaan);
 
         $this->load->view('landing/_partials/header', $data);
         $this->load->view('landing/detailLowongan');
