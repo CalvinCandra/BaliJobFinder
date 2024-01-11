@@ -158,7 +158,7 @@ class Balijobfinder extends CI_Controller {
          $this->cek();
  
          // ambil id_users berdasarkan email
-         $users = $this->M_auth->getUser($this->session->userdata('email'));
+         $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
  
          // mengambil gambar profile berdasarkan role
          if($users->role == 'pelamar'){
@@ -186,8 +186,8 @@ class Balijobfinder extends CI_Controller {
          //kirim data ke view
          $data = array(
              'title' => 'Details Lowongan',
-             'session_name' => $datas->name,
-             'role' => $datas->role,
+             'session_name' => $users->name,
+             'role' => $users->role,
              'logo' => $logo,
              'css' => 'assets/css/landing/details.css'
          );
