@@ -24,7 +24,7 @@
     <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
-        <div class="user-panel d-flex">
+        <div class="user-panel d-flex" style="height:150%;">
         <div class="image">
                     <?php if(empty($foto_profile)): ?>
                       <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">

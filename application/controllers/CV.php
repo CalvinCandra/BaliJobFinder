@@ -11,14 +11,11 @@ class CV extends CI_Controller {
 
     public function GenerateCV(){
 
-        // get session email
-        $email = $this->session->userdata('email');
-
         //get user
-        $pelamar = $this->M_auth->getUser($email);
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
 
         //get data-data pelamar
-        $data_pelamar = $this->M_pelamar->getDataPelamar($pelamar->id_users)->row();
+        $data_pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
 
         // get data pendidikan
         $data_pendidikan = $this->M_CV->getDataPendidikan($data_pelamar->id_pelamar)->result_array();
@@ -41,7 +38,7 @@ class CV extends CI_Controller {
         $orientation = "portrait";
 
         $data=array(
-            'email_pelamar' => $pelamar->email,
+            'email_pelamar' => $users->email,
             'nama_pelamar' => $data_pelamar->nama_lengkap,
             'deskripsi_pelamar' =>$data_pelamar->deskripsi_pelamar,
             'no_hp' =>$data_pelamar->no_hp,
