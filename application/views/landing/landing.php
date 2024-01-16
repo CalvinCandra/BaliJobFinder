@@ -5,7 +5,7 @@
             <h1 class="Judul">BALI JOB FINDER</h1>
             <h5 class="pendukung">Ingin segera mendapatkan pekerjaan di Bali? Bali Job Finder solusinya! Temukan lowongan kerja yang sesuai dengan minat dan kemampuanmu.</h5>
             <div class="bungkus-btn">
-                <a href="#lowongan" class="button">find now</a>
+                <a href="#landLowongan" class="button">find now</a>
             </div>
         </div>
 

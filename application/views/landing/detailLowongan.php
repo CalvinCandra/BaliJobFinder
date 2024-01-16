@@ -110,9 +110,9 @@
                 <?php
                     foreach($datalowongan->result_array() as $data):
                 ?>
-                    <input type="text" name="id_lowongan" value="<?= $data['id_lowongan']?>">
-                    <input type="text" name="posisi" value="<?= $data['posisi_lowongan']?>" >
-                    <input type="text" name="perusahaan" value="<?= $data['nama_perusahaan']?>">
+                    <input type="hidden" name="id_lowongan" value="<?= $data['id_lowongan']?>">
+                    <input type="hidden" name="posisi" value="<?= $data['posisi_lowongan']?>" >
+                    <input type="hidden" name="perusahaan" value="<?= $data['nama_perusahaan']?>">
                 <?php endforeach;?>
 
                 <div class="input-group mb-3">

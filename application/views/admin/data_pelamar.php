@@ -107,10 +107,6 @@
                         <input type="text" class="form-control" value="<?= $key['email'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="tgllahirpelamarEdit">Tgl Lahir:</label>
-                        <input type="text" class="form-control" value="<?= $key['tgl_lahir'] ?>" disabled>
-                    </div>
-                    <div class="form-group">
                         <label for="nohppelamarEdit">No Hp :</label>
                         <input type="text" class="form-control" value="<?= $key['no_hp'] ?>" disabled>
                     </div>
@@ -161,10 +157,6 @@
                     <div class="form-group">
                         <label for="emailpelamarEdit">Email Perusahaan:</label>
                         <input type="text" class="form-control" name="email" value="<?php echo $key['email'] ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tgllahirpelamarEdit">Tgl Lahir:</label>
-                        <input type="text" class="form-control" name="tgl_lahir" value="<?php echo $key['tgl_lahir'] ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="nohppelamarEdit">No Hp:</label>
