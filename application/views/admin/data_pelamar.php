@@ -8,7 +8,7 @@
                 <div class="col-md-6">
                     <form action="<?= base_url('admin/dataPelamar') ?>" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="searchLowongan" placeholder="Cari lowongan..." name="keyword" autocomplete="off" autofocus>
+                            <input type="text" class="form-control" id="searchLowongan" placeholder="Cari Pelamar..." name="keyword" autocomplete="off" autofocus>
                             <div class="input-group-append">
                                 <input class="btn btn-outline-secondary" type="submit" name="cari" value="cari">
                             </div>

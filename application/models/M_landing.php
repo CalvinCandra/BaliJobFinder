@@ -80,10 +80,10 @@ class M_landing extends CI_Model {
 
         if($lamaran->status_lamaran == "Belum Terkonfrimasi"){
             return $nilai = 1;
-        }
-            
-        if($lamaran->status_lamaran == "Diterima"){
+        }else if($lamaran->status_lamaran == "Diterima"){
             return $nilai = 2;
+        }else{
+            return 0;
         }
 
     }

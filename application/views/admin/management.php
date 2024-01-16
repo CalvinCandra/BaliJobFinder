@@ -80,7 +80,7 @@
 <!-- Modal Detail lowongan -->
 <?php foreach ($lowongan_kerja->result_array() as $key): ?>
 <div class="modal fade" id="detailLowonganModal<?php echo $key['id_lowongan'] ?>" tabindex="-1" role="dialog" aria-labelledby="detailLowonganModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="detailLowonganModalLabel">Detail Lowongan</h5>
@@ -117,7 +117,14 @@
                     </div>
                     <div class="form-group">
                         <label for="syaratLowonganDetail">Syarat Lowongan :</label>
-                        <input type="text" class="form-control" value="<?= $key['syarat_lowongan'] ?>" disabled>
+                        <?php
+                            $syaratArray = explode("\n", $key['syarat_lowongan']);
+                            foreach($syaratArray as $syarat):
+                        ?>
+                            <ul class="list">
+                                <li><?= $syarat?></li>  
+                            </ul>
+                        <?php endforeach;?>
                     </div>
                     <div class="form-group">
                         <label for="statusLowongandDetail">Status:</label>

@@ -30,7 +30,7 @@
             <a href="<?= base_url('admin/dataLowongan') ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Management Lowongan
+                  Management Lowongan
               </p>
             </a>
           </li>

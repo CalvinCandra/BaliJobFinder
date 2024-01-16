@@ -31,7 +31,7 @@
               <div class="inner">
                 <h3><?php echo $totalLowongan ?></h3>
 
-                <p>Managemnet Lowongan</p>
+                <p>Management Lowongan</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>

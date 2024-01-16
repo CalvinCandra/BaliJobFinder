@@ -222,13 +222,13 @@ class Balijobfinder extends CI_Controller {
             redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
 
         }else if($users->role == "perusahaan"){ //Jika Perusahaan
-            $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Yang Membuka Lowongan Ini');          
+            $this->SweetAlert('info', 'Informasi', 'Anda Tidak Bisa Melamar, Karena Anda Adalah Perusahaan');          
             redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
 
         }else{ // Jika Pelamar
 
             // get data pelamar
-            $pelamar = $this->M_pelamar->getDataPelamar($users->id_users);
+            $pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
 
             // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
             $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
@@ -245,8 +245,9 @@ class Balijobfinder extends CI_Controller {
         
                     // Config untuk upload file berupa foto
                     $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
-                    $config['allowed_types'] = '|pdf'; // esktesion yang diperbolehkan
-                    $config['max_size']      = 10000; // set ukuran menjadi 10mb
+                    $config['allowed_types'] = 'pdf'; // esktesion yang diperbolehkan
+                    $config['max_size']      = 5028; // set ukuran menjadi 5mb
+                    $config['file_name'] = date("his").'_'.$_FILES['cv']['name'];
             
                     $this->load->library('upload', $config); 
             
@@ -254,13 +255,9 @@ class Balijobfinder extends CI_Controller {
                     if ($this->upload->do_upload('cv')) {
                         // upload
                         $upload_data = $this->upload->data();
-                        // lalu simpan pada path
-                        $logo_path = 'assets/CV/' . $upload_data['file_name'];
-
-                        $file_name = $upload_data['file_name'];
             
                         // menyimpan lcvgo ke database
-                        $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $file_name, $lowongan);
+                        $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $upload_data['file_name'], $lowongan);
         
                         if($cv){
                             $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
@@ -269,7 +266,7 @@ class Balijobfinder extends CI_Controller {
                         
                     } else {
                         // mengatasi jika error
-                        $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 10MB'); 
+                        $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 5MB'); 
                         redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                     }
                 }

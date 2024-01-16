@@ -129,7 +129,7 @@ class Admin extends CI_Controller {
     public function dataPerusahaan()
     {
         // Mendapatkan data user dari session
-        $users = $this->M_auth->getUser($this->session->userdata('email'));
+        $users = $this->M_auth->getUser($this->session->userdata('email'))->row();
   
         $data = array(
             'session' => $users->name,
@@ -162,7 +162,7 @@ class Admin extends CI_Controller {
     {
         // mengambil data inputan user
         $lowongan = $this->input->post('lowongan');
-        $posisi = $this->input->post('posisi_lowongan');
+        $posisi = $this->input->post('posisi');
         $salary = $this->input->post('salary');
         $syarat = $this->input->post('syarat');
         $status = $this->input->post('status');
