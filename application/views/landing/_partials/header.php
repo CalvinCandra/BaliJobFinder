@@ -37,7 +37,7 @@
             <!-- navigasion menu -->
             <div class="list-menu">
                 <a href="<?= base_url("#home")?>">Home</a>
-                <a href="<?= base_url("#lowongan")?>">Lowongan</a>
+                <a href="<?= base_url("#landLowongan")?>">Lowongan</a>
                 <a href="<?= base_url("#contact")?>">Contact</a>
             </div>
 
@@ -48,7 +48,7 @@
                     if($session_name === NULL){
                 ?>
                     <a href="<?php echo base_url("Auth/login")?>" class="btn">Login</a>
-                    <a href="<?php echo base_url("Auth/register_pilihan")?>" class="btn">Register</a>
+                    <a href="<?php echo base_url("Auth/register_pilihan")?>" class="btn-register">Register</a>
                 <?php 
                     }else{
                 ?>
@@ -90,17 +90,17 @@
             <?php 
                  if($session_name === NULL){
             ?>
-                <li class="ngelist"><a href="#home" class="link">Home</a></li>
-                <li class="ngelist"><a href="#lowongan" class="link">Lowongan</a></li>
-                <li class="ngelist"><a href="#contact" class="link">Contact</a></li>
+                <li class="ngelist"><a href="<?= base_url("#home")?>" class="link">Home</a></li>
+                <li class="ngelist"><a href="<?= base_url("#landLowongan")?>" class="link">Lowongan</a></li>
+                <li class="ngelist"><a href="<?= base_url("#contact")?>" class="link">Contact</a></li>
                 <li><a href="<?php echo base_url("Auth/login")?>" class="btn">Login</a></li>
                 <li><a href="<?php echo base_url("Auth/register_pilihan")?>" class="btn">Register</a></li>
             <?php 
                 }else{
             ?>
-                <li class="ngelist"><a href="#home" class="link">Home</a></li>
-                <li class="ngelist"><a href="#lowongan" class="link">Lowongan</a></li>
-                <li class="ngelist"><a href="#contact" class="link">Contact</a></li>
+                <li class="ngelist"><a href="<?= base_url("#home")?>" class="link">Home</a></li>
+                <li class="ngelist"><a href="<?= base_url("#landLowongan")?>" class="link">Lowongan</a></li>
+                <li class="ngelist"><a href="<?= base_url("#contact")?>" class="link">Contact</a></li>
                 <div>
                     <!-- cek role -->
                     <?php 

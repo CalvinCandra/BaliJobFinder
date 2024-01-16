@@ -35,18 +35,21 @@
 
                             <input type="hidden" class="form-control" name="perusahaan" value="<?php echo $key['id_perusahaan'] ?>">
 
-                             <div class="form-group">
-                                    <label for="logo">Logo Perusahaan:</label>
-                                    <br>
-                                    <?php if (empty($key['logo'])): ?>
-                                        <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
-                                    <?php else: ?>
-                                        <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="100">
-                                    <?php endif; ?>
-                                </div>
+                            <div class="d-flex align-items-center">
                                 <div class="form-group">
-                                    <input type="file" id="logo" name="logo_file" class="form-control-file" accept="image/*">
-                                </div>
+                                       <label for="logo">Logo Perusahaan:</label>
+                                       <br>
+                                       <?php if (empty($key['logo'])): ?>
+                                           <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="150">
+                                       <?php else: ?>
+                                           <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="150">
+                                       <?php endif; ?>
+                                   </div>
+
+                                   <div class="form-group">
+                                       <input type="file" id="logo" name="logo_file" class="form-control-file ml-4 mt-5" accept="image/*">
+                                   </div>
+                            </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Perusahaan:</label>
                                     <input type="text" class="form-control" name="nama_perusahaan" value="<?php echo $key['nama_perusahaan']; ?>" required>

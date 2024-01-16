@@ -44,26 +44,28 @@
 							enctype="multipart/form-data">
 
 							<!-- foto profile -->
-							<div class="form-group">
-								<label for="logo">Foto Profil:</label>
-								<br>
-								<?php if (empty($key['gambar'])): ?>
-								<img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo"
-									width="100">
-								<?php else: ?>
-								<img src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
-									alt="Logo Preview" width="100">
-								<?php endif; ?>
-							</div>
-
-							<div class="form-group">
-								<input type="file" id="logo" name="logo_file" class="form-control-file"
-									accept="image/*">
+							<div class="d-flex align-items-center">
+								<div class="form-group">
+									<label for="logo">Foto Profil:</label>
+									<br>
+									<?php if (empty($key['gambar'])): ?>
+										<img class="mr-4" src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo"
+											width="150">
+									<?php else: ?>
+										<img class="mr-4" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
+											alt="Logo Preview" width="150">
+									<?php endif; ?>
+								</div>
+	
+								<div class="form-group">
+									<input type="file" id="logo" name="logo_file" class="form-control-file mt-4"
+										accept=".png, .jpg">
+								</div>
 							</div>
 
 							<!-- nama pelamar -->
 							<div class="form-group">
-								<label for="nama">Nama Pelamar:</label>
+								<label for="nama">Nama Lengkap:</label>
 								<input type="hidden" class="form-control" name="id"
 									value="<?php echo $key['id_pelamar'] ?>">
 								<input type="text" class="form-control" name="nama_lengkap"

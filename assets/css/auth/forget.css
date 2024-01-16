@@ -9,17 +9,44 @@
 
 .bg{
     height: 100vh;
+    position: relative;
+}
+
+.bg .gambar_atas{
+    position: absolute;
+    top: -1px;
+}
+
+.bg .gambar_bawah{
+    position: absolute;
+    bottom: 0;
+}
+
+.forget{
+    position: relative;
+    z-index: 1;
+    top: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.forgetPass{
+    position: relative;
+    z-index: 1;
+    top: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .containerr{
     background-color: transparent;
     width: 30vw;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 9px 4px 100px 0px #000;
+    box-shadow: 0px 0px 41px 0px rgba(0, 0, 0, 0.30);
 }
 
 .containerr .fomulir{

@@ -135,13 +135,11 @@ class Pelamar extends CI_Controller {
             if ($this->upload->do_upload('logo_file')) {
                 // upload
                 $upload_data = $this->upload->data();
-                // lalu simpan pada path
-                $logo_path = 'assets/img/profile/pelamar/' . $upload_data['file_name'];
 
-                $file_name = $upload_data['file_name'];
+                // $img = $this->cropImg($upload_data['file_name']);
     
                 // menyimpan logo ke database
-                $this->M_pelamar->saveLogoPath($pelamar->id_pelamar, $file_name);
+                $this->M_pelamar->saveLogoPath($pelamar->id_pelamar, $upload_data['file_name']);
 
             } else {
                 // mengatasi jika error
@@ -164,6 +162,45 @@ class Pelamar extends CI_Controller {
         }
 
     }
+
+    // public function cropImg($file_name){
+    //     // memanggil library image_lib CI
+    //     $this->load->library('image_lib');
+
+    //     // menentukan library manipulasi gambar
+    //     $config['image_library'] = 'gd2';
+    //     // menentukan lokasi gambar yang ingin di crop
+    //     $config['source_image'] = 'assets/img/profile/pelamar/'.$file_name;
+    //     // rasio aspek di pertahankan
+    //     $config['maintain_ratio'] = true;
+    //     // mempertahakan kualitas gambar sebesar 60% dari gambar asli
+    //     $config['quality']= '60%';
+    //     // menentukan ukuran width 
+    //     $config['width'] = 1080;
+    //     // menentukan ukuran height
+    //     $config['height'] = 1080;
+
+    //     // mendapatkan ukuran gambar asli
+    //     $width = getimagesize($config['source_image'])[0];
+    //     $height = getimagesize($config['source_image'])[1];
+
+    //     // menentukan sumbu y_axis dan x_axis
+    //     $config['y_axis'] = ($height/2) - ($config['height'] / 2);
+    //     $config['x_axis'] = ($witdh/2) - ($config['width'] / 2);
+    //     // Tentukan nama file hasil cropping
+    //     $config['new_image'] = 'assets/img/profile/pelamar/crop_' .$file_name;
+        
+    //     $this->image_lib->clear();
+    //     $this->image_lib->initialize($config);
+    //     $this->image_lib->crop();
+
+    //     // Hapus gambar asli atau yang belum di-crop
+    //     unlink($config['source_image']);
+
+    //     // mengembalikan gambar yang sudah dic rop hanya nama filenya aja
+    //     return basename($config['new_image']);
+        
+    // }
 
      // function simpan data pendidikan
      public function simpanPendidikan(){
