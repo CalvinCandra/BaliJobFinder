@@ -1,50 +1,40 @@
 <!-- footer -->
-<div class="" id="contact" id="lowongan" data-aos="fade-up" data-aos-duration="1000">
-    <footer>
-    
-        <div class="kotak-footer">
+<footer id="contact">
+    <div class="kotak-body">
+        <div class="about">
+            <p>Bali Job Finder adalah platform terpercaya yang menyediakan informasi lowongan pekerjaan dari berbagai perusahaan terkemuka. Didesain intuitif, website ini membantu Anda menemukan pekerjaan impian dengan mudah. Fitur pembuatan CV otomatisnya juga mempermudah pengguna untuk membuat profil profesional secara efisien.</p>
+        </div>
+
+        <div class="kontak">
             <div class="kotak-logo">
                 <img src="<?php echo base_url("assets/img/logo/logo_putih.png")?>" alt="Logo">
             </div>
-    
-            <div class="kotak-body">
-                <div class="about">
-                    <h3>About</h3>
-                    <p>Bali Job Finder adalah layanan menyediakan Info lowongan pekerjaan yang dipercaya oleh banyak perusahaan dan Bali Job Finder hadir untuk membantu Anda yang sedang mencari pekerjaan yang diimpikan .</p>
-                </div>
-    
-                <div class="kontak">
-                    <h3>Kontak</h3>
-    
-                    <div class="icon-kontak">
-                        <a href="" ><i class="fa-solid fa-envelope"></i></a>
-                        <p>balijobfinder@gmail.com</p>
-                    </div>
-    
-                    <div class="icon-kontak">
-                        <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-                        <p>087777777777</p>
-                    </div>
-    
-                </div>
+
+            <div class="icon-kontak">
+                <a href="" ><i class="fa-solid fa-envelope"></i></a>
+                <p>balijobfinder@gmail.com</p>
             </div>
-    
-            <div class="kotak-copy">
-                
-                <div class="sosmed">
-                    <a href=""><i class="fa-brands fa-instagram"></i></a>
-                    <a href="" class="sosmed-center"><i class="fa-brands fa-facebook"></i></a>
-                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
-                </div>
-    
-                <div class="copy">
-                    <p>© 2023 PT. BALI JOB FINDER</p>
-                </div>
+
+            <div class="icon-kontak">
+                <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+                <p>087777777777</p>
             </div>
         </div>
+    </div>
     
-    </footer>
-</div>
+    <div class="kotak-copy">
+                
+        <div class="sosmed">
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <a href="" class="sosmed-center"><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+    
+        <div class="copy">
+            <p>© 2023 PT. BALI JOB FINDER</p>
+        </div>
+    </div>
+</footer>
 <!-- end footer -->
     
 
@@ -67,17 +57,17 @@
         document.addEventListener( 'DOMContentLoaded', function () {
         new Splide('.splide', {
             type: 'loop',
-            perPage: 3,
+            perPage: 4,
             focus: 'center',
             autoplay: true,
             interval: 3000,
             updateOnMove: true,
             pagination: false,
             breakpoints: {
-                640: {
-                    perPage: 2
+                500: {
+                    perPage: 3
                 },
-                768: {
+                800: {
                     perPage: 3
                 }
             }

@@ -2,11 +2,15 @@
 <div class="hero-section" data-aos="zoom-in-up" data-aos-duration="1000" id="home">
     <div class="hero">
         <div class="konten">
-            <h1 class="Judul">bali job finder</h1>
-            <h5 class="pendukung">website pencari lowongan kerja terbaik!</h5>
+            <h1 class="Judul">BALI JOB FINDER</h1>
+            <h5 class="pendukung">Ingin segera mendapatkan pekerjaan di Bali? Bali Job Finder solusinya! Temukan lowongan kerja yang sesuai dengan minat dan kemampuanmu.</h5>
             <div class="bungkus-btn">
                 <a href="#lowongan" class="button">find now</a>
             </div>
+        </div>
+
+        <div class="gambar-hero">
+            <img src="<?= base_url("assets/img/landing/heroSection.png")?>" alt="">
         </div>
     </div>
 </div>
@@ -22,31 +26,33 @@
         <div class="alasan">
             <div class="bungkus-alasan">
                 <div class="gambar">
-                    <img src="<?php echo base_url("assets/img/landing/cv_generator.png")?>" alt="Gambar Alasan">
+                    <img src="<?php echo base_url("assets/img/landing/Generate CV 1.png")?>" alt="Gambar Alasan">
                 </div>
                 <div class="judul-card">
-                    <h5>CV Generator</h5>
+                    <h5>Automatic CV Generator</h5>
                 </div>
                 <div class="text">
-                    <p>Buat CV dengan gampang dengan contoh CV yang dibuat secara otomatis oleh sistem</p>
+                    <p>
+                        Automatic CV Generator akan membantu Anda memproyeksikan pengalaman, dan kompetensi yang Anda miliki, dalam tampilan yang menarik dan profesional.
+                    </p>
                 </div>            
             </div>
     
             <div class="bungkus-alasan">
                 <div class="gambar">
-                    <img src="<?php echo base_url("assets/img/landing/search_lowongan.png")?>" alt="Gambar Alasan">
+                    <img src="<?php echo base_url("assets/img/landing/Job Detail 1.png")?>" alt="Gambar Alasan">
                 </div>
                 <div class="judul-card">
-                    <h5>Search Lowongan</h5>
+                    <h5>Career Finder</h5>
                 </div>
                 <div class="text">
-                    <p>Mencari lowongan dengan mudah dan sesuai preferensi Anda  dengan beberapa detik </p>
+                    <p>Temukan karir impian Anda dengan mudah, yang sesuai dengan preferensi dan passion Anda dalam beberapa detik</p>
                 </div>            
             </div>
     
             <div class="bungkus-alasan">
                 <div class="gambar">
-                    <img src="<?php echo base_url("assets/img/landing/detail_lowongan.png")?>" alt="Gambar Alasan">
+                    <img src="<?php echo base_url("assets/img/landing/search lowongan 1.png")?>" alt="Gambar Alasan">
                 </div>
                 <div class="judul-card">
                     <h5>Detail Lowongan</h5>
@@ -71,55 +77,64 @@
     
             <div class="splide">
                 <div class="splide__track">
-                        <ul class="splide__list">
-                            <li class="splide__slide d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_collection.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Bank_Mandiri.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
+                    <ul class="splide__list">
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_collection.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Blessing_Computer.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
     
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                    <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Telkom_Indonesia_(Persero)_Tbk.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Level_21_Mall.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
                                 <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bullseye.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Tourism_Development_Corporation.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
                                 <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Kreasi_Bali_Prima_(Atlas_Beach_Fest).jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Techbros_Indonesia.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
+                            </div>
+                        </li>
+                         <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
                                 <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Solusi_Sinergi_Digital_(SSD).jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-                            <li class="splide__slide mx-1 d-flex justify-content-center align-items-center">
-                                <div class=" w-50 p-2 ">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
-                                </div>
-                            </li>
-    
-                        </ul>
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Techbros_Indonesia.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Telkom_Indonesia_(Persero)_Tbk.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2 " style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Bank_Mandiri.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                        <li class="splide__slide d-flex justify-content-center align-items-center">
+                            <div class=" p-2" style="width:55%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Garuda_Indonesia.jpg')?>" alt="" style="width:100%;">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -129,10 +144,12 @@
 
 
 <!-- lowongan -->
-<div class="" id="lowongan" data-aos="zoom-in-up" data-aos-duration="1000">
-    <section>
-        <h2 class="judul-lowongan">Lowongan Pekerjaan</h2>
-        <div class="lowongan-section">
+
+<section id="landLowongan" data-aos="zoom-in-up" data-aos-duration="1000">
+
+    <h2 class="judul-lowongan">Lowongan Pekerjaan</h2>
+
+    <div class="lowongan-section">
             <div class="lowongan">
     
                 <?php
@@ -141,14 +158,16 @@
         
                 <div class="kotak-lowongan">
                     <!-- img -->
-                    <div class="logo-lowongan">
-                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
+                    <div class="bungkus-logo-lowongan">
+                        <div class="logo-lowongan">
+                            <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
+                        </div>
                     </div>
         
                     <!-- lowongan body -->
                     <div class="body-lowongan">
+                        <h4 class="namaPosisi"><?= $key['posisi_lowongan']?></h4>
                         <p class="namaUsaha"><?= $key['nama_perusahaan']?></p>
-                        <h2 class="namaPosisi"><?= $key['posisi_lowongan']?></h2>
                     </div>
         
                     <!-- lowongan kota -->
@@ -171,14 +190,14 @@
         
             </div>
     
-        </div>
+    </div>
     
-         <!-- link more -->
-         <div class="btn_more-lowongan">
-            <a href="<?php echo base_url("Balijobfinder/Lowongan") ?>">Find More</a>
-        </div>
-    </section>
-</div>
+    <!-- link more -->
+    <div class="btn_more-lowongan">
+        <a href="<?php echo base_url("Balijobfinder/Lowongan") ?>">Find More</a>
+    </div>
+</section>
+
 
 <!-- end lowongan -->
 

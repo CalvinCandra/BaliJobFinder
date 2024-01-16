@@ -1,7 +1,7 @@
 
     <div class="containerr">
         <div class="gambar_kotak">
-            <img src="<?php echo base_url("assets/img/auth/register_perusahaan.png")?>" alt="">
+            <img src="<?php echo base_url("assets/img/auth/Commpany Regis 1.png")?>" alt="">
         </div>
 
         <div class="fomulir">
@@ -15,7 +15,7 @@
 
                 <div class="inputan">
                     <i class="bi bi-person-fill"></i>
-                    <input type="text" name="name" id="" placeholder="Name Company">
+                    <input type="text" name="name" id="" placeholder="Name Perusahaan">
                 </div>
                 <small class="pesan"><?php echo form_error('name'); ?></small>
 
@@ -27,16 +27,16 @@
 
                 <div class="inputan">
                     <i class="bi bi-lock"></i>
-                    <input type="password" name="confrim" id="" placeholder="Confrim Password">
+                    <input type="password" name="confrim" id="" placeholder="Konfrimasi Password">
                 </div>
                 <small class="pesan"><?php echo form_error('confrim'); ?></small>
 
                 <div class="btn_register">
-                    <button type="submit">Register Now</button>
+                    <button type="submit">Register</button>
                 </div>
             </form>
             <div class="ke_login">
-                <p>Already have an  account? <a href="<?php echo base_url("Auth/login")?>">Login</a></p>
+                <p>Sudah Punya Akun? <a href="<?php echo base_url("Auth/login")?>">Login</a></p>
             </div>
             
         </div>

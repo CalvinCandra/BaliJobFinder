@@ -16,25 +16,25 @@ body{
 
 .containerr{
     background-color: #ffffff;
-    width: 100vh;
+    width: 70%;
     display: flex;
+    border-radius: 10px;
     justify-content: space-between;
-    box-shadow: 6px 6px 40px rgb(0, 0, 0);
+    box-shadow: 0px 0px 41px 0px rgba(0, 0, 0, 0.30);
 }
 
 .containerr .gambar_kotak{
-    margin: 15px;
-    width: 100vh;
-}
-
-.containerr .gambar_kotak img{
-    max-width: 100%;
-    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: 15px;
+    margin-block: 10%;
 }
 
 .containerr .fomulir{
     margin: 15px;
-    width: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,32 +42,33 @@ body{
 }
 
 .containerr .fomulir .judul{
+    color: #333;
     text-transform: uppercase;
-    font-size: 30px;
-    /* margin-bottom: 10px */
+    font-size: 45px;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .fomulir .inputan{
-    width: 45vh;
-    height: 35px;
+    width: 400px;
+    height: 37px;
     background-color: #ffffff;
-    margin: 15px 0;
-    /* border-radius: 10px; */
+    margin: 30px 0;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #000;
+    overflow: hidden;
 }
 
 .fomulir .inputan input{
-    width: 100%;
-    padding: 0 15px;
-    font-size: 18px;
-    margin: -2px 2px 0 -5px;
+    width: 80vw;
+    font-style: italic;
+    font-size: 24px;
+    line-height: normal;
     outline: none;
     border: none;
     background-color: none;
-    font-weight: 600;
-    flex: 6;
+    flex: 10;
 }
 
 .fomulir .inputan i{
@@ -137,7 +138,13 @@ body{
     }
 
     .containerr{
-        width: 80vw;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .containerr .fomulir{
+        background-color: red;
+        width: 100%;
     }
 
     .fomulir small{
@@ -145,12 +152,7 @@ body{
     }
 
     .fomulir .inputan{
-        width: 65vw;
-    }
-
-    .fomulir .inputan input{
-        font-size: 22px;
-        flex: 10;
+        width: 60vw;
     }
 
     .fomulir small{
@@ -174,20 +176,22 @@ body{
     }
 
     .containerr{
-        width: 75vw;
+        width: 75%;
+        display: flex;
+        justify-content: center;
     }
 
     .containerr .gambar_kotak{
         display: none;
     }
 
-    .fomulir .inputan{
-        width: 60vw;
+    .containerr .fomulir{
+        width: 100%;
+        background-color: red;
     }
 
-    .fomulir .inputan input{
-        font-size: 22px;
-        flex: 10;
+    .fomulir .inputan{
+        width: 55vw;
     }
 
     .fomulir small{
@@ -204,17 +208,29 @@ body{
 }
 
 /* Handphone */
-@media (max-width: 450px){
+@media (max-width: 500px){
     html{
         font-size: 100%;
     }
 
     .containerr{
-        width: 85vw;
+        width: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerr .gambar_kotak{
+        display: none;
+    }
+
+    .containerr .fomulir{
+        width: 100%;
+        display: flex;
     }
 
     .fomulir .inputan{
-        width: 70vw;
+        width: 45vh;
     }
 
     .fomulir .inputan input{

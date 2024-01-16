@@ -33,23 +33,7 @@ class Admin extends CI_Controller {
 
     // Fungsi ini akan meredirect ke fungsi home
     public function index(){
-         // cek
-       $cek = $this->M_auth->getUser($this->session->userdata('email'))->row();
-
-       if(!$cek){
-           redirect('Auth/login');
-       }
-
-       if($cek->role == 'admin'){
-           $this->SweetAlert('error', 'Dilarang!', 'Halaman Tidak Bisa Di akses, Karena Bukan Untuk Anda');
-           redirect('Admin');
-       }elseif($cek->role == 'pelamar'){
-           $this->SweetAlert('error', 'Dilarang!', 'Halaman Tidak Bisa Di akses, Karena Bukan Untuk Anda');
-           redirect('Pelamar');
-       }else{
-           redirect('Admin/home');
-       }
-       
+        redirect('Admin/home');   
     }
 
     // Fungsi untuk menampilkan halaman dashboard admin

@@ -254,15 +254,22 @@ class Auth extends CI_Controller {
         if($user){
            // jika token sama dengan token di database
            if(hash_equals($token, $user->token)){
-               $data=['users' => $user->id_users];
+                $data = array(
+                    'title' => 'Forget Password',
+                    'css' => 'assets/css/auth/forget.css',
+                    'users' => $user->id_users
+                );
+                // memanggil komponen view
+                $this->load->view('auth/_partials/header', $data);
+                $this->load->view('auth/forget/formForget');
+                $this->load->view('auth/_partials/footer');
 
-               $this->load->view('auth/forget/formForget', $data);
            }else{ //jika token berbeda
                 $this->SweetAlert('error', 'Gagal!', 'Token Tidak Cocok');
                 redirect('Auth/login');
            }
         }else{ //jika email blm register
-            $this->SweetAlert('error', 'Gagal!', 'Tidak Cocok');
+            $this->SweetAlert('error', 'Gagal!', 'Email Tidak Cocok');
             redirect('Auth/login');
         }
     }

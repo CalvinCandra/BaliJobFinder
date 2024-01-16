@@ -28,14 +28,16 @@
     
                 <div class="kotak-lowongan"  data-aos="zoom-in-up" data-aos-duration="900">
                     <!-- img -->
-                    <div class="logo-lowongan">
-                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
+                    <div class="bungkus-logo-lowongan">
+                        <div class="logo-lowongan">
+                            <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo'])?>" alt="">
+                        </div>
                     </div>
         
                     <!-- lowongan body -->
                     <div class="body-lowongan">
-                        <p class="namaUsaha" id="perusahaan" value="<?= $key['nama_perusahaan']?>"><?= $key['nama_perusahaan']?></p>
-                        <h2 class="namaPosisi" id="posisi" value="<?= $key['posisi_lowongan']?>"><?= $key['posisi_lowongan']?></h2>
+                        <h4 class="namaPosisi"><?= $key['posisi_lowongan']?></h4>
+                        <p class="namaUsaha"><?= $key['nama_perusahaan']?></p>
                     </div>
         
                     <!-- lowongan kota -->

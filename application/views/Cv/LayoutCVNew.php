@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+    margin: 0;
+    padding: 0;
+">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,187 +18,140 @@
 
     <title>CV</title>
 
+
     </head>
 
-    <style>
-        
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: none;
-            font-family: 'Times New Roman', Times, serif;
-        }
+    <body style="background-color:#E6E6E6; font-family: 'Times New Roman', Times, serif;">
 
-    </style>
 
-    <body style="background-color: #ffffff;">
-    <div class="container-fuild">
+        <div class="position-relative" style="float:left; width:50%;">
 
-        <div class="position-relative" style="float:left; width:55%;">
-
-            <div class="position-relative" style="left:25%; top:5%;">     
-                <div class="w-50 h-50">
-                    <img src="<?= base_url("assets/img/profile/pelamar/".$foto)?>" alt="" class="w-100">
-                </div>
-
-            </div>
-
-            <div class="position-relative" style="top:-21%;">
-                <h1 class="text-center fs-1 fw-bold"><?= $nama_pelamar?></h1>
-            </div>
-
-            <div class="position-relative" style="top:-21%;"> 
-                <div class="mb-2 px-2 mx-auto" style="width:90%;">
-                    <p class="text-justify fs-5"><?= $deskripsi_pelamar?></p>
+            <div class="position-relative" style="left:25%; top:9%;">     
+                <div class="" style="height:200px; width:200px;">
+                    <img src="<?= base_url("assets/img/profile/pelamar/".$foto)?>" alt="" class="w-100 rounded-circle">
                 </div>
             </div>
-
-            <div class="position-relative py-3" style="top:-21%;">
-                <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
-                    <h2 class="text-center fw-bold text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Kontak</h2>
-                </div>
-                <div class="p-3 position-relative" style="width:90%;">
-
-                    <div class="w-50">
-                        <div class="position-absolute" style="left:1%; width:30px;">
-                            <img src="<?= base_url("assets/img/CV/location.png")?>" alt="" class="w-100">
-                        </div>
-                        <div class="position-absolute" style="right:0; top:3%; width:80%;">
-                            <p class="fw-bold text-justify position-relative" style="right:0;"><?= $alamat?></p>
-                        </div>   
-                    </div>
-
-                    <div class="w-50">
-                        <div class="position-absolute" style="left:2%; width:25px; top:20%;">
-                            <img src="<?= base_url("assets/img/CV/wa.png")?>" alt="" class="w-100">
-                        </div>
-                        <div class="position-absolute" style="right:0; width:80%; top:21%;">
-                            <p class="fw-bold"><?= $no_hp?></p>                        
-                        </div>
-                    </div>
-
-                    <div class="w-50">
-                        <div class="position-absolute" style="left:2%; width:28px; top:34%;">
-                            <img src="<?= base_url("assets/img/CV/mail.png")?>" alt="" class="w-100">
-                        </div>
-                        <div class="position-absolute" style="right:0; width:80%; top:35%;">
-                            <p class="fw-bold"><?= $email_pelamar?></p>  
-                        </div>
-                    </div>
-
-                </div>
+            
+            <div class="position-relative" style="top:11.5%;">
+                <h2 class="text-center" style="font-size:25px; color:#333; font-weight:700;"><?= $nama_pelamar?></h2>
             </div>
 
-
-            <div class="" style="margin-top :-15%;">
-                    <div class="w-50" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
-                        <h2 class="text-center text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Skill</h2>
-                    </div>
-        
-                    <div class="mx-2">
-    
-                        <div class="w-100" style="width:80%;">
-                            <?php
-                                foreach ($skill as $dataSkill) {
-                                    echo "
-                                        <div class='my-2'>
-                                            <h5 class='fs-3 fw-bold'>{$dataSkill['nama_skill']}</h5>
-                                            <div class='progress w-100'>
-                                                <div class='progress-bar fw-bold text-center' role='progressbar' style='width: {$dataSkill['value']}%;' aria-valuenow='{$dataSkill['value']}' aria-valuemin='0' aria-valuemax='100'>{$dataSkill['value']}%</div>
-                                            </div>
-                                        </div>
-                                    ";
-                                }
-                            ?>
-                                
-                        </div>
-                    </div>
+            <div class="position-relative" style="left:10%; top:12%; width:330px;">
+                <h2 style="font-size:16px; font-weight:400; text-align:justify;"><?= $deskripsi_pelamar?></h2>
             </div>
 
+            <div class="position-relative" style="left:10%; top:13%; margin-bottom:5%;">
+                <h2 class="" style="font-size:25px;  color:#333; font-weight:700;">Contac Person</h2>
+            </div>
 
+            <div class="position-relative" style="left:15%; top:12.5%;">
+                <img src="<?= base_url('assets/img/CV/location.webp')?>" class="" style="width:20px;">
+                <h2 class="position-relative" style="left:8%; top:-2.7%; font-size:16px; font-weight:400; width:70%;"><?= $alamat?></h2>
+            </div>
+
+            <div class="position-relative" style="left:15%; top:11%;">
+                <img src="<?= base_url('assets/img/CV/email.webp')?>" class="" style="width:20px;">
+                <h2 class="position-relative" style="left:8%; top:-3%; font-size:16px; font-weight:400; width:70%;"><?= $email_pelamar?></h2>
+            </div>
+
+            <div class="position-relative" style="left:15%; top:10%;">
+                <img src="<?= base_url('assets/img/CV/wa.webp')?>" class="" style="width:20px;">
+                <h2 class="position-relative" style="left:8%; top:-3%; font-size:16px; font-weight:400; width:70%;"><?= $no_hp?></h2>
+            </div>
         </div>
-
-       
-
-        <div class="position-relative" style="float:right; background-color: #ffffff; height:100%; width:45%; border:none; outline:none;">
-            <div class="position-relative">
-                <div class="mt-5">
-                    <div class="w-75" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
-                        <h2 class="text-center fw-bold text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Pendidikan</h2>
-                    </div>
         
-                    <div class="position-relative" style="width:100%;">
-                        <?php
-                            foreach($pendidikan as $Datapendidikan):
-                        ?>
-                            <ul style="margin-top:-15px;">
+        <div class="position-relative" style="float:right; background-color: #ffffff; height:100%; width:50%;">
+
+            <!-- pendidikan -->
+            <div class="position-relative" style="top:9%">
+            
+                <div style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd; width:50%;">
+                    <h2 class="" style="color: #ffffff; font-size:25px; padding: 5px 0 5px 20px; font-weight:700;">Pendidikan</h2>
+                </div>
+
+                <div style="width:100%;">
+                    <?php
+                        foreach($pendidikan as $Datapendidikan):
+                    ?>
+                        <ul>
+                            <li style="font-size:25px;">
+                                <div class="p-0 m-0">
+                                    <h2 style="font-size:16px; font-weight:400; margin-top:-7px;"><?= $Datapendidikan['bulan_mulai']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></h2>
+            
+                                    <h2 style="font-size:16px;  color:#333; font-weight:700;  margin-top:-9px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
+            
+                                    <h2 style="font-size:16px; font-weight:400;  margin-top:-9px;"><?= $Datapendidikan['bidang_studi']?> </h2>
+                                        
+                                    <h2 style="font-size:16px; font-weight:400;  margin-top:-9px;">Nilai Akhir <?= $Datapendidikan['nilai_akhir']?></h2>
+                                </div>
+                            </li>
+                        </ul>
+
+                    <?php
+                        endforeach;
+                    ?>
+                </div>
+
+
+            </div>
+
+            <!-- pengalaman -->
+            <div class="position-relative" style="top:9%">
+                <div style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd; width:50%;">
+                    <h2 class="" style="color: #ffffff; font-size:25px; padding:5px 0 5px 20px; font-weight:700;">Pengalaman</h2>
+                </div>
+    
+                <div style="width:100%;">
+                    <?php
+                        foreach($pengalaman as $Datapengalaman):
+                    ?>  
+                        <div class="">
+                            <ul style="font-size:25px;">
                                 <li>
-                                    <div class="ms-3 me-5 p-2">
-                                        <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapendidikan['bulan_mulai']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></p>
+                                    <div class="">
+                                        <h2 style="font-size:16px; font-weight:400; margin-top:-7px;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['bulan_akhir_kerja']?> <?= $Datapengalaman['tahun_akhir_kerja']?></h2>
+                                       
+                                        <h2 style="font-size:16px;  color:#333; font-weight:700; margin-top:-9px;"><?= $Datapengalaman['jabatan']?></h2>
+
+                                        <h2 style="font-size:16px; font-weight:400; margin-top:-9px;"><?= $Datapengalaman['nama_perusahaan']?> (<?= $Datapengalaman['lokasi_perusahaan']?>)</h2>
                 
-                                        <h2 class="fw-bold" style="margin-top:-10px; font-size:20px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
-                
-                                        <h5 class="mt-2 italic" style="font-size:18px;"><?= $Datapendidikan['bidang_studi']?> </h5>
-                                            
-                                            
-                                        <h5 class="mt-2" style="font-size:18px;">Nilai Akhir <?= $Datapendidikan['nilai_akhir']?></h5>
+                                        <h2 style="font-size:16px; font-weight:400; margin-top:-9px;"><?= $Datapengalaman['status_pekerja']?> <span>(<?= $Datapengalaman['sistem_kerja']?>)</span></h2>
                                     </div>
                                 </li>
                             </ul>
+                                
+                        </div>
+    
+                    <?php
+                        endforeach;
+                    ?>      
+                </div>
+            </div>
 
-                        <?php
-                            endforeach;
-                        ?>
+            <!-- skill -->
+            <div class="position-relative" style="top:9%">
+                <div style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd; width:50%;">
+                    <h2 class="" style="color: #ffffff; font-size:25px; padding: 5px 0 5px 20px; font-weight:700;">Skill</h2>
+                </div>
     
+                <div class="mx-2">
+                    <div style="width:90%; ">
+                        <?php
+                            foreach ($skill as $dataSkill) {
+                                echo "
+                                <div class='my-2'>
+                                    <h2 style='font-size:16px; font-weight:400;'>{$dataSkill['nama_skill']}</h2>
+                                    <div class='progress w-100'>
+                                        <div class='progress-bar fw-bold text-center h-100' role='progressbar' style='width: {$dataSkill['value']}%;' aria-valuenow='{$dataSkill['value']}' aria-valuemin='0' aria-valuemax='100'>{$dataSkill['value']}%</div>
+                                    </div>
+                                </div>
+                                ";
+                            }
+                        ?>    
                     </div>
                 </div>
-        
-                <div class="">
-                    <div class="w-75" style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd;">
-                        <h2 class="text-center text-uppercase" style="color: #ffffff; margin-left:20px; font-size:30px; font-weight:600;">Pengalaman</h2>
-                    </div>
-        
-                    <div class="position-relative" style="width:100%;">
-                        <?php
-                            foreach($pengalaman as $Datapengalaman):
-                        ?>  
-                            <div class="">
-                                <ul style="margin-top:-15px;">
-                                    <li>
-                                        <div class="ms-2 me-5 p-2">
-                                            <p class="fw-bold text-black" style="font-size:15px;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['bulan_akhir_kerja']?> <?= $Datapengalaman['tahun_akhir_kerja']?></p>
-                                           
-                                            <h2 class="fw-bold" style="margin-top:-10px; font-size:20px;"><?= $Datapengalaman['jabatan']?></h2>
-    
-                                            <h4 class="fw-bold" style="margin-top:0;"><?= $Datapengalaman['nama_perusahaan']?> (<?= $Datapengalaman['lokasi_perusahaan']?>)</h4>
-                    
-                    
-                                            <h5 class="mt-2 italic text-capitalize" style="font-size:18px;"><?= $Datapengalaman['status_pekerja']?> <span class="fst-italic fw-bold">(<?= $Datapengalaman['sistem_kerja']?>)</span></h5>
-                                        </div>
-                                    </li>
-                                </ul>
-                                    
-                            </div>
-        
-                        <?php
-                            endforeach;
-                        ?>      
-                    </div>
-                </div>
-        
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-    </div>
-    
   
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

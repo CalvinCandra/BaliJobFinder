@@ -4,7 +4,7 @@
         
         <div class="login">
             <div class="containerr">
-                <h2 class="judul fw-bold">Login Form</h2>
+                <h2 class="judul fw-bold">BALI JOB FINDER</h2>
                 <div class="fomulir">
                     <form action="<?php echo base_url("Auth/proses_login")?>" method="post">
     
@@ -25,7 +25,7 @@
                         </div>
         
                         <div class="btn_login">
-                            <button type="submit" name="login">Login Now</button>
+                            <button type="submit" name="login">Login</button>
                         </div>
                     </form>
                     <div class="ke_register">
