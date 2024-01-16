@@ -59,7 +59,17 @@
                                     <td><?php echo ++$start ?></td>
                                     <td ><?php echo $key['posisi_lowongan'] ?></td>
                                     <td >Rp. <?php echo number_format($key['salary'], 0, ',', '.'); ?></td>
-                                    <td><?php echo $key['syarat_lowongan'] ?></td>
+                                    <!-- <td><?php echo $key['syarat_lowongan'] ?></td> -->
+                                    <td>
+                                    <?php
+                                        $syaratArray = explode("\n", $key['syarat_lowongan']);
+                                        foreach($syaratArray as $syarat):
+                                    ?>
+                                        <ul class="list">
+                                            <li><?= $syarat?></li>  
+                                        </ul>
+                                    <?php endforeach;?>
+                                    </td>
                                     <td>
                                         <?php if ($key['status'] == 1): ?>
                                             <span class="badge badge-success">Aktif</span>

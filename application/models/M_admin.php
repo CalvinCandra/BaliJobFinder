@@ -41,6 +41,7 @@
         public function getDataPelamar($limit, $start,$keyword=null) {
             $this->db->select('*');
             $this->db->from('data_pelamar');
+            $this->db->join('users', 'users.id_users = data_pelamar.fk_id_users');
 
             $this->db->limit($limit,$start);
 
@@ -59,6 +60,7 @@
         public function getDataPerusahaan($limit, $start,$keyword=null) {
             $this->db->select('*');
             $this->db->from('data_perusahaan');
+            $this->db->join('users', 'users.id_users = data_perusahaan.fk_id_users');
 
             $this->db->limit($limit,$start);
 
@@ -76,7 +78,7 @@
         public function editLowongan($posisi, $salary, $syarat, $status, $id_lowongan)
         {
             // memanggil sp_update_lowongan
-            return $this->db->query("call sp_update_lowongan('".$posisi."', '".$salary."', '".$syarat."', '".$status.", '".$id_lowongan."'')");
+            return $this->db->query("call sp_update_lowongan('".$posisi."', '".$salary."','".$syarat."','".$status."','".$id_lowongan."')");
         }
 
         

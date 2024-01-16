@@ -88,6 +88,7 @@ class Perusahaan extends CI_Controller {
             $config['upload_path']   = './assets/img/profile/perusahaan'; //tempat upload logonya nanti
             $config['allowed_types'] = 'jpg|png'; // esktesion yang diperbolehkan
             $config['max_size']      = 5048; // set ukuran menjadi 5mb
+            $config['file_name'] = date("his").'_'.$_FILES['logo_file']['name'];
     
             $this->load->library('upload', $config); 
     
@@ -95,14 +96,9 @@ class Perusahaan extends CI_Controller {
             if ($this->upload->do_upload('logo_file')) {
                 // upload
                 $upload_data = $this->upload->data();
-
-                // lalu simpan pada path
-                $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
-
-                $file_name = $upload_data['file_name'];
     
                 // // menyimpan logo ke database
-                $this->M_perusahaan->saveLogoPath($perusahaan->id_perusahaan, $file_name);
+                $this->M_perusahaan->saveLogoPath($perusahaan->id_perusahaan, $upload_data['file_name']);
             } else {
                 // mengatasi jika error
                 $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .png Dengan Ukuran Max 5MB');

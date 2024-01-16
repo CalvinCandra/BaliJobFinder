@@ -101,10 +101,6 @@
                         <input type="text" class="form-control" value="<?= $key['nama_lengkap'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="salaryLowonganEdit">Tanggal Lahir :</label>
-                        <input type="text" class="form-control" value="<?= $key['tgl_lahir'] ?>" disabled>
-                    </div>
-                    <div class="form-group">
                         <label for="salaryLowonganEdit">Alamat :</label>
                         <textarea class="form-control" name="alamat" rows="3" disabled><?= $key['alamat'] ?></textarea>
                     </div>

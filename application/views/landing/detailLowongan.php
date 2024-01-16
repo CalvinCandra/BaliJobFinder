@@ -102,17 +102,18 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        
             <h5 class="modal-title" id="exampleModalLabel">Upload Curriculum Vitae (CV)</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-       
-
       </div>
       <div class="modal-body">
             <form action="<?= base_url("BalijobFinder/uploadCV")?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id_lowongan" value="<?= $key['id_lowongan']?>">
-                <input type="hidden" name="posisi" value="<?= $key['posisi_lowongan']?>" >
-                <input type="hidden" name="perusahaan" value="<?= $key['nama_perusahaan']?>">
+                <?php
+                    foreach($datalowongan->result_array() as $data):
+                ?>
+                    <input type="text" name="id_lowongan" value="<?= $data['id_lowongan']?>">
+                    <input type="text" name="posisi" value="<?= $data['posisi_lowongan']?>" >
+                    <input type="text" name="perusahaan" value="<?= $data['nama_perusahaan']?>">
+                <?php endforeach;?>
 
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" name="cv" id="inputGroupFile02" accept=".pdf">
