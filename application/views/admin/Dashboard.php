@@ -12,7 +12,7 @@
             
           </div><!-- /.col -->
         </div><!-- /.row -->
-        <div class= "alert alert-success" >Selamat siang <b> <?= $session ?> </b></div>
+        <div class= "alert alert-success" >Selamat datang <b> <?= $session ?> </b></div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -56,7 +56,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-12">
     <!-- small box -->
-    <div class="small-box" style="background-color: blue;">
+    <div class="small-box bg-secondary">
         <div class="inner">
             <h3><?php echo $totalPelamar ?></h3>
             <p>User Pelamar</p>

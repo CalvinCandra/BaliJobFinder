@@ -39,14 +39,14 @@
                                     <th>Logo</th>
                                     <th>Nama Perusahaan</th>
                                     <th>Email</th>
-                                    <th>Telephon</th>
+                                    <th>Telephone</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php foreach ($perusahaan->result_array() as $key): ?>
                                 <tr>
-                                    <td><?= $key['id_perusahaan']?></td>
+                                    <td><?= ++$start?></td>
                                     <td>
                                         <?php if (empty($key['logo'])): ?>
                                             <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
@@ -103,15 +103,15 @@
                         <input type="text" class="form-control" value="<?= $key['nama_perusahaan'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="emailEdit">Email Perusahaan:</label>
+                        <label for="emailEdit">Email Perusahaan :</label>
                         <input type="text" class="form-control" value="<?= $key['email'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="alamatperusahaannEdit">Alamat Perusahaan:</label>
-                        <input type="text" class="form-control" value="<?= $key['alamat_perusahaan'] ?>" disabled>
+                        <label for="alamatperusahaannEdit">Alamat Perusahaan :</label>
+                        <textarea class="form-control" rows ="3" disabled><?php echo $key['alamat_perusahaan'] ?></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="tlpperusahaanEdit">Tlp Perusahaan :</label>
+                        <label for="tlpperusahaanEdit">Telephone Perusahaan :</label>
                         <input type="text" class="form-control" value="<?= $key['tlp_perusahaan'] ?>" disabled>
                     </div>
                     <div class="form-group">
@@ -142,7 +142,7 @@
             <div class="modal-body">
                 <form method="post" action="<?php echo base_url('admin/editPerusahaan') ?>" enctype="multipart/form-data">
                 <div class="form-group">
-                                    <label for="logo">Logo Perusahaan:</label>
+                                    <label for="logo">Logo Perusahaan :</label>
                                     <br>
                                     <?php if (empty($key['logo'])): ?>
                                         <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
@@ -154,24 +154,24 @@
                                     <input type="file" id="logo" name="logo_file" class="form-control-file" accept="image/*">
                                 </div>
                     <div class="form-group">
-                        <label for="namaperusahaanEdit">Nama Perusahaan:</label>
+                        <label for="namaperusahaanEdit">Nama Perusahaan :</label>
                         <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_perusahaan'] ?>">
                         <input type="text" class="form-control" name="nama_perusahaan" value="<?php echo $key['nama_perusahaan'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="emailperusahaanEdit">Email Perusahaan:</label>
+                        <label for="emailperusahaanEdit">Email Perusahaan :</label>
                         <input type="text" class="form-control" name="email" value="<?php echo $key['email'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="alamatperusahaanEdit">Alamat Perusahaan:</label>
-                        <input type="text" class="form-control" name="alamat_perusahaan" value="<?php echo $key['alamat_perusahaan'] ?>" required>
+                        <label for="alamatperusahaanEdit">Alamat Perusahaan :</label>
+                        <textarea name="alamat_perusahaan" class="form-control" rows ="3" required><?php echo $key['alamat_perusahaan'] ?></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="tlp_perusahaanEdit">tlp:</label>
+                        <label for="tlp_perusahaanEdit">Telephone Perusahaan :</label>
                         <input type="text" class="form-control" name="tlp_perusahaan" value="<?php echo $key['tlp_perusahaan'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="kotaperusahaanEdit">Kota:</label>
+                        <label for="kotaperusahaanEdit">Kota :</label>
                         <input type="text" class="form-control" name="kota" value="<?php echo $key['kota'] ?>" required>
                     </div>
                     

@@ -74,7 +74,7 @@
 
 							<!-- no hp -->
 							<div class="form-group">
-								<label for="no_tlp">No.HP:</label>
+								<label for="no_tlp">Nomor Handphone:</label>
 								<input type="text" class="form-control" name="no_hp"
 									value="<?php echo $key['no_hp']; ?>" required>
 							</div>
@@ -180,7 +180,7 @@
 											<!-- value 1 == sudah selesai kerja -->
 											<?php if($data['status_kerja']  == 1 ):?>
 												<div class="">
-													<p class="fw-bold text-black" style="font-size:15px;"> <?= $data['bulan_mulai_kerja']?> <?= $data['tahun_mulai_kerja']?> - NOW</p>
+													<p class="fw-bold text-black" style="font-size:15px;"> <?= $data['bulan_mulai_kerja']?> <?= $data['tahun_mulai_kerja']?> - Sekarang</p>
 												</div>
 											<?php else:?>
 												<div class="">
@@ -329,7 +329,7 @@
 					</div>
 					<div class="form-group">
 						<label for="bidang_studi">Bidang Studi</label>
-						<input type="text" class="form-control" name="bidang_studi" placeholder="Masukkan Nilai Akhir"
+						<input type="text" class="form-control" name="bidang_studi" placeholder="Masukkan Bidang Studi"
 							required>
 					</div>
 					<div class="form-group">
@@ -430,7 +430,7 @@
 					<div class="form-group">
 						<label for="bidang_studi">Bidang Studi</label>
 						<input type="text" class="form-control" name="bidang_studi" value="<?= $key['bidang_studi']?>"
-							placeholder="Masukkan Nilai Akhir" required>
+							placeholder="Masukkan Bidang Studi" required>
 					</div>
 					<div class="form-group">
 						<label for="bulan_mulai">Bulan Mulai Sekolah</label>
@@ -609,7 +609,7 @@
 					</div>
 
 					<div class="form-group" id="inputan1" style="display:none;">
-						<label for="bulan_akhir_kerja">Bulan Tamat Kerja</label>
+						<label for="bulan_akhir_kerja">Bulan Selesai Kerja</label>
 						<select name="bulan_akhir_kerja" class="form-control" id="">
 							<option value="" hidden>-- PILIH --</option>
 							<option value="Januari">Januari</option>
@@ -628,9 +628,9 @@
 					</div>
 
 					<div class="form-group" id="inputan2" style="display:none;">
-						<label for="tahun_akhir_kerja">Tahun Tamat kerja</label>
+						<label for="tahun_akhir_kerja">Tahun Selesai kerja</label>
 						<input type="number" class="form-control" name="tahun_akhir_kerja"
-							placeholder="Tahun akhir kerja" min="0">
+							placeholder="Tahun selesai kerja" min="0">
 					</div>
 
 
@@ -742,7 +742,7 @@
 					</div>
 
 					<div class="form-group" id="InputUpdate1" style="display:none;">
-						<label for="bulan_akhir_kerja">Bulan Tamat Kerja</label>
+						<label for="bulan_akhir_kerja">Bulan Selesai Kerja</label>
 						<select name="bulan_akhir_kerja" class="form-control" id="bulan_akhir">
 							<option value="<?= $key['bulan_akhir_kerja']?>" ><?= $key['bulan_akhir_kerja']?></option>
 							<option value="Januari">Januari</option>
@@ -761,7 +761,7 @@
 					</div>
 
 					<div class="form-group" id="InputUpdate2" style="display:none;">
-						<label for="tahun_akhir_kerja">Tahun Tamat kerja</label>
+						<label for="tahun_akhir_kerja">Tahun Selesai kerja</label>
 						<input type="number" class="form-control" name="tahun_akhir_kerja"
 							placeholder="Tahun akhir kerja" min="0" value="<?= $key['tahun_akhir_kerja']?>" id="tahun_akhir">
 					</div>

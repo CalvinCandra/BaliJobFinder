@@ -33,30 +33,30 @@
             </div>
             
             <div class="position-relative" style="top:11.5%;">
-                <h2 class="text-center" style="font-size:25px; color:#333; font-weight:700;"><?= $nama_pelamar?></h2>
+                <h2 class="text-center" style="font-size:25px; font-weight:700;"><?= $nama_pelamar?></h2>
             </div>
 
             <div class="position-relative" style="left:10%; top:12%; width:330px;">
-                <h2 style="font-size:16px; font-weight:400; text-align:justify;"><?= $deskripsi_pelamar?></h2>
+                <h2 style="font-size:16px; font-weight:400; color:#333; text-align:justify;"><?= $deskripsi_pelamar?></h2>
             </div>
 
             <div class="position-relative" style="left:10%; top:13%; margin-bottom:5%;">
-                <h2 class="" style="font-size:25px;  color:#333; font-weight:700;">Contac Person</h2>
+                <h2 class="" style="font-size:25px;  font-weight:700;">Contac Person</h2>
             </div>
 
-            <div class="position-relative" style="left:15%; top:12.5%;">
+            <div class="position-relative" style="left:15%; top:12.5%; color:#333;">
                 <img src="<?= base_url('assets/img/CV/location.webp')?>" class="" style="width:20px;">
-                <h2 class="position-relative" style="left:8%; top:-2.7%; font-size:16px; font-weight:400; width:70%;"><?= $alamat?></h2>
+                <h2 class="position-relative" style="left:8%; top:-3.4%; font-size:16px; font-weight:400; width:70%;"><?= $alamat?></h2>
             </div>
 
-            <div class="position-relative" style="left:15%; top:11%;">
+            <div class="position-relative" style="left:15%; top:11%;color:#333;">
                 <img src="<?= base_url('assets/img/CV/email.webp')?>" class="" style="width:20px;">
-                <h2 class="position-relative" style="left:8%; top:-3%; font-size:16px; font-weight:400; width:70%;"><?= $email_pelamar?></h2>
+                <h2 class="position-relative" style="left:8%; top:-3.6%; font-size:16px; font-weight:400; width:70%;"><?= $email_pelamar?></h2>
             </div>
 
-            <div class="position-relative" style="left:15%; top:10%;">
+            <div class="position-relative" style="left:15%; top:10%;color:#333;">
                 <img src="<?= base_url('assets/img/CV/wa.webp')?>" class="" style="width:20px;">
-                <h2 class="position-relative" style="left:8%; top:-3%; font-size:16px; font-weight:400; width:70%;"><?= $no_hp?></h2>
+                <h2 class="position-relative" style="left:8%; top:-3.5%; font-size:16px; font-weight:400; width:70%;"><?= $no_hp?></h2>
             </div>
         </div>
         
@@ -76,9 +76,9 @@
                         <ul>
                             <li style="font-size:25px;">
                                 <div class="p-0 m-0">
-                                    <h2 style="font-size:16px; font-weight:400; margin-top:-7px;"><?= $Datapendidikan['bulan_mulai']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></h2>
+                                    <h2 style="font-size:16px; font-weight:400; margin-top:-7px; color:#5b5b5b;"><?= $Datapendidikan['bulan_mulai']?> <?= $Datapendidikan['tahun_mulai']?> - <?= $Datapendidikan['bulan_akhir']?> <?= $Datapendidikan['tahun_akhir']?></h2>
             
-                                    <h2 style="font-size:16px;  color:#333; font-weight:700;  margin-top:-9px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
+                                    <h2 style="font-size:16px; font-weight:700;  margin-top:-9px;"><?= $Datapendidikan['nama_sekolah']?> (<?= $Datapendidikan['jenjang_pendidikan']?>)</h2>
             
                                     <h2 style="font-size:16px; font-weight:400;  margin-top:-9px;"><?= $Datapendidikan['bidang_studi']?> </h2>
                                         
@@ -109,9 +109,12 @@
                             <ul style="font-size:25px;">
                                 <li>
                                     <div class="">
-                                        <h2 style="font-size:16px; font-weight:400; margin-top:-7px;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['bulan_akhir_kerja']?> <?= $Datapengalaman['tahun_akhir_kerja']?></h2>
-                                       
-                                        <h2 style="font-size:16px;  color:#333; font-weight:700; margin-top:-9px;"><?= $Datapengalaman['jabatan']?></h2>
+                                    <?php if($Datapengalaman['status_kerja']  == 0 ):?>
+                                        <h2 style="font-size:16px; font-weight:400; margin-top:-7px; color:#5b5b5b;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - <?= $Datapengalaman['bulan_akhir_kerja']?> <?= $Datapengalaman['tahun_akhir_kerja']?></h2>
+                                    <?php else:?>
+                                        <h2 style="font-size:16px; font-weight:400; margin-top:-7px; color:#5b5b5b;"><?= $Datapengalaman['bulan_mulai_kerja']?> <?= $Datapengalaman['tahun_mulai_kerja']?> - Sekarang</h2>
+                                    <?php endif;?>
+                                        <h2 style="font-size:16px; font-weight:700; margin-top:-9px;"><?= $Datapengalaman['jabatan']?></h2>
 
                                         <h2 style="font-size:16px; font-weight:400; margin-top:-9px;"><?= $Datapengalaman['nama_perusahaan']?> (<?= $Datapengalaman['lokasi_perusahaan']?>)</h2>
                 

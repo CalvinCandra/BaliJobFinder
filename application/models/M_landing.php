@@ -6,9 +6,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_landing extends CI_Model {
 
     // function untuk jumlah lowongan
-    public function jumlahLowongan(){
+    public function jumlahLowongan($search=null){
+        //join table dan hitung total lowongan digunakan untuk pagination saat search
+        $this->db->select('COUNT(*) as total_lowongan');
+        $this->db->from('lowongan_kerja');
+        $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+        // kondisi jika statusnya aktif
+        $this->db->where(array('lowongan_kerja.status' =>  1));
+
+        // jika data yang dicari ada
+        if ($search) {
+            $this->db->group_start();
+            $this->db->like('posisi_lowongan', $search);
+            $this->db->group_end();
+        }
+
         // mengambil data dan dijadikan num_row
-        return $this->db->get('lowongan_kerja')->num_rows();
+        return $this->db->get()->row()->total_lowongan;
     }
 
     // ambil data lowongan berdasarkan yang aktif dan tampilkan secara acak
