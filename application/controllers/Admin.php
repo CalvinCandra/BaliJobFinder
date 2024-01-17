@@ -196,38 +196,19 @@ class Admin extends CI_Controller {
     // Fungsi untuk melakukan edit data perusahaan
     public function editperusahaan()
     {
-        // melakukan pengecekan apakah ada logo di unggah atau tidak
-        if (!empty($_FILES['logo_file']['name'])) {
-            // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/img/profile/perusahaan';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size']      = 2048; // 2MB
-    
-            $this->load->library('upload', $config);
-    
-            if ($this->upload->do_upload('logo_file')) {
-                $upload_data = $this->upload->data();
-                $logo_path = $upload_data['file_name'];
-    
-                // menyimpan logo ke database
-                $this->M_admin->SavelogoPerusahaan($logo_path);
-            } else {
-                // mengatasi jika error
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('upload_error', $error);
-            }
-        }
 
-        $editperusahaan = $this->M_admin->editPerusahaan();
+        $id = $this->input->post('id');
+        $logo = $this->input->post('hapusGambar');
+        $nama_perusahaan = $this->input->post('nama_perusahaan');
+        $alamat_perusahaan = $this->input->post('alamat_perusahaan');
+        $tlp_perusahaa = $this->input->post('tlp_perusahaan');
+        $kota = $this->input->post('kota');
 
-        if($editperusahaan){
-            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Perusahaan');
-            redirect('admin/dataPerusahaan');
-        }else{
-            $this->SweetAlert('error', 'Gagal!', 'Gagal Update Data Perusahaan');
-            redirect('admin/dataPerusahaan');
-        }
-        
+        // kirim inputan ke model
+        $this->M_admin->editPerusahaan($nama_perusahaan, $alamat_perusahaan, $tlp_perusahaa, $kota, $id, $logo);
+
+        $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Perusahaan');
+        redirect('admin/dataPerusahaan');
     }
 
     
@@ -248,37 +229,19 @@ class Admin extends CI_Controller {
     // Fungsi untuk melakukan edit data pelamar
     public function editpelamar()
     {
-        // melakukan pengecekan apakah ada file di unggah atau tidak
-        if (!empty($_FILES['logo_file']['name'])) {
-            // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/img/profile/pelamar';
-            $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size']      = 2048; // 2MB
-    
-            $this->load->library('upload', $config);
-    
-            if ($this->upload->do_upload('logo_file')) {
-                $upload_data = $this->upload->data();
-                $logo_path = $upload_data['file_name'];
-    
-                // menyimpan logo ke database
-                $this->M_admin->SavelogoPelamar($logo_path);
-            } else {
-                // mengatasi jika error
-                $error = $this->upload->display_errors();
-                $this->session->set_flashdata('upload_error', $error);
-            }
-        }
+        $id = $this->input->post('id');
+        $gambar = $this->input->post('nama_lengkap');
+        $nama_lengkap = $this->input->post('nama_lengkap');
+        $no_hp = $this->input->post('no_hp');
+        $alamat = $this->input->post('alamat');   
+        $deskripsi_pelamar = $this->input->post('deskripsi');   
 
-        $editpelamar = $this->M_admin->editpelamar();
+        // kirim ke model
+        $this->M_admin->editpelamar($nama_lengkap, $no_hp, $alamat, $deskripsi_pelamar, $id, $gambar);
 
-        if($editpelamar){
-            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Pelamar');
-            redirect('admin/dataPelamar');
-        }else{
-            $this->SweetAlert('error', 'Gagal!', 'Gagal Update Data Pelamar');
-            redirect('admin/dataPelamar');
-        }
+        $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Pelamar');
+        redirect('admin/dataPelamar');
+
     }
 
     // Fungsi untuk menghapus data pelamar berdasarkan ID

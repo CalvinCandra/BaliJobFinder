@@ -119,31 +119,42 @@ class Pelamar extends CI_Controller {
         // melakukan pengecekan apakah ada file di unggah atau tidak
         if (!empty($_FILES['logo_file']['name'])) {
 
+            // Config untuk upload file berupa foto
+            $config['upload_path']   = './assets/img/profile/pelamar'; //tempat upload logonya nanti
+            $config['allowed_types'] = 'jpeg|jpg|png'; // esktesion yang diperbolehkan
+            $config['max_size']      = 3072000; // set ukuran menjadi 3mb (dalam byte)
+            $config['file_name'] = date("his").'_'.$_FILES['logo_file']['name'];
+    
+            $this->load->library('upload', $config);
+
+            // pengecekan gambar
+            // jika gambar lebih dari 3 MB
+            if($_FILES['logo_file']['size'] >= $config['max_size']){
+                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Ukuran Max 3MB');
+                redirect('pelamar/profile');
+
+            // jika gambar tidak sesuai typenya
+            }else if(!$_FILES['logo_file']['type'] == $config['allowed_types']){
+                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .jpeg .png');
+                redirect('pelamar/profile');
+            }
+
+            
             // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
             if(!empty($pelamar->gambar)){
                 unlink('assets/img/profile/pelamar/' .$pelamar->gambar);
             }
 
-            // Config untuk upload file berupa foto
-            $config['upload_path']   = './assets/img/profile/pelamar'; //tempat upload logonya nanti
-            $config['allowed_types'] = 'jpg|png'; // esktesion yang diperbolehkan
-            $config['max_size']      = 5048; // set ukuran menjadi 5mb
-            $config['file_name'] = date("his").'_'.$_FILES['logo_file']['name'];
-    
-            $this->load->library('upload', $config);
     
             //jika file gambar diupload
             if ($this->upload->do_upload('logo_file')) {
+
                 // upload
                 $upload_data = $this->upload->data();
     
                 // menyimpan logo ke database
                 $this->M_pelamar->saveLogoPath($pelamar->id_pelamar, $upload_data['file_name']);
 
-            } else {
-                // mengatasi jika error
-                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .png Dengan Ukuran Max 5MB');
-                redirect('pelamar/profile');
             }
         }
 
