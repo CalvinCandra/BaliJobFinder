@@ -129,7 +129,7 @@ class Balijobfinder extends CI_Controller {
         // config pagination for lowongan
         // ambil jumlah data lowongan kerja
 
-        $jumlah_data = $this->M_landing->jumlahLowongan();
+        $jumlah_data = $this->M_landing->jumlahLowongan($data['search']);
 
         $config['base_url'] = base_url(). 'Balijobfinder/Lowongan';
         $config['total_rows'] = $jumlah_data;

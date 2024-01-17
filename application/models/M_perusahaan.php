@@ -11,10 +11,23 @@
         }
 
         // function untuk menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function LowonganCount($id_perusahaan)
+        public function LowonganCount($id_perusahaan, $keyword=null)
         {
-            // menghitung jumlah lowongan berdasarkan id lowongan
-            return $this->db->where('fk_id_perusahaan', $id_perusahaan)->count_all_results('lowongan_kerja');
+            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            $this->db->select('COUNT(*) as total_lowongan');
+            $this->db->from('data_perusahaan');
+            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+
+            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+            // jika data yang dicari ada
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('salary', $keyword);
+                $this->db->group_end();
+            }
+
+            return $this->db->get()->row()->total_lowongan;
                     
         }
 

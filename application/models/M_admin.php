@@ -4,18 +4,55 @@
     
     class M_admin extends CI_Model {
         // function untuk menghitung jumlah keselurahan lowongan
-        public function LowonganCount(){
-            return $this->db->count_all_results('lowongan_kerja');
+        public function LowonganCount($keyword=null){
+            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            $this->db->select('COUNT(*) as total_lowongan');
+            $this->db->from('data_perusahaan');
+            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+            
+            // jika data yang dicari ada
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('salary', $keyword);
+                $this->db->or_like('nama_perusahaan', $keyword);
+                $this->db->group_end();
+            }
+
+            // menghitung jumlah lowongan 
+            return $this->db->get()->row()->total_lowongan;
         }
 
         // function untuk menghitung jumlah keselurahan akun perusahaan
-        public function PerusahaanCount(){
-            return $this->db->count_all_results('data_perusahaan');
+        public function PerusahaanCount($keyword=null){
+            // menghitung jumlah pelamar pada table
+            $this->db->select('COUNT(*) as total_perusahaan');
+            $this->db->from('data_perusahaan');
+
+            // pencarian data di tabel berdasarkan keyword
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('nama_perusahaan', $keyword);
+                $this->db->group_end();
+            }
+
+            return $this->db->get()->row()->total_perusahaan;
         }
 
         // function untuk menghitung jumlah keselurahan akun pelamar
-        public function PelamarCount(){
-            return $this->db->count_all_results('data_pelamar');
+        public function PelamarCount($keyword=null){
+            // menghitung jumlah pelamar pada table
+            $this->db->select('COUNT(*) as total_pelamar');
+            $this->db->from('data_pelamar');
+
+            // pencarian data di tabel berdasarkan keyword untuk result
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('nama_lengkap', $keyword);
+                $this->db->group_end();
+            }
+
+            return $this->db->get()->row()->total_pelamar;
         }
 
         // function untuk mengambil data perusahaan dan meng join 2 tabel lowongan_kerja Dengan data_perusahaan
@@ -31,6 +68,7 @@
                 $this->db->group_start();
                 $this->db->like('posisi_lowongan', $keyword);
                 $this->db->or_like('salary', $keyword);
+                $this->db->or_like('nama_perusahaan', $keyword);
                 $this->db->group_end();
             }
 
@@ -136,9 +174,9 @@
         {
             $edit = array(
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'no_hp' => $this->input->post('no_hp'),
                 'alamat' => $this->input->post('alamat'),   
+                'deskripsi_pelamar' => $this->input->post('deskripsi'),   
             );
 
             $this->db->where('id_pelamar', $this->input->post('id'));

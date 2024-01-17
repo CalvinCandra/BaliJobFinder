@@ -56,14 +56,25 @@
         }
 
          // function get jumlah lamaran
-         public function LamaranCount($id_pelamar)
+         public function LamaranCount($id_pelamar,$keyword=null)
          {
              $this->db->select('COUNT(*) as total_lamaran');
              $this->db->from('lamaran');
              // join table data_pelamar
              $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
+            //  join table lowongan_kerja, data_perusahaan untuk count result di pencarian
+             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
+             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
              $this->db->where('lamaran.fk_id_pelamar', $id_pelamar);
  
+             // jika ada data yang dicari oleh user
+            if ($keyword) {
+                $this->db->group_start();
+                $this->db->like('posisi_lowongan', $keyword);
+                $this->db->or_like('nama_perusahaan', $keyword);
+                $this->db->group_end();
+            }
+
              return $this->db->get()->row()->total_lamaran;
          }
  
@@ -88,7 +99,7 @@
             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
             $this->db->where(array(
-                'lamaran.fk_id_pelamar', $id_pelamar,
+                'lamaran.fk_id_pelamar'=> $id_pelamar,
             ));
 
             // jika ada data yang dicari oleh user

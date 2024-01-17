@@ -46,7 +46,7 @@
                             <tbody>
                             <?php foreach ($pelamar->result_array() as $key): ?>
                                 <tr>
-                                    <td><?= $key['id_pelamar']?></td>
+                                    <td><?= ++$start?></td>
                                     <td>
                                         <?php if (empty($key['gambar'])): ?>
                                             <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
@@ -99,7 +99,7 @@
                                 </div>
            
                     <div class="form-group">
-                        <label for="namapelamarEdit">Nama Pelamar :</label>
+                        <label for="namapelamarEdit">Nama Lengkap :</label>
                         <input type="text" class="form-control" value="<?= $key['nama_lengkap'] ?>" disabled>
                     </div>
                     <div class="form-group">
@@ -107,12 +107,16 @@
                         <input type="text" class="form-control" value="<?= $key['email'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="nohppelamarEdit">No Hp :</label>
+                        <label for="nohppelamarEdit">Nomor Handphone :</label>
                         <input type="text" class="form-control" value="<?= $key['no_hp'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="alamatpelamarEdit">Alamat :</label>
-                        <input type="text" class="form-control" value="<?= $key['alamat'] ?>" disabled>
+                        <label for="alamatpelamarEdit">Alamat:</label>
+                        <textarea name="alamat" class="form-control" rows ="3" disabled><?php echo $key['alamat'] ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsipelamarEdit">Deskripsi Pelamar:</label>
+                        <textarea name="deskripsi" class="form-control" rows ="4" disabled><?php echo $key['deskripsi_pelamar'] ?></textarea>
                     </div>
                 </form>
             </div>
@@ -124,7 +128,7 @@
 </div>
 <?php endforeach ?>
 
-<!-- Modal Edit perusahaan -->
+<!-- Modal Edit pelamar -->
 <?php foreach ($pelamar->result_array() as $key): ?>
 <div class="modal fade" id="editpelamarmodal<?php echo $key['id_pelamar'] ?>" tabindex="-1" role="dialog" aria-labelledby="editpelamarmodalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -150,7 +154,7 @@
                                     <input type="file" id="logo" name="logo_file" class="form-control-file" accept="image/*">
                                 </div>
                     <div class="form-group">
-                        <label for="namapelamarEdit">Nama Pelamar:</label>
+                        <label for="namapelamarEdit">Nama Lengkap:</label>
                         <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_pelamar'] ?>">
                         <input type="text" class="form-control" name="nama_lengkap" value="<?php echo $key['nama_lengkap'] ?>" required>
                     </div>
@@ -159,14 +163,17 @@
                         <input type="text" class="form-control" name="email" value="<?php echo $key['email'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="nohppelamarEdit">No Hp:</label>
+                        <label for="nohppelamarEdit">Nomor Handphone:</label>
                         <input type="text" class="form-control" name="no_hp" value="<?php echo $key['no_hp'] ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="alamatpelamarEdit">Alamat:</label>
-                        <input type="text" class="form-control" name="alamat" value="<?php echo $key['alamat'] ?>" required>
+                        <textarea name="alamat" class="form-control" rows ="3" required><?php echo $key['alamat'] ?></textarea>
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="deskripsipelamarEdit">Deskripsi Pelamar:</label>
+                        <textarea name="deskripsi" class="form-control" rows ="4" required><?php echo $key['deskripsi_pelamar'] ?></textarea>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

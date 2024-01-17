@@ -44,7 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $nomor=1;foreach ($lamaran->result_array() as $key): ?>
+                                <?php foreach ($lamaran->result_array() as $key): ?>
                                 <tr>
                                     <td><?= ++$start ?></td>
                                     <td><?php echo $key['nama_lengkap'] ?></td>

@@ -207,7 +207,7 @@ class Admin extends CI_Controller {
     
             if ($this->upload->do_upload('logo_file')) {
                 $upload_data = $this->upload->data();
-                $logo_path = 'assets/img/profile/perusahaan/' . $upload_data['file_name'];
+                $logo_path = $upload_data['file_name'];
     
                 // menyimpan logo ke database
                 $this->M_admin->SavelogoPerusahaan($logo_path);
@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
 
         $editperusahaan = $this->M_admin->editPerusahaan();
 
-        if($editlperusahaan){
+        if($editperusahaan){
             $this->SweetAlert('success', 'Berhasil!', 'Berhasil Update Data Perusahaan');
             redirect('admin/dataPerusahaan');
         }else{
@@ -259,7 +259,7 @@ class Admin extends CI_Controller {
     
             if ($this->upload->do_upload('logo_file')) {
                 $upload_data = $this->upload->data();
-                $logo_path = 'assets/img/profile/pelamar/' . $upload_data['file_name'];
+                $logo_path = $upload_data['file_name'];
     
                 // menyimpan logo ke database
                 $this->M_admin->SavelogoPelamar($logo_path);

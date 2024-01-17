@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-group">
                         <label for="alamatowonganDetail">Alamat Perusahaan:</label>
-                        <input type="text" class="form-control" value="<?= $key['alamat_perusahaan'] ?>" disabled>
+                        <textarea class="form-control" rows ="3" disabled><?php echo $key['alamat_perusahaan'] ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="posisiLowonganDetail">Posisi Lowongan :</label>

@@ -40,25 +40,25 @@
     
             <div class="bungkus-alasan">
                 <div class="gambar">
-                    <img src="<?php echo base_url("assets/img/landing/Job Detail 1.png")?>" alt="Gambar Alasan">
+                    <img src="<?php echo base_url("assets/img/landing/search lowongan 1.png")?>" alt="Gambar Alasan">
                 </div>
                 <div class="judul-card">
                     <h5>Career Finder</h5>
                 </div>
                 <div class="text">
-                    <p>Temukan karir impian Anda dengan mudah, yang sesuai dengan preferensi dan passion Anda dalam beberapa detik</p>
+                    <p>Temukan karir impian Anda dengan mudah, yang sesuai dengan preferensi dan passion Anda dalam beberapa detik.</p>
                 </div>            
             </div>
     
             <div class="bungkus-alasan">
                 <div class="gambar">
-                    <img src="<?php echo base_url("assets/img/landing/search lowongan 1.png")?>" alt="Gambar Alasan">
+                    <img src="<?php echo base_url("assets/img/landing/Job Detail 1.png")?>" alt="Gambar Alasan">
                 </div>
                 <div class="judul-card">
                     <h5>Detail Lowongan</h5>
                 </div>
                 <div class="text">
-                    <p>Dapat melihat detail lowongan yang jelas sesuai dengan kebutuhhan Anda</p>
+                    <p>Detail lowongan akan mempermudah anda dalam mendapatkan informasi yang komprehensif tentang pekerjaan yang anda cari.</p>
                 </div>            
             </div>
         </div>

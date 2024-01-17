@@ -8,7 +8,7 @@
                 <div class="col-md-6">
                     <form action="<?= base_url('Pelamar/managementStatus') ?>" method="post">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="searchLowongan" placeholder="daftar lamaran..." name="keyword" autocomplete="off" autofocus>
+                            <input type="text" class="form-control" id="searchLowongan" placeholder="cari daftar lamaran..." name="keyword" autocomplete="off" autofocus>
                             <div class="input-group-append">
                                 <input class="btn btn-outline-secondary" type="submit" name="cari" value="cari">
                             </div>
@@ -26,7 +26,12 @@
                         <h3 class="card-title">Kelola Lowongan</h3>
                     </div> -->
                     <div class="card-body">
-                        <h5>Results : <?= $totalLamaran?></h5>
+                        <h5>Results : <?= $total_rows; ?></h5>
+                         <?php if ($keyword && $lamaran->num_rows() == 0): ?>
+                        <div class="alert alert-danger" role="alert">
+                            Data tidak ditemukan untuk kata kunci "<?php echo $keyword; ?>"
+                        </div>
+                        <?php elseif ($lamaran->num_rows() > 0): ?>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -42,7 +47,7 @@
                                 foreach ($lamaran->result_array() as $key): 
                             ?>
                                 <tr>
-                                    <td><?= $nomor++?></td>
+                                    <td><?= ++$start?></td>
                                     <td><?= $key['posisi_lowongan']?></td>
                                     <td><?= $key['nama_perusahaan']?></td>
                                     <td>
@@ -58,6 +63,7 @@
                                 <?php endforeach?>
                             </tbody>
                         </table>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
