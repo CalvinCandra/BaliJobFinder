@@ -230,7 +230,7 @@ class Admin extends CI_Controller {
     public function editpelamar()
     {
         $id = $this->input->post('id');
-        $gambar = $this->input->post('nama_lengkap');
+        $gambar = $this->input->post('hapusGambar');
         $nama_lengkap = $this->input->post('nama_lengkap');
         $no_hp = $this->input->post('no_hp');
         $alamat = $this->input->post('alamat');   
