@@ -130,34 +130,55 @@
          }
 
         // mengedit atau update data perusahhaan
-        public function editperusahaan()
+        public function editperusahaan($nama_perusahaan, $alamat_perusahaan, $tlp_perusahaa, $kota, $id, $logo)
         {
-             $edit = array(
-                 'nama_perusahaan' => $this->input->post('nama_perusahaan'),
-                 'alamat_perusahaan' => $this->input->post('alamat_perusahaan'),
-                 'tlp_perusahaan' => $this->input->post('tlp_perusahaan'),
-                 'kota' => $this->input->post('kota'),
-                 
-             );
+            if($logo == '1'){
+                $edit = array(
+                    'nama_perusahaan' => $nama_perusahaan,
+                    'alamat_perusahaan' => $alamat_perusahaan,
+                    'tlp_perusahaan' => $tlp_perusahaa,
+                    'kota' => $kota,
+                    'logo' => NULL
+                );
 
-             $this->db->where('id_perusahaan', $this->input->post('id'));
-             $result = $this->db->update('data_perusahaan', $edit);
+                // mengambil data perusahaan
+                $perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row();
 
-            if($result) {
-                // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
-                $email_baru = $this->input->post('email');
-                $this->db->where('id_users', $id_users);
-                $this->db->update('users', ['email' => $email_baru]);
+                // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
+                if(!empty($perusahaan->logo)){
+                    unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
+                }
+
+                // update
+                $result = $this->db->update('data_perusahaan', $edit, $perusahaan->id_perusahaan);
+   
+               if($result) {
+                   // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
+                   $email_baru = $this->input->post('email');
+                   $this->db->where('id_users', $id_users);
+                   $this->db->update('users', ['email' => $email_baru]);
+               }
+
+            }else{
+                $edit = array(
+                    'nama_perusahaan' => $nama_perusahaan,
+                    'alamat_perusahaan' => $alamat_perusahaan,
+                    'tlp_perusahaan' => $tlp_perusahaa,
+                    'kota' => $kota,
+                );
+
+                $this->db->where('id_perusahaan', $id);
+                $result = $this->db->update('data_perusahaan', $edit);
+   
+               if($result) {
+                   // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
+                   $email_baru = $this->input->post('email');
+                   $this->db->where('id_users', $id_users);
+                   $this->db->update('users', ['email' => $email_baru]);
+               }
+   
             }
-
-             return $result;
-        }
-
-        // menyimpan logo perusahaan ke dalam tabel
-        public function SavelogoPerusahaan($logoPath)
-        {
-            $this->db->where('id_perusahaan', $this->input->post('id'));
-            $this->db->update('data_perusahaan', ['logo' => $logoPath]);
+             
         }
 
         // menghapus data perusahaan dari tabel
@@ -170,33 +191,53 @@
 
           
         // mengedit atau update data pelamar
-        public function editpelamar()
+        public function editpelamar($nama_lengkap, $no_hp, $alamat, $deskripsi_pelamar, $id, $gambar)
         {
-            $edit = array(
-                'nama_lengkap' => $this->input->post('nama_lengkap'),
-                'no_hp' => $this->input->post('no_hp'),
-                'alamat' => $this->input->post('alamat'),   
-                'deskripsi_pelamar' => $this->input->post('deskripsi'),   
-            );
 
-            $this->db->where('id_pelamar', $this->input->post('id'));
-            $result = $this->db->update('data_pelamar', $edit);
+            if($gambar == '1'){
+                $edit = array(
+                    'nama_lengkap' => $nama_lengkap,
+                    'no_hp' => $no_hp,
+                    'alamat' => $alamat,   
+                    'deskripsi_pelamar' => $deskripsi_pelamar,   
+                    'gambar' => NULL,   
+                );
 
-            if ($result) {
-                // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
-                $email_baru = $this->input->post('email');
-                $this->db->where('id_users', $id_users);
-                $this->db->update('users', ['email' => $email_baru]);
+                // mengambil data pelamar
+                $pelamar = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row();
+
+                // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
+                if(!empty($pelamar->logo)){
+                    unlink('assets/img/profile/pelamar/' .$pelamar->gambar);
+                }
+
+                // update
+                $result = $this->db->update('data_pelamar', $edit, $pelamar->id_pelamar);
+
+                if ($result) {
+                    // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
+                    $email_baru = $this->input->post('email');
+                    $this->db->where('id_users', $id_users);
+                    $this->db->update('users', ['email' => $email_baru]);
+                }
+            }else{
+                $edit = array(
+                    'nama_lengkap' => $nama_lengkap,
+                    'no_hp' => $no_hp,
+                    'alamat' => $alamat,   
+                    'deskripsi_pelamar' => $deskripsi_pelamar,     
+                );
+
+                $this->db->where('id_pelamar',$id);
+                $result = $this->db->update('data_pelamar', $edit);
+
+                if ($result) {
+                    // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
+                    $email_baru = $this->input->post('email');
+                    $this->db->where('id_users', $id_users);
+                    $this->db->update('users', ['email' => $email_baru]);
+                }
             }
-
-            return $result;
-        }
-  
-        // menyimpan profile pelamar ke dalam tabel
-        public function SavelogoPelamar($logoPath)
-        {
-            $this->db->where('id_pelamar', $this->input->post('id'));
-            $this->db->update('data_pelamar', ['gambar' => $logoPath]);
         }
  
         // menghapus data pelamar dari tabel

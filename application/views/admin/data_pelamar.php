@@ -78,7 +78,7 @@
 <!-- Modal Detail pelamar -->
 <?php foreach ($pelamar->result_array() as $key): ?>
 <div class="modal fade" id="datapelamarDetail<?php echo $key['id_pelamar'] ?>" tabindex="-1" role="dialog" aria-labelledby="datapelamarDetailLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="datapelamarDetailLabel">Detail Pelamar</h5>
@@ -131,7 +131,7 @@
 <!-- Modal Edit pelamar -->
 <?php foreach ($pelamar->result_array() as $key): ?>
 <div class="modal fade" id="editpelamarmodal<?php echo $key['id_pelamar'] ?>" tabindex="-1" role="dialog" aria-labelledby="editpelamarmodalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editpelamarmodalLabel">Edit Pelamar</h5>
@@ -141,21 +141,29 @@
             </div>
             <div class="modal-body">
                 <form method="post" action="<?php echo base_url('admin/editPelamar') ?>" enctype="multipart/form-data">
-                <div class="form-group">
-                                    <label for="logo">Profile Pelamar:</label>
-                                    <br>
-                                    <?php if (empty($key['gambar'])): ?>
-                                        <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
-                                    <?php else: ?>
-                                        <img src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>" alt="Logo Preview" width="100">
-                                    <?php endif; ?>
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" id="logo" name="logo_file" class="form-control-file" accept="image/*">
-                                </div>
+                    <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_pelamar'] ?>">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-group">
+                            <label for="logo">Profile Pelamar:</label>
+                            <br>
+                            <?php if (empty($key['gambar'])): ?>
+                                <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
+                            <?php else: ?>
+                                <img src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>" alt="Logo Preview" width="100">
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group mt-4 ml-3">
+                            <!-- <form action="<??>" method="post"></form> -->
+                            <input class="form-check-input" type="checkbox" value="1" name="hapusGambar" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Hapus Gambar?
+                            </label>
+                        </div>
+                    </div>
+                        
                     <div class="form-group">
                         <label for="namapelamarEdit">Nama Lengkap:</label>
-                        <input type="hidden" class="form-control" name="id" value="<?php echo $key['id_pelamar'] ?>">
                         <input type="text" class="form-control" name="nama_lengkap" value="<?php echo $key['nama_lengkap'] ?>" required>
                     </div>
                     <div class="form-group">
