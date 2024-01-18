@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin-top: 57px;">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -167,7 +167,7 @@
                         <input type="text" class="form-control" name="nama_lengkap" value="<?php echo $key['nama_lengkap'] ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="emailpelamarEdit">Email Perusahaan:</label>
+                        <label for="emailpelamarEdit">Email Pelamar:</label>
                         <input type="text" class="form-control" name="email" value="<?php echo $key['email'] ?>" required>
                     </div>
                     <div class="form-group">
@@ -206,7 +206,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus lowongan ini?
+                    Apakah Anda yakin ingin menghapus data akun pelamar ini?
                 </div>
                 <div class="modal-footer">
                     <form method="post" action="<?php echo base_url('admin/deletepelamar/'.$key['id_pelamar']) ?>">

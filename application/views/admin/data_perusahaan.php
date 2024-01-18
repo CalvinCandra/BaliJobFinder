@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin-top: 57px;">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -145,7 +145,7 @@
 
                     <div class="d-flex align-items-center">
                         <div class="form-group">
-                            <label for="logo">Profile Pelamar:</label>
+                            <label for="logo">Logo Perusahaan:</label>
                             <br>
                             <?php if (empty($key['logo'])): ?>
                                 <img src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo" width="100">
@@ -195,7 +195,7 @@
 </div>
 <?php endforeach ?>
 
-<!-- Modal Hapus Lowongan -->
+<!-- Modal Hapus Perusahaan -->
 <?php foreach ($perusahaan->result_array() as $key): ?>
     <div class="modal fade" id="modalhapusdataperusahaan<?php echo $key['id_perusahaan'] ?>" tabindex="-1" role="dialog" aria-labelledby="modalhapusdataperusahaanLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -207,7 +207,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus lowongan ini?
+                    Apakah Anda yakin ingin menghapus Akun Perusahaan ini?
                 </div>
                 <div class="modal-footer">
                     <form method="post" action="<?php echo base_url('admin/deleteperusahaan/'.$key['id_perusahaan']) ?>">

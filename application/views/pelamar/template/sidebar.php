@@ -29,7 +29,7 @@
             <a href="<?= base_url('Pelamar/managementStatus')?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Status Lamaran
+                Daftar Lamaran
               </p>
             </a>
           </li>
