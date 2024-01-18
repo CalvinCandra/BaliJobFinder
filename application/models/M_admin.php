@@ -182,11 +182,32 @@
         }
 
         // menghapus data perusahaan dari tabel
-        public function deleteperusahaan($id)
+        public function deletePerusahaan($id)
         {
-            $this->db->where('id_perusahaan', $id);
-            $result = $this->db->delete('data_perusahaan');
-            return $result;
+            // Mulai transaksi
+            $this->db->trans_start();
+
+            // mendapatkan id users
+            $user_id = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row()->fk_id_users;
+
+            // Hapus logo agar hemat memori
+            $image = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row()->logo;
+            unlink('assets/img/profile/perusahaan/' . $image);
+
+            // Hapus data lowongan kerja
+            $this->db->where('fk_id_perusahaan', $id)->delete('lowongan_kerja');
+
+            // Hapus data perusahaan
+            $this->db->where('id_perusahaan', $id)->delete('data_perusahaan');
+
+            // Hapus data users
+            $this->db->where('id_users', $user_id)->delete('users');
+
+            // Selesai transaksi
+            $this->db->trans_complete();
+
+            // Kembalikan status transaksi
+            return $this->db->trans_status();
         }
 
           
@@ -241,11 +262,45 @@
         }
  
         // menghapus data pelamar dari tabel
-        public function deletepelamar($id)
+        public function deletePelamar($id)
         {
-            $this->db->where('id_pelamar', $id);
-            $result = $this->db->delete('data_pelamar');
-            return $result;
+            // Mulai transaksi
+            $this->db->trans_start();
+
+            // mendapatkan id users
+            $user_id = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->fk_id_users;
+
+            // Hapus gambar
+            $image = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->gambar;
+            unlink('assets/img/profile/pelamar/' . $image);
+
+            // Hapus CV untuk hemat memori
+            $fileCV = $this->db->get_where('lamaran', ['fk_id_pelamar' => $id])->row()->cv;
+            unlink('assets/CV/' . $fileCV);
+
+            // Hapus data dari tabel lamaran
+            $this->db->where('fk_id_pelamar', $id)->delete('lamaran');
+
+            // Hapus data dari tabel pendidikan
+            $this->db->where('fk_id_pelamar', $id)->delete('pendidikan');
+
+            // Hapus data dari tabel pengalaman
+            $this->db->where('fk_id_pelamar', $id)->delete('pengalaman');
+
+            // Hapus data dari tabel skil
+            $this->db->where('fk_id_pelamar', $id)->delete('skil');
+
+            // Hapus data dari tabel data_pelamar
+            $this->db->delete('data_pelamar', ['id_pelamar' => $id]);
+
+            // Hapus data dari tabel users
+            $this->db->delete('users', ['id_users' => $user_id]);
+
+            // Selesai transaksi
+            $this->db->trans_complete();
+
+            // Kembalikan status transaksi
+            return $this->db->trans_status();
         }
     
     }

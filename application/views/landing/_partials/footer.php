@@ -17,7 +17,7 @@
 
             <div class="icon-kontak">
                 <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-                <p>087777777777</p>
+                <p>085739076216</p>
             </div>
         </div>
     </div>
