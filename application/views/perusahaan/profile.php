@@ -63,10 +63,11 @@
                                     <input type="text" class="form-control" name="kota" value="<?php echo $key['kota']; ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat:</label>
+                                    <label for="alamat">Alamat Perusahaan:</label>
                                     <textarea class="form-control" name="alamat" rows="3" required><?php echo $key['alamat_perusahaan']; ?></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Simpan Profile</button>
                             </form>
                         </div>
                     <?php endforeach ?>

@@ -288,10 +288,10 @@ class Perusahaan extends CI_Controller {
 
         if($hapuslamaran){
             $this->SweetAlert('success', 'Berhasil!', 'Berhasil Hapus Lamaran');
-            redirect('perusahaan/management');
+            redirect('perusahaan/lamaran');
         }else{
             $this->SweetAlert('error', 'Gagal!', 'Gagal Hapus Lamaran');
-            redirect('perusahaan/management');
+            redirect('perusahaan/lamaran');
         }
     }
 

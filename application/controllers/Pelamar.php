@@ -413,7 +413,7 @@ class Pelamar extends CI_Controller {
         }
 
         // config pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/Pelamar/StatusLamaran';
+        $config['base_url'] = 'http://localhost/BaliJobFinder/Pelamar/managementStatus';
         $config['total_rows'] = $this->M_pelamar->LamaranCount($pelamar->id_pelamar, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;

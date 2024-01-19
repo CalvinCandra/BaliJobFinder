@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin-top: 57px;">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -69,4 +69,5 @@
             </div>
         </div>
     </section>
+    <?= $this->pagination->create_links(); ?>
 </div>
