@@ -738,7 +738,7 @@
 
 					<div class="form-group">
 						<label for="status_kerja">Status Kerja</label>
-						<select name="status_kerja" class="form-control" id="statusUpdate">
+						<select name="status_kerja" class="form-control" id="statusUpdate<?= $key['id_pengalaman'] ?>">
 							<?php if($key['status_kerja'] == 0):?>
 								<option value="<?= $key['status_kerja']?>">Sudah Selesai Berkerja</option>
 								<option value="1">Masih Berkerja</option>
@@ -749,7 +749,7 @@
 						</select>
 					</div>
 
-					<div class="form-group" id="InputUpdate1" style="display:none;">
+					<div class="form-group" id="InputUpdate1<?= $key['id_pengalaman'] ?>" style="display:none;">
 						<label for="bulan_akhir_kerja">Bulan Selesai Kerja</label>
 						<select name="bulan_akhir_kerja" class="form-control" id="bulan_akhir">
 							<option value="<?= $key['bulan_akhir_kerja']?>" ><?= $key['bulan_akhir_kerja']?></option>
@@ -768,14 +768,14 @@
 						</select>
 					</div>
 
-					<div class="form-group" id="InputUpdate2" style="display:none;">
+					<div class="form-group" id="InputUpdate2<?= $key['id_pengalaman'] ?>" style="display:none;">
 						<label for="tahun_akhir_kerja">Tahun Selesai kerja</label>
 						<input type="number" class="form-control" name="tahun_akhir_kerja"
 							placeholder="Tahun akhir kerja" min="0" value="<?= $key['tahun_akhir_kerja']?>" id="tahun_akhir">
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" id="btn">Simpan</button>
+						<button type="submit" class="btn btn-primary" id="btn">Update</button>
 					</div>
 				</form>
 			</div>

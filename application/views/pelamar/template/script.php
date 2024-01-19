@@ -75,41 +75,30 @@ select.addEventListener("change", () => {
 
 <!-- untuk update pengalaman -->
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    <?php foreach ($pengalaman as $key): ?>
+        const selectt<?= $key['id_pengalaman'] ?> = document.getElementById("statusUpdate<?= $key['id_pengalaman'] ?>");
+        const input1<?= $key['id_pengalaman'] ?> = document.getElementById("InputUpdate1<?= $key['id_pengalaman'] ?>");
+        const input2<?= $key['id_pengalaman'] ?> = document.getElementById("InputUpdate2<?= $key['id_pengalaman'] ?>");
 
-  const selectt = document.getElementById("statusUpdate");
-  const input1 = document.getElementById("InputUpdate1");
-  const input2 = document.getElementById("InputUpdate2");
-  const ibulan = document.getElementById("bulan_akhir");
-  const tahun = document.getElementById("tahun_akhir");
-  const button = document.getElementById("btn");
+        const updateInputVisibility<?= $key['id_pengalaman'] ?> = () => {
+            if (selectt<?= $key['id_pengalaman'] ?>.value == "0" || selectt<?= $key['id_pengalaman'] ?>.value == "Sudah Selesai Bekerja") {
+                input1<?= $key['id_pengalaman'] ?>.style.display = "block";
+                input2<?= $key['id_pengalaman'] ?>.style.display = "block";
+            } else {
+                input1<?= $key['id_pengalaman'] ?>.style.display = "none";
+                input2<?= $key['id_pengalaman'] ?>.style.display = "none";
+            }
+        };
 
-  // Cek value select saat awal
-  if (selectt.value == "0") {
+        // Initial check
+        updateInputVisibility<?= $key['id_pengalaman'] ?>();
 
-    input1.style.display = "block";
-    input2.style.display = "block";
-
-  } else {
-
-    input1.style.display = "none";
-    input2.style.display = "none";
-
-  }
-
-  selectt.addEventListener("change", () => {
-
-    if (selectt.value == "0") {
-      input1.style.display = "block";
-      input2.style.display = "block";
-    } else {
-      input1.style.display = "none";
-      input2.style.display = "none";
-    }
-  });
-
-
- 
+        selectt<?= $key['id_pengalaman'] ?>.addEventListener("change", updateInputVisibility<?= $key['id_pengalaman'] ?>);
+    <?php endforeach; ?>
+});
 </script>
+
 
 </body>
 </html>
