@@ -192,8 +192,8 @@
                 </div>
                 <div class="modal-footer">
                     <form method="post" action="<?php echo base_url('perusahaan/deleteLowongan/'.$key['id_lowongan']) ?>">
-                        <button type="submit" class="btn btn-primary">Hapus</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
                     </form>
                 </div>
             </div>

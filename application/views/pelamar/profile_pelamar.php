@@ -12,7 +12,7 @@
 	}
 </style>
 
-<div class="content-wrapper">
+<div class="content-wrapper" style="margin-top: 57px;">
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row">
@@ -92,7 +92,20 @@
 								<textarea class="form-control" name="deskripsi" rows="3"
 									required><?php echo $key['deskripsi_pelamar']; ?></textarea>
 							</div>
-
+							<br>
+							<button type="submit" class="btn btn-primary">Simpan Biodata</button>
+						</form>
+					</div>
+					<?php endforeach ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
 							<!-- pendidikan -->
 							<div class="form-group">
 								<label for="pendidikan">Pendidikan</label> <a type="button"
@@ -283,12 +296,7 @@
                                     ?>
 								</div>
 							</div>
-
-
-							<button type="submit" class="btn btn-primary">Simpan Profile</button>
-						</form>
 					</div>
-					<?php endforeach ?>
 				</div>
 			</div>
 		</div>
@@ -526,7 +534,7 @@
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<h5 class="modal-title" id="TambahpendidikanModalLabel">Pendidikan</h5>
+				<h5 class="modal-title" id="TambahpendidikanModalLabel">Pengalaman</h5>
 			</div>
 
 			<div class="modal-body">
@@ -863,7 +871,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Simpan</button>
+						<button type="submit" class="btn btn-primary">Update</button>
 					</div>
 				</form>
 			</div>

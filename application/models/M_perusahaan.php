@@ -173,8 +173,21 @@
         // hapus lamaran dari table lamaran
         public function deleteLamaran($id)
         {
+            // Mulai transaksi
+            $this->db->trans_start();
+
+            // Hapus CV untuk hemat memori
+            $fileCV = $this->db->get_where('lamaran', ['id_lamaran' => $id])->row()->cv;
+            unlink('assets/CV/' . $fileCV);
+
             //memanggil sp_delete_lamaran 
-            return $this->db->query("call sp_delete_lamaran('".$id."')");
+            $this->db->query("call sp_delete_lamaran('".$id."')");
+
+            // Selesai transaksi
+            $this->db->trans_complete();
+
+            // Kembalikan status transaksi
+            return $this->db->trans_status();
         }   
 
         // mengkonfirmasi atau mengubah status lamaran pelamar
