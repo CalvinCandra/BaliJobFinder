@@ -752,7 +752,11 @@
 					<div class="form-group" id="InputUpdate1<?= $key['id_pengalaman'] ?>" style="display:none;">
 						<label for="bulan_akhir_kerja">Bulan Selesai Kerja</label>
 						<select name="bulan_akhir_kerja" class="form-control" id="bulan_akhir">
-							<option value="<?= $key['bulan_akhir_kerja']?>" ><?= $key['bulan_akhir_kerja']?></option>
+							<?php if($key['bulan_akhir_kerja'] == "NULL"):?>
+								<option value="" hidden>-- PILIH --</option>
+							<?php else:?>
+								<option value="<?= $key['bulan_akhir_kerja']?>" hidden><?= $key['bulan_akhir_kerja']?></option>
+							<?php endif;?>
 							<option value="Januari">Januari</option>
 							<option value="Februari">Februari</option>
 							<option value="Maret">Maret</option>
@@ -771,7 +775,7 @@
 					<div class="form-group" id="InputUpdate2<?= $key['id_pengalaman'] ?>" style="display:none;">
 						<label for="tahun_akhir_kerja">Tahun Selesai kerja</label>
 						<input type="number" class="form-control" name="tahun_akhir_kerja"
-							placeholder="Tahun akhir kerja" min="0" value="<?= $key['tahun_akhir_kerja']?>" id="tahun_akhir">
+							placeholder="Tahun Selesai kerja" min="0" value="<?= $key['tahun_akhir_kerja']?>" id="tahun_akhir">
 					</div>
 
 					<div class="modal-footer">

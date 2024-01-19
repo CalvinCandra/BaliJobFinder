@@ -221,19 +221,40 @@
 
         //function Update data Pengalaman
         public function UpdatePengalaman($jabatan, $statusPekerja, $perusahaan, $lokasi, $sistemKerja, $statusKerja, $bulanMulai, $tahunMulai, $bulanAkhir, $tahunAkhir, $pengalaman){
-            return $this->db->query("call sp_update_pengalaman(
-                '".$jabatan."',
-                '".$statusPekerja."',
-                '".$perusahaan."',
-                '".$lokasi."',
-                '".$sistemKerja."',
-                '".$statusKerja."',
-                '".$bulanMulai."',
-                '".$tahunMulai."',
-                '".$bulanAkhir."',
-                '".$tahunAkhir."',
-                '".$pengalaman."'
-            )");
+            // jika statusnya sudah selesai maka masukan juga inputan bulan dan tahun selesai
+            if($statusKerja == 0){
+                return $this->db->query("call sp_update_pengalaman(
+                    '".$jabatan."',
+                    '".$statusPekerja."',
+                    '".$perusahaan."',
+                    '".$lokasi."',
+                    '".$sistemKerja."',
+                    '".$statusKerja."',
+                    '".$bulanMulai."',
+                    '".$tahunMulai."',
+                    '".$bulanAkhir."',
+                    '".$tahunAkhir."',
+                    '".$pengalaman."'
+                )");
+
+            // jika statusnya Masih Kerja maka inputan bulan dan tahun selesai kerja dibuat NULL
+            }else{
+                return $this->db->query("call sp_update_pengalaman(
+                    '".$jabatan."',
+                    '".$statusPekerja."',
+                    '".$perusahaan."',
+                    '".$lokasi."',
+                    '".$sistemKerja."',
+                    '".$statusKerja."',
+                    '".$bulanMulai."',
+                    '".$tahunMulai."',
+                    'NULL',
+                    'NULL',
+                    '".$pengalaman."'
+                )");
+            }
+            
+
         }
 
         //function hapus data pendidikan
