@@ -4,8 +4,7 @@
     
     class M_pelamar extends CI_Model {
         // function get data pelamar
-        public function getDataPelamar($user_id)
-        {
+        public function getDataPelamar($user_id){
             return $this->db->get_where('data_pelamar', array('fk_id_users' => $user_id));
         }
 
@@ -23,8 +22,7 @@
                 }
             }
         }
-
-           
+  
         // function cek data pendidikan berdasarkan user yang login apakah ada atau tidak
         public function cekDataPendidikan($id_pelamar){
             // jika data pendidikan tidak ada
@@ -56,16 +54,12 @@
         }
 
          // function get jumlah lamaran
-         public function LamaranCount($id_pelamar,$keyword=null)
-         {
+         public function LamaranCount($id_pelamar,$keyword=null){
+
              $this->db->select('COUNT(*) as total_lamaran');
-             $this->db->from('lamaran');
-             // join table data_pelamar
-             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            //  join table lowongan_kerja, data_perusahaan untuk count result di pencarian
-             $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
-             $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-             $this->db->where('lamaran.fk_id_pelamar', $id_pelamar);
+             $this->db->from('lamaranpelamar');
+
+             $this->db->where('id_pelamar', $id_pelamar);
  
              // jika ada data yang dicari oleh user
             if ($keyword) {
@@ -76,31 +70,29 @@
             }
 
              return $this->db->get()->row()->total_lamaran;
-         }
+        }
  
          // function get jumlah lamaran berdasarkan statusnya belum terkonfirmasi
-         public function LamaranCountStatus($id_pelamar)
-         {
+         public function LamaranCountStatus($id_pelamar){
              $this->db->select('COUNT(*) as total');
-             $this->db->from('lamaran');
-             // join table data_pelamar
-             $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
+             $this->db->from('lamaranpelamar');
+        
              $this->db->where([
-                 'lamaran.fk_id_pelamar'=> $id_pelamar, 
-                 'lamaran.status_lamaran' => 'Belum Terkonfrimasi' 
+                 'id_pelamar'=> $id_pelamar, 
+                 'status_lamaran' => 'Belum Terkonfrimasi' 
              ]);
              return $this->db->get()->row()->total;
-         }
+        }
 
         //  function untuk get status lamaran
         public function getStatusLamaran($id_pelamar,  $limit, $start, $keyword = null){
             $this->db->select('*');
-            $this->db->from('lamaran');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
-            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-            $this->db->where(array(
-                'lamaran.fk_id_pelamar'=> $id_pelamar,
-            ));
+            $this->db->from('lamaranpelamar');
+
+            $this->db->where('id_pelamar', $id_pelamar);
+
+            // batasan pagination
+            $this->db->limit($limit, $start);
 
             // jika ada data yang dicari oleh user
             if ($keyword) {
@@ -109,9 +101,6 @@
                 $this->db->or_like('nama_perusahaan', $keyword);
                 $this->db->group_end();
             }
-
-            // batasan pagination
-            $this->db->limit($limit, $start);
 
             return $this->db->get();
         }
