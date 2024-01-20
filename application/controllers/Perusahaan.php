@@ -157,7 +157,7 @@ class Perusahaan extends CI_Controller {
 
         // config pagination
         $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/management';
-        $config['total_rows'] = $this->M_perusahaan->LowonganCount($DataPerusahaan->id_perusahaan, $data['keyword']);
+        $config['total_rows'] = $this->M_perusahaan->LowonganCount($users->id_users, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
 
@@ -277,7 +277,7 @@ class Perusahaan extends CI_Controller {
         $data['start'] = $this->uri->segment(3);
 
         // memanggil function getpelamar di M_perusahaan
-        $data['lamaran'] = $this->M_perusahaan->getPelamar($perusahaan->id_perusahaan,$config['per_page'],$data['start'],$data['key_lamaran']);
+        $data['lamaran'] = $this->M_perusahaan->getLamaran($perusahaan->id_perusahaan,$config['per_page'],$data['start'],$data['key_lamaran']);
         $this->template->load('perusahaan/template','perusahaan/daftar_pelamar',$data);
     }
 

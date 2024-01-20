@@ -5,14 +5,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_landing extends CI_Model {
 
+    // ambil data lowongan berdasarkan yang aktif dan tampilkan secara acak
+    public function getLowonganLanding(){
+        // manggil view database
+        $this->db->select('*');
+        $this->db->from('lowongan');
+        // kondisi jika statusnya aktif
+        $this->db->where('status',  1);
+        // mebuat data acak supaya mnampilkan secara acak
+        $this->db->order_by('lowongan_kerja.id_lowongan','RANDOM');
+       // batas 6 saja
+       $this->db->limit(6);
+
+       $query = $this->db->get();
+       return $query;
+   }
+
     // function untuk jumlah lowongan
     public function jumlahLowongan($search=null){
-        //join table dan hitung total lowongan digunakan untuk pagination saat search
+        //manggil view dan hitung total lowongan
         $this->db->select('COUNT(*) as total_lowongan');
-        $this->db->from('lowongan_kerja');
-        $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+        $this->db->from('lowongan');
         // kondisi jika statusnya aktif
-        $this->db->where(array('lowongan_kerja.status' =>  1));
+        $this->db->where('status', 1);
 
         // jika data yang dicari ada
         if ($search) {
@@ -25,32 +40,15 @@ class M_landing extends CI_Model {
         return $this->db->get()->row()->total_lowongan;
     }
 
-    // ambil data lowongan berdasarkan yang aktif dan tampilkan secara acak
-    public function getLowonganLanding(){
-         //join table
-         $this->db->select('*');
-         $this->db->from('lowongan_kerja');
-         $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-         // kondisi jika statusnya aktif
-         $this->db->where(array('lowongan_kerja.status' =>  1));
-         // mebuat data acak supaya mnampilkan secara acak
-         $this->db->order_by('lowongan_kerja.id_lowongan','RANDOM');
-        // batas 6 saja
-        $this->db->limit(6);
-
-        $query = $this->db->get();
-        return $query;
-    }
-
     // function untuk melihat lowongan yang lebih banyak, dan tampilkan secara acak
     public function getLowonganMore($limit, $start, $search=null){
 
-         //join table
+        //  manggil view
          $this->db->select('*');
-         $this->db->from('lowongan_kerja');
-         $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+         $this->db->from('lowongan');
+
          // kondisi jika statusnya aktif
-         $this->db->where(array('lowongan_kerja.status' =>  1));
+         $this->db->where(array('status' =>  1));
          // mebuat data acak supaya mnampilkan secara acak
          $this->db->order_by('lowongan_kerja.id_lowongan','RANDOM');
         // batas 16 saja
@@ -69,14 +67,14 @@ class M_landing extends CI_Model {
 
     // function untuk melihat data lowongan secara details
     public function getDataLowongan($posisi, $perusahaan){
-        //join table
+        // manggil view database
         $this->db->select('*');
-        $this->db->from('lowongan_kerja');
-        $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+        $this->db->from('lowongan');
+        
         $this->db->where(array(
-            'lowongan_kerja.status' => 1,
-            'lowongan_kerja.posisi_lowongan' => $posisi,
-            'data_perusahaan.nama_perusahaan' => $perusahaan,
+            'status' => 1,
+            'posisi_lowongan' => $posisi,
+            'nama_perusahaan' => $perusahaan,
         ));
 
         $query = $this->db->get();

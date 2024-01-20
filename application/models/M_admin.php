@@ -5,10 +5,9 @@
     class M_admin extends CI_Model {
         // function untuk menghitung jumlah keselurahan lowongan
         public function LowonganCount($keyword=null){
-            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            // view database
             $this->db->select('COUNT(*) as total_lowongan');
-            $this->db->from('data_perusahaan');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+            $this->db->from('lowongan');
             
             // jika data yang dicari ada
             if ($keyword) {
@@ -57,9 +56,9 @@
 
         // function untuk mengambil data perusahaan dan meng join 2 tabel lowongan_kerja Dengan data_perusahaan
         public function getlowongan($limit, $start,$keyword=null) {
+            // manggil view
             $this->db->select('*');
-            $this->db->from('lowongan_kerja');
-            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+            $this->db->from('lowongan');
 
             // menentukan batasan dari pagination
             $this->db->limit($limit,$start);
@@ -119,14 +118,11 @@
             return $this->db->query("call sp_update_lowongan('".$posisi."', '".$salary."','".$syarat."','".$status."','".$id_lowongan."')");
         }
 
-        
-
          // menghapus data lowongan dari tabel
          public function deleteLowongan($id)
          {
-             $this->db->where('id_lowongan', $id);
-             $result = $this->db->delete('lowongan_kerja');
-             return $result;
+            // memanggil sp_delete_lowongan
+            return $this->db->query("call sp_delete_lowongan('".$id."')");
          }
 
         // mengedit atau update data perusahhaan
@@ -210,7 +206,6 @@
             return $this->db->trans_status();
         }
 
-          
         // mengedit atau update data pelamar
         public function editpelamar($nama_lengkap, $no_hp, $alamat, $deskripsi_pelamar, $id, $gambar)
         {

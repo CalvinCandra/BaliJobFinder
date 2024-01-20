@@ -5,20 +5,19 @@
     class M_perusahaan extends CI_Model {
 
         // function untuk mengambil data perusahaan yang login
-        public function getPerusahaan($id_users)
-        {
+        public function getPerusahaan($id_users){
             return $this->db->get_where('data_perusahaan', array('fk_id_users' => $id_users));
         }
 
         // function untuk menghitung jumlah lowongan berdasarkan perusahaan yang login
-        public function LowonganCount($id_perusahaan, $keyword=null)
+        public function LowonganCount($user_id, $keyword=null)
         {
-            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            // hitung semua data
             $this->db->select('COUNT(*) as total_lowongan');
-            $this->db->from('data_perusahaan');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+            // memanggil view
+            $this->db->from('lowongan'); 
 
-            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+            $this->db->where('fk_id_users', $user_id);
             // jika data yang dicari ada
             if ($keyword) {
                 $this->db->group_start();
@@ -32,15 +31,15 @@
         }
 
         // function untuk menghitung jumlah lamaran berdasarkan lowongan kerja perusahaan
-        public function LamaranCount($user_id,$keyword=null)
+        public function LamaranCount($user_id, $keyword=null)
         {
-            // join 3 table yaitu lowongan_kerja, data_pelamar, data_perusahaan
+            // mengambil id perusahaan
+            $id_perusahaan = $this->getPerusahaan($user_id)->row()->id_perusahaan;
+
             $this->db->select('COUNT(*) as total_lamaran');
-            $this->db->from('lamaran');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
-            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
-            $this->db->where('data_perusahaan.fk_id_users', $user_id);
+            $this->db->from('lamaranpelamar'); //view
+           
+            $this->db->where('id_perusahaan', $id_perusahaan);
 
             // jika ada data yang dicari oleh user
             if ($keyword) {
@@ -103,12 +102,11 @@
         // function get data lowongan
         public function getLowongan($id_perusahaan, $limit, $start,$keyword=null)
         {
-            // meng join 2 tabel data_perusahaan dengan lowongan_kerja
+            // memanggil view database
             $this->db->select('*');
-            $this->db->from('data_perusahaan');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.fk_id_perusahaan = data_perusahaan.id_perusahaan');
+            $this->db->from('lowongan');
 
-            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+            $this->db->where('fk_id_perusahaan', $id_perusahaan);
             // menentukan batasan dari pagination
             $this->db->limit($limit,$start);
             
@@ -144,17 +142,17 @@
             return $this->db->query("call sp_delete_lowongan('".$id_lowongan."')");
         }
 
-        // function get data pelamar
-        public function getPelamar($id_perusahaan, $limit, $start, $keyword = null)
+        // function get data lamaran
+        public function getLamaran($id_perusahaan, $limit, $start, $keyword = null)
         {
             // join 3 table yaitu lowonngan_kerja, data_pelamar, data_perusahaan
             $this->db->select('*');
-            $this->db->from('lamaran');
-            $this->db->join('lowongan_kerja', 'lowongan_kerja.id_lowongan = lamaran.fk_id_lowongan');
-            $this->db->join('data_pelamar', 'data_pelamar.id_pelamar = lamaran.fk_id_pelamar');
-            $this->db->join('data_perusahaan', 'data_perusahaan.id_perusahaan = lowongan_kerja.fk_id_perusahaan');
+            $this->db->from('lamaranpelamar');
 
-            $this->db->where('data_perusahaan.id_perusahaan', $id_perusahaan);
+            $this->db->where('id_perusahaan', $id_perusahaan);
+
+            // batasan pagination
+            $this->db->limit($limit, $start);
 
             // tampilkan data berdasarkan yang dicari user
             if ($keyword) {
@@ -164,8 +162,6 @@
                 $this->db->group_end();
             }
 
-            // batasan pagination
-            $this->db->limit($limit, $start);
 
             return $this->db->get();
         }
