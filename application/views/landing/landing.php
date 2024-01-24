@@ -19,8 +19,9 @@
 
 <!-- alasan -->
 <div class="" data-aos="zoom-in-up" data-aos-duration="1000">
+    
     <h2 class="judul-alasan">Kenapa Bali Job Finder?</h2>
-
+    
     <div class="alasan-section">
     
         <div class="alasan">
@@ -80,7 +81,7 @@
                     <ul class="splide__list">
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_collection.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_Collection.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
@@ -101,7 +102,7 @@
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Tourism_Development_Corporation.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/profile/perusahaan/065248_PT__Bali_Tourism_Development_Corporation.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
@@ -145,7 +146,7 @@
 
 <!-- lowongan -->
 
-<section id="landLowongan" data-aos="zoom-in-up" data-aos-duration="1000">
+<section id="landLowongan" data-aos="zoom-in-up" data-aos-duration="800">
 
     <h2 class="judul-lowongan">Lowongan Pekerjaan</h2>
 

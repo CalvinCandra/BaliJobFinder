@@ -15,7 +15,6 @@
                         <small class="pesan"><?php echo form_error('email'); ?></small>
         
                         <div class="btn_login">
-                            <a href="<?php echo base_url('Auth')?>" class="back">Back</a>
                             <button type="submit" class="submit">Send Email</button>
                         </div>
                     </form>
