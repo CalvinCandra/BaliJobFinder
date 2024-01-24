@@ -128,7 +128,7 @@
         // mengedit atau update data perusahhaan
         public function editperusahaan($nama_perusahaan, $alamat_perusahaan, $tlp_perusahaa, $kota, $id, $logo)
         {
-            if($logo == '1'){
+            if($logo == "1"){
                 $edit = array(
                     'nama_perusahaan' => $nama_perusahaan,
                     'alamat_perusahaan' => $alamat_perusahaan,
@@ -137,16 +137,16 @@
                     'logo' => NULL
                 );
 
-                // mengambil data perusahaan
-                $perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row();
+                // mengambil logo
+                $PerusahaanLogo = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row()->logo;
 
                 // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-                if(!empty($perusahaan->logo)){
-                    unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
+                if(!empty($PerusahaanLogo)){
+                    unlink('assets/img/profile/perusahaan/' .$PerusahaanLogo);
                 }
 
                 // update
-                $result = $this->db->update('data_perusahaan', $edit, $perusahaan->id_perusahaan);
+                $result = $this->db->update('data_perusahaan', $edit, ['id_perusahaan' => $id]);
    
                if($result) {
                    // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
@@ -209,7 +209,6 @@
         // mengedit atau update data pelamar
         public function editpelamar($nama_lengkap, $no_hp, $alamat, $deskripsi_pelamar, $id, $gambar)
         {
-
             if($gambar == '1'){
                 $edit = array(
                     'nama_lengkap' => $nama_lengkap,
@@ -220,15 +219,15 @@
                 );
 
                 // mengambil data pelamar
-                $pelamar = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row();
+                $PelamarFoto = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->gambar;
 
                 // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-                if(!empty($pelamar->logo)){
-                    unlink('assets/img/profile/pelamar/' .$pelamar->gambar);
+                if(!empty($PelamarFoto)){
+                    unlink('assets/img/profile/pelamar/' .$PelamarFoto);
                 }
 
                 // update
-                $result = $this->db->update('data_pelamar', $edit, $pelamar->id_pelamar);
+                $result = $this->db->update('data_pelamar', $edit, ['id_pelamar', $id]);
 
                 if ($result) {
                     // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
