@@ -37,7 +37,7 @@
 
                                             <small class="font-italic">*Ekstensi yang diperbolehkan adalah .jpg, .jpeg, .png</small><br>
 											<small class="font-italic">*Size foto harus di bawah 3MB.</small><br>
-											<small class="font-italic">*Ukuran foto harus 1:1 memperoleh hasil yang bagus.</small>
+											<small class="font-italic">*Gunakan rasio aspek 1:1 untuk hasil yang lebih bagus.</small>
                                         </div>
                                     </div>
                                 </div>

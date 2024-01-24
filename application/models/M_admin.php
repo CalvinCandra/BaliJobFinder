@@ -227,7 +227,7 @@
                 }
 
                 // update
-                $result = $this->db->update('data_pelamar', $edit, ['id_pelamar', $id]);
+                $result = $this->db->update('data_pelamar', $edit, ['id_pelamar' => $id]);
 
                 if ($result) {
                     // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
