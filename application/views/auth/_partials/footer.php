@@ -12,6 +12,7 @@
               title: "<?= $this->session->flashdata('swal_title')?>",
               text: "<?= $this->session->flashdata('swal_text')?>",
               icon: "<?= $this->session->flashdata('swal_icon')?>",
+              confirmButtonColor: "#0d6efd",
           });
 
       <?php endif;?> 

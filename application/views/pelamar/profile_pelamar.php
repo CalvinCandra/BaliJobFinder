@@ -1,24 +1,10 @@
-<style>
-	/* Custom styles for Profile User section */
-	.profile-header {
-		font-weight: bold;
-		margin-bottom: 5px;
-		/* Adjust as needed */
-	}
-
-	.error-message {
-		color: red;
-		margin-top: 10px;
-	}
-</style>
-
 <div class="content-wrapper" style="margin-top: 57px;">
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6">
 					<b>
-						<h3 class="profile-header">Profile User</h3>
+						<h3 class="profile-header font-weight-bold mb-2">PROFILE USER</h3>
 					</b>
 				</div>
 			</div>
@@ -31,69 +17,70 @@
 					<!-- menampilkan data pelamar -->
 					<?php foreach ($profile as $key): ?>
 					<div class="card-body">
-						<!-- menampilkan pesan error -->
-						<div class="flash-data" data-flashdata="<?= $this->session->flashdata('berhasilUpdate')?>"></div>
-
-						<!-- <?php if ($this->session->flashdata('upload_error')): ?>
-						<div class="error-message">
-							<?php echo $this->session->flashdata('upload_error'); ?>
-						</div>
-						<?php endif; ?> -->
 
 						<form method="post" action="<?php echo base_url('Pelamar/simpanProfile'); ?>"
 							enctype="multipart/form-data">
 
-							<!-- foto profile -->
-							<div class="d-flex align-items-center">
-								<div class="form-group">
+							<div class="row">
+								<div class="col-md-5 col-sm-12">
+									<!-- foto profile -->
 									<label for="logo">Foto Profil:</label>
+									<div class="d-flex align-items-center justify-content-md-center">
+										<div class="form-group">
+											<br>
+											<?php if (empty($key['gambar'])): ?>
+												
+												<img class="mr-4" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo"
+													width="250">
+											<?php else: ?>
+												<img class="mr-4" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
+													alt="Logo Preview" width="250">
+											<?php endif; ?>
+
+											<input type="file" id="logo" name="logo_file" class="form-control-file mt-4"
+												accept=".png, .jpg"><br>
+
+											<small class="font-italic">*Ekstensi yang diperbolehkan adalah .jpg, .jpeg, .png</small><br>
+											<small class="font-italic">*Size foto harus di bawah 3MB.</small><br>
+											<small class="font-italic">*Ukuran foto harus 1:1 memperolah hasil yang bagus.</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-7 col-sm-12">
+									<!-- nama pelamar -->
+									<div class="form-group">
+										<label for="nama">Nama Lengkap:</label>
+										<input type="hidden" class="form-control" name="id"
+											value="<?php echo $key['id_pelamar'] ?>">
+										<input type="text" class="form-control" name="nama_lengkap"
+											value="<?php echo $key['nama_lengkap']; ?>" required>
+									</div>
+		
+									<!-- no hp -->
+									<div class="form-group">
+										<label for="no_tlp">Nomor Handphone:</label>
+										<input type="text" class="form-control" name="no_hp"
+											value="<?php echo $key['no_hp']; ?>" required>
+									</div>
+		
+									<!-- alamat -->
+									<div class="form-group">
+										<label for="alamat">Alamat:</label>
+										<textarea class="form-control" name="alamat" rows="3"
+											required><?php echo $key['alamat']; ?></textarea>
+									</div>
+		
+									<!-- Deskripsi Pelamar -->
+									<div class="form-group">
+										<label for="alamat">Deskripsi Singkat Pelamar:</label>
+										<textarea class="form-control" name="deskripsi" rows="3"
+											required><?php echo $key['deskripsi_pelamar']; ?></textarea>
+									</div>
 									<br>
-									<?php if (empty($key['gambar'])): ?>
-										<img class="mr-4" src="<?= base_url('assets/img/dashboard/profile.png'); ?>" alt="Default Logo"
-											width="150">
-									<?php else: ?>
-										<img class="mr-4" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
-											alt="Logo Preview" width="150">
-									<?php endif; ?>
-								</div>
-	
-								<div class="form-group">
-									<input type="file" id="logo" name="logo_file" class="form-control-file mt-4"
-										accept=".png, .jpg">
+									<button type="submit" class="btn btn-primary">Simpan Biodata</button>
 								</div>
 							</div>
-
-							<!-- nama pelamar -->
-							<div class="form-group">
-								<label for="nama">Nama Lengkap:</label>
-								<input type="hidden" class="form-control" name="id"
-									value="<?php echo $key['id_pelamar'] ?>">
-								<input type="text" class="form-control" name="nama_lengkap"
-									value="<?php echo $key['nama_lengkap']; ?>" required>
-							</div>
-
-							<!-- no hp -->
-							<div class="form-group">
-								<label for="no_tlp">Nomor Handphone:</label>
-								<input type="text" class="form-control" name="no_hp"
-									value="<?php echo $key['no_hp']; ?>" required>
-							</div>
-
-							<!-- alamat -->
-							<div class="form-group">
-								<label for="alamat">Alamat:</label>
-								<textarea class="form-control" name="alamat" rows="3"
-									required><?php echo $key['alamat']; ?></textarea>
-							</div>
-
-							<!-- Deskripsi Pelamar -->
-							<div class="form-group">
-								<label for="alamat">Deskripsi Singkat Pelamar:</label>
-								<textarea class="form-control" name="deskripsi" rows="3"
-									required><?php echo $key['deskripsi_pelamar']; ?></textarea>
-							</div>
-							<br>
-							<button type="submit" class="btn btn-primary">Simpan Biodata</button>
 						</form>
 					</div>
 					<?php endforeach ?>
@@ -101,16 +88,19 @@
 			</div>
 		</div>
 	</section>
+
 	<section class="content">
 		<div class="row">
-			<div class="col-12">
+
+			<!-- pendidikan -->
+			<div class="col-sm-12 col-md-4">
 				<div class="card">
 					<div class="card-body">
 							<!-- pendidikan -->
 							<div class="form-group">
-								<label for="pendidikan">Pendidikan</label> <a type="button"
+								<label for="pendidikan" style="font-size:20px;">PENDIDIKAN</label> <a type="button"
 									class="btn btn-primary rounded-circle text-white" data-bs-toggle="modal"
-									data-bs-target="#tambahPendidikan"><i class="fa-solid fa-plus"></i></a>
+									data-bs-target="#tambahPendidikan" style="margin-top:-5px;"><i class="fa-solid fa-plus"></i></a>
 
 								<div class="w-100 p-3 mt-2 d-flex flex-wrap">
 									<?php
@@ -168,15 +158,23 @@
 
 								</div>
 							</div>
+					</div>
+				</div>
+			</div>
 
-							<!-- Pengalaman -->
-							<div class="form-group">
-								<label for="pendidikan">Pengalaman</label> <a type="button"
-									class="btn btn-primary rounded-circle text-white" data-bs-toggle="modal"
-									data-bs-target="#tambahPengalaman"><i class="fa-solid fa-plus"></i></a>
+			<!-- pengalaman -->
+			<div class="col-sm-12 col-md-4">
+				<div class="card">
+					<div class="card-body">
 
-								<div class="w-100 p-3 mt-2 d-flex flex-wrap">
-									<?php
+						<!-- Pengalaman -->
+						<div class="form-group">
+							<label for="pengalaman" style="font-size:20px;">PENGALAMAN</label> <a type="button"
+								class="btn btn-primary rounded-circle text-white" data-bs-toggle="modal"
+								data-bs-target="#tambahPengalaman" style="margin-top:-5px;"><i class="fa-solid fa-plus"></i></a>
+
+							<div class="w-100 p-3 mt-2 d-flex flex-wrap">
+								<?php
                                             if(!$pengalaman):    
                                         ?>
 									<p class="fw-bold text-black" style="font-size:15px;">Data Belum Ada</p>
@@ -239,11 +237,20 @@
 								</div>
 							</div>
 
+					</div>
+				</div>
+			</div>
+
+			<!-- skill -->
+			<div class="col-sm-12 col-md-4">
+				<div class="card">
+					<div class="card-body">
 							<!-- Skill -->
 							<div class="form-group">
-								<label for="pendidikan">Skill</label> <a type="button"
+								<label for="Skill" style="font-size:20px;">SKILL</label> 
+								<a type="button"
 									class="btn btn-primary rounded-circle text-white" data-bs-toggle="modal"
-									data-bs-target="#tambahSkill"><i class="fa-solid fa-plus"></i></a>
+									data-bs-target="#tambahSkill" style="margin-top:-5px;"><i class="fa-solid fa-plus"></i></a>
 
 								<div class="w-100 p-3 mt-2 d-flex flex-wrap">
 									<?php

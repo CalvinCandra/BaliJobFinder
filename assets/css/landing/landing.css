@@ -330,15 +330,19 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 130px;
+    padding-top: 20px;
     color: #333;
     font-weight: 700;
     font-size: 40px;
     text-transform: uppercase;
+    background-color: #EAEAEA;
 }
 .alasan-section{
+    margin-top: -10px;
     display: flex;
     justify-content: center;
     width: 100%;
+    background-color: #EAEAEA;
 }
 
 .alasan{
@@ -420,7 +424,8 @@ body{
 
 /* lowongan */
 #landLowongan{
-    margin-top: 20%;
+    margin-top: 10%;
+    background-color: rgba(13, 181, 253, 0.09);
 }
 
 .judul-lowongan{
