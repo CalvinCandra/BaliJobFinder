@@ -154,7 +154,6 @@
                             <?php endif; ?>
                         </div>
                         <div class="form-group mt-4 ml-3">
-                            <!-- <form action="<??>" method="post"></form> -->
                             <input class="form-check-input" type="checkbox" value="1" name="hapusGambar" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Hapus Gambar?

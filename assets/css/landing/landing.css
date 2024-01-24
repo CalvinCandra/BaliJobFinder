@@ -434,6 +434,7 @@ body{
     color: #333;
     font-weight: 700;
     font-size: 40px;
+    padding-top: 25px;
     text-transform: uppercase;
     margin-bottom: 30px;
 }
@@ -593,7 +594,7 @@ body{
 
 /* footer */
 footer{
-    margin-top: 8%;
+    /* margin-top: 8%; */
     background-color: #0d6efd;
     width: 100%;
 }

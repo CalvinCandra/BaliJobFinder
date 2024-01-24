@@ -145,7 +145,6 @@
         // function get data lamaran
         public function getLamaran($id_perusahaan, $limit, $start, $keyword = null)
         {
-            // join 3 table yaitu lowonngan_kerja, data_pelamar, data_perusahaan
             $this->db->select('*');
             $this->db->from('lamaranpelamar');
 

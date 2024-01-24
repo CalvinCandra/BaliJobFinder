@@ -81,58 +81,58 @@
                     <ul class="splide__list">
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Bandung_Collection.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/Bandung_Collection.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Blessing_Computer.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/Blessing_Computer.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
     
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/Level_21_Mall.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/Level_21_Mall.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Bali_Media_Televisi.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/065248_PT__Bali_Tourism_Development_Corporation.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Bali_Tourism_Development_Corporation.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Kreasi_Bali_Prima_(Atlas_Beach_Fest).jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Kreasi_Bali_Prima_(Atlas_Beach_Fest).jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                          <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Solusi_Sinergi_Digital_(SSD).jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Solusi_Sinergi_Digital_(SSD).jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Techbros_Indonesia.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Techbros_Indonesia.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT__Telkom_Indonesia_(Persero)_Tbk.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT__Telkom_Indonesia_(Persero)_Tbk.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2 " style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Bank_Mandiri.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT_Bank_Mandiri.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                         <li class="splide__slide d-flex justify-content-center align-items-center">
                             <div class=" p-2" style="width:55%;">
-                                <img src="<?php echo base_url('assets/img/profile/perusahaan/PT_Garuda_Indonesia.jpg')?>" alt="" style="width:100%;">
+                                <img src="<?php echo base_url('assets/img/landing/rekomendasi/PT_Garuda_Indonesia.jpg')?>" alt="" style="width:100%;">
                             </div>
                         </li>
                     </ul>

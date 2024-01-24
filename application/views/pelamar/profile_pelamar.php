@@ -42,7 +42,7 @@
 
 											<small class="font-italic">*Ekstensi yang diperbolehkan adalah .jpg, .jpeg, .png</small><br>
 											<small class="font-italic">*Size foto harus di bawah 3MB.</small><br>
-											<small class="font-italic">*Ukuran foto harus 1:1 memperolah hasil yang bagus.</small>
+											<small class="font-italic">*Ukuran foto harus 1:1 memperoleh hasil yang bagus.</small>
 										</div>
 									</div>
 								</div>
@@ -839,7 +839,7 @@
 					
 					<div class="form-group">
 						<label for="bidang_studi">Value</label>
-						<input type="number" class="form-control" name="value" placeholder="Masukkan Nilai/Value Skill Anda"
+						<input type="number" class="form-control" name="value" min="0" max="100" placeholder="Masukkan Nilai/Value Skill Anda"
 							required>
 					</div>
 
@@ -878,7 +878,7 @@
 					<div class="form-group">
 						<label for="nama_perusahaan">Value</label>
 						<input type="number" class="form-control" name="value"
-							value="<?= $key['value']?>" placeholder="Masukkan Nilai/Value Skill Anda" required>
+							value="<?= $key['value']?>" placeholder="Masukkan Nilai/Value Skill Anda"  min="0" max="100" required>
 					</div>
 
 					<div class="modal-footer">
