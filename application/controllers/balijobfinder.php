@@ -129,10 +129,8 @@ class Balijobfinder extends CI_Controller {
         // config pagination for lowongan
         // ambil jumlah data lowongan kerja
 
-        $jumlah_data = $this->M_landing->jumlahLowongan($data['search']);
-
         $config['base_url'] = base_url(). 'Balijobfinder/Lowongan';
-        $config['total_rows'] = $jumlah_data;
+        $config['total_rows'] = $this->M_landing->jumlahLowongan($data['search']);
         $config['per_page'] = 15;
 
         // initialize pagination
@@ -257,12 +255,10 @@ class Balijobfinder extends CI_Controller {
                         $upload_data = $this->upload->data();
             
                         // menyimpan lcvgo ke database
-                        $cv = $this->M_landing->UploadPathCV($pelamar->id_pelamar, $upload_data['file_name'], $lowongan);
+                        $this->M_landing->UploadPathCV($pelamar->id_pelamar, $upload_data['file_name'], $lowongan);
         
-                        if($cv){
-                            $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
-                            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
-                        }
+                        $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
+                        redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
                         
                     } else {
                         // mengatasi jika error
