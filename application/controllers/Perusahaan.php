@@ -156,7 +156,7 @@ class Perusahaan extends CI_Controller {
         }
 
         // config pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/management';
+        $config['base_url'] = base_url().'Perusahaan/management';
         $config['total_rows'] = $this->M_perusahaan->LowonganCount($users->id_users, $data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
@@ -262,7 +262,7 @@ class Perusahaan extends CI_Controller {
         }
 
         // config pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/perusahaan/lamaran';
+        $config['base_url'] = base_url().'Perusahaan/lamaran';
         $config['total_rows'] = $this->M_perusahaan->LamaranCount($perusahaan->id_perusahaan, $data['key_lamaran']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;
