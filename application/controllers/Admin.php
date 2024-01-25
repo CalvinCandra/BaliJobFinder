@@ -76,7 +76,7 @@ class Admin extends CI_Controller {
         }
 
         // Konfigurasi pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/admin/dataLowongan';
+        $config['base_url'] = base_url().'Admin/dataLowongan';
         $config['total_rows'] = $this->M_admin->LowonganCount($data['keyword']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;    
@@ -110,7 +110,7 @@ class Admin extends CI_Controller {
         }
 
         // Konfigurasi  pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/admin/dataPelamar';
+        $config['base_url'] = base_url().'Admin/dataPelamar';
         $config['total_rows'] = $this->M_admin->PelamarCount($data['key_pelamar']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;    
@@ -144,7 +144,7 @@ class Admin extends CI_Controller {
         }
 
         // Konfigurasi  pagination
-        $config['base_url'] = 'http://localhost/BaliJobFinder/admin/dataPerusahaan';
+        $config['base_url'] = base_url().'Admin/dataPerusahaan';
         $config['total_rows'] = $this->M_admin->PerusahaanCount($data['key_perusahaan']);
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 5;    
