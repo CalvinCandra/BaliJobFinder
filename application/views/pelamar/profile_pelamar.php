@@ -29,11 +29,10 @@
 										<div class="form-group">
 											<br>
 											<?php if (empty($key['gambar'])): ?>
-												
-												<img class="mr-4" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo"
+												<img class="mr-4 rounded-circle" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo"
 													width="250">
 											<?php else: ?>
-												<img class="mr-4" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
+												<img class="mr-4 rounded-circle" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
 													alt="Logo Preview" width="250">
 											<?php endif; ?>
 

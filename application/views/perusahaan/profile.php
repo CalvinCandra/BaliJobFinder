@@ -28,9 +28,9 @@
                                         <div class="form-group">
                                             <br>
                                             <?php if (empty($key['logo'])): ?>
-                                                <img src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo" width="250">
+                                                <img class="rounded-circle" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo" width="250">
                                             <?php else: ?>
-                                                <img src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="250">
+                                                <img class="rounded-circle" src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="250">
                                             <?php endif; ?>
 
                                             <input type="file" id="logo" name="logo_file" class="form-control-file mt-4" accept="image/*"><br>
