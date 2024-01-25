@@ -246,12 +246,16 @@ class M_auth extends CI_Model {
 
     // function untuk register pelamar dan mengirim email verifikasi
     public function regisPelamar($email, $pass, $name){
+        // // membuat token random
+        $token = base64_encode(random_bytes(10));
+
         // deklarasi untuk memasukan data pada table users
         $datausers = array(
             'email' => $email,
             'password' => $pass,
             'name' => $name,
             'email_verified' => NULL,
+            'token' => $token,
             'role' => "pelamar",
         );
 
@@ -263,14 +267,6 @@ class M_auth extends CI_Model {
 
         // mengambil last id yang baru saja di insert
         $last_id_users = $this->db->insert_id();
-
-        // membuat token random
-        $token = base64_encode(random_bytes(10));
-
-        // memasukan token random ke dalam column token yang ada di table user berdasarkan id yang dikirim
-        $this->db->set('token', $token);
-        $this->db->where('id_users', $last_id_users);
-        $this->db->update('users');
 
         // deklarasi untuk memasukan data pada table data_pelamar
         $dataPelamar = array(
@@ -304,6 +300,8 @@ class M_auth extends CI_Model {
 
     // function untuk register perusahaan dan mengirim email verifikasi
     public function regisPerusahaan($email, $pass, $name){
+        // membuat token
+        $token = base64_encode(random_bytes(10));
 
         // deklarasi untuk memasukan data pada table users
         $datausers = array(
@@ -311,6 +309,7 @@ class M_auth extends CI_Model {
             'password' => $pass,
             'name' => $name,
             'email_verified' => NULL,
+            'token' => $token,
             'role' => "perusahaan",
         );
 
@@ -321,15 +320,6 @@ class M_auth extends CI_Model {
         $this->db->insert('users', $datausers);
         // mengambil last id
         $last_id_users = $this->db->insert_id();
-
-        // membuat token
-        $token = base64_encode(random_bytes(10));
-
-        // memasukan token random ke dalam colum token yang ada di table user berdasarkan id yang dikirim
-        $this->db->set('token', $token);
-        $this->db->where('id_users', $last_id_users);
-        $this->db->update('users');
-
 
         // deklarasi untuk memasukan data pda table data_perusahaan
         $dataPerusahaan = array(
