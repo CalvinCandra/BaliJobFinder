@@ -128,6 +128,9 @@
         // mengedit atau update data perusahhaan
         public function editperusahaan($nama_perusahaan, $alamat_perusahaan, $tlp_perusahaa, $kota, $id, $logo)
         {
+            // mengambil Data Perusahaan
+            $Perusahaan = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row();
+
             if($logo == "1"){
                 $edit = array(
                     'nama_perusahaan' => $nama_perusahaan,
@@ -137,12 +140,9 @@
                     'logo' => NULL
                 );
 
-                // mengambil logo
-                $PerusahaanLogo = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row()->logo;
-
                 // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-                if(!empty($PerusahaanLogo)){
-                    unlink('assets/img/profile/perusahaan/' .$PerusahaanLogo);
+                if(!empty($Perusahaan->logo)){
+                    unlink('assets/img/profile/perusahaan/' .$Perusahaan->logo);
                 }
 
                 // update
@@ -151,7 +151,7 @@
                if($result) {
                    // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
                    $email_baru = $this->input->post('email');
-                   $this->db->where('id_users', $id_users);
+                   $this->db->where('id_users', $Perusahaan->fk_id_users);
                    $this->db->update('users', ['email' => $email_baru]);
                }
 
@@ -169,7 +169,7 @@
                if($result) {
                    // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
                    $email_baru = $this->input->post('email');
-                   $this->db->where('id_users', $id_users);
+                   $this->db->where('id_users', $Perusahaan->fk_id_users);
                    $this->db->update('users', ['email' => $email_baru]);
                }
    
@@ -188,7 +188,9 @@
 
             // Hapus logo agar hemat memori
             $image = $this->db->get_where('data_perusahaan', ['id_perusahaan' => $id])->row()->logo;
-            unlink('assets/img/profile/perusahaan/' . $image);
+            if(!empty($image)){
+                unlink('assets/img/profile/perusahaan/' . $image);
+            }
 
             // Hapus data lowongan kerja
             $this->db->where('fk_id_perusahaan', $id)->delete('lowongan_kerja');
@@ -209,6 +211,9 @@
         // mengedit atau update data pelamar
         public function editpelamar($nama_lengkap, $no_hp, $alamat, $deskripsi_pelamar, $id, $gambar)
         {
+            // mengambil data pelamar
+            $Pelamar = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row();
+
             if($gambar == '1'){
                 $edit = array(
                     'nama_lengkap' => $nama_lengkap,
@@ -218,12 +223,9 @@
                     'gambar' => NULL,   
                 );
 
-                // mengambil data pelamar
-                $PelamarFoto = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->gambar;
-
                 // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-                if(!empty($PelamarFoto)){
-                    unlink('assets/img/profile/pelamar/' .$PelamarFoto);
+                if(!empty($Pelamar->gambar)){
+                    unlink('assets/img/profile/pelamar/' .$Pelamar->gambar);
                 }
 
                 // update
@@ -232,7 +234,7 @@
                 if ($result) {
                     // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
                     $email_baru = $this->input->post('email');
-                    $this->db->where('id_users', $id_users);
+                    $this->db->where('id_users', $Pelamar->fk_id_users);
                     $this->db->update('users', ['email' => $email_baru]);
                 }
             }else{
@@ -249,7 +251,7 @@
                 if ($result) {
                     // Jika update data perusahaan sukses, update juga email perusahaan di tabel users
                     $email_baru = $this->input->post('email');
-                    $this->db->where('id_users', $id_users);
+                    $this->db->where('id_users', $Pelamar->fk_id_users);
                     $this->db->update('users', ['email' => $email_baru]);
                 }
             }
@@ -262,18 +264,19 @@
             $this->db->trans_start();
 
             // mendapatkan id users
-            $user_id = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->fk_id_users;
+            $pelamar = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row();
 
-            // Hapus gambar
-            $image = $this->db->get_where('data_pelamar', ['id_pelamar' => $id])->row()->gambar;
-            unlink('assets/img/profile/pelamar/' . $image);
+            if(!empty($pelamar->gambar)){
+                unlink('assets/img/profile/pelamar/' . $pelamar->gambar);
+            }
 
             // Hapus CV untuk hemat memori
-            $fileCV = $this->db->get_where('lamaran', ['fk_id_pelamar' => $id])->row()->cv;
-            unlink('assets/CV/' . $fileCV);
-
-            // Hapus data dari tabel lamaran
-            $this->db->where('fk_id_pelamar', $id)->delete('lamaran');
+            $lamaran = $this->db->get_where('lamaran', ['fk_id_pelamar' => $id])->row();
+            if($lamaran){
+                unlink('assets/CV/' . $lamaran->cv);
+                // Hapus data dari tabel lamaran
+                $this->db->where('fk_id_pelamar', $id)->delete('lamaran');
+            }
 
             // Hapus data dari tabel pendidikan
             $this->db->where('fk_id_pelamar', $id)->delete('pendidikan');
@@ -288,7 +291,7 @@
             $this->db->delete('data_pelamar', ['id_pelamar' => $id]);
 
             // Hapus data dari tabel users
-            $this->db->delete('users', ['id_users' => $user_id]);
+            $this->db->delete('users', ['id_users' => $pelamar->fk_id_users]);
 
             // Selesai transaksi
             $this->db->trans_complete();
