@@ -49,8 +49,7 @@
                 $this->db->group_end();
             }
 
-            $query = $this->db->get();
-            return $query->row()->total_lamaran;
+            return $this->db->get()->row()->total_lamaran;
         }
 
 
