@@ -50,7 +50,7 @@ class M_landing extends CI_Model {
          // kondisi jika statusnya aktif
          $this->db->where(array('status' =>  1));
          // mebuat data acak supaya mnampilkan secara acak
-         $this->db->order_by('lowongan_kerja.id_lowongan','RANDOM');
+         $this->db->order_by('id_lowongan','RANDOM');
         // batas 16 saja
         $this->db->limit($limit,$start);
 
@@ -58,6 +58,7 @@ class M_landing extends CI_Model {
         if ($search) {
             $this->db->group_start();
             $this->db->like('posisi_lowongan', $search);
+            $this->db->or_like('nama_perusahaan', $search);
             $this->db->group_end();
         }
 
@@ -87,15 +88,24 @@ class M_landing extends CI_Model {
         [
             'fk_id_pelamar' => $id_pelamar,
             'fk_id_lowongan' => $id_lowongan
-        ])->row();
+        ]);
 
+        $row = $lamaran->row();
+        $num_row = $lamaran->num_rows();
 
-        if($lamaran->status_lamaran == "Belum Terkonfrimasi"){
-            return $nilai = 1;
-        }else if($lamaran->status_lamaran == "Diterima"){
-            return $nilai = 2;
-        }else{
+        // jika tidak ada
+        if($num_row == 0){
             return 0;
+
+        //jika ada
+        }else{
+            if($row->status_lamaran == "Belum Terkonfrimasi"){
+                return $nilai = 1;
+            }else if($row->status_lamaran == "Diterima"){
+                return $nilai = 2;
+            }else{
+                return 0;
+            }
         }
 
     }
@@ -103,7 +113,7 @@ class M_landing extends CI_Model {
     // function untuk insert ke lamaran
     public function UploadPathCV($pelamar, $file_name, $lowongan){
         // memanggil sp_insert_lamaran
-        return $this->db->query("call sp_insert_lamaran('".$file_name."', '".$lowongan."', '".$pelamar."')");
+        return $this->db->query("call sp_insert_lamaran('".$file_name."', '".$lowongan."', '".$pelamar."', 'Belum Terkonfrimasi')");
     }
     
     
