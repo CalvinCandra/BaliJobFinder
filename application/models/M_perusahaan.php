@@ -123,8 +123,25 @@
         // function memasukkan inputan ke dalam tabel
         public function inputlowongan($posisi, $salary, $syarat, $id_perusahaan)
         {
-            // memanggil sp_insert_lowongan
-            return $this->db->query("call sp_insert_lowongan('".$posisi."', '".$salary."', '".$syarat."', '1', '".$id_perusahaan."' )");
+            // cek lowongan agar nama posisi tidak sama
+            $this->db->select('posisi_lowongan');
+            $this->db->from('lowongan');
+            $this->db->where(array(
+                'id_perusahaan' => $id_perusahaan,
+                'posisi_lowongan' => $posisi
+            ));
+
+            $get = $this->db->get()->num_rows();
+
+            // jika data tidak ada
+            if($get == 0){
+                // memanggil sp_insert_lowongan
+                $this->db->query("call sp_insert_lowongan('".$posisi."', '".$salary."', '".$syarat."', '1', '".$id_perusahaan."' )");
+                return 0;
+            // jika  ada
+            }else{
+                return 1;
+            }
         }
 
         // function mengedit atau update data lowongan

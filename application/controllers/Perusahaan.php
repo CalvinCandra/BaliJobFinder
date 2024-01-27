@@ -191,11 +191,11 @@ class Perusahaan extends CI_Controller {
         
         $addLowongan = $this->M_perusahaan->inputlowongan($posisi, $salary, $syarat, $perusahaan->id_perusahaan);
 
-        if($addLowongan){
-            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Tambah Lowongan Kerja');
+        if($addLowongan == 1){
+            $this->SweetAlert('error', 'Gagal!', 'Gagal Tambah Lowongan Kerja, Mohon Posisi Lowongan Kerja Tidak Boleh Ada Lebih Dari 1');
             redirect('perusahaan/management');
         }else{
-            $this->SweetAlert('error', 'Gagal!', 'Gagal Tambah Lowongan Kerja');
+            $this->SweetAlert('success', 'Berhasil!', 'Berhasil Tambah Lowongan Kerja');
             redirect('perusahaan/management');
         }
         
