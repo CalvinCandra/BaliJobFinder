@@ -229,41 +229,43 @@ class Balijobfinder extends CI_Controller {
             $pelamar = $this->M_pelamar->getDataPelamar($users->id_users)->row();
 
             // cek jika pelamar sudh pernah melamar, namun memiliki status diterima dan belum dikonfrimasi
-            $cek = $this->M_landing->CekLamaran($pelamar->id_pelamar, $lowongan);
+            $cekBelum = $this->M_landing->CekLamaranStatusBelum($pelamar->id_pelamar, $lowongan);
+            $cekTerima = $this->M_landing->CekLamaranStatusTerima($pelamar->id_pelamar, $lowongan);
 
-            if($cek == 1){
-                $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Konfrimasi Perusahaan');          
-                redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
-                
-            }else if($cek == 2){
-                $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Diterima Di Pekerjaan Ini, Silahkan Menunggu Email Dari Perusahaan');  
+            if($cekBelum > 0){
+                $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Konfrimasi');          
                 redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
             }else{
-                if (!empty($_FILES['cv']['name'])) {
+                if($cekTerima > 0){
+                    $this->SweetAlert('warning', 'Informasi', 'Anda Sudah Melamar Pekerjaan Ini, Silahkan Menunggu Balasan Dari Perusahaan');          
+                    redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                }else{
+                    if (!empty($_FILES['cv']['name'])) {
         
-                    // Config untuk upload file berupa foto
-                    $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
-                    $config['allowed_types'] = 'pdf'; // esktesion yang diperbolehkan
-                    $config['max_size']      = 5028; // set ukuran menjadi 5mb
-                    $config['file_name'] = date("his").'_'.$_FILES['cv']['name'];
+                        // Config untuk upload file berupa foto
+                        $config['upload_path']   = './assets/CV/'; //tempat upload CV nanti
+                        $config['allowed_types'] = 'pdf'; // esktesion yang diperbolehkan
+                        $config['max_size']      = 5028; // set ukuran menjadi 5mb
+                        $config['file_name'] = date("his").'_'.$_FILES['cv']['name'];
+                
+                        $this->load->library('upload', $config); 
+                
+                        //jika file gambar diupload
+                        if ($this->upload->do_upload('cv')) {
+                            // upload
+                            $upload_data = $this->upload->data();
+                
+                            // menyimpan lcvgo ke database
+                            $this->M_landing->UploadPathCV($pelamar->id_pelamar, $upload_data['file_name'], $lowongan);
             
-                    $this->load->library('upload', $config); 
-            
-                    //jika file gambar diupload
-                    if ($this->upload->do_upload('cv')) {
-                        // upload
-                        $upload_data = $this->upload->data();
-            
-                        // menyimpan lcvgo ke database
-                        $this->M_landing->UploadPathCV($pelamar->id_pelamar, $upload_data['file_name'], $lowongan);
-        
-                        $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
-                        redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
-                        
-                    } else {
-                        // mengatasi jika error
-                        $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 5MB'); 
-                        redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                            $this->SweetAlert('success', 'Berhasil', 'Selamat, Anda Berhasil Melamar Pekerjaan, Silahkan Menunggu Konfirmasi Dari Perusahaan');           
+                            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                            
+                        } else {
+                            // mengatasi jika error
+                            $this->SweetAlert('error', 'Gagal', 'Silahkan Upload File Dengan Format .pdf Dengan Ukuran Di bawah 5MB'); 
+                            redirect('Balijobfinder/Details/'.$posisi.'/'.$perusahaan);
+                        }
                     }
                 }
             }
