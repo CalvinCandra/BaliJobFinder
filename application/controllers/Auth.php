@@ -276,6 +276,10 @@ class Auth extends CI_Controller {
 
     // function untuk proses change password
     public function prosesForget(){
+        // ambil data input user
+        $pass = $this->input->post('password');
+        $id_users = $this->input->post('users');
+
         //set rules
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]',[
             'in_lenght' => 'Your Passoword To Short',
@@ -287,11 +291,17 @@ class Auth extends CI_Controller {
         // jika rules form validation ada yang melanggar, maka akan menampilkan pesannya pada view
         if ($this->form_validation->run() == FALSE) {
 
+            $data = array(
+                'title' => 'Forget Password',
+                'css' => 'assets/css/auth/forget.css',
+                'users' => $id_users
+            );
+            // memanggil komponen view
+            $this->load->view('auth/_partials/header', $data);
             $this->load->view('auth/forget/formForget');
+            $this->load->view('auth/_partials/footer');
+
         } else {
-            // ambil data input user
-            $pass = $this->input->post('password');
-            $id_users = $this->input->post('users');
 
             // panggil function forget di M_auth
             $this->M_auth->forget(htmlspecialchars(password_hash($pass, PASSWORD_DEFAULT)), $id_users);

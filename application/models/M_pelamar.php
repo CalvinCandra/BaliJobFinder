@@ -32,26 +32,6 @@
                 return 0;
             }
         }
-   
-         // function cek data pengalaman berdasarkan user yang login apakah ada atau tidak
-        public function cekDataPengalaman($id_pelamar){
-            // jika data pengalaman tidak ada
-            if($this->db->get_where('pengalaman', ['fk_id_pelamar' => $id_pelamar])->num_rows() == 0){
-                return 1;
-            }else{ // jika data pengalaman ada
-                return 0;
-            }
-        }
-
-        // function cek data skill berdasarkan user yang login apakah ada atau tidak
-        public function cekDataSkill($id_pelamar){
-            // jika data skill tidak ada
-            if($this->db->get_where('skil', ['fk_id_pelamar' => $id_pelamar])->num_rows() == 0){
-                return 1;
-            }else{// jika data skill ada
-                return 0;
-            }
-        }
 
          // function get jumlah lamaran
          public function LamaranCount($id_pelamar,$keyword=null){

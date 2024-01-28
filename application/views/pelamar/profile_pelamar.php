@@ -28,13 +28,15 @@
 									<div class="d-flex align-items-center justify-content-md-center">
 										<div class="form-group">
 											<br>
-											<?php if (empty($key['gambar'])): ?>
-												<img class="mr-4 rounded-circle" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo"
-													width="250">
-											<?php else: ?>
-												<img class="mr-4 rounded-circle" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
-													alt="Logo Preview" width="250">
-											<?php endif; ?>
+											<div class="position-relative rounded-circle overflow-hidden" style="height:320px; width:320px;">
+												<?php if (empty($key['gambar'])): ?>
+													<img class="mr-4 d-flex align-items-center justify-content-center" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo"
+													style="width:100%;">
+												<?php else: ?>
+													<img class="mr-4 d-flex align-items-center justify-content-center" src="<?= base_url('assets/img/profile/pelamar/'.$key['gambar']); ?>"
+														alt="Logo Preview" style="width:100%;">
+												<?php endif; ?>
+											</div>
 
 											<input type="file" id="logo" name="logo_file" class="form-control-file mt-4"
 												accept=".png, .jpg"><br>
@@ -105,7 +107,7 @@
 									<?php
                                             if(!$pendidikan):    
                                         ?>
-									<p class="fw-bold text-black" style="font-size:15px;">Data Belum Ada</p>
+									<p class="fw-bold text-black" style="font-size:15px;">Belum Ada</p>
 									<?php
                                             else:     
                                         ?>
@@ -176,7 +178,7 @@
 								<?php
                                             if(!$pengalaman):    
                                         ?>
-									<p class="fw-bold text-black" style="font-size:15px;">Data Belum Ada</p>
+									<p class="fw-bold text-black" style="font-size:15px;">Belum Ada</p>
 									<?php
                                             else:     
                                         ?>
@@ -255,7 +257,7 @@
 									<?php
                                             if(!$skill):    
                                         ?>
-									<p class="fw-bold text-black" style="font-size:15px;">Data Belum Ada</p>
+									<p class="fw-bold text-black" style="font-size:15px;">Belum Ada</p>
 									<?php
                                             else:     
                                         ?>

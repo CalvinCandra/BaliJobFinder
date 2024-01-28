@@ -21,11 +21,19 @@ class CV extends CI_Controller {
         $data_pendidikan = $this->M_CV->getDataPendidikan($data_pelamar->id_pelamar)->result_array();
         
         // get data pengalaman
-        $data_pengalaman = $this->M_CV->getDataPengalaman($data_pelamar->id_pelamar)->result_array();
+        if($this->M_CV->getDataPengalaman($data_pelamar->id_pelamar)->num_rows() == 0){
+            $data_pengalaman = 0;
+        }else{
+            $data_pengalaman = $this->M_CV->getDataPengalaman($data_pelamar->id_pelamar)->result_array();
+        }
         
         // get data skill
-        $data_skill = $this->M_CV->getDataSkill($data_pelamar->id_pelamar)->result_array();
-
+        if($this->M_CV->getDataSkill($data_pelamar->id_pelamar)->num_rows() == 0){
+            $data_skill = 0;
+        }else{
+            $data_skill = $this->M_CV->getDataSkill($data_pelamar->id_pelamar)->result_array();
+        }
+        
         // DOMPDF
         $this->load->library('pdfgenerator');
 

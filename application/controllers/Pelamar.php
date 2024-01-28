@@ -53,10 +53,6 @@ class Pelamar extends CI_Controller {
             'cekData' => $this->M_pelamar->cekData($pelamar->id_pelamar),
              // ngecek data pendidikan
             'cekDataPendidikan' => $this->M_pelamar->cekDataPendidikan($pelamar->id_pelamar),
-             // ngecek data pengalaman
-            'cekDataPengalaman' => $this->M_pelamar->cekDataPengalaman($pelamar->id_pelamar),
-             // ngecek data skill
-            'cekDataSkill' => $this->M_pelamar->cekDataSkill($pelamar->id_pelamar),
              // hitung jumlah Lamaran yang di lamar oleh user
             'totalLamaran' => $this->M_pelamar->LamaranCount($pelamar->id_pelamar),
             // hitung jumlah Lamaran yang di lamar oleh user yang berstatus Belum Terkonfirmasi
@@ -87,19 +83,11 @@ class Pelamar extends CI_Controller {
             'profile' => $DataPelamar->result_array(),
             // mengirim data pendidikan yang polosan dalam bentuk array
             'pendidikan'=> $this->M_pelamar->getDataPendidikan($pelamar->id_pelamar)->result_array(),
-            // mengirim data pengalaman yang polosan dalam bentuk array
-            'pengalaman'=> $this->M_pelamar->getDataPengalaman($pelamar->id_pelamar)->result_array(),
-            // mengirim data skill yang polosan dalam bentuk array
-            'skill'=> $this->M_pelamar->getDataSkill($pelamar->id_pelamar)->result_array(),
 
             // ngecek data profile
             'cekData' => $this->M_pelamar->cekData($pelamar->id_pelamar),
              // ngecek data pendidikan
             'cekDataPendidikan' => $this->M_pelamar->cekDataPendidikan($pelamar->id_pelamar),
-             // ngecek data pengalaman
-            'cekDataPengalaman' => $this->M_pelamar->cekDataPengalaman($pelamar->id_pelamar),
-             // ngecek data skill
-            'cekDataSkill' => $this->M_pelamar->cekDataSkill($pelamar->id_pelamar),
 
             'session' => $users->name
         );
@@ -127,34 +115,29 @@ class Pelamar extends CI_Controller {
     
             $this->load->library('upload', $config);
 
-            // pengecekan gambar
             // jika gambar lebih dari 3 MB
             if($_FILES['logo_file']['size'] >= $config['max_size']){
                 $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Ukuran Max 3MB');
                 redirect('pelamar/profile');
-
-            // jika gambar tidak sesuai typenya
-            }else if(!$_FILES['logo_file']['type'] == $config['allowed_types']){
-                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .jpeg .png');
-                redirect('pelamar/profile');
             }
-
-            
-            // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-            if(!empty($pelamar->gambar)){
-                unlink('assets/img/profile/pelamar/' .$pelamar->gambar);
-            }
-
     
             //jika file gambar diupload
             if ($this->upload->do_upload('logo_file')) {
 
                 // upload
                 $upload_data = $this->upload->data();
-    
+
+                // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
+                if(!empty($pelamar->gambar)){
+                    unlink('assets/img/profile/pelamar/' .$pelamar->gambar);
+                }
+                
                 // menyimpan logo ke database
                 $this->M_pelamar->saveLogoPath($pelamar->id_pelamar, $upload_data['file_name']);
 
+            }else{
+                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .jpeg .png');
+                redirect('pelamar/profile');
             }
         }
 
@@ -396,10 +379,6 @@ class Pelamar extends CI_Controller {
             'cekData' => $this->M_pelamar->cekData($pelamar->id_pelamar),
             // ngecek data pendidikan
             'cekDataPendidikan' => $this->M_pelamar->cekDataPendidikan($pelamar->id_pelamar),
-            // ngecek data pengalaman
-            'cekDataPengalaman' => $this->M_pelamar->cekDataPengalaman($pelamar->id_pelamar),
-            // ngecek data skill
-            'cekDataSkill' => $this->M_pelamar->cekDataSkill($pelamar->id_pelamar),
             // hitung jumlah Lamaran yang di lamar oleh user
             'totalLamaran' => $this->M_pelamar->LamaranCount($pelamar->id_pelamar),
         );

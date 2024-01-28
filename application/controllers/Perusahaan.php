@@ -86,31 +86,28 @@ class Perusahaan extends CI_Controller {
             $config['file_name'] = date("his").'_'.$_FILES['logo_file']['name'];
     
             $this->load->library('upload', $config);
-
-            // pengecekan gambar
+            
             // jika gambar lebih dari 3 MB
             if($_FILES['logo_file']['size'] >= $config['max_size']){
                 $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Ukuran Max 3MB');
                 redirect('Perusahaan/profile');
-
-            // jika gambar tidak sesuai typenya
-            }else if(!$_FILES['logo_file']['type'] == $config['allowed_types']){
-                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .jpeg .png');
-                redirect('Perusahaan/profile');
-            }
-
-            // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
-            if(!empty($perusahaan->logo)){
-                unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
             }
     
             //jika file gambar diupload
             if ($this->upload->do_upload('logo_file')) {
                 // upload
                 $upload_data = $this->upload->data();
+
+                // melakukan penghapusan gambar sebelumnya dari path agar lebih hemat :)
+                if(!empty($perusahaan->logo)){
+                    unlink('assets/img/profile/perusahaan/' .$perusahaan->logo);
+                }
     
                 // // menyimpan logo ke database
                 $this->M_perusahaan->saveLogoPath($perusahaan->id_perusahaan, $upload_data['file_name']);
+            }else{
+                $this->SweetAlert('error', 'Gagal!', 'Gagal Update Profile, Mohon Untuk Upload Gambar Format .jpg .jpeg .png');
+                redirect('Perusahaan/profile');
             }
         }
 

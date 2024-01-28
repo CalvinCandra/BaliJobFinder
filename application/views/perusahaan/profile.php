@@ -27,11 +27,13 @@
                                     <div class="d-flex align-items-center justify-content-md-center">
                                         <div class="form-group">
                                             <br>
-                                            <?php if (empty($key['logo'])): ?>
-                                                <img class="rounded-circle" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo" width="250">
-                                            <?php else: ?>
-                                                <img class="rounded-circle" src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" width="250">
-                                            <?php endif; ?>
+                                            <div class="position-relative rounded-circle overflow-hidden" style="height:250px; width:250px;">
+                                                <?php if (empty($key['logo'])): ?>
+                                                    <img class="rd-flex align-items-center justify-content-center" src="<?= base_url('assets/img/dashboard/no_image.png'); ?>" alt="Default Logo" style="width:100%;">
+                                                <?php else: ?>
+                                                    <img class="d-flex align-items-center justify-content-center" src="<?= base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" alt="Logo Preview" style="width:100%;">
+                                                <?php endif; ?>
+                                            </div>
 
                                             <input type="file" id="logo" name="logo_file" class="form-control-file mt-4" accept="image/*"><br>
 

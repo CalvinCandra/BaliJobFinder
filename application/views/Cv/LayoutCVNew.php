@@ -95,6 +95,8 @@
 
             </div>
 
+            <?php if($pengalaman > 0):?>
+
             <!-- pengalaman -->
             <div class="position-relative" style="top:9%">
                 <div style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd; width:50%;">
@@ -130,7 +132,9 @@
                     ?>      
                 </div>
             </div>
+            <?php endif;?>
 
+            <?php if($skill > 0):?>
             <!-- skill -->
             <div class="position-relative" style="top:9%">
                 <div style="border-bottom-right-radius: 50px; border-top-right-radius: 50px; background-color: #0d6efd; width:50%;">
@@ -154,6 +158,8 @@
                     </div>
                 </div>
             </div>
+            <?php endif;?>
+
         </div>
   
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
