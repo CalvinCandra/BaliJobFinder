@@ -27,11 +27,11 @@
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <div class="user-panel d-flex">
-        <div class="image">
+        <div class="position-relative rounded-circle overflow-hidden border" style="height:35px; width:35px;">
                     <?php if ($key['logo']): ?>
-                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" class="img-circle elevation-1" alt="User Image">
+                        <img src="<?php echo base_url('assets/img/profile/perusahaan/'.$key['logo']); ?>" class="elevation-1 d-flex align-items-center justify-content-center" alt="User Image" style="width:100%; background-size:cover;">
                     <?php else: ?>
-                        <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">
+                        <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="elevation-1 d-flex align-items-center justify-content-center" alt="User Image" style="width:100%; background-size:cover;">
                     <?php endif; ?>
           </div>
           <div class="info">

@@ -25,11 +25,11 @@
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <div class="user-panel d-flex" style="height:150%;">
-        <div class="image">
+        <div class="position-relative rounded-circle overflow-hidden border" style="height:35px; width:35px;">
                     <?php if(empty($foto_profile)): ?>
-                      <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="img-circle elevation-1" alt="Default User Image">
+                      <img src="<?php echo base_url('assets/img/dashboard/profile.png');?>" class="elevation-1 d-flex align-items-center justify-content-center" alt="User Image" style="width:100%; background-size:cover;">
                     <?php else: ?>
-                       <img src="<?= base_url('assets/img/profile/pelamar/'.$foto_profile); ?>" class="img-circle elevation-1" alt="User Image">
+                       <img src="<?= base_url('assets/img/profile/pelamar/'.$foto_profile); ?>" class="elevation-1 d-flex align-items-center justify-content-center" alt="User Image" style="width:100%; background-size:cover;">
                     <?php endif; ?>
           </div>
           <div class="info">
@@ -44,7 +44,7 @@
         <a href="<?php echo base_url("pelamar/profile")?>" class="dropdown-item">Profile</a>
         <a href="<?php echo base_url("Balijobfinder")?>" class="dropdown-item">Landing Page</a>
 
-        <?php if($cekData == 1 || $cekDataPendidikan == 1 || $cekDataPengalaman == 1 || $cekDataSkill == 1 ): ?>
+        <?php if($cekData == 1 || $cekDataPendidikan == 1): ?>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#alert">Generate CV</a>
         <?php else:?>

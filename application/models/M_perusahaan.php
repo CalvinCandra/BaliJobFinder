@@ -31,10 +31,8 @@
         }
 
         // function untuk menghitung jumlah lamaran berdasarkan lowongan kerja perusahaan
-        public function LamaranCount($user_id, $keyword=null)
+        public function LamaranCount($id_perusahaan, $keyword=null)
         {
-            // mengambil id perusahaan
-            $id_perusahaan = $this->getPerusahaan($user_id)->row()->id_perusahaan;
 
             $this->db->select('COUNT(*) as total_lamaran');
             $this->db->from('lamaranpelamar'); //view
