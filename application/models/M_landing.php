@@ -100,9 +100,9 @@ class M_landing extends CI_Model {
         //jika ada
         }else{
             if($row->status_lamaran == "Belum Terkonfrimasi"){
-                return $nilai = 1;
+                return 1;
             }else if($row->status_lamaran == "Diterima"){
-                return $nilai = 2;
+                return 2;
             }else{
                 return 0;
             }
