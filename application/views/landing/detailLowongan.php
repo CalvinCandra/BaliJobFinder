@@ -116,7 +116,7 @@
                 <?php endforeach;?>
 
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control" name="cv" id="inputGroupFile02" accept=".pdf">
+                    <input type="file" class="form-control" name="cv" id="inputGroupFile02" accept=".pdf" required>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Lamar</button>
             </form>

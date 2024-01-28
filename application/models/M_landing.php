@@ -82,32 +82,25 @@ class M_landing extends CI_Model {
         return $query;
     }
 
-    // function untuk mengecek lamaran
-    public function CekLamaran($id_pelamar, $id_lowongan){
-        $lamaran = $this->db->get_where('lamaran', 
+    // function untuk ngecek lamaran apakah sebelumnya ada diterima atau tidak
+    public function CekLamaranStatusBelum($id_pelamar, $id_lowongan){
+        return $this->db->get_where('lamaran',
         [
             'fk_id_pelamar' => $id_pelamar,
-            'fk_id_lowongan' => $id_lowongan
-        ]);
+            'fk_id_lowongan' => $id_lowongan,
+            'status_lamaran' => "Belum Terkonfrimasi",
+        ])->num_rows();
 
-        $row = $lamaran->row();
-        $num_row = $lamaran->num_rows();
+    }
 
-        // jika tidak ada
-        if($num_row == 0){
-            return 0;
-
-        //jika ada
-        }else{
-            if($row->status_lamaran == "Belum Terkonfrimasi"){
-                return 1;
-            }else if($row->status_lamaran == "Diterima"){
-                return 2;
-            }else{
-                return 0;
-            }
-        }
-
+    // function untuk ngecek lamaran apakah sebelumnya ada diterima atau tidak
+    public function CekLamaranStatusTerima($id_pelamar, $id_lowongan){
+        return $this->db->get_where('lamaran',
+        [
+            'fk_id_pelamar' => $id_pelamar,
+            'fk_id_lowongan' => $id_lowongan,
+            'status_lamaran' => "Diterima",
+        ])->num_rows();
     }
 
     // function untuk insert ke lamaran
