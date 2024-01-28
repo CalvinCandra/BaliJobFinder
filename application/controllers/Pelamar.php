@@ -83,7 +83,10 @@ class Pelamar extends CI_Controller {
             'profile' => $DataPelamar->result_array(),
             // mengirim data pendidikan yang polosan dalam bentuk array
             'pendidikan'=> $this->M_pelamar->getDataPendidikan($pelamar->id_pelamar)->result_array(),
-
+            // mengirim data pengalaman yang polosan dalam bentuk array
+            'pengalaman'=> $this->M_pelamar->getDataPengalaman($pelamar->id_pelamar)->result_array(),
+            // mengirim data skill yang polosan dalam bentuk array
+            'skill'=> $this->M_pelamar->getDataSkill($pelamar->id_pelamar)->result_array(),
             // ngecek data profile
             'cekData' => $this->M_pelamar->cekData($pelamar->id_pelamar),
              // ngecek data pendidikan
